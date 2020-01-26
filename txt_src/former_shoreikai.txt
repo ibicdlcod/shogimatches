@@ -1,0 +1,236 @@
+
+<h3>指導棋士</h3>
+<section>
+
+<table  id="names7d" class="title table table-bordered table-striped">
+<caption>指導棋士七段</caption>
+<tr>
+<td><a href="person.php?name=806">藤代三郎</a></td>
+<td><a href="person.php?name=322">相馬清司</a></td>
+<td><a href="person.php?name=323">土井春左右</a></td>
+<td><a href="person.php?name=808">工藤浩平</a></td>
+<td><a href="person.php?name=811">中尾修</a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=326">関口勝雄</a></td>
+<td><a href="person.php?name=810">田川信之</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+
+
+<table  id="names6d" class="title table table-bordered table-striped">
+<caption>指導棋士六段</caption>
+<tr>
+<td><a href="person.php?name=801">佐藤健伍</a></td>
+<td><a href="person.php?name=336">山崎茂樹</a></td>
+<td><a href="person.php?name=432">植野博</a></td>
+<td><a href="person.php?name=333">三谷正範</a></td>
+<td><a href="person.php?name=337">中山則男</a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=334">細原一夫</a></td>
+<td><a href="person.php?name=332">潮隆次</a></td>
+<td><a href="person.php?name=338">田畑良太</a></td>
+<td><a href="person.php?name=346">野間俊克</a></td>
+<td><a href="person.php?name=352">渡辺恭位</a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=360">下野貴志</a></td>
+<td><a href="person.php?name=342">小池裕喜</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+
+
+<table  id="names5d" class="title table table-bordered table-striped">
+<caption>指導棋士五段</caption>
+<tr>
+<td><a href="person.php?name=325">寺田昭夫</a></td>
+<td><a href="person.php?name=335">村松康雄</a></td>
+<td><a href="person.php?name=358">藤内忍</a></td>
+<td><a href="person.php?name=366">高野悟志</a></td>
+<td><a href="person.php?name=371">関口武史</a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=350">石堀浩二</a></td>
+<td><a href="person.php?name=340">三村亨</a></td>
+<td><a href="person.php?name=362">水津隆義</a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+
+
+<table  id="names4d" class="title table table-bordered table-striped">
+<caption>指導棋士四段</caption>
+<tr>
+<td><a href="person.php?name=384">竹内貴浩</a></td>
+<td><a href="person.php?name=359">佐藤佳一郎</a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+</section>
+<a id="nameexj" class="anchor"></a>
+<h3>元奨励会員</h3>
+<section>
+<table id="nameex" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=814"><span class="n">清水孝晏<span></a></td>
+<td><a href="person.php?name=815"><span class="n">小暮恒男<span></a></td>
+<td><a href="person.php?name=2001"><span class="n">杉山喜郎<span></a></td>
+<td><a href="person.php?name=2002"><span class="n">湯川克己<span></a></td>
+<td><a href="person.php?name=441"><span class="n">横山公望<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=505"><span class="n">青柳敏郎<span></a></td>
+<td><a href="person.php?name=450"><span class="n">丸岡辰美<span></a></td>
+<td><a href="person.php?name=526"><span class="n">中藤誠<span></a></td>
+<td><a href="person.php?name=624"><span class="n">庄司弘光<span></a></td>
+<td><a href="person.php?name=496"><span class="n">松本誠<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=557"><span class="n">矢橋修<span></a></td>
+<td><a href="person.php?name=519"><span class="n">竹中健一<span></a></td>
+<td><a href="person.php?name=460"><span class="n">芹田修<span></a></td>
+<td><a href="person.php?name=448"><span class="n">嘉野満<span></a></td>
+<td><a href="person.php?name=459"><span class="n">桐山隆<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=529"><span class="n">長岡俊勝<span></a></td>
+<td><a href="person.php?name=495"><span class="n">松尾哲也<span></a></td>
+<td><a href="person.php?name=474"><span class="n">細川大市郎<span></a></td>
+<td><a href="person.php?name=462"><span class="n">近藤伸哉<span></a></td>
+<td><a href="person.php?name=438"><span class="n">稲葉聡<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=544"><span class="n">藤本裕行<span></a></td>
+<td><a href="person.php?name=538"><span class="n">島村健一<span></a></td>
+<td><a href="person.php?name=466"><span class="n">栗生直樹<span></a></td>
+<td><a href="person.php?name=507"><span class="n">千葉成人<span></a></td>
+<td><a href="person.php?name=510"><span class="n">浅倉孝幸<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=613"><span class="n">久保田貴洋<span></a></td>
+<td><a href="person.php?name=816"><span class="n">畠山大樹<span></a></td>
+<td><a href="person.php?name=471"><span class="n">高橋英晃<span></a></td>
+<td><a href="person.php?name=587"><span class="n">吉本悠太<span></a></td>
+<td><a href="person.php?name=601"><span class="n">藤岡隼太<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=453"><span class="n">吉岡大和<span></a></td>
+<td><a href="person.php?name=576"><span class="n">野崎雅敬<span></a></td>
+<td><a href="person.php?name=590"><span class="n">長森優作<span></a></td>
+<td><a href="person.php?name=619"><span class="n">中口貴裕<span></a></td>
+<td><a href="person.php?name=578"><span class="n">坪井祐二<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=634"><span class="n">星田雅弘<span></a></td>
+<td><a href="person.php?name=621"><span class="n">竹下貴重<span></a></td>
+<td><a href="person.php?name=802"><span class="n">大友寛二<span></a></td>
+<td><a href="person.php?name=804"><span class="n">沢口博勝<span></a></td>
+<td><a href="person.php?name=803"><span class="n">森脇太郎<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=805"><span class="n">大麻重明<span></a></td>
+<td><a href="person.php?name=807"><span class="n">小沢義史<span></a></td>
+<td><a href="person.php?name=324"><span class="n">山本統一<span></a></td>
+<td><a href="person.php?name=809"><span class="n">蔵野康夫<span></a></td>
+<td><a href="person.php?name=812"><span class="n">藤井一機<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=327"><span class="n">松田幹雄<span></a></td>
+<td><a href="person.php?name=328"><span class="n">平川修<span></a></td>
+<td><a href="person.php?name=329"><span class="n">鈴木英春<span></a></td>
+<td><a href="person.php?name=813"><span class="n">永井嘉<span></a></td>
+<td><a href="person.php?name=330"><span class="n">板橋等<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=331"><span class="n">斎藤誠<span></a></td>
+<td><a href="person.php?name=339"><span class="n">小泉有明<span></a></td>
+<td><a href="person.php?name=347"><span class="n">愛達治<span></a></td>
+<td><a href="person.php?name=612"><span class="n">古作登<span></a></td>
+<td><a href="person.php?name=341"><span class="n">庄司俊之<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=343"><span class="n">村田登亀雄<span></a></td>
+<td><a href="person.php?name=344"><span class="n">鈴木純一<span></a></td>
+<td><a href="person.php?name=345"><span class="n">秋山太郎<span></a></td>
+<td><a href="person.php?name=348"><span class="n">小牧毅<span></a></td>
+<td><a href="person.php?name=349"><span class="n">斎田純一<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=351"><span class="n">石飛英二<span></a></td>
+<td><a href="person.php?name=353"><span class="n">中川俊一<span></a></td>
+<td><a href="person.php?name=354"><span class="n">長田博道<span></a></td>
+<td><a href="person.php?name=355"><span class="n">樋口達也<span></a></td>
+<td><a href="person.php?name=357"><span class="n">三須智弘<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=361"><span class="n">松本秀介<span></a></td>
+<td><a href="person.php?name=363"><span class="n">津山慎悟<span></a></td>
+<td><a href="person.php?name=364"><span class="n">城間春樹<span></a></td>
+<td><a href="person.php?name=365"><span class="n">加來博洋<span></a></td>
+<td><a href="person.php?name=368"><span class="n">本田啓二<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=367"><span class="n">平田竜樹<span></a></td>
+<td><a href="person.php?name=369"><span class="n">菊地裕太<span></a></td>
+<td><a href="person.php?name=370"><span class="n">野島崇宏<span></a></td>
+<td><a href="person.php?name=372"><span class="n">中村裕介<span></a></td>
+<td><a href="person.php?name=374"><span class="n">和田澄人<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=373"><span class="n">天野貴元<span></a></td>
+<td><a href="person.php?name=375"><span class="n">荒木宣貴<span></a></td>
+<td><a href="person.php?name=376"><span class="n">石井直樹<span></a></td>
+<td><a href="person.php?name=377"><span class="n">一瀬浩司<span></a></td>
+<td><a href="person.php?name=378"><span class="n">殿岡裕里<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=379"><span class="n">岡畑明範<span></a></td>
+<td><a href="person.php?name=380"><span class="n">佐藤秀和<span></a></td>
+<td><a href="person.php?name=383"><span class="n">渡辺愛生<span></a></td>
+<td><a href="person.php?name=382"><span class="n">森村賢平<span></a></td>
+<td><a href="person.php?name=381"><span class="n">鵜木学<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=606"><span class="n">三宅潤<span></a></td>
+<td><a href="person.php?name=385"><span class="n">小泉祐<span></a></td>
+<td><a href="person.php?name=390"><span class="n">伊藤和夫<span></a></td>
+<td><a href="person.php?name=392"><span class="n">森下裕也<span></a></td>
+<td><a href="person.php?name=394"><span class="n">鈴木肇<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=391"><span class="n">慶田義法<span></a></td>
+<td><a href="person.php?name=396"><span class="n">福間健太<span></a></td>
+<td><a href="person.php?name=620"><span class="n">折田翔吾<span></a></td>
+<td><a href="person.php?name=592"><span class="n">望月陵<span></a></td>
+<td><a href="person.php?name=399"><span class="n">藤原結樹<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=402"><span class="n">石川泰<span></a></td>
+<td><a href="person.php?name=405"><span class="n">知花賢<span></a></td>
+<td><a href="person.php?name=567"><span class="n">荒木隆<span></a></td>
+<td><a href="person.php?name=403"><span class="n">川崎直人<span></a></td>
+<td><a href="person.php?name=408"><span class="n">甲斐日向<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=610"><span class="n">藤田彰一<span></a></td>
+<td><a href="person.php?name=626"><span class="n">菅野倫太郎<span></a></td>
+<td><a href="person.php?name=599"><span class="n">黒川智記<span></a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>

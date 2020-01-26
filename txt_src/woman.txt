@@ -1,0 +1,274 @@
+
+<td><a href="person.php?name=407"><span class="n">里見香奈<span></a></td>
+<td><a href="person.php?name=411"><span class="n">清水市代<span></a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel6j" class="anchor"></a>
+<h3>女流六段</h3>
+<section>
+<table id="namel6" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=412"><span class="n">中井広恵<span></a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel5j" class="anchor"></a>
+<h3>女流五段</h3>
+<section>
+<table id="namel5" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=427"><span class="n">斎田晴子<span></a></td>
+<td><a href="person.php?name=430"><span class="n">矢内理絵子<span></a></td>
+<td><a href="person.php?name=413"><span class="n">甲斐智美<span></a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel4j" class="anchor"></a>
+<h3>女流四段</h3>
+<section>
+<table id="namel4" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=416"><span class="n">長沢千和子<span></a></td>
+<td><a href="person.php?name=415"><span class="n">千葉涼子<span></a></td>
+<td><a href="person.php?name=568"><span class="n">山田久美<span></a></td>
+<td><a href="person.php?name=713"><span class="n">高群佐知子<span></a></td>
+<td><a href="person.php?name=424"><span class="n">上田初美<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=725"><span class="n">竹部さゆり<span></a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel3j" class="anchor"></a>
+<h3>女流三段</h3>
+<section>
+<table id="namel3" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=426"><span class="n">本田小百合<span></a></td>
+<td><a href="person.php?name=425"><span class="n">早水千紗<span></a></td>
+<td><a href="person.php?name=423"><span class="n">香川愛生<span></a></td>
+<td><a href="person.php?name=418"><span class="n">中村真梨花<span></a></td>
+<td><a href="person.php?name=417"><span class="n">岩根忍<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=569"><span class="n">渡部愛<span></a></td>
+<td><a href="person.php?name=585"><span class="n">加藤桃子<span></a></td>
+<td><a href="person.php?name=586"><span class="n">伊藤沙恵<span></a></td>
+<td><a href="person.php?name=422"><span class="n">谷口由紀<span></a></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel2j" class="anchor"></a>
+<h3>女流二段</h3>
+<section>
+<table id="namel2" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=717"><span class="n">船戸陽子<span></a></td>
+<td><a href="person.php?name=714"><span class="n">石高澄恵<span></a></td>
+<td><a href="person.php?name=719"><span class="n">真田彩子<span></a></td>
+<td><a href="person.php?name=726"><span class="n">中倉宏美<span></a></td>
+<td><a href="person.php?name=734"><span class="n">山田朱未<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=737"><span class="n">村田智穂<span></a></td>
+<td><a href="person.php?name=715"><span class="n">鹿野圭生<span></a></td>
+<td><a href="person.php?name=727"><span class="n">島井咲緒里<span></a></td>
+<td><a href="person.php?name=419"><span class="n">長谷川優貴<span></a></td>
+<td><a href="person.php?name=420"><span class="n">鈴木環那<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=735"><span class="n">北尾まどか<span></a></td>
+<td><a href="person.php?name=740"><span class="n">室田伊緒<span></a></td>
+<td><a href="person.php?name=421"><span class="n">山口恵梨子<span></a></td>
+<td><a href="person.php?name=731"><span class="n">藤田綾<span></a></td>
+<td><a href="person.php?name=739"><span class="n">井道千尋<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=741"><span class="n">宮宗紫野<span></a></td>
+<td><a href="person.php?name=748"><span class="n">山根ことみ<span></a></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel1j" class="anchor"></a>
+<h3>女流初段</h3>
+<section>
+<table id="namel1" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=732"><span class="n">上川香織<span></a></td>
+<td><a href="person.php?name=729"><span class="n">安食総子<span></a></td>
+<td><a href="person.php?name=718"><span class="n">大庭美樹<span></a></td>
+<td><a href="person.php?name=742"><span class="n">中村桃子<span></a></td>
+<td><a href="person.php?name=738"><span class="n">貞升南<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=589"><span class="n">伊奈川愛菓<span></a></td>
+<td><a href="person.php?name=743"><span class="n">渡辺弥生<span></a></td>
+<td><a href="person.php?name=749"><span class="n">和田あき<span></a></td>
+<td><a href="person.php?name=746"><span class="n">相川春香<span></a></td>
+<td><a href="person.php?name=745"><span class="n">北村桂香<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=751"><span class="n">中澤沙耶<span></a></td>
+<td><a href="person.php?name=758"><span class="n">石本さくら<span></a></td>
+<td><a href="person.php?name=755"><span class="n">里見咲紀<span></a></td>
+<td><a href="person.php?name=756"><span class="n">武富礼衣<span></a></td>
+<td><a href="person.php?name=747"><span class="n">飯野愛<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=767"><span class="n">礒谷真帆<span></a></td>
+<td><a href="person.php?name=759"><span class="n">頼本奈菜<span></a></td>
+<td><a href="person.php?name=750"><span class="n">塚田恵梨花<span></a></td>
+<td><a href="person.php?name=762"><span class="n">加藤結李愛<span></a></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel1kj" class="anchor"></a>
+<h3>女流1級</h3>
+<section>
+<table id="namel1k" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=733"><span class="n">野田澤彩乃<span></a></td>
+<td><a href="person.php?name=753"><span class="n">山口絵美菜<span></a></td>
+<td><a href="person.php?name=754"><span class="n">カロリーナ・ステチェンスカ<span></a></td>
+<td><a href="person.php?name=760"><span class="n">藤井奈々<span></a></td>
+<td><a href="person.php?name=763"><span class="n">水町みゆ<span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=766"><span class="n">脇田菜々子<span></a></td>
+<td><a href="person.php?name=764"><span class="n">加藤圭<span></a></td>
+<td><a href="person.php?name=761"><span class="n">小髙佐季子<span></a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel2kj" class="anchor"></a>
+<h3>女流2級</h3>
+<section>
+<table id="namel2k" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=752"><span class="n">高浜愛子<span></a></td>
+<td><a href="person.php?name=757"><span class="n">堀彩乃<span></a></td>
+<td><a href="person.php?name=1266"><span class="n">山口仁子梨<span></a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</section>
+
+<a id="namel3kj" class="anchor"></a>
+<h3>女流3級</h3>
+<section>
+<table id="namel3k" class="title table table-bordered table-striped">
+<tr>
+<td><a href="person.php?name=765"><span class="n">田中沙紀<span></a></td>
+
+<td><a href="person.php?name=701"><span class="n">関根紀代子</span></a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+<a id="namerl5j" class="anchor"></a>
+<table  id="namel5" class="title table table-bordered table-striped">
+<caption>女流五段</caption>
+<tr>
+<td><a href="person.php?name=429"><span class="n">蛸島彰子</span></a></td>
+<td><a href="person.php?name=428"><span class="n">山下カズ子</span></a></td>
+<td><a href="person.php?name=708"><span class="n">谷川治恵</span></a></td>
+<td><a href="person.php?name=431"><span class="n">林葉直子</span></a></td>
+<td></td>
+</tr>
+</table>
+
+<a id="namerl4j" class="anchor"></a>
+<table  id="namel4" class="title table table-bordered table-striped">
+<caption>女流四段</caption>
+<tr>
+<td><a href="person.php?name=702"><span class="n">多田佳子</span></a></td>
+<td><a href="person.php?name=703"><span class="n">寺下紀子</span></a></td>
+<td><a href="person.php?name=705"><span class="n">杉崎里子</span></a></td>
+<td><a href="person.php?name=709"><span class="n">森安多恵子</span></a></td>
+<td><a href="person.php?name=711"><span class="n">藤森奈津子</span></a></td>
+</tr>
+<tr>
+<td><a href="person.php?name=414"><span class="n">石橋幸緒</span></a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+<a id="namerl3j" class="anchor"></a>
+<table  id="namel3" class="title table table-bordered table-striped">
+<caption>女流三段</caption>
+<tr>
+<td><a href="person.php?name=710"><span class="n">宇治正子</span></a></td>
+<td><a href="person.php?name=716"><span class="n">植村真理</span></a></td>
+<td><a href="person.php?name=720"><span class="n">高橋和</span></a></td>
+<td><a href="person.php?name=721"><span class="n">林まゆみ</span></a></td>
+<td></td>
+</tr>
+</table>
+
+<a id="namerl2j" class="anchor"></a>
+<table  id="namel2" class="title table table-bordered table-striped">
+<caption>女流二段</caption>
+<tr>
+<td><a href="person.php?name=704"><span class="n">村山幸子</span></a></td>
+<td><a href="person.php?name=712"><span class="n">神田真由美</span></a></td>
+<td><a href="person.php?name=722"><span class="n">久津知子</span></a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+
+<a id="namerl1j" class="anchor"></a>
+<table  id="namel1" class="title table table-bordered table-striped">
+<caption>女流初段</caption>
+<tr>
+<td><a href="person.php?name=706"><span class="n">福崎睦美</span></a></td>
+<td><a href="person.php?name=723"><span class="n">中倉彰子</span></a></td>
+<td><a href="person.php?name=724"><span class="n">伊藤明日香</span></a></td>
+<td><a href="person.php?name=736"><span class="n">坂東香菜子</span></a></td>
+<td><a href="person.php?name=744"><span class="n">竹俣紅</span></a></td>
+</tr>
+</table>
+
+<a id="namerl1kj" class="anchor"></a>
+<table  id="namel1k" class="title table table-bordered table-striped">
+<caption>女流1級</caption>
+<tr>
+<td><a href="person.php?name=707"><span class="n">佐藤寿子</span></a></td>
+<td><a href="person.php?name=728"><span class="n">藤田麻衣子</span></a></td>
+<td><a href="person.php?name=730"><span class="n">大庭美夏</span></a></td>

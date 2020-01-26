@@ -41,3 +41,7 @@ def read_kisei() -> list:
         kisei_db.sort(key=lambda x: x.id)
         print("Reading Kisei data complete")
         return kisei_db
+
+
+def read_match(tournament_id: int, iteration_id: int) -> list:
+    pass

@@ -12,7 +12,7 @@ def str_to_match(in_str: str) -> match_data.Match:
 
     proto_fiscal = in_str_frag[0]
     fiscal_index = proto_fiscal.find(";\">") + 3
-    fiscal = proto_fiscal[fiscal_index:]
+    fiscal = int(proto_fiscal[fiscal_index:])
 
     proto_date = in_str_frag[1]
     date_index = proto_date.find(";\">") + 3
@@ -65,10 +65,21 @@ def import_data(iteration: int, tournament: int) -> list:
     try_count = 0
     while try_count < 10:
         try:
+            time.sleep(0.5)
             print(f"Retrieving web information for tournament "
                   f"{tournament} with iteration {iteration}, please wait...")
-            with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0"
-                                        f"&pd={1000 + iteration}&mn={tournament}") as response:
+            req = urllib.request.Request(
+                f"http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0"
+                f"&pd={1000 + iteration}&mn={tournament}",
+                data=None,
+                headers={
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, '
+                                  'like Gecko) Chrome/35.0.1916.47 Safari/537.36 '
+                }
+            )
+            with urllib.request.urlopen(req) as response:
+                # with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0"
+                #                             f"&pd={1000 + iteration}&mn={tournament}") as response:
                 html = response.read()
             html_str = str(html, encoding="utf-8-sig")
             scroll_body_start = html_str.find("<tbody class=\"scrollBody\">") + 27
@@ -135,7 +146,8 @@ def match_to_sql(in_match_list: list) -> None:
         if cursor.lastrowid:
             print('last insert id', cursor.lastrowid)
         else:
-            print('last insert id not found')  # Expected behaviour
+            pass
+            # print('last insert id not found')  # Expected behaviour
 
         cursor.close()
         conn.commit()

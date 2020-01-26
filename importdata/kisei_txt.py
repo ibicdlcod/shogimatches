@@ -1,7 +1,4 @@
-from importdata import sql_read
 from metastruct import kisei_data
-from metastruct import match_data
-from datetime import date
 from importdata import match_auto
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
@@ -173,6 +170,6 @@ if __name__ == '__main__':
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
     match_list = match_auto.import_data(1, 1)
     match_auto.match_to_sql(match_list)
-    #for str1 in match_auto.import_data(1, 1):
+    # for str1 in match_auto.import_data(1, 1):
     #    outfile.write(str(str1) + "\n")
     outfile.close()

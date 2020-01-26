@@ -1,5 +1,7 @@
 from importdata import sql_read
 from metastruct import kisei_data
+from metastruct import match_data
+from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
 
@@ -165,3 +167,18 @@ if __name__ == '__main__':
     for i in sql_read.read_kisei():
         outfile.write(str(i) + "\n")
     outfile.close()
+
+    match1 = match_data.Match(2000,
+                              date.fromisoformat("2000-01-01"),
+                              -1,
+                              False,
+                              "米長邦雄",
+                              "島朗",
+                              "01期",
+                              "竜王戦",
+                              "タイトル戦",
+                              "七番勝負",
+                              "第4局",
+                              0,
+                              0)
+    print(match1.hash.hex())

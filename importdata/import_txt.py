@@ -160,9 +160,10 @@ if __name__ == '__main__':
     # str1 = import_ryuou.import_data(1)
     # outfile1.write(str1)
     # outfile1.close()
-    outfile2_name = "..\\temp.txt"
-    outfile2 = open(outfile2_name, 'w', encoding="utf-8-sig")
-    fengdao = [kisei for kisei in kisei_db if kisei.fullname == "豊島将之"][0]
-    str2 = fengdao.rank(date.fromisoformat("2019-12-12"))
-    outfile2.write(str2)
-    outfile2.close()
+
+    # outfile2_name = "..\\temp.txt"
+    # outfile2 = open(outfile2_name, 'w', encoding="utf-8-sig")
+    # fengdao = [kisei for kisei in kisei_db if kisei.fullname == "豊島将之"][0]
+    # str2 = fengdao.rank(date.fromisoformat("2019-12-12"))
+    # outfile2.write(str2)
+    # outfile2.close()

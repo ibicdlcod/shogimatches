@@ -1,4 +1,6 @@
 venv
-temp*
+temp/
+temp.txt
 .idea/
 mysqlsampledatabase.sql
+*.pyc

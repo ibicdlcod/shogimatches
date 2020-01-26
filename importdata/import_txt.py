@@ -1,8 +1,7 @@
-import importdata
+from importdata import sql_read
 from metastruct import kisei_data
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
-from datetime import date
 
 kisei_db = []
 
@@ -161,9 +160,8 @@ if __name__ == '__main__':
     # outfile1.write(str1)
     # outfile1.close()
 
-    # outfile2_name = "..\\temp.txt"
-    # outfile2 = open(outfile2_name, 'w', encoding="utf-8-sig")
-    # fengdao = [kisei for kisei in kisei_db if kisei.fullname == "豊島将之"][0]
-    # str2 = fengdao.rank(date.fromisoformat("2019-12-12"))
-    # outfile2.write(str2)
-    # outfile2.close()
+    outfile_name = "..\\txt_dst\\names2.csv"
+    outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+    for i in sql_read.read_kisei():
+        outfile.write(str(i) + "\n")
+    outfile.close()

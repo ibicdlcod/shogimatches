@@ -7,4 +7,3 @@ def import_data(self, iteration: int) -> str:
                                 f"&pd={1000+iteration}&mn=1") as response:
         html = response.read()
     html_str = str(html, encoding="utf-8-sig")
-    return html_str[index2 + 2 + len(self.fullname):index3]

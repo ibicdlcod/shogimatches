@@ -1,4 +1,3 @@
-import importdata
 from metastruct import kisei_data
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
@@ -40,4 +39,5 @@ def read_kisei() -> list:
         if conn is not None and conn.is_connected():
             conn.close()
         kisei_db.sort(key=lambda x: x.id)
+        print("Reading Kisei data complete")
         return kisei_db

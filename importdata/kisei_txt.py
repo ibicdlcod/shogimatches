@@ -171,5 +171,8 @@ if __name__ == '__main__':
 
     outfile_name = "..\\temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    outfile.write(match_auto.import_data(1, 1))
+    match_list = match_auto.import_data(1, 1)
+    match_auto.match_to_sql(match_list)
+    #for str1 in match_auto.import_data(1, 1):
+    #    outfile.write(str(str1) + "\n")
     outfile.close()

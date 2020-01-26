@@ -55,7 +55,7 @@ class Match:
         self.sennichite = i_sennichite
 
     def __str__(self) -> str:
-        out_str_item = [str(self.hash),
+        out_str_item = [str(self.hash.hex()),
                         str(self.fiscal_year),
                         str(self.match_date.isoformat()),
                         str(self.win_loss_for_black),

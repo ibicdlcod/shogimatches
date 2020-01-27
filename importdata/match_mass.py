@@ -1,8 +1,9 @@
 from importdata import match_auto
 
-dict_tour_name = {"ryuou": 1, "meijin": 2, "junni": 3, "eiou": 12,
-                  "oui": 4, "ouza": 5, "kiou": 6, "oushou": 7,
-                  "kisei": 8}
+dict_tour_name = {"ryuou": 1, "meijin": 2, "junni": 3, "eiou": 12, "oui": 4,
+                  "ouza": 5, "kiou": 6, "oushou": 7, "kisei": 8, "asahi_cup": 9,
+                  "ginga": 10, "nhk": 11, "jt": 13, "shinjin": 14, "kakogawa": 15,
+                  "yamada": 34, "dan10": 17, "dan9": 35}
 
 if __name__ == '__main__':
     match_list = []
@@ -48,6 +49,7 @@ if __name__ == '__main__':
     kiou = False
     oushou = False
     kisei = False
+    asahi_cup = False
     if ouza:
         for i in range(31, 68):
             match_list = match_auto.import_data(i, dict_tour_name["ouza"])
@@ -76,3 +78,58 @@ if __name__ == '__main__':
             match_list = match_auto.import_data(i, dict_tour_name["kisei"])
             match_auto.match_to_sql(match_list)
             print(f"Retrieving web information for tournament 8 with iteration {i} succeeded")
+    if asahi_cup:
+        for i in range(1001, 1013):
+            match_list = match_auto.import_data(i, dict_tour_name["asahi_cup"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 9 with iteration {i} succeeded")
+
+    ginga = False
+    nhk = False
+    jt = False
+    shinjin = False
+    kakogawa = False
+    if ginga:
+        for i in range(1008, 1028):
+            match_list = match_auto.import_data(i, dict_tour_name["ginga"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 10 with iteration {i} succeeded")
+    if nhk:
+        for i in range(1003, 1069):
+            match_list = match_auto.import_data(i, dict_tour_name["nhk"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 11 with iteration {i} succeeded")
+    if jt:
+        for i in range(1001, 1041):
+            match_list = match_auto.import_data(i, dict_tour_name["jt"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 13 with iteration {i} succeeded")
+    if shinjin:
+        for i in range(1001, 1051):
+            match_list = match_auto.import_data(i, dict_tour_name["shinjin"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 14 with iteration {i} succeeded")
+    if kakogawa:
+        for i in range(1001, 1010):
+            match_list = match_auto.import_data(i, dict_tour_name["kakogawa"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 15 with iteration {i} succeeded")
+
+    yamada = False
+    dan10 = False
+    dan9 = True
+    if yamada:
+        for i in range(1001, 1005):
+            match_list = match_auto.import_data(i, dict_tour_name["yamada"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 34 with iteration {i} succeeded")
+    if dan10:
+        for i in range(1, 27):
+            match_list = match_auto.import_data(i, dict_tour_name["dan10"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 17 with iteration {i} succeeded")
+    if dan9:
+        for i in range(4, 13):
+            match_list = match_auto.import_data(i, dict_tour_name["dan9"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 35 with iteration {i} succeeded")

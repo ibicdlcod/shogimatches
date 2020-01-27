@@ -19,7 +19,10 @@ def str_to_match(in_str: str) -> match_data.Match:
     date_eff = date.fromisoformat(proto_date[date_index:])
 
     proto_result = in_str_frag[2]
-    result = proto_result[4]
+    if len(proto_result) == 4:
+        result = ''  # 1956-01-26 高島一岐代 vs 灘蓮照 無勝負
+    else:
+        result = proto_result[4]
     black_win = 0
     forfeit = False
     if result == '○':
@@ -32,7 +35,7 @@ def str_to_match(in_str: str) -> match_data.Match:
     elif result == '■':
         black_win = -1
         forfeit = True
-    elif result == '持':
+    elif result == '持' or result == '':
         black_win = 0
 
     black_name = in_str_frag[3][4:]
@@ -65,7 +68,7 @@ def import_data(iteration: int, tournament: int) -> list:
     try_count = 0
     while try_count < 10:
         try:
-            time.sleep(0.5)
+            time.sleep(1)
             print(f"Retrieving web information for tournament "
                   f"{tournament} with iteration {iteration}, please wait...")
             req = urllib.request.Request(

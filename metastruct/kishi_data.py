@@ -1,17 +1,10 @@
 from datetime import date
 from metastruct import kishi_rank_sql
+import mysql.connector
+import metastruct.python_mysql_dbconf as db_conf
 import urllib.request
 import urllib.error
 import time
-
-
-def kishi_from_str(in_str: str):
-    a = in_str.split(",")
-    return Kishi(int(a[0]), a[1], int(a[2]), a[3],
-                 True if a[4] == 'T' else False,
-                 True if a[5] == 'T' else False,
-                 True if a[6] == 'T' else False,
-                 )
 
 
 class Kishi:
@@ -99,3 +92,52 @@ class Kishi:
               f"on day {query_date.isoformat()} "
               f"on large number of tries.")
         return ""
+
+
+def kishi_from_str(in_str: str):
+    a = in_str.split(",")
+    return Kishi(int(a[0]), a[1], int(a[2]), a[3],
+                 True if a[4] == 'T' else False,
+                 True if a[5] == 'T' else False,
+                 True if a[6] == 'T' else False,
+                 )
+
+
+def query_kishi_from_name(in_name: str) -> Kishi:
+    db_config = db_conf.read_db_config()
+    conn = None
+    result = None
+
+    try:
+        conn = mysql.connector.MySQLConnection(**db_config)
+
+        cursor = conn.cursor(buffered=True)
+        query_use = "USE shogi;"
+        args_use = tuple()
+        cursor.execute(query_use, args_use)
+
+        query_insert = ("SELECT * FROM kishi\n"
+                        "WHERE fullname=%s;\n")
+        args_insert = (in_name,)
+        cursor = conn.cursor()
+        cursor.execute(query_insert, args_insert)
+        all_rows = cursor.fetchall()
+        row = all_rows[0]
+        if row is None:
+            print(f"Invalid name: kishi {in_name} does not exist")
+            result = None
+        else:
+            result = Kishi(row[0], row[1], row[2], row[3], row[4] == 1,
+                           row[5] == 1, row[6] == 1)
+
+        cursor.close()
+        conn.commit()
+
+    except mysql.connector.Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+        return result
+

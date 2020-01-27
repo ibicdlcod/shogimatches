@@ -1,8 +1,10 @@
 from importdata import sql_read
 from metastruct import kishi_data
+from metastruct import tree_node
 from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
+
 
 kishi_db = []
 
@@ -173,6 +175,7 @@ if __name__ == '__main__':
     #     outfile.write(kishi.rank(date.fromisoformat("2020-01-27")) + "\n")
     # outfile.close()
     # kishi_db = sql_read.read_kishi()
-    match_db = sql_read.read_match("順位戦", "第77期", "C級2組")
+    match_db = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント", "挑戦者決定三番勝負")
+    tree_node = tree_node.TreeNode(match_db)
     for match in match_db:
         print(match)

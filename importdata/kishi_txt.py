@@ -1,9 +1,9 @@
-from metastruct import kisei_data
+from metastruct import kishi_data
 from importdata import match_auto
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
 
-kisei_db = []
+kishi_db = []
 
 
 def process_txt():
@@ -19,9 +19,9 @@ def process_txt():
             index4 = content.find("<", index3 + 1)
         id_1 = int(content[index1 + 1:index2])
         fullname = content[index3 + 1:index4]
-        kisei_db.append(kisei_data.Kisei(id_1, fullname, 2, "", False, False, False))
+        kishi_db.append(kishi_data.Kishi(id_1, fullname, 2, "", False, False, False))
         content = infile.readline()
-    kisei_db.sort(key=lambda x: x.id)
+    kishi_db.sort(key=lambda x: x.id)
     infile.close()
 
 
@@ -54,7 +54,7 @@ def sql_connect(insert_first, read):
     query_establish = ("CREATE DATABASE IF NOT EXISTS shogi\n"
                        "CHARACTER SET utf8mb4;\n"
                        + "USE shogi;\n"
-                       + "CREATE TABLE IF NOT EXISTS kisei(\n"
+                       + "CREATE TABLE IF NOT EXISTS kishi(\n"
                        + "id INT,\n"
                        + "fullname VARCHAR(255) NOT NULL,\n"
                        + "surname_len INT DEFAULT 2,\n"
@@ -76,7 +76,7 @@ def sql_connect(insert_first, read):
         cursor.execute(query_establish, args_establish, multi=True)
 
         if insert_first:
-            query_insert = "INSERT INTO kisei(id,fullname,surname_len,wiki_name," \
+            query_insert = "INSERT INTO kishi(id,fullname,surname_len,wiki_name," \
                            "woman,current_shoreikai,current_amateur)\n" \
                            "VALUES(%s,%s,%s,%s,%s,%s,%s)\n" \
                            "ON DUPLICATE KEY UPDATE " \
@@ -84,10 +84,10 @@ def sql_connect(insert_first, read):
                            "woman=VALUES(woman)," \
                            "current_shoreikai=VALUES(current_shoreikai)," \
                            "current_amateur=VALUES(current_amateur);"
-            for kisei1 in kisei_db:
-                args_insert = (kisei1.id, kisei1.fullname, kisei1.surname_length,
-                               kisei1.wiki_name, kisei1.woman, kisei1.current_shoreikai,
-                               kisei1.current_amateur)
+            for kishi1 in kishi_db:
+                args_insert = (kishi1.id, kishi1.fullname, kishi1.surname_length,
+                               kishi1.wiki_name, kishi1.woman, kishi1.current_shoreikai,
+                               kishi1.current_amateur)
                 cursor = conn.cursor()
                 cursor.execute(query_insert, args_insert)
 
@@ -97,18 +97,18 @@ def sql_connect(insert_first, read):
                 print('last insert id not found')  # Expected behaviour
 
         if read:
-            cursor.execute("SELECT * FROM kisei")
+            cursor.execute("SELECT * FROM kishi")
 
             row = cursor.fetchone()
             while row is not None:
                 current_id = row[0]
-                current_kisei: kisei_data.Kisei = [kisei1 for kisei1 in kisei_db if kisei1.id == current_id][0]
-                current_kisei.fullname = row[1]
-                current_kisei.surname_length = row[2]
-                current_kisei.wiki_name = row[3]
-                current_kisei.woman = (row[4] == 1)
-                current_kisei.current_shoreikai = (row[5] == 1)
-                current_kisei.current_amateur = (row[6] == 1)
+                current_kishi: kishi_data.Kishi = [kishi1 for kishi1 in kishi_db if kishi1.id == current_id][0]
+                current_kishi.fullname = row[1]
+                current_kishi.surname_length = row[2]
+                current_kishi.wiki_name = row[3]
+                current_kishi.woman = (row[4] == 1)
+                current_kishi.current_shoreikai = (row[5] == 1)
+                current_kishi.current_amateur = (row[6] == 1)
                 row = cursor.fetchone()
         cursor.close()
 
@@ -132,25 +132,25 @@ if __name__ == '__main__':
         current_3dan = process_more_txt("sandan")
         women = process_more_txt("woman")
 
-        for kisei in kisei_db:
-            i = kisei.id
+        for kishi in kishi_db:
+            i = kishi.id
             if i in amateur1 or i in amateur_w or i in former_srk:
-                kisei.current_amateur = True
-            if i in amateur_w or i in women or kisei.fullname == "西山朋佳":
+                kishi.current_amateur = True
+            if i in amateur_w or i in women or kishi.fullname == "西山朋佳":
                 """
                 Special treatment, eh?
                 note shoreikai members < 3dan does not appear.
                 中七海 and 今井絢 is still treated as amateurs by http://kenyu1234.php.xdomain.jp/
                 """
-                kisei.woman = True
+                kishi.woman = True
             if i in current_3dan:
-                kisei.current_shoreikai = True
+                kishi.current_shoreikai = True
 
         sql_connect(False, True)
 
         outfile_name = "..\\txt_src\\names2.csv"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-        for i in kisei_db:
+        for i in kishi_db:
             outfile.write(str(i) + "\n")
         outfile.close()
 
@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
     # outfile_name = "..\\txt_dst\\names2.csv"
     # outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    # for i in sql_read.read_kisei():
+    # for i in sql_read.read_kishi():
     #     outfile.write(str(i) + "\n")
     # outfile.close()
 

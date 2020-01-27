@@ -4,16 +4,16 @@ import urllib.error
 import time
 
 
-def kisei_from_str(in_str: str):
+def kishi_from_str(in_str: str):
     a = in_str.split(",")
-    return Kisei(int(a[0]), a[1], int(a[2]), a[3],
+    return Kishi(int(a[0]), a[1], int(a[2]), a[3],
                  True if a[4] == 'T' else False,
                  True if a[5] == 'T' else False,
                  True if a[6] == 'T' else False,
                  )
 
 
-class Kisei:
+class Kishi:
     # defaults
     id: int = 0
     fullname: str = ""

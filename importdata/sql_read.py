@@ -1,14 +1,14 @@
-from metastruct import kisei_data
+from metastruct import kishi_data
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
 
 
-def read_kisei() -> list:
+def read_kishi() -> list:
     """ Connect to MySQL database """
 
     db_config = db_conf.read_db_config()
     conn = None
-    kisei_db = []
+    kishi_db = []
 
     try:
         conn = mysql.connector.MySQLConnection(**db_config)
@@ -18,15 +18,15 @@ def read_kisei() -> list:
 
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM kisei")
+        cursor.execute("SELECT * FROM kishi")
 
         row = cursor.fetchone()
         while row is not None:
-            current_kisei: kisei_data.Kisei = kisei_data.Kisei(
+            current_kishi: kishi_data.Kishi = kishi_data.Kishi(
                 row[0], row[1], row[2], row[3], row[4] == 1,
                 row[5] == 1, row[6] == 1
             )
-            kisei_db.append(current_kisei)
+            kishi_db.append(current_kishi)
             row = cursor.fetchone()
         cursor.close()
 
@@ -38,9 +38,9 @@ def read_kisei() -> list:
     finally:
         if conn is not None and conn.is_connected():
             conn.close()
-        kisei_db.sort(key=lambda x: x.id)
-        print("Reading Kisei data complete")
-        return kisei_db
+        kishi_db.sort(key=lambda x: x.id)
+        print("Reading Kishi data complete")
+        return kishi_db
 
 
 def read_match(tournament_id: int, iteration_id: int) -> list:

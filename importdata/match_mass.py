@@ -1,7 +1,8 @@
 from importdata import match_auto
 
 dict_tour_name = {"ryuou": 1, "meijin": 2, "junni": 3, "eiou": 12,
-                  "oui": 4, "ouza": 5, "kiou": 6}
+                  "oui": 4, "ouza": 5, "kiou": 6, "oushou": 7,
+                  "kisen": 8}
 
 if __name__ == '__main__':
     match_list = []
@@ -44,7 +45,8 @@ if __name__ == '__main__':
             print(f"Retrieving web information for tournament 4 with iteration {i} succeeded")
 
     ouza = False
-    kiou = True
+    kiou = False
+    oushou = False
     if ouza:
         for i in range(31, 68):
             match_list = match_auto.import_data(i, dict_tour_name["ouza"])
@@ -63,3 +65,8 @@ if __name__ == '__main__':
             match_list = match_auto.import_data(i, dict_tour_name["kiou"])
             match_auto.match_to_sql(match_list)
             print(f"Retrieving web information for tournament 6 with iteration {i} succeeded")
+    if oushou:
+        for i in range(3, 69):
+            match_list = match_auto.import_data(i, dict_tour_name["oushou"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 7 with iteration {i} succeeded")

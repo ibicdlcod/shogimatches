@@ -12,7 +12,7 @@ def sql_init():
                      "CHARACTER SET utf8mb4;"
                      "USE shogi;")
     args_init_db = tuple()
-    query_init_kisei_table = ("CREATE TABLE IF NOT EXISTS kisei("
+    query_init_kishi_table = ("CREATE TABLE IF NOT EXISTS kishi("
                               "id INT,"
                               "fullname VARCHAR(63) NOT NULL,"
                               "surname_len INT DEFAULT 2,"
@@ -22,7 +22,7 @@ def sql_init():
                               "current_amateur TINYINT(1) NOT NULL DEFAULT 0,"
                               "PRIMARY KEY (id)"
                               ");")
-    args_init_kisei_table = tuple()
+    args_init_kishi_table = tuple()
     query_init_match_table = ("CREATE TABLE IF NOT EXISTS matches("
                               "hash BINARY(64),"
                               "fiscal_year INT NOT NULL DEFAULT 1900,"
@@ -51,8 +51,8 @@ def sql_init():
         cursor = conn.cursor()
         cursor.execute(query_init_db, args_init_db, multi=True)
         print("Database init success")
-        cursor.execute(query_init_kisei_table, args_init_kisei_table)
-        print("Kisei table init success")
+        cursor.execute(query_init_kishi_table, args_init_kishi_table)
+        print("Kishi table init success")
         cursor.execute(query_init_match_table, args_init_match_table)
         print("Match table init success")
 

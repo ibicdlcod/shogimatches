@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
     yamada = False
     dan10 = False
-    dan9 = True
+    dan9 = False
     if yamada:
         for i in range(1001, 1005):
             match_list = match_auto.import_data(i, dict_tour_name["yamada"])

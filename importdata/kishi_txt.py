@@ -1,3 +1,4 @@
+from importdata import sql_read
 from metastruct import kishi_data
 from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
@@ -166,8 +167,11 @@ if __name__ == '__main__':
     #     outfile.write(str(i) + "\n")
     # outfile.close()
 
-    outfile_name = "..\\temp.txt"
-    outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    for kishi in kishi_db[:20]:
-        print(kishi.rank(date.fromisoformat("2020-01-27")))
-    outfile.close()
+    # outfile_name = "..\\temp.txt"
+    # outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+    # for kishi in kishi_db[:20]:
+    #     print(kishi.rank(date.fromisoformat("2020-01-27")))
+    # outfile.close()
+    kishi_db = sql_read.read_kishi()
+    match_db = sql_read.read_match("名人戦", "第77期")
+    print(match_db[0])

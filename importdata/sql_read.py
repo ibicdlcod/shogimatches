@@ -24,7 +24,7 @@ def read_kishi() -> list:
         while row is not None:
             current_kishi: kishi_data.Kishi = kishi_data.Kishi(
                 row[0], row[1], row[2], row[3], row[4] == 1,
-                row[5] == 1, row[6] == 1
+                                                row[5] == 1, row[6] == 1
             )
             kishi_db.append(current_kishi)
             row = cursor.fetchone()
@@ -43,7 +43,8 @@ def read_kishi() -> list:
         return kishi_db
 
 
-def read_match(tournament_name: str, iteration: str) -> list:
+def read_match(tournament_name: str, iteration: str,
+               detail1=None, detail2=None, detail3=None) -> list:
     """ Connect to MySQL database """
 
     db_config = db_conf.read_db_config()
@@ -56,9 +57,29 @@ def read_match(tournament_name: str, iteration: str) -> list:
         if conn.is_connected():
             print('Connected to MySQL database')
 
-        query_match = "SELECT * FROM matches WHERE tournament_name=%s AND iteration=%s"
-        args_match = (tournament_name, iteration)
         cursor = conn.cursor()
+        if detail1 is None:  # only temporary matches have detail1 = "" which is ignored
+            query_match = "SELECT * FROM matches WHERE tournament_name=%s AND iteration=%s"
+            args_match = (tournament_name, iteration)
+        else:
+            if detail2 is None:
+                if detail3 is None:
+                    query_match = ("SELECT * FROM matches WHERE tournament_name=%s "
+                                   "AND iteration=%s AND detail1=%s")
+                    args_match = (tournament_name, iteration, detail1)
+                else:
+                    query_match = ("SELECT * FROM matches WHERE tournament_name=%s "
+                                   "AND iteration=%s AND detail1=%s AND detail3=%s")
+                    args_match = (tournament_name, iteration, detail1, detail3)
+            else:
+                if detail3 is None:
+                    query_match = ("SELECT * FROM matches WHERE tournament_name=%s "
+                                   "AND iteration=%s AND detail1=%s AND detail2=%s")
+                    args_match = (tournament_name, iteration, detail1, detail2)
+                else:
+                    query_match = ("SELECT * FROM matches WHERE tournament_name=%s "
+                                   "AND iteration=%s AND detail1=%s AND detail2=%s AND detail3=%s")
+                    args_match = (tournament_name, iteration, detail1, detail2, detail3)
         cursor.execute(query_match, args_match)
 
         row = cursor.fetchone()

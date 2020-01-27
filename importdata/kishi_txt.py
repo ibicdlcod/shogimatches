@@ -170,8 +170,9 @@ if __name__ == '__main__':
     # outfile_name = "..\\temp.txt"
     # outfile = open(outfile_name, 'w', encoding="utf-8-sig")
     # for kishi in kishi_db[:20]:
-    #     print(kishi.rank(date.fromisoformat("2020-01-27")))
+    #     outfile.write(kishi.rank(date.fromisoformat("2020-01-27")) + "\n")
     # outfile.close()
-    kishi_db = sql_read.read_kishi()
-    match_db = sql_read.read_match("名人戦", "第77期")
-    print(match_db[0])
+    # kishi_db = sql_read.read_kishi()
+    match_db = sql_read.read_match("順位戦", "第77期", "C級2組")
+    for match in match_db:
+        print(match)

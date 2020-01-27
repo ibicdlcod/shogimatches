@@ -17,7 +17,7 @@ def to_sql(in_str: str, in_id: int, in_date: date) -> None:
         cursor.execute(query_use, args_use)
 
         rank_code = (in_date.isoformat()
-                     + " " + str(in_id) + in_str)
+                     + " " + str(in_id))
         h = hashlib.sha512()
         h.update(bytes(rank_code, "utf-8"))
         rank_hash = h.digest()

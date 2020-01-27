@@ -1,4 +1,5 @@
 from datetime import date
+from metastruct import kishi_rank_sql
 import urllib.request
 import urllib.error
 import time
@@ -55,9 +56,16 @@ class Kishi:
         return ",".join(out_str_item)
 
     def rank(self, query_date: date) -> str:
+        sql_result = kishi_rank_sql.from_sql(self.id, query_date)
+        if sql_result is not None:
+            return sql_result
+
         try_count = 0
         while try_count < 10:
             try:
+                time.sleep(1)
+                print(f"Obtaining rank of {self.fullname} "
+                      f"on day {query_date.isoformat()} ")
                 with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/titlecheck.php?name={self.id}"
                                             f"&date={date.isoformat(query_date)}") as response:
                     html = response.read()
@@ -69,9 +77,13 @@ class Kishi:
                           or html_str[i] == "("
                           or html_str[i] == "・"][0]
                 if html_str[index3] == "・" and html_str[index3-2] == "竜" and html_str[index3-3] == " ":
-                    return "竜王名人"
+                    result = "竜王名人"
                 else:
-                    return html_str[index2 + 2 + len(self.fullname):index3]
+                    result = html_str[index2 + 2 + len(self.fullname):index3]
+                kishi_rank_sql.to_sql(result, self.id, query_date)
+                print(f"Obtained rank of {self.fullname} "
+                      f"on day {query_date.isoformat()} ")
+                return result
             except urllib.error.URLError as e:
                 try_count += 1
                 if hasattr(e, 'reason'):

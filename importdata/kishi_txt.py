@@ -1,5 +1,5 @@
 from metastruct import kishi_data
-from importdata import match_auto
+from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
 
@@ -123,7 +123,7 @@ def sql_connect(insert_first, read):
 
 
 if __name__ == '__main__':
-    update_on = False
+    update_on = True
     if update_on:
         process_txt()
         amateur1 = process_more_txt("current_amateur_part")
@@ -168,8 +168,6 @@ if __name__ == '__main__':
 
     outfile_name = "..\\temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    match_list = match_auto.import_data(1, 1)
-    match_auto.match_to_sql(match_list)
-    # for str1 in match_auto.import_data(1, 1):
-    #    outfile.write(str(str1) + "\n")
+    for kishi in kishi_db[:20]:
+        print(kishi.rank(date.fromisoformat("2020-01-27")))
     outfile.close()

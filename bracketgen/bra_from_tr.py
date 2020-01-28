@@ -88,6 +88,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         t = table_desc.TableDesc(
             (row_num, factor * (a - col_num_pri - 1) + 1),
             (row_num, factor * (a - col_num_pri - 1) + u),
+            False,
             in_tree.list_round_num[col_num_pri],
             "#dedede",
             False,
@@ -129,6 +130,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 t1 = table_desc.TableDesc(
                     (position_dicts[j][k], factor * (a - j - 1) - (0 if j == a - 1 else 3)),
                     (position_dicts[j][k] + 1, factor * (a - j - 1)),
+                    False,
                     seeds_in[k] if k in seeds_in.keys() else "",
                     "#f9f9f9",
                 )
@@ -139,18 +141,27 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     kishi_display_name = "[[" \
                                          + this_kishi.fullname \
                                          + "]]" \
-                                         + this_kishi.rank(this_node.series[0].match_date)
+                                         + this_kishi.rank(this_node.series[0].match_date)[0]
                 else:
                     kishi_display_name = "[[" \
                                          + this_kishi.wiki_name \
                                          + "|" \
                                          + this_kishi.fullname \
                                          + "]]" \
-                                         + this_kishi.rank(this_node.series[0].match_date)
+                                         + this_kishi.rank(this_node.series[0].match_date)[0]
             elif kishi_surname_table.count(this_kishi.fullname[:this_kishi.surname_length]) > 1:
                 kishi_display_name = this_kishi.fullname[:this_kishi.surname_length + 1]
             else:
                 kishi_display_name = this_kishi.fullname[:this_kishi.surname_length]
+
+            if k in new_match_dicts[j].keys() or j == 0:
+                kishi_display_name_len = len(this_kishi.fullname) * 1.4 \
+                                         + this_kishi.rank(this_node.series[0].match_date)[1]
+            elif kishi_surname_table.count(this_kishi.fullname[:this_kishi.surname_length]) > 1:
+                kishi_display_name_len = len(this_kishi.fullname[:this_kishi.surname_length + 1]) * 1.4
+            else:
+                kishi_display_name_len = len(this_kishi.fullname[:this_kishi.surname_length]) * 1.4
+
             last_winners = [node.winner() for node in in_tree.last_remain_nodes]
             if this_kishi in last_winners and first_place_label != "":
                 kishi_display_name = "'''" + kishi_display_name \
@@ -162,8 +173,12 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             t2 = table_desc.TableDesc(
                 (position_dicts[j][k], factor * (a - j - 1) + 1),
                 (position_dicts[j][k] + 1, factor * (a - j - 1) + 1),
+                False,
                 kishi_display_name,
                 "#f9f9f9",
+                False,
+                (True, True, True, True),
+                kishi_display_name_len
             )
             table_pos_all.append(t2)
             match_icons = ""
@@ -198,6 +213,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             t3 = table_desc.TableDesc(
                 (position_dicts[j][k], factor * (a - j - 1) + 2),
                 (position_dicts[j][k] + 1, factor * (a - j - 1) + 2),
+                False,
                 match_icons,
                 "#f9f9f9",
             )
@@ -209,6 +225,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 t4 = table_desc.TableDesc(
                     (position_dicts[j][k], factor * (a - j - 1) + 3),
                     (position_dicts[j][k] + 1, factor * (a - j - 1) + 3),
+                    False,
                     out_seed_text,
                     "#f9f9f9",
                 )
@@ -221,6 +238,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             t5 = table_desc.TableDesc(
                 (pos1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1)),
                 (pos2, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1)),
+                False,
                 "",
                 "#FFFFFF",
                 True,
@@ -230,15 +248,51 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             pos3 = (pos1 + pos2) // 2
             if j != 0:
                 t6 = table_desc.TableDesc(
-                    (pos3 - 1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
-                    (pos3 - 1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                    False,
                     "",
                     "#FFFFFF",
                     True,
                     (False, False, True, False)
                 )
                 table_pos_all.append(t6)
-    table_pos_all.sort(key=lambda cell: cell.from_cell[0] * 1000 + cell.from_cell[1])
+    occupied_grid = []
+    row_limit = max([cell.to_cell[0] for cell in table_pos_all]) + 1
+    column_limit = max([cell.to_cell[1] for cell in table_pos_all]) + 1
+    for i in range(row_limit):
+        occupied_grid.append([])
+        for j in range(column_limit):
+            occupied_grid[i].append(False)
+    for cell in table_pos_all:
+        from_row = cell.from_cell[0]
+        from_col = cell.from_cell[1]
+        to_row = cell.to_cell[0] + 1
+        to_col = cell.to_cell[1] + 1
+        for i in range(from_row, to_row):
+            for j in range(from_col, to_col):
+                occupied_grid[i][j] = True
+    for i in range(row_limit):
+        print(occupied_grid[i])
+    for i in range(row_limit):
+        j = 0
+        while j < column_limit:
+            if not occupied_grid[i][j]:
+                k = j
+                while k < column_limit - 1:
+                    if occupied_grid[i][k+1]:
+                        break
+                    k += 1
+                t7 = table_desc.TableDesc(
+                    (i, j),
+                    (i, k),
+                    True,
+                )
+                table_pos_all.append(t7)
+                j = k+1
+            else:
+                j += 1
+    table_pos_all.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
     return table_pos_all
 
 
@@ -253,7 +307,83 @@ def draw_table(in_table_list: list) -> str:
     # for row 0
     return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
     # column names
-    return_block += '| &nbsp;'
+    return_block += '| &nbsp;\n'
+    in_table_list_cur_index = 1
+    while True:
+        current_cell = in_table_list[in_table_list_cur_index]
+        if current_cell.from_cell[0] > 0:
+            break
+        if not current_cell.empty:
+            return_block += (f'| align="center" colspan="'
+                             f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                             f'" style="border:1px solid #aaa;" bgcolor="'
+                             f'{current_cell.bg_color}" |'
+                             f'{current_cell.content}\n')
+        else:
+            return_block += (f'| colspan="'
+                             f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                             f'" |\n'
+                             )
+        in_table_list_cur_index += 1
+    # for row 1
+    return_block += '|-\n|'
+    # calculate column width
+    column_width = []
+    for j in range(column_limit):
+        column_width.append(0.5)
+    for cell in in_table_list:
+        if cell.empty or cell.content == '':
+            continue
+        else:
+            columns = range(cell.from_cell[1], cell.to_cell[1] + 1)
+            print(columns)
+            content_length = cell.content_len
+            print(content_length)
+            current_col_lengh = sum([column_width[column] for column in columns])
+            print(current_col_lengh)
+            while current_col_lengh < content_length:
+                for column in columns:
+                    column_width[column] += 0.5
+                current_col_lengh = sum([column_width[column] for column in columns])
+    print(column_width)
+    for i in range(column_limit):
+        if i == 0:
+            return_block += f'style="height:0.5em; width:{column_width[i]}em"| '
+        else:
+            return_block += f'||style="width:{column_width[i]}em"| '
+    return_block += '\n'
+    # for row 2 onwards
+    for row_num in range(2, row_limit):
+        flag = 0
+        return_block += '|-\n'
+        while True:
+            current_cell = in_table_list[in_table_list_cur_index]
+            if current_cell.from_cell[0] < row_num:
+                in_table_list_cur_index += 1
+            else:
+                break
+        while True:
+            current_cell = in_table_list[in_table_list_cur_index]
+            if current_cell.from_cell[0] > row_num:
+                break
+            if flag == 0:
+                return_block += '|style="height:1em" '
+                flag += 1
+            else:
+                return_block += f'||'
+            return_block += (f'rowspan="'
+                             f'{current_cell.to_cell[0] - current_cell.from_cell[0] + 1}'
+                             f'" colspan="'
+                             f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                             f'" |'
+                             f'{current_cell.content}')
+            return_block += " "
+            in_table_list_cur_index += 1
+            if in_table_list_cur_index >= len(in_table_list):
+                break
+        return_block += "\n"
+        # print(in_table_list[in_table_list_cur_index])
 
+    return_block += "|}\n"
     print(return_block)
     return return_block

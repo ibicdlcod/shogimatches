@@ -51,12 +51,18 @@ class Kishi:
     def __eq__(self, other):
         return self.id == other.id
 
-    def rank(self, query_date: date) -> str:
+    def __ne__(self, other):
+        return self.id != other.id
+
+    def rank(self, query_date: date) -> tuple:
         sql_result = kishi_rank_sql.from_sql(self.id, query_date)
         if sql_result is not None:
             if len(sql_result) > 3:
+                length = len(sql_result) * 0.7
                 sql_result = "<small>" + sql_result + "</small>"
-            return sql_result
+            else:
+                length = len(sql_result)
+            return sql_result, length
 
         try_count = 0
         while try_count < 10:
@@ -82,8 +88,11 @@ class Kishi:
                 print(f"Obtained rank of {self.fullname} "
                       f"on day {query_date.isoformat()} ")
                 if len(result) > 3:
-                    result = "<small>" + result + "</small>"
-                return result
+                    length = len(result) * 0.7
+                    sql_result = "<small>" + result + "</small>"
+                else:
+                    length = len(result)
+                return sql_result, length
             except urllib.error.URLError as e:
                 try_count += 1
                 if hasattr(e, 'reason'):
@@ -98,7 +107,7 @@ class Kishi:
         print(f"Failed to obtain rank of {self.fullname}"
               f"on day {query_date.isoformat()} "
               f"on large number of tries.")
-        return ""
+        return "", 0
 
 
 def kishi_from_str(in_str: str):

@@ -10,18 +10,15 @@ class TreeNode:
     advance_result = 0  # >0 for black and <0 for white
     black_q_from = None  # its a TreeNode
     white_q_from = None  # its a TreeNode
-    black_seed_in: str = None
-    white_seed_in: str = None
-    black_seed_out: str = None
-    white_seed_out: str = None
     round_num: str = None
     round_num_display: str = ""
 
     def __init__(self, match_list: list, title_holder: kishi_data.Kishi = None,
-                 superior_1win_advantage: kishi_data.Kishi = None):
+                 superior_1win_advantage: kishi_data.Kishi = None,):
         if len(match_list) == 0:
             print("Invalid: no match specified for TreeNode")
             exit(2)
+        self.title_holder = title_holder
         self.series = match_list
         self.series.sort(key=lambda match1: match1.match_date)
         self.black_of_first = kishi_data.query_kishi_from_name(self.series[0].black_name)
@@ -75,10 +72,6 @@ class TreeNode:
             '' if self.black_q_from is None else self.black_q_from.white_of_first.fullname,
             '' if self.white_q_from is None else self.white_q_from.black_of_first.fullname,
             '' if self.white_q_from is None else self.white_q_from.white_of_first.fullname,
-            '' if self.black_seed_in is None else self.black_seed_in,
-            '' if self.white_seed_in is None else self.white_seed_in,
-            '' if self.black_seed_out is None else self.black_seed_out,
-            '' if self.white_seed_out is None else self.white_seed_out,
             self.round_num,
             self.round_num_display,
             "\n" + "\n".join([str(match) for match in self.series]),

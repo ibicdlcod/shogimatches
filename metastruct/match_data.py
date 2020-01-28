@@ -1,4 +1,5 @@
 from datetime import date
+from metastruct import kishi_data
 import hashlib
 
 
@@ -71,3 +72,14 @@ class Match:
                         str(self.mochishogi),
                         str(self.sennichite)]
         return ",".join(out_str_item)
+
+
+def query_node_from_id(list_nodes: list, query_id: int):
+    for node in list_nodes:
+        black_id = node.black_of_first.id
+        white_id = node.white_of_first.id
+        if black_id == query_id:
+            return node, "black"
+        if white_id == query_id:
+            return node, "white"
+    return None, "Not found"

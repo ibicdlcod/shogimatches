@@ -141,3 +141,41 @@ def query_kishi_from_name(in_name: str) -> Kishi:
             conn.close()
         return result
 
+
+def query_kishi_from_id(in_id: int) -> Kishi:
+    db_config = db_conf.read_db_config()
+    conn = None
+    result = None
+
+    try:
+        conn = mysql.connector.MySQLConnection(**db_config)
+
+        cursor = conn.cursor(buffered=True)
+        query_use = "USE shogi;"
+        args_use = tuple()
+        cursor.execute(query_use, args_use)
+
+        query_insert = ("SELECT * FROM kishi\n"
+                        "WHERE id=%s;\n")
+        args_insert = (in_id,)
+        cursor = conn.cursor()
+        cursor.execute(query_insert, args_insert)
+        all_rows = cursor.fetchall()
+        row = all_rows[0]
+        if row is None:
+            print(f"Invalid name: kishi {in_id} does not exist")
+            result = None
+        else:
+            result = Kishi(row[0], row[1], row[2], row[3], row[4] == 1,
+                           row[5] == 1, row[6] == 1)
+
+        cursor.close()
+        conn.commit()
+
+    except mysql.connector.Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+        return result

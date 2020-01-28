@@ -2,10 +2,10 @@ from importdata import sql_read
 from metastruct import kishi_data
 from metastruct import tree_node
 from metastruct import organized_t
+from bracketgen import bra_from_tr
 from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
-
 
 kishi_db = []
 
@@ -40,8 +40,8 @@ def process_more_txt(source_name: str) -> list:
             line1 = infile1.readline()
             continue
         else:
-            index2 = line1.find("\"", index1+1)
-            returns.append(int(line1[index1+6:index2]))
+            index2 = line1.find("\"", index1 + 1)
+            returns.append(int(line1[index1 + 6:index2]))
 
         line1 = infile1.readline()
     infile1.close()
@@ -180,12 +180,15 @@ if __name__ == '__main__':
     tree_node = tree_node.TreeNode(match_db)
     match_db2 = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント")
     org_tree = organized_t.OrganizedTree(match_db2, "決勝トーナメント",
-                                         [
-                                             "挑戦者決定三番勝負",
-                                             "準決勝",
-                                             "03回戦",
-                                             "02回戦",
-                                             "01回戦",
-                                         ])
-    #for match in match_db2:
+                                         ["挑戦者決定三番勝負", "準決勝",
+                                          "03回戦", "02回戦", "01回戦",
+                                          ])
+    bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), False)
+    # match_db3 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")
+    # org_tree3 = organized_t.OrganizedTree(match_db3, "決勝トーナメント",
+    #                                      ["挑戦者決定三番勝負", "準々決勝",
+    #                                       "04回戦", "03回戦", "02回戦", "01回戦",
+    #                                       ])
+    # bra_from_tr.generate_bra_pos(org_tree3)
+    # for match in match_db2:
     #    print(match)

@@ -3,6 +3,7 @@ from metastruct import tree_node
 
 class OrganizedTree:
     last_remain_nodes = []
+    total_nodes: int = 0
     list_round_prefix = ""
     list_round_num = []
 
@@ -50,11 +51,32 @@ class OrganizedTree:
                 for tn2 in node_group[j + 1]:
                     if tn2.winner().id == tn_black.id:
                         tn.black_q_from = tn2
-                        break
                     elif tn2.winner().id == tn_white.id:
                         tn.white_q_from = tn2
-                        break
+        self.total_nodes = 0
         for i in range(len(self.list_round_num)):
-            for tn in node_group[i]:
-                print(tn)
-            print()
+            self.total_nodes += len(node_group[i])
+            # for [] in node_group[i]:
+            #     self.total_nodes += 1
+        self.total_nodes += len(self.last_remain_nodes)
+
+
+def nodes_layer_from_tr(in_org_tr: OrganizedTree) -> list:  # a list of list of nodes
+    return_value = [in_org_tr.last_remain_nodes, ]
+    current_nodes = in_org_tr.last_remain_nodes
+    while True:
+        current_nodes_copy = current_nodes.copy()
+        next_layer_content_num = 0
+        for tn in current_nodes:
+            if tn.black_q_from is not None:
+                current_nodes_copy.append(tn.black_q_from)
+                next_layer_content_num += 1
+            if tn.white_q_from is not None:
+                current_nodes_copy.append(tn.white_q_from)
+                next_layer_content_num += 1
+            current_nodes_copy.remove(tn)
+        if next_layer_content_num == 0:
+            break
+        current_nodes = current_nodes_copy.copy()
+        return_value.append(current_nodes)
+    return return_value

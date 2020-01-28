@@ -153,10 +153,11 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 new_flag = True
             if k in new_match_dicts[j].keys() or j == 0:
                 if this_kishi.wiki_name == "":
+                    rank = this_kishi.rank(this_node.series[0].match_date)[0]
                     kishi_display_name = "[[" \
                                          + this_kishi.fullname \
                                          + "]]" \
-                                         + this_kishi.rank(this_node.series[0].match_date)[0]
+                                         + rank
                 else:
                     kishi_display_name = "[[" \
                                          + this_kishi.wiki_name \
@@ -260,7 +261,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 (True, True, True, False)
             )
             table_pos_all.append(t5)
-            pos3 = (pos1 + pos2) // 2
+            pos3 = (pos1 + pos2 - 1) // 2
             if j != 0:
                 t6 = table_desc.TableDesc(
                     (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 2),
@@ -288,8 +289,6 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             for j in range(from_col, to_col):
                 occupied_grid[i][j] = True
     for i in range(row_limit):
-        print(occupied_grid[i])
-    for i in range(row_limit):
         j = 0
         while j < column_limit:
             if not occupied_grid[i][j]:
@@ -313,12 +312,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
 
 def draw_table(in_table_list: list) -> str:
     return_block = ""
-    for i in in_table_list:
-        print(i)
     row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1
-    print(row_limit)
     column_limit = max([cell.to_cell[1] for cell in in_table_list]) + 1
-    print(column_limit)
     # for row 0
     return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
     # column names
@@ -352,20 +347,16 @@ def draw_table(in_table_list: list) -> str:
             continue
         else:
             columns = range(cell.from_cell[1], cell.to_cell[1] + 1)
-            print(columns)
             content_length = cell.content_len
             if content_length != 0 and content_length < 3:
                 content_length += 1
             if 3 <= content_length < 5:
                 content_length += 0.5
-            print(content_length)
             current_col_length = sum([column_width[column] for column in columns])
-            print(current_col_length)
             while current_col_length < content_length:
                 for column in columns:
                     column_width[column] += 0.5
                 current_col_length = sum([column_width[column] for column in columns])
-    print(column_width)
     in_table_list.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
     for i in range(column_limit):
         if i == 0:
@@ -392,7 +383,6 @@ def draw_table(in_table_list: list) -> str:
                 flag += 1
             else:
                 return_block += f'||'
-            solid_border = f'style="border:1px solid #aaa;text-align:center" bgcolor="{current_cell.bg_color}"'
             rowspan_describe = (f'rowspan="'
                                 f'{current_cell.to_cell[0] - current_cell.from_cell[0] + 1}'
                                 f'" ')
@@ -403,10 +393,22 @@ def draw_table(in_table_list: list) -> str:
                 rowspan_describe = ''
             if current_cell.to_cell[1] == current_cell.from_cell[1]:
                 colspan_describe = ''
-            return_block += (rowspan_describe + colspan_describe
-                             + (solid_border if (not current_cell.empty) and (not current_cell.border_black) else '') +
-                             f' |'
-                             f'{current_cell.content}')
+            solid_border = f'style="border:1px solid #aaa;text-align:center" bgcolor="{current_cell.bg_color}"'
+            up = "1px" if current_cell.border_up else 0
+            right = "1px" if current_cell.border_right else 0
+            down = "1px" if current_cell.border_down else 0
+            left = "1px" if current_cell.border_left else 0
+            black_border = f'style="border-width:{up} {right} {down} {left}; border-style:solid; border-color:black;"'
+            if not current_cell.border_black:
+                return_block += (rowspan_describe + colspan_describe
+                                 + (solid_border if (not current_cell.empty) else '')
+                                 + f' |'
+                                 f'{current_cell.content}')
+            else:
+                return_block += (rowspan_describe + colspan_describe
+                                 + black_border +
+                                 f' |'
+                                 f'{current_cell.content}')
             return_block += " "
             in_table_list_cur_index += 1
             if in_table_list_cur_index >= len(in_table_list):

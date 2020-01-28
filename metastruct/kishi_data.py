@@ -67,7 +67,7 @@ class Kishi:
         try_count = 0
         while try_count < 10:
             try:
-                time.sleep(1)
+                time.sleep(0.5)
                 print(f"Obtaining rank of {self.fullname} "
                       f"on day {query_date.isoformat()} ")
                 with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/titlecheck.php?name={self.id}"
@@ -89,10 +89,10 @@ class Kishi:
                       f"on day {query_date.isoformat()} ")
                 if len(result) > 3:
                     length = len(result) * 0.7
-                    sql_result = "<small>" + result + "</small>"
+                    result = "<small>" + result + "</small>"
                 else:
                     length = len(result)
-                return sql_result, length
+                return result, length
             except urllib.error.URLError as e:
                 try_count += 1
                 if hasattr(e, 'reason'):

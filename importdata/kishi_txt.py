@@ -181,10 +181,13 @@ if __name__ == '__main__':
                                          ["挑戦者決定三番勝負", "準決勝",
                                           "03回戦", "02回戦", "01回戦",
                                           ])
-    table2 = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), False)
-    draw_table = bra_from_tr.draw_table(table2)
     outfile_name = "..\\temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+    table2 = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), False)
+    draw_table = bra_from_tr.draw_table(table2)
+    outfile.write(draw_table)
+    table2 = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True)
+    draw_table = bra_from_tr.draw_table(table2)
     outfile.write(draw_table)
     outfile.close()
     # match_db3 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")

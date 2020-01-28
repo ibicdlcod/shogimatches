@@ -44,7 +44,17 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
     }
     seeds_out = out_seed
     seeds_out = {
-        198: "挑戦者"
+        198: "挑戦者",
+        184: "4組優勝",
+        102: "3組2位",
+        115: "1組優勝",
+        100: "1組3位",
+        150: "2組2位",
+        119: "2組優勝",
+        42: "1組3位",
+        170: "1組2位",
+        190: "5組優勝",
+        201: "6組優勝",
     }
     vertical_pos = []
     for nodes in in_tree.last_remain_nodes:
@@ -86,8 +96,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         else:
             u = 3
         t = table_desc.TableDesc(
-            (row_num, factor * (a - col_num_pri - 1) + 1),
-            (row_num, factor * (a - col_num_pri - 1) + u),
+            (row_num, factor * (a - col_num_pri - 1) + 2),
+            (row_num, factor * (a - col_num_pri - 1) + u + 2),
             False,
             in_tree.list_round_num[col_num_pri],
             "#dedede",
@@ -127,9 +137,14 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             this_node, black_or_white = match_data.query_node_from_id(tree_into_layers[j], k)
             new_flag = False
             if k in new_match_dicts[j].keys() and (not in_seed_disabled):
+                column_from_1 = (factor * (a - j - 1) - (0 if j == a - 1 else 3)
+                                 + (1 if not out_seed_disabled else 2))
+                column_to_1 = factor * (a - j - 1) + 1
+                if column_from_1 > column_to_1:
+                    column_from_1 = column_to_1
                 t1 = table_desc.TableDesc(
-                    (position_dicts[j][k], factor * (a - j - 1) - (0 if j == a - 1 else 3)),
-                    (position_dicts[j][k] + 1, factor * (a - j - 1)),
+                    (position_dicts[j][k], column_from_1),
+                    (position_dicts[j][k] + 1, column_to_1),
                     False,
                     seeds_in[k] if k in seeds_in.keys() else "",
                     "#f9f9f9",
@@ -171,8 +186,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 kishi_display_name = ("'''" if j != 0 else "") + kishi_display_name \
                                      + ("'''" if j != 0 else "") + (second_place_label if new_flag else "")
             t2 = table_desc.TableDesc(
-                (position_dicts[j][k], factor * (a - j - 1) + 1),
-                (position_dicts[j][k] + 1, factor * (a - j - 1) + 1),
+                (position_dicts[j][k], factor * (a - j - 1) + 2),
+                (position_dicts[j][k] + 1, factor * (a - j - 1) + 2),
                 False,
                 kishi_display_name,
                 "#f9f9f9",
@@ -211,8 +226,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                         match_icon += "●"
                 match_icons += match_icon
             t3 = table_desc.TableDesc(
-                (position_dicts[j][k], factor * (a - j - 1) + 2),
-                (position_dicts[j][k] + 1, factor * (a - j - 1) + 2),
+                (position_dicts[j][k], factor * (a - j - 1) + 3),
+                (position_dicts[j][k] + 1, factor * (a - j - 1) + 3),
                 False,
                 match_icons,
                 "#f9f9f9",
@@ -223,8 +238,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 out_seed_text = ""
             if j == 0 or (not out_seed_disabled):
                 t4 = table_desc.TableDesc(
-                    (position_dicts[j][k], factor * (a - j - 1) + 3),
-                    (position_dicts[j][k] + 1, factor * (a - j - 1) + 3),
+                    (position_dicts[j][k], factor * (a - j - 1) + 4),
+                    (position_dicts[j][k] + 1, factor * (a - j - 1) + 4),
                     False,
                     out_seed_text,
                     "#f9f9f9",
@@ -236,8 +251,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             pos1 = position_dicts[j][node.black_of_first.id] + 1
             pos2 = position_dicts[j][node.white_of_first.id]
             t5 = table_desc.TableDesc(
-                (pos1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1)),
-                (pos2, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1)),
+                (pos1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                (pos2, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
                 False,
                 "",
                 "#FFFFFF",
@@ -248,8 +263,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             pos3 = (pos1 + pos2) // 2
             if j != 0:
                 t6 = table_desc.TableDesc(
-                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
-                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 2),
+                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 2),
                     False,
                     "",
                     "#FFFFFF",
@@ -280,7 +295,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             if not occupied_grid[i][j]:
                 k = j
                 while k < column_limit - 1:
-                    if occupied_grid[i][k+1]:
+                    if occupied_grid[i][k + 1]:
                         break
                     k += 1
                 t7 = table_desc.TableDesc(
@@ -289,7 +304,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     True,
                 )
                 table_pos_all.append(t7)
-                j = k+1
+                j = k + 1
             else:
                 j += 1
     table_pos_all.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))

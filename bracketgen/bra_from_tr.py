@@ -22,8 +22,12 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                      in_seed: dict,
                      out_seed_disabled: bool = False,
                      in_seed_disabled: bool = False,
-                     ):
+                     first_place_label: str = "",
+                     second_place_label: str = "",
+                     ) -> list:
     a = len(in_tree.list_round_num)
+    first_place_label = "◎"
+    second_place_label = "△"
     seeds_in = in_seed
     seeds_in = {
         184: "4組優勝",
@@ -38,6 +42,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         190: "5組優勝",
         201: "6組優勝",
     }
+    seeds_out = out_seed
     seeds_out = {
         198: "挑戦者"
     }
@@ -49,13 +54,9 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
     for i in range(a):
         position_dicts.append(dict())
     for i in range(len(vertical_pos)):
-        position_dicts[a-1][vertical_pos[i]] = 2+2*i
+        position_dicts[a - 1][vertical_pos[i]] = 2 + 2 * i
     tree_into_layers = organized_t.nodes_layer_from_tr(in_tree)
-    for i in tree_into_layers:
-        for j in i:
-            print(j)
-        print()
-    for i in range(a-1, -1, -1):
+    for i in range(a - 1, -1, -1):
         prev_position = position_dicts[i]
         next_position = prev_position.copy()
         for j in tree_into_layers[i]:
@@ -73,12 +74,12 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             next_position.pop(j_lower)
             next_position[j_winner] = (prev_position[j_upper] + prev_position[j_lower]) // 2
         if i != 0:
-            position_dicts[i-1] = next_position
+            position_dicts[i - 1] = next_position
     table_pos_all = []
     # upper
     row_num = 0
     factor = 4 if out_seed_disabled else 5
-    for col_num_pri in range(a-1, -1, -1):
+    for col_num_pri in range(a - 1, -1, -1):
         u = 0
         if out_seed_disabled and col_num_pri != 0:
             u = 2
@@ -102,17 +103,17 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         new_match_dicts.append(dict())
     for j in range(a):
         for k in position_dicts[j].keys():
-            if j != a-1 and position_dicts[j][k] != position_dicts[j+1][k]:
+            if j != a - 1 and position_dicts[j][k] != position_dicts[j + 1][k]:
                 have_match_dicts[j][k] = True
-            if j != 0 and k not in position_dicts[j-1].keys():
+            if j != 0 and k not in position_dicts[j - 1].keys():
                 have_match_dicts[j][k] = True
-            if j != 0 and k in position_dicts[j-1].keys() and position_dicts[j][k] != position_dicts[j-1][k]:
+            if j != 0 and k in position_dicts[j - 1].keys() and position_dicts[j][k] != position_dicts[j - 1][k]:
                 have_match_dicts[j][k] = True
     for j in range(a):
         for k in have_match_dicts[j].keys():
-            if j == a-1:
+            if j == a - 1:
                 new_match_dicts[j][k] = True
-            elif k not in have_match_dicts[j+1].keys():
+            elif k not in have_match_dicts[j + 1].keys():
                 new_match_dicts[j][k] = True
     kishi_surname_table = []
     for k in vertical_pos:
@@ -123,20 +124,22 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         for k in have_match_dicts[j].keys():
             this_kishi = kishi_data.query_kishi_from_id(k)
             this_node, black_or_white = match_data.query_node_from_id(tree_into_layers[j], k)
+            new_flag = False
             if k in new_match_dicts[j].keys() and (not in_seed_disabled):
                 t1 = table_desc.TableDesc(
-                    (position_dicts[j][k], factor * (a - j - 1)),
-                    (position_dicts[j][k]+1, factor * (a - j - 1)),
+                    (position_dicts[j][k], factor * (a - j - 1) - (0 if j == a - 1 else 3)),
+                    (position_dicts[j][k] + 1, factor * (a - j - 1)),
                     seeds_in[k] if k in seeds_in.keys() else "",
                     "#f9f9f9",
                 )
                 table_pos_all.append(t1)
+                new_flag = True
             if k in new_match_dicts[j].keys() or j == 0:
                 if this_kishi.wiki_name == "":
                     kishi_display_name = "[[" \
-                                        + this_kishi.fullname\
-                                        + "]]" \
-                                        + this_kishi.rank(this_node.series[0].match_date)
+                                         + this_kishi.fullname \
+                                         + "]]" \
+                                         + this_kishi.rank(this_node.series[0].match_date)
                 else:
                     kishi_display_name = "[[" \
                                          + this_kishi.wiki_name \
@@ -145,12 +148,20 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                                          + "]]" \
                                          + this_kishi.rank(this_node.series[0].match_date)
             elif kishi_surname_table.count(this_kishi.fullname[:this_kishi.surname_length]) > 1:
-                kishi_display_name = this_kishi.fullname[:this_kishi.surname_length+1]
+                kishi_display_name = this_kishi.fullname[:this_kishi.surname_length + 1]
             else:
                 kishi_display_name = this_kishi.fullname[:this_kishi.surname_length]
+            last_winners = [node.winner() for node in in_tree.last_remain_nodes]
+            if this_kishi in last_winners and first_place_label != "":
+                kishi_display_name = "'''" + kishi_display_name \
+                                     + "'''" + (first_place_label if new_flag else "")
+            last_losers = [node.loser() for node in in_tree.last_remain_nodes]
+            if this_kishi in last_losers and second_place_label != "":
+                kishi_display_name = ("'''" if j != 0 else "") + kishi_display_name \
+                                     + ("'''" if j != 0 else "") + (second_place_label if new_flag else "")
             t2 = table_desc.TableDesc(
                 (position_dicts[j][k], factor * (a - j - 1) + 1),
-                (position_dicts[j][k]+1, factor * (a - j - 1) + 1),
+                (position_dicts[j][k] + 1, factor * (a - j - 1) + 1),
                 kishi_display_name,
                 "#f9f9f9",
             )
@@ -186,13 +197,13 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 match_icons += match_icon
             t3 = table_desc.TableDesc(
                 (position_dicts[j][k], factor * (a - j - 1) + 2),
-                (position_dicts[j][k]+1, factor * (a - j - 1) + 2),
+                (position_dicts[j][k] + 1, factor * (a - j - 1) + 2),
                 match_icons,
                 "#f9f9f9",
             )
             table_pos_all.append(t3)
             out_seed_text = seeds_out[k] if k in seeds_out.keys() else ""
-            if j != 0 and k in have_match_dicts[j-1].keys():
+            if j != 0 and k in have_match_dicts[j - 1].keys():
                 out_seed_text = ""
             if j == 0 or (not out_seed_disabled):
                 t4 = table_desc.TableDesc(
@@ -202,6 +213,47 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     "#f9f9f9",
                 )
                 table_pos_all.append(t4)
+    # black lines
+    for j in range(a):
+        for node in tree_into_layers[j]:
+            pos1 = position_dicts[j][node.black_of_first.id] + 1
+            pos2 = position_dicts[j][node.white_of_first.id]
+            t5 = table_desc.TableDesc(
+                (pos1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1)),
+                (pos2, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1)),
+                "",
+                "#FFFFFF",
+                True,
+                (True, True, True, False)
+            )
+            table_pos_all.append(t5)
+            pos3 = (pos1 + pos2) // 2
+            if j != 0:
+                t6 = table_desc.TableDesc(
+                    (pos3 - 1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                    (pos3 - 1, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 1),
+                    "",
+                    "#FFFFFF",
+                    True,
+                    (False, False, True, False)
+                )
+                table_pos_all.append(t6)
+    table_pos_all.sort(key=lambda cell: cell.from_cell[0] * 1000 + cell.from_cell[1])
+    return table_pos_all
 
-    for t in table_pos_all:
-        print(t)
+
+def draw_table(in_table_list: list) -> str:
+    return_block = ""
+    for i in in_table_list:
+        print(i)
+    row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1
+    print(row_limit)
+    column_limit = max([cell.to_cell[1] for cell in in_table_list]) + 1
+    print(column_limit)
+    # for row 0
+    return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
+    # column names
+    return_block += '| &nbsp;'
+
+    print(return_block)
+    return return_block

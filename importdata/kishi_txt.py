@@ -176,19 +176,18 @@ if __name__ == '__main__':
     #     outfile.write(kishi.rank(date.fromisoformat("2020-01-27")) + "\n")
     # outfile.close()
     # kishi_db = sql_read.read_kishi()
-    match_db = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント", "挑戦者決定三番勝負")
-    tree_node = tree_node.TreeNode(match_db)
     match_db2 = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント")
     org_tree = organized_t.OrganizedTree(match_db2, "決勝トーナメント",
                                          ["挑戦者決定三番勝負", "準決勝",
                                           "03回戦", "02回戦", "01回戦",
                                           ])
-    bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), False)
+    table2 = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), False)
+    bra_from_tr.draw_table(table2)
     # match_db3 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")
     # org_tree3 = organized_t.OrganizedTree(match_db3, "決勝トーナメント",
     #                                      ["挑戦者決定三番勝負", "準々決勝",
     #                                       "04回戦", "03回戦", "02回戦", "01回戦",
     #                                       ])
-    # bra_from_tr.generate_bra_pos(org_tree3)
+    # bra_from_tr.generate_bra_pos(org_tree3, dict(), dict(), False)
     # for match in match_db2:
     #    print(match)

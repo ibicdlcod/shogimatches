@@ -48,9 +48,14 @@ class Kishi:
                         ]
         return ",".join(out_str_item)
 
+    def __eq__(self, other):
+        return self.id == other.id
+
     def rank(self, query_date: date) -> str:
         sql_result = kishi_rank_sql.from_sql(self.id, query_date)
         if sql_result is not None:
+            if len(sql_result) > 3:
+                sql_result = "<small>" + sql_result + "</small>"
             return sql_result
 
         try_count = 0
@@ -76,6 +81,8 @@ class Kishi:
                 kishi_rank_sql.to_sql(result, self.id, query_date)
                 print(f"Obtained rank of {self.fullname} "
                       f"on day {query_date.isoformat()} ")
+                if len(result) > 3:
+                    result = "<small>" + result + "</small>"
                 return result
             except urllib.error.URLError as e:
                 try_count += 1

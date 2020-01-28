@@ -1,6 +1,7 @@
 from importdata import sql_read
 from metastruct import kishi_data
 from metastruct import tree_node
+from metastruct import organized_t
 from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
@@ -177,5 +178,14 @@ if __name__ == '__main__':
     # kishi_db = sql_read.read_kishi()
     match_db = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント", "挑戦者決定三番勝負")
     tree_node = tree_node.TreeNode(match_db)
-    for match in match_db:
-        print(match)
+    match_db2 = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント")
+    org_tree = organized_t.OrganizedTree(match_db2, "決勝トーナメント",
+                                         [
+                                             "挑戦者決定三番勝負",
+                                             "準決勝",
+                                             "03回戦",
+                                             "02回戦",
+                                             "01回戦",
+                                         ])
+    #for match in match_db2:
+    #    print(match)

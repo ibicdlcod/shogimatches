@@ -24,7 +24,7 @@ def read_kishi() -> list:
         while row is not None:
             current_kishi: kishi_data.Kishi = kishi_data.Kishi(
                 row[0], row[1], row[2], row[3], row[4] == 1,
-                                                row[5] == 1, row[6] == 1
+                row[5] == 1, row[6] == 1
             )
             kishi_db.append(current_kishi)
             row = cursor.fetchone()

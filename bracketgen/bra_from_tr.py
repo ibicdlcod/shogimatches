@@ -138,7 +138,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             new_flag = False
             if k in new_match_dicts[j].keys() and (not in_seed_disabled):
                 column_from_1 = (factor * (a - j - 1) - (0 if j == a - 1 else 3)
-                                 + (1 if not out_seed_disabled else 2))
+                                 + (2 if not out_seed_disabled else 2))
                 column_to_1 = factor * (a - j - 1) + 1
                 if column_from_1 > column_to_1:
                     column_from_1 = column_to_1
@@ -346,6 +346,7 @@ def draw_table(in_table_list: list) -> str:
     column_width = []
     for j in range(column_limit):
         column_width.append(0.5)
+    in_table_list.sort(key=lambda cell: cell.to_cell[1] - cell.from_cell[1])
     for cell in in_table_list:
         if cell.empty or cell.content == '':
             continue
@@ -353,14 +354,19 @@ def draw_table(in_table_list: list) -> str:
             columns = range(cell.from_cell[1], cell.to_cell[1] + 1)
             print(columns)
             content_length = cell.content_len
+            if content_length != 0 and content_length < 3:
+                content_length += 1
+            if 3 <= content_length < 5:
+                content_length += 0.5
             print(content_length)
-            current_col_lengh = sum([column_width[column] for column in columns])
-            print(current_col_lengh)
-            while current_col_lengh < content_length:
+            current_col_length = sum([column_width[column] for column in columns])
+            print(current_col_length)
+            while current_col_length < content_length:
                 for column in columns:
                     column_width[column] += 0.5
-                current_col_lengh = sum([column_width[column] for column in columns])
+                current_col_length = sum([column_width[column] for column in columns])
     print(column_width)
+    in_table_list.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
     for i in range(column_limit):
         if i == 0:
             return_block += f'style="height:0.5em; width:{column_width[i]}em"| '
@@ -386,11 +392,20 @@ def draw_table(in_table_list: list) -> str:
                 flag += 1
             else:
                 return_block += f'||'
-            return_block += (f'rowspan="'
-                             f'{current_cell.to_cell[0] - current_cell.from_cell[0] + 1}'
-                             f'" colspan="'
-                             f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
-                             f'" |'
+            solid_border = f'style="border:1px solid #aaa;text-align:center" bgcolor="{current_cell.bg_color}"'
+            rowspan_describe = (f'rowspan="'
+                                f'{current_cell.to_cell[0] - current_cell.from_cell[0] + 1}'
+                                f'" ')
+            colspan_describe = (f'colspan="'
+                                f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                                f'" ')
+            if current_cell.to_cell[0] == current_cell.from_cell[0]:
+                rowspan_describe = ''
+            if current_cell.to_cell[1] == current_cell.from_cell[1]:
+                colspan_describe = ''
+            return_block += (rowspan_describe + colspan_describe
+                             + (solid_border if (not current_cell.empty) and (not current_cell.border_black) else '') +
+                             f' |'
                              f'{current_cell.content}')
             return_block += " "
             in_table_list_cur_index += 1

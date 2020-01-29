@@ -41,8 +41,15 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             for j in this_part_nodes:
                 for k in j.series:
                     this_part_matches.append(k)
-            organized_t.OrganizedTree(this_part_matches, in_tree.list_round_prefix,
+            sub_org_tree = organized_t.OrganizedTree(this_part_matches, in_tree.list_round_prefix,
                                       in_tree.list_round_num, in_tree.list_round_prefix + f"({s})")
+            generate_bra_pos(sub_org_tree,
+                             out_seed,
+                             in_seed,
+                             out_seed_disabled,
+                             in_seed_disabled,
+                             first_place_label,
+                             second_place_label)
             print(this_part_nodes)
             print()
 
@@ -89,6 +96,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
     for i in range(a - 1, -1, -1):
         prev_position = position_dicts[i]
         next_position = prev_position.copy()
+        
         for j in tree_into_layers[i]:
             j_upper = j.black_of_first.id
             j_lower = j.white_of_first.id

@@ -55,4 +55,9 @@ class TableDesc:
 
 
 def union_table(in_table_list_list: list) -> list:
-    column_limit = 1
+    column_limit = 0
+    for in_table_list in in_table_list_list:
+        column_limit_item = max([in_table.to_cell[1] for in_table in in_table_list]) + 1
+        if column_limit < column_limit_item:
+            column_limit = column_limit_item
+    print(column_limit)

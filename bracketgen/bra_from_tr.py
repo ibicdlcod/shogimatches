@@ -37,8 +37,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         sub_table_alt = []
         for tr in sub_trees:
             sub_table_alt.append(generate_bra_pos(tr,
-                                                  out_seed,
                                                   in_seed,
+                                                  out_seed,
                                                   out_seed_disabled,
                                                   in_seed_disabled,
                                                   first_place_label,
@@ -184,7 +184,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 (position_dicts[j][k] + 1, factor * (a - j - 1) + 2),
                 False,
                 kishi_display_name,
-                "#f9f9f9",
+                "#fff0f0" if this_kishi.woman else "#f9f9f9",
                 False,
                 (True, True, True, True),
                 kishi_display_name_len
@@ -224,7 +224,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 (position_dicts[j][k] + 1, factor * (a - j - 1) + 3),
                 False,
                 match_icons,
-                "#f9f9f9",
+                "#fff0f0" if this_kishi.woman else "#f9f9f9",
             )
             table_pos_all.append(t3)
             out_seed_text = out_seed[k] if k in out_seed.keys() else ""
@@ -236,7 +236,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     (position_dicts[j][k] + 1, factor * (a - j - 1) + 4),
                     False,
                     out_seed_text,
-                    "#f9f9f9",
+                    "#fff0f0" if this_kishi.woman else "#f9f9f9",
                 )
                 table_pos_all.append(t4)
     # black lines
@@ -272,6 +272,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
 
 
 def draw_table(in_table_list: list, table_name: str = '') -> str:
+    print(f"Begin generating table of {table_name}")
     return_block = f"<!-- Begin Bracket of {table_name}-->\n"
     row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1
     column_limit = max([cell.to_cell[1] for cell in in_table_list]) + 1

@@ -1,6 +1,3 @@
-from metastruct import organized_t
-
-
 class Seed:
     seed_type: int = 0
     left_tree_list: list = None,
@@ -48,23 +45,35 @@ class Seed:
                     left_kishi.append(loser)
         elif self.seed_type == -1:
             for left_tree in self.left_tree_list:
-                for loser in left_tree.get_runners_up():
-                    left_kishi.append(loser)
-                for loser in left_tree.get_others():
-                    left_kishi.append(loser)
+                for i in range(len(left_tree.list_round_num) - 1, -1, -1):
+                    for loser in left_tree.get_losers_level(i):
+                        left_kishi.append(loser)
         elif self.seed_type == -2:
             for left_tree in self.left_tree_list:
-                for loser in left_tree.get_others():
-                    left_kishi.append(loser)
+                for i in range(len(left_tree.list_round_num) - 1, 0, -1):
+                    for loser in left_tree.get_losers_level(i):
+                        left_kishi.append(loser)
 
-        intersect_kishi = list(set(left_kishi).intersection(set(right_kishi)))
+        intersect_kishi = []
+        for kishi in left_kishi:
+            if kishi in right_kishi:
+                intersect_kishi.append(kishi)
         dict_left = dict()
         dict_right = dict()
         for i in range(len(intersect_kishi)):
-            print(intersect_kishi[i].fullname)
             dict_left[intersect_kishi[i].id] = self.character_set[i]
             dict_right[intersect_kishi[i].id] = self.character_set_out[i]
-        print(dict_left)
-        print(dict_right)
-        left_tree.out_seed = dict_left
-        right_tree.in_seed = dict_right
+        for left_tree in self.left_tree_list:
+            if left_tree.out_seed is None:
+                left_tree.out_seed = dict_left
+            else:
+                # replace dict
+                for k, v in dict_left.items():
+                    left_tree.out_seed[k] = v
+        for right_tree in self.right_tree_list:
+            if right_tree.in_seed is None:
+                right_tree.in_seed = dict_right
+            else:
+                # replace dict
+                for k, v in dict_right.items():
+                    right_tree.in_seed[k] = v

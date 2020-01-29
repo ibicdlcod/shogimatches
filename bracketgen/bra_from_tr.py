@@ -47,35 +47,6 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         return return_result
 
     a = len(in_tree.list_round_num)
-    first_place_label = "◎"
-    # second_place_label = "△"
-    #
-    # in_seed = {
-    #     184: "4組優勝",
-    #     102: "3組2位",
-    #     115: "1組優勝",
-    #     100: "1組3位",
-    #     150: "2組2位",
-    #     119: "2組優勝",
-    #     42: "1組3位",
-    #     170: "1組2位",
-    #     198: "3組優勝",
-    #     190: "5組優勝",
-    #     201: "6組優勝",
-    # }
-    # out_seed = {
-    #     198: "挑戦者",
-    #     184: "4組優勝",
-    #     102: "3組2位",
-    #     115: "1組優勝",
-    #     100: "1組3位",
-    #     150: "2組2位",
-    #     119: "2組優勝",
-    #     42: "1組3位",
-    #     170: "1組2位",
-    #     190: "5組優勝",
-    #     201: "6組優勝",
-    # }
     vertical_pos = []
     for nodes in in_tree.last_remain_nodes:
         for i in vertical_position(nodes):
@@ -168,7 +139,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     (position_dicts[j][k] + 1, column_to_1),
                     False,
                     in_seed[k] if k in in_seed.keys() else "",
-                    "#f9f9f9",
+                    "#fff0f0" if this_kishi.woman else "#f9f9f9",
                 )
                 table_pos_all.append(t1)
             if k in new_match_dicts[j].keys():
@@ -407,5 +378,5 @@ def draw_table(in_table_list: list, table_name: str = '') -> str:
 
     return_block += ("|}\n<!-- End Bracket of "
                      + f"{table_name}"
-                     + "--><br/>\n")
+                     + "-->\n")
     return return_block

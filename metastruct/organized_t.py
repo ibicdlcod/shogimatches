@@ -86,6 +86,12 @@ class OrganizedTree:
                 return_result.append(node.loser())
         return return_result
 
+    def get_losers_level(self, level: int):
+        return_result = []
+        for node in self.node_groups[level]:
+            return_result.append(node.loser())
+        return return_result
+
     def modify_dict(self, in_dict: dict, out_dict: dict):
         self.in_seed = in_dict
         self.out_seed = out_dict
@@ -143,3 +149,4 @@ def split_with_multiple_winners(in_tree: OrganizedTree):
                                      in_tree.list_round_prefix + f"({s})")
         sub_trees.append(sub_org_tree)
     return sub_trees
+

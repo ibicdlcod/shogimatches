@@ -68,7 +68,7 @@ class Kishi:
         try_count = 0
         while try_count < 10:
             try:
-                time.sleep(0.5)
+                time.sleep(0.2)
                 print(f"Obtaining rank of {self.fullname} "
                       f"on day {query_date.isoformat()} ")
                 with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/titlecheck.php?name={self.id}"

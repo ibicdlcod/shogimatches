@@ -158,43 +158,32 @@ if __name__ == '__main__':
             outfile.write(str(i) + "\n")
         outfile.close()
 
-    # outfile1_name = "..\\temp.txt"
-    # outfile1 = open(outfile1_name, 'w', encoding="utf-8-sig")
-    # str1 = import_ryuou.import_data(1)
-    # outfile1.write(str1)
-    # outfile1.close()
-
-    # outfile_name = "..\\txt_dst\\names2.csv"
-    # outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    # for i in sql_read.read_kishi():
-    #     outfile.write(str(i) + "\n")
-    # outfile.close()
-
-    # outfile_name = "..\\temp.txt"
-    # outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    # for kishi in kishi_db[:20]:
-    #     outfile.write(kishi.rank(date.fromisoformat("2020-01-27")) + "\n")
-    # outfile.close()
-    # kishi_db = sql_read.read_kishi()
-    match_db2 = sql_read.read_match("竜王戦", "第02期", "決勝トーナメント")
-    org_tree = organized_t.OrganizedTree(match_db2, "決勝トーナメント",
-                                         ["挑戦者決定三番勝負", "準決勝",
-                                          "03回戦", "02回戦", "01回戦",
-                                          ])
     outfile_name = "..\\temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    # table2 = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), False)
-    # draw_table = bra_from_tr.draw_table(table2)
-    # outfile.write(draw_table)
+    match_db2 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")
+    org_tree2 = organized_t.OrganizedTree(match_db2, "決勝トーナメント",
+                                         ["挑戦者決定三番勝負", "準々決勝", "04回戦",
+                                          "03回戦", "02回戦", "01回戦",
+                                          ])
+    table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
+    draw_table_2 = bra_from_tr.draw_table(table_2)
+    outfile.write(draw_table_2)
     for i in range(2, 3):
         iteration_string = str(i).zfill(2)
-        print(iteration_string)
         match_db_i = sql_read.read_match("竜王戦", "第" + iteration_string + "期", "決勝トーナメント")
         org_tree = organized_t.OrganizedTree(match_db_i, "決勝トーナメント",
                                              ["挑戦者決定三番勝負", "準決勝",
                                               "03回戦", "02回戦", "01回戦",
                                               ])
-        table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, True)
+        table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, False)
         draw_table_i = bra_from_tr.draw_table(table_i)
         outfile.write(draw_table_i)
+    match_db_i = sql_read.read_match("竜王戦", "第" + "02" + "期", "1組", "ランキング戦")
+    org_tree = organized_t.OrganizedTree(match_db_i, "1組ランキング戦",
+                                         ["決勝", "準決勝",
+                                          "03回戦", "02回戦", "01回戦",
+                                          ])
+    table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, True)
+    draw_table_i = bra_from_tr.draw_table(table_i)
+    outfile.write(draw_table_i)
     outfile.close()

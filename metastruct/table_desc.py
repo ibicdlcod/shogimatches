@@ -52,3 +52,7 @@ class TableDesc:
             str(self.border_left)
         ]
         return ",".join(out_str_item)
+
+
+def union_table(in_table_list_list: list) -> list:
+    column_limit = 1

@@ -5,10 +5,13 @@ class OrganizedTree:
     last_remain_nodes = []
     total_nodes: int = 0
     list_round_prefix = ""
+    display_name = list_round_prefix
     list_round_num = []
+    node_groups = []
 
-    def __init__(self, matches: list, org_tree_name: str, round_names: list):
+    def __init__(self, matches: list, org_tree_name: str, round_names: list, display_name: str = None):
         self.list_round_prefix = org_tree_name
+        self.display_name = self.list_round_prefix if display_name is None else display_name
         self.list_round_num = round_names
         dict1 = dict()
         for i in matches:
@@ -42,6 +45,7 @@ class OrganizedTree:
                 if tn.round_num == (self.list_round_prefix + self.list_round_num[i]):
                     node_group[i].append(tn)
         self.last_remain_nodes = node_group[0]
+        self.node_groups = node_group
         for j in range(len(self.list_round_num)):
             for tn in node_group[j]:
                 tn_black = tn.black_of_first

@@ -25,11 +25,32 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                      first_place_label: str = "",
                      second_place_label: str = "",
                      ) -> list:
+    # split tree
+    if len(in_tree.last_remain_nodes) > 1:
+        s = 0
+        for last_node in in_tree.last_remain_nodes:
+            s += 1
+            this_part_nodes = [last_node, ]
+            for i in range(1, len(in_tree.list_round_num)):
+                for node in this_part_nodes:
+                    if node.black_q_from in in_tree.node_groups[i]:
+                        this_part_nodes.append(node.black_q_from)
+                    if node.white_q_from in in_tree.node_groups[i]:
+                        this_part_nodes.append(node.white_q_from)
+            this_part_matches = []
+            for j in this_part_nodes:
+                for k in j.series:
+                    this_part_matches.append(k)
+            organized_t.OrganizedTree(this_part_matches, in_tree.list_round_prefix,
+                                      in_tree.list_round_num, in_tree.list_round_prefix + f"({s})")
+            print(this_part_nodes)
+            print()
+
     a = len(in_tree.list_round_num)
     first_place_label = "◎"
     second_place_label = "△"
-    seeds_in = in_seed
-    seeds_in = {
+
+    in_seed = {
         184: "4組優勝",
         102: "3組2位",
         115: "1組優勝",
@@ -42,8 +63,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         190: "5組優勝",
         201: "6組優勝",
     }
-    seeds_out = out_seed
-    seeds_out = {
+    out_seed = {
         198: "挑戦者",
         184: "4組優勝",
         102: "3組2位",
@@ -114,6 +134,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         new_match_dicts.append(dict())
     for j in range(a):
         for k in position_dicts[j].keys():
+            if j == 0:
+                have_match_dicts[j][k] = True
             if j != a - 1 and position_dicts[j][k] != position_dicts[j + 1][k]:
                 have_match_dicts[j][k] = True
             if j != 0 and k not in position_dicts[j - 1].keys():
@@ -146,10 +168,11 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     (position_dicts[j][k], column_from_1),
                     (position_dicts[j][k] + 1, column_to_1),
                     False,
-                    seeds_in[k] if k in seeds_in.keys() else "",
+                    in_seed[k] if k in in_seed.keys() else "",
                     "#f9f9f9",
                 )
                 table_pos_all.append(t1)
+            if k in new_match_dicts[j].keys():
                 new_flag = True
             if k in new_match_dicts[j].keys() or j == 0:
                 if this_kishi.wiki_name == "":
@@ -234,7 +257,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 "#f9f9f9",
             )
             table_pos_all.append(t3)
-            out_seed_text = seeds_out[k] if k in seeds_out.keys() else ""
+            out_seed_text = out_seed[k] if k in out_seed.keys() else ""
             if j != 0 and k in have_match_dicts[j - 1].keys():
                 out_seed_text = ""
             if j == 0 or (not out_seed_disabled):
@@ -414,8 +437,6 @@ def draw_table(in_table_list: list) -> str:
             if in_table_list_cur_index >= len(in_table_list):
                 break
         return_block += "\n"
-        # print(in_table_list[in_table_list_cur_index])
 
-    return_block += "|}\n"
-    print(return_block)
+    return_block += "|}\n<br/>\n"
     return return_block

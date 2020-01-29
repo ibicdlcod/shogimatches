@@ -1,15 +1,10 @@
-from importdata import sql_read, gen_round_name
 from metastruct import kishi_data
-from metastruct import organized_t
-from bracketgen import bra_from_tr
-from datetime import date
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
 
-kishi_db = []
-
 
 def process_txt():
+    kishi_db = []
     infile_name = "..\\txt_src\\names.txt"
     infile = open(infile_name, 'r', encoding="utf-8-sig")
     content = infile.readline()
@@ -26,6 +21,7 @@ def process_txt():
         content = infile.readline()
     kishi_db.sort(key=lambda x: x.id)
     infile.close()
+    return kishi_db
 
 
 def process_more_txt(source_name: str) -> list:
@@ -48,9 +44,13 @@ def process_more_txt(source_name: str) -> list:
     return returns
 
 
-def sql_connect(insert_first, read):
+def sql_connect(insert_first: bool = False,
+                read: bool = False,
+                kishi_db=None):
     """ Connect to MySQL database """
 
+    if kishi_db is None:
+        kishi_db = []
     db_config = db_conf.read_db_config()
     conn = None
 
@@ -123,64 +123,4 @@ def sql_connect(insert_first, read):
     finally:
         if conn is not None and conn.is_connected():
             conn.close()
-
-
-if __name__ == '__main__':
-    update_on = True
-    if update_on:
-        process_txt()
-        amateur1 = process_more_txt("current_amateur_part")
-        amateur_w = process_more_txt("current_amateur_woman")
-        former_srk = process_more_txt("former_shoreikai")
-        current_3dan = process_more_txt("sandan")
-        women = process_more_txt("woman")
-
-        for kishi in kishi_db:
-            i = kishi.id
-            if i in amateur1 or i in amateur_w or i in former_srk:
-                kishi.current_amateur = True
-            if i in amateur_w or i in women or kishi.fullname == "西山朋佳":
-                """
-                Special treatment, eh?
-                note shoreikai members < 3dan does not appear.
-                中七海 and 今井絢 is still treated as amateurs by http://kenyu1234.php.xdomain.jp/
-                """
-                kishi.woman = True
-            if i in current_3dan:
-                kishi.current_shoreikai = True
-
-        sql_connect(False, True)
-
-        outfile_name = "..\\txt_src\\names2.csv"
-        outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-        for i in kishi_db:
-            outfile.write(str(i) + "\n")
-        outfile.close()
-
-    outfile_name = "..\\temp.txt"
-    outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-
-    match_db2 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")
-    round_db2 = gen_round_name.read_round("竜王戦", "第01期", "決勝トーナメント")
-    print(round_db2)
-    org_tree2 = organized_t.OrganizedTree(match_db2, "決勝トーナメント", round_db2)
-    table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
-    draw_table_2 = bra_from_tr.draw_table(table_2, "竜王戦第01期" + org_tree2.display_name)
-    outfile.write(draw_table_2)
-
-    match_db2 = sql_read.read_match("竜王戦", "第31期", "6組", "昇級者決定戦")
-    round_db2 = gen_round_name.read_round("竜王戦", "第31期", "6組", "昇級者決定戦")
-    print(round_db2)
-    org_tree2 = organized_t.OrganizedTree(match_db2, "6組昇級者決定戦", round_db2)
-    table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
-    draw_table_2 = bra_from_tr.draw_table(table_2, "竜王戦第31期" + org_tree2.display_name)
-    outfile.write(draw_table_2)
-
-    # match_db2 = sql_read.read_match("竜王戦", "第31期", "6組", "昇級者決定戦")
-    # org_tree2 = organized_t.OrganizedTree(match_db2, "6組昇級者決定戦",
-    #                                       ["決勝", "06回戦", "05回戦", "04回戦", "03回戦", "02回戦", "01回戦",
-    #                                        ])
-    # table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
-    # draw_table_2 = bra_from_tr.draw_table(table_2)
-    # outfile.write(draw_table_2)
-    outfile.close()
+        return kishi_db

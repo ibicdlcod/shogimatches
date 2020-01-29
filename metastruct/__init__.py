@@ -5,7 +5,10 @@ import mysql.connector
 def sql_init():
     """ Connect to MySQL database """
 
+    # running as main
     db_config = db_conf.read_db_config()
+    # running as import data
+    # db_config = db_conf.read_db_config()
     conn = None
 
     query_init_db = ("CREATE DATABASE IF NOT EXISTS shogi\n"

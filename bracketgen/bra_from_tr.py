@@ -26,43 +26,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                      second_place_label: str = "",
                      ) -> list:
     # split tree
-    if len(in_tree.last_remain_nodes) > 1:
-        # s = 0
-        # sub_table = []
-        # for last_node in in_tree.last_remain_nodes:
-        #     s += 1
-        #     sub_table.append([])
-        #     this_part_nodes = [last_node, ]
-        #     count = [1, ]
-        #     for i in range(1, len(in_tree.list_round_num)):
-        #         count.append(0)
-        #         for node in this_part_nodes:
-        #             if node.black_q_from in in_tree.node_groups[i]:
-        #                 this_part_nodes.append(node.black_q_from)
-        #                 count[i] += 1
-        #             if node.white_q_from in in_tree.node_groups[i]:
-        #                 this_part_nodes.append(node.white_q_from)
-        #                 count[i] += 1
-        #     this_part_matches = []
-        #     for j in this_part_nodes:
-        #         for k in j.series:
-        #             this_part_matches.append(k)
-        #     for j in range(len(in_tree.list_round_num)):
-        #         if count[j] == 0:
-        #             real_depth = j
-        #             break
-        #     else:
-        #         real_depth = len(in_tree.list_round_num)
-        #     sub_org_tree = organized_t.OrganizedTree(this_part_matches, in_tree.list_round_prefix,
-        #                                              in_tree.list_round_num[:real_depth],
-        #                                              in_tree.list_round_prefix + f"({s})")
-        #     sub_table[s - 1] = generate_bra_pos(sub_org_tree,
-        #                                         out_seed,
-        #                                         in_seed,
-        #                                         out_seed_disabled,
-        #                                         in_seed_disabled,
-        #                                         first_place_label,
-        #                                         second_place_label)
+    if len(in_tree.last_remain_nodes) > 1 and in_tree.total_nodes > 18:
         sub_trees = organized_t.split_with_multiple_winners(in_tree)
         sub_table_alt = []
         for tr in sub_trees:

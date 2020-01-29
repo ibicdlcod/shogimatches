@@ -1,5 +1,4 @@
 from datetime import date
-from metastruct import kishi_data
 import hashlib
 
 

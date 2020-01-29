@@ -1,4 +1,3 @@
-from metastruct import kishi_data, match_data
 import metastruct.python_mysql_dbconf as db_conf
 import mysql.connector
 
@@ -18,6 +17,7 @@ def read_round(tournament_name: str, iteration: str,
             print('Connected to MySQL database')
 
         cursor = conn.cursor()
+
         if detail1 is None:  # only temporary matches have detail1 = "" which is ignored
             query_match = "SELECT detail1, detail2, detail3 FROM matches WHERE tournament_name=%s AND iteration=%s " \
                           "GROUP BY detail1, detail2, detail3"
@@ -67,13 +67,6 @@ def read_round(tournament_name: str, iteration: str,
                 else:
                     if round_db.count(result3) == 0:
                         round_db.append(result3)
-            # current_match: match_data.Match = match_data.Match(
-            #     row[1], row[2], row[3], row[4] == 1,
-            #     row[5], row[6], row[7], row[8],
-            #     row[9], row[10], row[11], row[12], row[13]
-            # )
-            # round_db.append(current_match)
-            # row = cursor.fetchone()
         cursor.close()
 
         conn.commit()

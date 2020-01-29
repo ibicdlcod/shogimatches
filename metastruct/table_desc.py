@@ -1,6 +1,6 @@
 class TableDesc:
-    from_cell = (0, 0)
-    to_cell = (0, 0)
+    from_cell = [0, 0]
+    to_cell = [0, 0]
     empty = False
     content = ''
     content_len = 0
@@ -25,8 +25,8 @@ class TableDesc:
                  border_active: tuple = (False, False, False, False),
                  content_len=-1
                  ):
-        self.from_cell = from_cell
-        self.to_cell = to_cell
+        self.from_cell = list(from_cell)
+        self.to_cell = list(to_cell)
         self.empty = empty
         self.content = content
         self.content_len = content_len if content_len != -1 else len(content)
@@ -53,6 +53,12 @@ class TableDesc:
         ]
         return ",".join(out_str_item)
 
+    def shift(self, row_shift: int, col_shift: int):
+        self.from_cell[0] += row_shift
+        self.to_cell[0] += row_shift
+        self.from_cell[1] += col_shift
+        self.to_cell[1] += col_shift
+
 
 def union_table(in_table_list_list: list) -> list:
     column_limit = 0
@@ -61,3 +67,66 @@ def union_table(in_table_list_list: list) -> list:
         if column_limit < column_limit_item:
             column_limit = column_limit_item
     print(column_limit)
+    row_limit = 0
+    for in_table_list in in_table_list_list:
+        row_limit_item = max([in_table.to_cell[0] for in_table in in_table_list]) + 1
+        row_limit += row_limit_item
+    print(row_limit)
+    for in_table_list in in_table_list_list:
+        this_column_limit = max([in_table.to_cell[1] for in_table in in_table_list]) + 1
+        for cell in in_table_list:
+            cell.shift(0, column_limit - this_column_limit)
+    # for i in in_table_list_list[0]:
+    #     print(i)
+    # print()
+    row_current = 0
+    for in_table_list in in_table_list_list:
+        for cell in in_table_list:
+            cell.shift(row_current, 0)
+        row_current += max([in_table.to_cell[0] for in_table in in_table_list]) + 1
+    return_result = []
+    for in_table_list in in_table_list_list:
+        for cell in in_table_list:
+            return_result.append(cell)
+    return_result.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
+    for i in return_result:
+        print(i)
+    return return_result
+
+
+def padding_0(table_pos_all: list) -> list:
+    occupied_grid = []
+    row_limit = max([cell.to_cell[0] for cell in table_pos_all]) + 1
+    column_limit = max([cell.to_cell[1] for cell in table_pos_all]) + 1
+    for i in range(row_limit):
+        occupied_grid.append([])
+        for j in range(column_limit):
+            occupied_grid[i].append(False)
+    for cell in table_pos_all:
+        from_row = cell.from_cell[0]
+        from_col = cell.from_cell[1]
+        to_row = cell.to_cell[0] + 1
+        to_col = cell.to_cell[1] + 1
+        for i in range(from_row, to_row):
+            for j in range(from_col, to_col):
+                occupied_grid[i][j] = True
+    for i in range(row_limit):
+        j = 0
+        while j < column_limit:
+            if not occupied_grid[i][j]:
+                k = j
+                while k < column_limit - 1:
+                    if occupied_grid[i][k + 1]:
+                        break
+                    k += 1
+                t7 = TableDesc(
+                    (i, j),
+                    (i, k),
+                    True,
+                )
+                table_pos_all.append(t7)
+                j = k + 1
+            else:
+                j += 1
+    table_pos_all.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
+    return table_pos_all

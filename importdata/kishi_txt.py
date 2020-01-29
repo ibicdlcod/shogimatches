@@ -168,22 +168,22 @@ if __name__ == '__main__':
     table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
     draw_table_2 = bra_from_tr.draw_table(table_2)
     outfile.write(draw_table_2)
-    for i in range(2, 3):
-        iteration_string = str(i).zfill(2)
-        match_db_i = sql_read.read_match("竜王戦", "第" + iteration_string + "期", "決勝トーナメント")
-        org_tree = organized_t.OrganizedTree(match_db_i, "決勝トーナメント",
-                                             ["挑戦者決定三番勝負", "準決勝",
-                                              "03回戦", "02回戦", "01回戦",
-                                              ])
-        table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, False)
-        draw_table_i = bra_from_tr.draw_table(table_i)
-        outfile.write(draw_table_i)
-    match_db_i = sql_read.read_match("竜王戦", "第" + "02" + "期", "1組", "ランキング戦")
-    org_tree = organized_t.OrganizedTree(match_db_i, "1組ランキング戦",
-                                         ["決勝", "準決勝",
-                                          "03回戦", "02回戦", "01回戦",
-                                          ])
-    table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, True)
-    draw_table_i = bra_from_tr.draw_table(table_i)
-    outfile.write(draw_table_i)
+    # for i in range(2, 3):
+    #     iteration_string = str(i).zfill(2)
+    #     match_db_i = sql_read.read_match("竜王戦", "第" + iteration_string + "期", "決勝トーナメント")
+    #     org_tree = organized_t.OrganizedTree(match_db_i, "決勝トーナメント",
+    #                                          ["挑戦者決定三番勝負", "準決勝",
+    #                                           "03回戦", "02回戦", "01回戦",
+    #                                           ])
+    #     table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, False)
+    #     draw_table_i = bra_from_tr.draw_table(table_i)
+    #     outfile.write(draw_table_i)
+    # match_db_i = sql_read.read_match("竜王戦", "第" + "02" + "期", "1組", "ランキング戦")
+    # org_tree = organized_t.OrganizedTree(match_db_i, "1組ランキング戦",
+    #                                      ["決勝", "準決勝",
+    #                                       "03回戦", "02回戦", "01回戦",
+    #                                       ])
+    # table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, True)
+    # draw_table_i = bra_from_tr.draw_table(table_i)
+    # outfile.write(draw_table_i)
     outfile.close()

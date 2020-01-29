@@ -89,8 +89,6 @@ def union_table(in_table_list_list: list) -> list:
         for cell in in_table_list:
             return_result.append(cell)
     return_result.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
-    for i in return_result:
-        print(i)
     return return_result
 
 

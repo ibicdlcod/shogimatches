@@ -67,7 +67,11 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         #     print(i)
         #
         # return sub_table[0]
-        return table_desc.union_table(sub_table)
+        return_result = table_desc.union_table(sub_table)
+        return_result = table_desc.padding_0(return_result)
+        for i in return_result:
+            print(i)
+        return return_result
 
     a = len(in_tree.list_round_num)
     first_place_label = "◎"
@@ -320,40 +324,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 )
                 table_pos_all.append(t6)
     # pad 0+sort
-    occupied_grid = []
-    row_limit = max([cell.to_cell[0] for cell in table_pos_all]) + 1
-    column_limit = max([cell.to_cell[1] for cell in table_pos_all]) + 1
-    for i in range(row_limit):
-        occupied_grid.append([])
-        for j in range(column_limit):
-            occupied_grid[i].append(False)
-    for cell in table_pos_all:
-        from_row = cell.from_cell[0]
-        from_col = cell.from_cell[1]
-        to_row = cell.to_cell[0] + 1
-        to_col = cell.to_cell[1] + 1
-        for i in range(from_row, to_row):
-            for j in range(from_col, to_col):
-                occupied_grid[i][j] = True
-    for i in range(row_limit):
-        j = 0
-        while j < column_limit:
-            if not occupied_grid[i][j]:
-                k = j
-                while k < column_limit - 1:
-                    if occupied_grid[i][k + 1]:
-                        break
-                    k += 1
-                t7 = table_desc.TableDesc(
-                    (i, j),
-                    (i, k),
-                    True,
-                )
-                table_pos_all.append(t7)
-                j = k + 1
-            else:
-                j += 1
-    table_pos_all.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
+    table_pos_all = table_desc.padding_0(table_pos_all)
     return table_pos_all
 
 
@@ -364,8 +335,8 @@ def draw_table(in_table_list: list) -> str:
     # for row 0
     return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
     # column names
-    return_block += '| &nbsp;\n'
-    in_table_list_cur_index = 1
+    # return_block += '| &nbsp;\n'
+    in_table_list_cur_index = 0
     while True:
         current_cell = in_table_list[in_table_list_cur_index]
         if current_cell.from_cell[0] > 0:

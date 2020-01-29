@@ -18,13 +18,19 @@ def vertical_position(in_node: tree_node.TreeNode) -> list:
 
 
 def generate_bra_pos(in_tree: organized_t.OrganizedTree,
-                     out_seed: dict,
-                     in_seed: dict,
+                     in_seed: dict = None,
+                     out_seed: dict = None,
                      out_seed_disabled: bool = False,
                      in_seed_disabled: bool = False,
                      first_place_label: str = "",
                      second_place_label: str = "",
                      ) -> list:
+    if in_seed is not None:
+        if len(in_seed.keys()) == 0 and in_tree.in_seed is not None:
+            in_seed = in_tree.in_seed
+    if out_seed is not None:
+        if len(out_seed.keys()) == 0 and in_tree.out_seed is not None:
+            out_seed = in_tree.out_seed
     # split tree
     if len(in_tree.last_remain_nodes) > 1 and in_tree.total_nodes > 18:
         sub_trees = organized_t.split_with_multiple_winners(in_tree)

@@ -35,7 +35,8 @@ class Kishi:
         self.current_shoreikai = init_cur_shoreikai
         self.current_amateur = init_cur_amateur
 
-    # init end
+    def __hash__(self):
+        return self.id
 
     def __str__(self) -> str:
         out_str_item = [str(self.id),

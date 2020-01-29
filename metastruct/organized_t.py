@@ -8,8 +8,13 @@ class OrganizedTree:
     display_name = list_round_prefix
     list_round_num = []
     node_groups = []
+    in_seed = dict()
+    out_seed = dict()
 
-    def __init__(self, matches: list, org_tree_name: str, round_names: list, display_name: str = None):
+    def __init__(self, matches: list, org_tree_name: str, round_names: list, display_name: str = None,
+                 in_seed: dict = None, out_seed: dict = None):
+        self.in_seed = in_seed
+        self.out_seed = out_seed
         self.list_round_prefix = org_tree_name
         self.display_name = self.list_round_prefix if display_name is None else display_name
         self.list_round_num = round_names
@@ -61,6 +66,29 @@ class OrganizedTree:
         for i in range(len(self.list_round_num)):
             self.total_nodes += len(node_group[i])
         self.total_nodes += len(self.last_remain_nodes)
+
+    def get_winners(self):
+        return_result = []
+        for node in self.last_remain_nodes:
+            return_result.append(node.winner())
+        return return_result
+
+    def get_runners_up(self):
+        return_result = []
+        for node in self.last_remain_nodes:
+            return_result.append(node.loser())
+        return return_result
+
+    def get_others(self):
+        return_result = []
+        for i in range(1, len(self.node_groups)):
+            for node in self.node_groups[i]:
+                return_result.append(node.loser())
+        return return_result
+
+    def modify_dict(self, in_dict: dict, out_dict: dict):
+        self.in_seed = in_dict
+        self.out_seed = out_dict
 
 
 def nodes_layer_from_tr(in_org_tr: OrganizedTree) -> list:  # a list of list of nodes

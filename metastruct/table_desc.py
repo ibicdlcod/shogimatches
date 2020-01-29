@@ -66,12 +66,10 @@ def union_table(in_table_list_list: list) -> list:
         column_limit_item = max([in_table.to_cell[1] for in_table in in_table_list]) + 1
         if column_limit < column_limit_item:
             column_limit = column_limit_item
-    print(column_limit)
     row_limit = 0
     for in_table_list in in_table_list_list:
         row_limit_item = max([in_table.to_cell[0] for in_table in in_table_list]) + 1
         row_limit += row_limit_item
-    print(row_limit)
     for in_table_list in in_table_list_list:
         this_column_limit = max([in_table.to_cell[1] for in_table in in_table_list]) + 1
         for cell in in_table_list:
@@ -83,12 +81,13 @@ def union_table(in_table_list_list: list) -> list:
     for in_table_list in in_table_list_list:
         for cell in in_table_list:
             cell.shift(row_current, 0)
-        row_current += max([in_table.to_cell[0] for in_table in in_table_list]) + 1
+        row_current += max([in_table.to_cell[0] for in_table in in_table_list]) + 2
     return_result = []
     for in_table_list in in_table_list_list:
         for cell in in_table_list:
             return_result.append(cell)
-    return_result.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
+    return_result = padding_0(return_result)
+    return_result.sort(key=lambda cell_1: (cell_1.from_cell[0], cell_1.from_cell[1]))
     return return_result
 
 

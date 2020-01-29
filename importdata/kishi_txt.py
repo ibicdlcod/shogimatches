@@ -1,6 +1,5 @@
-from importdata import sql_read
+from importdata import sql_read, gen_round_name
 from metastruct import kishi_data
-from metastruct import tree_node
 from metastruct import organized_t
 from bracketgen import bra_from_tr
 from datetime import date
@@ -160,30 +159,28 @@ if __name__ == '__main__':
 
     outfile_name = "..\\temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+
     match_db2 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")
-    org_tree2 = organized_t.OrganizedTree(match_db2, "決勝トーナメント",
-                                         ["挑戦者決定三番勝負", "準々決勝", "04回戦",
-                                          "03回戦", "02回戦", "01回戦",
-                                          ])
+    round_db2 = gen_round_name.read_round("竜王戦", "第01期", "決勝トーナメント")
+    print(round_db2)
+    org_tree2 = organized_t.OrganizedTree(match_db2, "決勝トーナメント", round_db2)
     table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
-    draw_table_2 = bra_from_tr.draw_table(table_2)
+    draw_table_2 = bra_from_tr.draw_table(table_2, "竜王戦第01期" + org_tree2.display_name)
     outfile.write(draw_table_2)
-    # for i in range(2, 3):
-    #     iteration_string = str(i).zfill(2)
-    #     match_db_i = sql_read.read_match("竜王戦", "第" + iteration_string + "期", "決勝トーナメント")
-    #     org_tree = organized_t.OrganizedTree(match_db_i, "決勝トーナメント",
-    #                                          ["挑戦者決定三番勝負", "準決勝",
-    #                                           "03回戦", "02回戦", "01回戦",
-    #                                           ])
-    #     table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, False)
-    #     draw_table_i = bra_from_tr.draw_table(table_i)
-    #     outfile.write(draw_table_i)
-    # match_db_i = sql_read.read_match("竜王戦", "第" + "02" + "期", "1組", "ランキング戦")
-    # org_tree = organized_t.OrganizedTree(match_db_i, "1組ランキング戦",
-    #                                      ["決勝", "準決勝",
-    #                                       "03回戦", "02回戦", "01回戦",
-    #                                       ])
-    # table_i = bra_from_tr.generate_bra_pos(org_tree, dict(), dict(), True, True)
-    # draw_table_i = bra_from_tr.draw_table(table_i)
-    # outfile.write(draw_table_i)
+
+    match_db2 = sql_read.read_match("竜王戦", "第31期", "6組", "昇級者決定戦")
+    round_db2 = gen_round_name.read_round("竜王戦", "第31期", "6組", "昇級者決定戦")
+    print(round_db2)
+    org_tree2 = organized_t.OrganizedTree(match_db2, "6組昇級者決定戦", round_db2)
+    table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
+    draw_table_2 = bra_from_tr.draw_table(table_2, "竜王戦第31期" + org_tree2.display_name)
+    outfile.write(draw_table_2)
+
+    # match_db2 = sql_read.read_match("竜王戦", "第31期", "6組", "昇級者決定戦")
+    # org_tree2 = organized_t.OrganizedTree(match_db2, "6組昇級者決定戦",
+    #                                       ["決勝", "06回戦", "05回戦", "04回戦", "03回戦", "02回戦", "01回戦",
+    #                                        ])
+    # table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
+    # draw_table_2 = bra_from_tr.draw_table(table_2)
+    # outfile.write(draw_table_2)
     outfile.close()

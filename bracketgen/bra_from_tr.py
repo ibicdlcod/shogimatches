@@ -27,82 +27,85 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                      ) -> list:
     # split tree
     if len(in_tree.last_remain_nodes) > 1:
-        s = 0
-        sub_table = []
-        for last_node in in_tree.last_remain_nodes:
-            s += 1
-            sub_table.append([])
-            this_part_nodes = [last_node, ]
-            count = [1, ]
-            for i in range(1, len(in_tree.list_round_num)):
-                count.append(0)
-                for node in this_part_nodes:
-                    if node.black_q_from in in_tree.node_groups[i]:
-                        this_part_nodes.append(node.black_q_from)
-                        count[i] += 1
-                    if node.white_q_from in in_tree.node_groups[i]:
-                        this_part_nodes.append(node.white_q_from)
-                        count[i] += 1
-            this_part_matches = []
-            for j in this_part_nodes:
-                for k in j.series:
-                    this_part_matches.append(k)
-            for j in range(len(in_tree.list_round_num)):
-                if count[j] == 0:
-                    real_depth = j
-                    break
-            else:
-                real_depth = len(in_tree.list_round_num)
-            sub_org_tree = organized_t.OrganizedTree(this_part_matches, in_tree.list_round_prefix,
-                                                     in_tree.list_round_num[:real_depth],
-                                                     in_tree.list_round_prefix + f"({s})")
-            sub_table[s - 1] = generate_bra_pos(sub_org_tree,
-                                                out_seed,
-                                                in_seed,
-                                                out_seed_disabled,
-                                                in_seed_disabled,
-                                                first_place_label,
-                                                second_place_label)
-        # for i in sub_table[0]:
-        #     print(i)
-        #
-        # return sub_table[0]
-        return_result = table_desc.union_table(sub_table)
-        return_result = table_desc.padding_0(return_result)
-        for i in return_result:
-            print(i)
+        # s = 0
+        # sub_table = []
+        # for last_node in in_tree.last_remain_nodes:
+        #     s += 1
+        #     sub_table.append([])
+        #     this_part_nodes = [last_node, ]
+        #     count = [1, ]
+        #     for i in range(1, len(in_tree.list_round_num)):
+        #         count.append(0)
+        #         for node in this_part_nodes:
+        #             if node.black_q_from in in_tree.node_groups[i]:
+        #                 this_part_nodes.append(node.black_q_from)
+        #                 count[i] += 1
+        #             if node.white_q_from in in_tree.node_groups[i]:
+        #                 this_part_nodes.append(node.white_q_from)
+        #                 count[i] += 1
+        #     this_part_matches = []
+        #     for j in this_part_nodes:
+        #         for k in j.series:
+        #             this_part_matches.append(k)
+        #     for j in range(len(in_tree.list_round_num)):
+        #         if count[j] == 0:
+        #             real_depth = j
+        #             break
+        #     else:
+        #         real_depth = len(in_tree.list_round_num)
+        #     sub_org_tree = organized_t.OrganizedTree(this_part_matches, in_tree.list_round_prefix,
+        #                                              in_tree.list_round_num[:real_depth],
+        #                                              in_tree.list_round_prefix + f"({s})")
+        #     sub_table[s - 1] = generate_bra_pos(sub_org_tree,
+        #                                         out_seed,
+        #                                         in_seed,
+        #                                         out_seed_disabled,
+        #                                         in_seed_disabled,
+        #                                         first_place_label,
+        #                                         second_place_label)
+        sub_trees = organized_t.split_with_multiple_winners(in_tree)
+        sub_table_alt = []
+        for tr in sub_trees:
+            sub_table_alt.append(generate_bra_pos(tr,
+                                                  out_seed,
+                                                  in_seed,
+                                                  out_seed_disabled,
+                                                  in_seed_disabled,
+                                                  first_place_label,
+                                                  second_place_label))
+        return_result = table_desc.union_table(sub_table_alt)
         return return_result
 
     a = len(in_tree.list_round_num)
     first_place_label = "◎"
-    second_place_label = "△"
-
-    in_seed = {
-        184: "4組優勝",
-        102: "3組2位",
-        115: "1組優勝",
-        100: "1組3位",
-        150: "2組2位",
-        119: "2組優勝",
-        42: "1組3位",
-        170: "1組2位",
-        198: "3組優勝",
-        190: "5組優勝",
-        201: "6組優勝",
-    }
-    out_seed = {
-        198: "挑戦者",
-        184: "4組優勝",
-        102: "3組2位",
-        115: "1組優勝",
-        100: "1組3位",
-        150: "2組2位",
-        119: "2組優勝",
-        42: "1組3位",
-        170: "1組2位",
-        190: "5組優勝",
-        201: "6組優勝",
-    }
+    # second_place_label = "△"
+    #
+    # in_seed = {
+    #     184: "4組優勝",
+    #     102: "3組2位",
+    #     115: "1組優勝",
+    #     100: "1組3位",
+    #     150: "2組2位",
+    #     119: "2組優勝",
+    #     42: "1組3位",
+    #     170: "1組2位",
+    #     198: "3組優勝",
+    #     190: "5組優勝",
+    #     201: "6組優勝",
+    # }
+    # out_seed = {
+    #     198: "挑戦者",
+    #     184: "4組優勝",
+    #     102: "3組2位",
+    #     115: "1組優勝",
+    #     100: "1組3位",
+    #     150: "2組2位",
+    #     119: "2組優勝",
+    #     42: "1組3位",
+    #     170: "1組2位",
+    #     190: "5組優勝",
+    #     201: "6組優勝",
+    # }
     vertical_pos = []
     for nodes in in_tree.last_remain_nodes:
         for i in vertical_position(nodes):
@@ -137,7 +140,6 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
     row_num = 0
     factor = 4 if out_seed_disabled else 5
     for col_num_pri in range(a - 1, -1, -1):
-        u = 0
         if out_seed_disabled and col_num_pri != 0:
             u = 2
         else:
@@ -328,8 +330,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
     return table_pos_all
 
 
-def draw_table(in_table_list: list) -> str:
-    return_block = ""
+def draw_table(in_table_list: list, table_name: str = '') -> str:
+    return_block = f"<!-- Begin Bracket of {table_name}-->\n"
     row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1
     column_limit = max([cell.to_cell[1] for cell in in_table_list]) + 1
     # for row 0
@@ -433,5 +435,7 @@ def draw_table(in_table_list: list) -> str:
                 break
         return_block += "\n"
 
-    return_block += "|}\n<br/>\n"
+    return_block += ("|}\n<!-- End Bracket of "
+                     + f"{table_name}"
+                     + "--><br/>\n")
     return return_block

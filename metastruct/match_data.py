@@ -72,6 +72,15 @@ class Match:
                         str(self.sennichite)]
         return ",".join(out_str_item)
 
+    def __hash__(self):
+        return self.hash
+
+    def __eq__(self, other):
+        return self.hash == other.hash
+
+    def __ne__(self, other):
+        return self.hash != other.hash
+
 
 def query_node_from_id(list_nodes: list, query_id: int):
     for node in list_nodes:

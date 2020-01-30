@@ -1,5 +1,5 @@
 from metastruct import kishi_data, match_data
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
 
 
@@ -14,7 +14,9 @@ def read_kishi() -> list:
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            print('Connected to MySQL database')
+            gen_conf = db_conf.read_db_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Connected to MySQL database')
 
         cursor = conn.cursor()
 
@@ -39,7 +41,9 @@ def read_kishi() -> list:
         if conn is not None and conn.is_connected():
             conn.close()
         kishi_db.sort(key=lambda x: x.id)
-        print("Reading Kishi data complete")
+        gen_conf = db_conf.read_db_general_config()
+        if gen_conf["sql_output"] == "True":
+            print("Reading Kishi data complete")
         return kishi_db
 
 
@@ -55,7 +59,9 @@ def read_match(tournament_name: str, iteration: str,
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            print('Connected to MySQL database')
+            gen_conf = db_conf.read_db_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Connected to MySQL database')
 
         cursor = conn.cursor()
         if detail1 is None:  # only temporary matches have detail1 = "" which is ignored
@@ -102,5 +108,7 @@ def read_match(tournament_name: str, iteration: str,
         if conn is not None and conn.is_connected():
             conn.close()
         match_db.sort(key=lambda x: x.match_date)
-        print("Reading Match data complete")
+        gen_conf = db_conf.read_db_general_config()
+        if gen_conf["sql_output"] == "True":
+            print("Reading Match data complete")
         return match_db

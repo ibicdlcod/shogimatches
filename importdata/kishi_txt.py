@@ -1,5 +1,5 @@
 from metastruct import kishi_data
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
 
 
@@ -73,7 +73,9 @@ def sql_connect(insert_first: bool = False,
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            print('Connected to MySQL database')
+            gen_conf = db_conf.read_db_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Connected to MySQL database')
 
         cursor = conn.cursor()
         cursor.execute(query_establish, args_establish, multi=True)

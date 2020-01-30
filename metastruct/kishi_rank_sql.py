@@ -1,7 +1,7 @@
 import hashlib
 from datetime import date
 import mysql.connector
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 
 
 def to_sql(in_str: str, in_id: int, in_date: date) -> None:

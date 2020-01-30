@@ -1,7 +1,7 @@
 from datetime import date
 from metastruct import kishi_rank_sql
 import mysql.connector
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 import urllib.request
 import urllib.error
 import time

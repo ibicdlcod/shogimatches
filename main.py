@@ -1,11 +1,10 @@
 import importdata.kishi_txt as txt
+from importdata import python_mysql_dbconf
 from bracketgen import ryuou_old
-from metastruct import organized_t, seeds_out_in
-from bracketgen import bra_from_tr
-from importdata import sql_read, gen_round_name
 
 if __name__ == '__main__':
-    update_on = True
+    gen_conf = python_mysql_dbconf.read_db_general_config()
+    update_on = gen_conf["read_update_on"]
     if update_on:
         kishi_db = txt.process_txt()
         amateur1 = txt.process_more_txt("current_amateur_part")
@@ -40,21 +39,5 @@ if __name__ == '__main__':
         outfile.close()
     outfile_name = "temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    # for i in range(64, 84):
-    #     print(chr(i + 1))
-
-    # match_db2 = sql_read.read_match("竜王戦", "第01期", "決勝トーナメント")
-    # round_db2 = gen_round_name.read_round("竜王戦", "第01期", "決勝トーナメント")
-    # org_tree2 = organized_t.OrganizedTree(match_db2, "決勝トーナメント", round_db2)
-    # table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
-    # draw_table_2 = bra_from_tr.draw_table(table_2, "竜王戦第01期" + org_tree2.display_name)
-    # outfile.write(draw_table_2)
-
-    # match_db2 = sql_read.read_match("竜王戦", "第31期", "6組", "昇級者決定戦")
-    # round_db2 = gen_round_name.read_round("竜王戦", "第31期", "6組", "昇級者決定戦")
-    # org_tree2 = organized_t.OrganizedTree(match_db2, "6組昇級者決定戦", round_db2)
-    # table_2 = bra_from_tr.generate_bra_pos(org_tree2, dict(), dict(), True, True)
-    # draw_table_2 = bra_from_tr.draw_table(table_2, "竜王戦第31期" + org_tree2.display_name)
-    # outfile.write(draw_table_2)
-    outfile.write(ryuou_old.ryuou_old_str("第07期"))
+    outfile.write(ryuou_old.ryuou_old_str("第02期"))
     outfile.close()

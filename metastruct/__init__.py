@@ -1,4 +1,4 @@
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
 
 

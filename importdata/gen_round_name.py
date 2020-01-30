@@ -1,4 +1,4 @@
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
 
 
@@ -14,7 +14,9 @@ def read_round(tournament_name: str, iteration: str,
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            print('Connected to MySQL database')
+            gen_conf = db_conf.read_db_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Connected to MySQL database')
 
         cursor = conn.cursor()
 
@@ -80,7 +82,9 @@ def read_round(tournament_name: str, iteration: str,
         if conn is not None and conn.is_connected():
             conn.close()
         round_db.sort(key=lambda x: round_name_value(x), reverse=True)
-        print("Reading Match data complete")
+        gen_conf = db_conf.read_db_general_config()
+        if gen_conf["sql_output"] == "True":
+            print("Reading Match data complete")
         return round_db
 
 

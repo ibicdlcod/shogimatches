@@ -87,7 +87,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             u = 3
         t = table_desc.TableDesc(
             (row_num, factor * (a - col_num_pri - 1) + 2),
-            (row_num, factor * (a - col_num_pri - 1) + u + 2),
+            (row_num, factor * (a - col_num_pri - 1) + u + 1),
             False,
             in_tree.list_round_num[col_num_pri],
             "#dedede",
@@ -290,7 +290,7 @@ def draw_table(in_table_list: list, table_name: str = '') -> str:
                              f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
                              f'" style="border:1px solid #aaa;" bgcolor="'
                              f'{current_cell.bg_color}" |'
-                             f'{current_cell.content}\n')
+                             f'{current_cell.content if len(current_cell.content) > 0 else "01回戦"}\n')
         else:
             return_block += (f'| colspan="'
                              f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'

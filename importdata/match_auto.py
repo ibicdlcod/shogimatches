@@ -1,6 +1,6 @@
 from datetime import date
 from metastruct import match_data
-import metastruct.python_mysql_dbconf as db_conf
+import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
 import urllib.request
 import urllib.error
@@ -121,7 +121,9 @@ def match_to_sql(in_match_list: list) -> None:
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            print('Connected to MySQL database')
+            gen_conf = db_conf.read_db_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Connected to MySQL database')
 
         cursor = conn.cursor()
         query_use = "USE shogi;"

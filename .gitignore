@@ -5,3 +5,4 @@ temp.txt
 mysqlsampledatabase.sql
 *.pyc
 *.dump
+txt_dst/

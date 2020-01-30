@@ -22,7 +22,7 @@ def ryuou_old_str(iteration: str, iteration_last: str = None) -> str:
                                                  "七番勝負",
                                                  org_tree_title_last)
     legend_string = ('{| border="1" class="wikitable" style="font-size:89%"\n|\n'
-                     '◎：決勝進出　△：昇級　▼：降級\n|}\n')
+                     '◎：決勝進出　△：昇級　◇：残留 ▼：降級\n|}\n')
     feeds_x = []
     for i in range(0, 7):
         feeds_i = []

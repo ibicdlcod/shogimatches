@@ -110,5 +110,6 @@ def read_match(tournament_name: str, iteration: str,
         match_db.sort(key=lambda x: x.match_date)
         gen_conf = db_conf.read_db_general_config()
         if gen_conf["sql_output"] == "True":
-            print("Reading Match data complete")
+            print(f"Reading Match data of {tournament_name} iteration {iteration}"
+                  f" detail1:{detail1}, detail2:{detail2}, detail3:{detail3} complete")
         return match_db

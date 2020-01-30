@@ -191,6 +191,10 @@ def ryuou_old_str(iteration: str) -> str:
         for winner in feeds_x[i][1].tree.get_winners():
             winner_dict[winner.id] = "昇級"
         seeds_out_in.Seed(5, [feeds_x[i][1].tree, ], [], [], [], winner_dict)
+    challenge_dict = dict()
+    for kishi in tree_0.get_winners():
+        challenge_dict[kishi.id] = "挑戦者"
+    seeds_out_in.Seed(5, [tree_0, ], [], [], [], challenge_dict)
 
     for j in range(len(feeds_x)):
         return_result += table_feed.draw_table_from_feed(feeds_x[j])

@@ -31,7 +31,7 @@ def ryuou_old_str(iteration: str) -> str:
         'わ',	'ゐ',	'ゑ',	'を',
 
     ]
-    number_list = list(range(64))
+    # number_list = list(range(64))
 
     feeds_x = []
     for i in range(0, 7):
@@ -103,11 +103,11 @@ def ryuou_old_str(iteration: str) -> str:
         if i != 0:
             a, b = get_x_group_remain_war_trees(iteration, i)
             if a is None:
-                # remain_war_disabled_flag = True
-                if feed_promo is not None:
-                    feed_promo.prefix = "===昇級者決定戦===\n▼:降級\n"
-                else:  # to 5 for new
-                    feed_3.prefix = "===3位出場者決定戦===\n▼:降級\n"
+                if i != 6:
+                    if feed_promo is not None:
+                        feed_promo.prefix = "===昇級者決定戦===\n▼:降級\n"
+                    else:  # to 5 for new
+                        feed_3.prefix = "===3位出場者決定戦===\n▼:降級\n"
                 normal_first_round_losers = feed_normal.tree.get_losers_in_their_first()
                 if feed_promo is not None:
                     promo_first_round_losers = feed_promo.tree.get_losers_in_their_first()
@@ -121,20 +121,17 @@ def ryuou_old_str(iteration: str) -> str:
                 for loser in relegated:
                     losers_dict[loser.id] = "▼"
                 if feed_promo is not None:
-                    s_l = seeds_out_in.Seed(5, [feed_promo.tree, ], [], [], None, losers_dict)
+                    seeds_out_in.Seed(5, [feed_promo.tree, ], [], [], None, losers_dict)
                 else:
-                    s_l = seeds_out_in.Seed(5, [feed_3.tree, ], [], [], None, losers_dict)
-                s_l.assign_seed()
+                    seeds_out_in.Seed(5, [feed_3.tree, ], [], [], None, losers_dict)
                 pass  # trigger 无残留决定战时的降级
             elif b is None:
-                s = seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, ], katakana_list)
-                s.assign_seed()
+                seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, ], katakana_list)
                 a_losers = a.get_runners_up() + a.get_others()
                 losers_dict = dict()
                 for loser in a_losers:
                     losers_dict[loser.id] = "▼"
-                s_l = seeds_out_in.Seed(5, [a, ], [], [], None, losers_dict)
-                s_l.assign_seed()
+                seeds_out_in.Seed(5, [a, ], [], [], None, losers_dict)
                 feed_remain = table_feed.TableFeed(a,
                                                    f"===残留決定戦===\n▼:降級\n",
                                                    "竜王戦",
@@ -145,16 +142,13 @@ def ryuou_old_str(iteration: str) -> str:
                                                    "")
                 feeds_i.append(feed_remain)
             else:
-                s = seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, b, ], katakana_list)
-                s.assign_seed()
-                s2 = seeds_out_in.Seed(-1, [a, ], [b, ], hiragana_list)
-                s2.assign_seed()
+                seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, b, ], katakana_list)
+                seeds_out_in.Seed(-1, [a, ], [b, ], hiragana_list)
                 b_losers = b.get_runners_up() + b.get_others()
                 losers_dict = dict()
                 for loser in b_losers:
                     losers_dict[loser.id] = "▼"
-                s_l = seeds_out_in.Seed(5, [b, ], [], [], None, losers_dict)
-                s_l.assign_seed()
+                seeds_out_in.Seed(5, [b, ], [], [], None, losers_dict)
                 feed_remain = table_feed.TableFeed(a,
                                                    f"===残留決定戦===\n▼:降級\n",
                                                    "竜王戦",
@@ -174,10 +168,29 @@ def ryuou_old_str(iteration: str) -> str:
                 feeds_i.append(feed_remain)
                 feeds_i.append(feed_remain2)
         feeds_x.append(feeds_i)
-    s = seeds_out_in.Seed(1, [feeds_x[1][0].tree, ], [feeds_x[0][0].tree, ], ["優勝(決勝Ｔ)", ], ["1組優勝", ])
-    s.assign_seed()
-    s = seeds_out_in.Seed(2, [feeds_x[1][0].tree, ], [feeds_x[0][0].tree, ], ["2位(決勝Ｔ)", ], ["1組2位", ])
-    s.assign_seed()
+    tree_0 = feeds_x[0][0].tree
+    if iteration == "第01期":
+        seeds_out_in.Seed(0, [], [tree_0, ], [], [], {165: "第26期十段", 115: "永世十段", 42: "永世十段"})
+    seeds_out_in.Seed(1, [feeds_x[1][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)", ], ["1組優勝", ])
+    seeds_out_in.Seed(2, [feeds_x[1][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)", ], ["1組2位", ])
+    seeds_out_in.Seed(1, [feeds_x[1][1].tree, ], [tree_0, ], ["3位(決勝Ｔ)", "3位(決勝Ｔ)", ], ["1組3位", "1組3位", ])
+    seeds_out_in.Seed(1, [feeds_x[2][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["2組優勝", ])
+    seeds_out_in.Seed(2, [feeds_x[2][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)·昇級", ], ["2組2位", ])
+    seeds_out_in.Seed(1, [feeds_x[3][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["3組優勝", ])
+    seeds_out_in.Seed(2, [feeds_x[3][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)·昇級", ], ["3組2位", ])
+    seeds_out_in.Seed(1, [feeds_x[4][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["4組優勝", ])
+    seeds_out_in.Seed(1, [feeds_x[5][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["5組優勝", ])
+    seeds_out_in.Seed(1, [feeds_x[6][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["6組優勝", ])
+    for i in range(4, 7):
+        loser_dict = dict()
+        for loser in feeds_x[i][0].tree.get_runners_up():
+            loser_dict[loser.id] = "昇級"
+        seeds_out_in.Seed(5, [feeds_x[i][0].tree, ], [], [], [], loser_dict)
+    for i in range(2, 7):
+        winner_dict = dict()
+        for winner in feeds_x[i][1].tree.get_winners():
+            winner_dict[winner.id] = "昇級"
+        seeds_out_in.Seed(5, [feeds_x[i][1].tree, ], [], [], [], winner_dict)
 
     for j in range(len(feeds_x)):
         return_result += table_feed.draw_table_from_feed(feeds_x[j])

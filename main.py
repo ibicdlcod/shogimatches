@@ -43,5 +43,5 @@ if __name__ == '__main__':
         outfile.close()
     outfile_name = "temp.txt"
     outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    outfile.write(ryuou_old.ryuou_old_str("第02期"))
+    outfile.write(ryuou_old.ryuou_old_str("第01期"))
     outfile.close()

@@ -90,5 +90,3 @@ class Seed:
                 # replace dict
                 for k, v in dict_right.items():
                     right_tree.in_seed[k] = v
-
-

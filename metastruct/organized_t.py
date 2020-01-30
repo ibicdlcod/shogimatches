@@ -158,4 +158,3 @@ def split_with_multiple_winners(in_tree: OrganizedTree):
                                      in_tree.list_round_prefix + f"({s})")
         sub_trees.append(sub_org_tree)
     return sub_trees
-

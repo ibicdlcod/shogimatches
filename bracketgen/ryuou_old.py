@@ -1,5 +1,5 @@
 from bracketgen import title_match, str_list
-from metastruct import organized_t, seeds_out_in, table_feed
+from metastruct import organized_tr, seeds_out_in, table_feed
 from importdata import sql_read, gen_round_name
 
 
@@ -11,10 +11,10 @@ def ryuou_old_str(iteration: str, iteration_last: str = None) -> str:
     title_matches = sql_read.read_match("竜王戦", iteration, "タイトル戦", "七番勝負")
     if iteration_last is not None:
         title_matches_last = sql_read.read_match("竜王戦", iteration_last, "タイトル戦", "七番勝負")
-        org_tree_title_last = organized_t.OrganizedTree(title_matches_last, f"タイトル戦七番勝負", ["", ])
+        org_tree_title_last = organized_tr.OrganizedTree(title_matches_last, f"タイトル戦七番勝負", ["", ])
     else:
         org_tree_title_last = None
-    org_tree_title = organized_t.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
+    org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
     return_result += title_match.title_match_str(org_tree_title,
                                                  "竜王戦",
                                                  iteration,
@@ -33,9 +33,9 @@ def ryuou_old_str(iteration: str, iteration_last: str = None) -> str:
         if i == 0:
             match_db_0 = sql_read.read_match("竜王戦", iteration, "決勝トーナメント")
             round_db_0 = gen_round_name.read_round("竜王戦", iteration, "決勝トーナメント")
-            feed_0 = table_feed.TableFeed(organized_t.OrganizedTree(match_db_0,
+            feed_0 = table_feed.TableFeed(organized_tr.OrganizedTree(match_db_0,
                                                                     "決勝トーナメント",
-                                                                    round_db_0),
+                                                                     round_db_0),
                                           "==決勝トーナメント==\n",
                                           "竜王戦",
                                           iteration,
@@ -194,21 +194,21 @@ def ryuou_old_str(iteration: str, iteration_last: str = None) -> str:
 def get_x_group_normal_tree(iteration: str, group_num: int):
     match_db = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "ランキング戦")
     round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "ランキング戦")
-    org_tree = organized_t.OrganizedTree(match_db, f"{group_num}組ランキング戦", round_db)
+    org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組ランキング戦", round_db)
     return org_tree
 
 
 def get_x_group_promo_round_tree(iteration: str, group_num: int):
     match_db = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "昇級者決定戦")
     round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "昇級者決定戦")
-    org_tree = organized_t.OrganizedTree(match_db, f"{group_num}組昇級者決定戦", round_db)
+    org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組昇級者決定戦", round_db)
     return org_tree
 
 
 def get_1_group_appear_round_tree(iteration: str, pos_num: int):
     match_db = sql_read.read_match("竜王戦", iteration, "1組", f"{pos_num}位出場者決定戦")
     round_db = gen_round_name.read_round("竜王戦", iteration, "1組", f"{pos_num}位出場者決定戦")
-    org_tree = organized_t.OrganizedTree(match_db, f"1組{pos_num}位出場者決定戦", round_db)
+    org_tree = organized_tr.OrganizedTree(match_db, f"1組{pos_num}位出場者決定戦", round_db)
     return org_tree
 
 
@@ -218,7 +218,7 @@ def get_x_group_remain_war_trees(iteration: str, group_num: int) -> tuple:
         return None, None
     match_db_first_round = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "残留決定戦", "01回戦")
     if len(match_db_first_round) == 0:  # match_db only have first round
-        org_tree = organized_t.OrganizedTree(match_db, f"{group_num}組残留決定戦", ["", ])
+        org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組残留決定戦", ["", ])
         return org_tree, None
     first_round_one_match = match_db_first_round[0]
     first_round_loser_0 = None
@@ -239,11 +239,11 @@ def get_x_group_remain_war_trees(iteration: str, group_num: int) -> tuple:
         non_first_round_participants.append(m.white_name)
     if first_round_loser_0 in non_first_round_participants:
         print("Irregular remain war tree found")
-        org_tree_1 = organized_t.OrganizedTree(match_db_first_round, f"{group_num}組残留決定戦", ["01回戦", ])
+        org_tree_1 = organized_tr.OrganizedTree(match_db_first_round, f"{group_num}組残留決定戦", ["01回戦", ])
         round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "残留決定戦")
-        org_tree_2 = organized_t.OrganizedTree(match_db_non_first_round, f"{group_num}組残留決定戦", round_db[:-1])
+        org_tree_2 = organized_tr.OrganizedTree(match_db_non_first_round, f"{group_num}組残留決定戦", round_db[:-1])
         return org_tree_1, org_tree_2
     else:
         round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "残留決定戦")
-        org_tree = organized_t.OrganizedTree(match_db, f"{group_num}組残留決定戦", round_db)
+        org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組残留決定戦", round_db)
         return org_tree, None

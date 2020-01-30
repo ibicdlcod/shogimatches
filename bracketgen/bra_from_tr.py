@@ -1,5 +1,5 @@
-from metastruct import organized_t, tree_node, kishi_data, match_data
-from metastruct import table_desc
+from metastruct import organized_tr, tree_node, kishi_data, match_data
+from metastruct import table_desc, organized_tab
 
 
 def vertical_position(in_node: tree_node.TreeNode) -> list:
@@ -17,14 +17,14 @@ def vertical_position(in_node: tree_node.TreeNode) -> list:
     return return_val
 
 
-def generate_bra_pos(in_tree: organized_t.OrganizedTree,
+def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                      in_seed: dict = None,
                      out_seed: dict = None,
                      out_seed_disabled: bool = False,
                      in_seed_disabled: bool = False,
                      first_place_label: str = "",
                      second_place_label: str = "",
-                     ) -> list:
+                     ) -> organized_tab.OrganizedTable:
     if in_seed is not None:
         if len(in_seed.keys()) == 0 and in_tree.in_seed is not None:
             in_seed = in_tree.in_seed
@@ -33,7 +33,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
             out_seed = in_tree.out_seed
     # split tree
     if len(in_tree.last_remain_nodes) > 1 and in_tree.total_nodes > 18:
-        sub_trees = organized_t.split_with_multiple_winners(in_tree)
+        sub_trees = organized_tr.split_with_multiple_winners(in_tree)
         sub_table_alt = []
         for tr in sub_trees:
             sub_table_alt.append(generate_bra_pos(tr,
@@ -43,7 +43,8 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                                                   in_seed_disabled,
                                                   first_place_label,
                                                   second_place_label))
-        return_result = table_desc.union_table(sub_table_alt)
+        # return_result = table_desc.union_table(sub_table_alt)
+        return_result = organized_tab.union_table_with_dict(sub_table_alt)
         return return_result
 
     a = len(in_tree.list_round_num)
@@ -56,7 +57,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         position_dicts.append(dict())
     for i in range(len(vertical_pos)):
         position_dicts[a - 1][vertical_pos[i]] = 2 + 2 * i
-    tree_into_layers = organized_t.nodes_layer_from_tr(in_tree)
+    tree_into_layers = organized_tr.nodes_layer_from_tr(in_tree)
     for i in range(a - 1, -1, -1):
         prev_position = position_dicts[i]
         next_position = prev_position.copy()
@@ -247,7 +248,6 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 else:
                     column_disabled_dict[column_num] = False
                 table_pos_all.append(t4)
-    print(column_disabled_dict)
     # black lines
     for j in range(a):
         for node in tree_into_layers[j]:
@@ -277,10 +277,126 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                 table_pos_all.append(t6)
     # pad 0+sort
     table_pos_all = table_desc.padding_0(table_pos_all)
-    return table_pos_all
+    return organized_tab.OrganizedTable(table_pos_all, column_disabled_dict)
 
 
 def draw_table(in_table_list: list, table_name: str = '') -> str:
+    print(f"Begin generating table of {table_name}")
+    return_block = f"<!-- Begin Bracket of {table_name}-->\n"
+    row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1
+    column_limit = max([cell.to_cell[1] for cell in in_table_list]) + 1
+    # for row 0
+    return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
+    # column names
+    # return_block += '| &nbsp;\n'
+    in_table_list_cur_index = 0
+    while True:
+        current_cell = in_table_list[in_table_list_cur_index]
+        if current_cell.from_cell[0] > 0:
+            break
+        if not current_cell.empty:
+            return_block += (f'| align="center" colspan="'
+                             f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                             f'" style="border:1px solid #aaa;" bgcolor="'
+                             f'{current_cell.bg_color}" |'
+                             f'{current_cell.content if len(current_cell.content) > 0 else "01回戦"}\n')
+        else:
+            return_block += (f'| colspan="'
+                             f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                             f'" |\n'
+                             )
+        in_table_list_cur_index += 1
+    # for row 1
+    return_block += '|-\n|'
+    # calculate column width
+    column_width = []
+    for j in range(column_limit):
+        column_width.append(0.5)
+    in_table_list.sort(key=lambda cell: cell.to_cell[1] - cell.from_cell[1])
+    for cell in in_table_list:
+        if cell.empty or cell.content == '':
+            continue
+        else:
+            columns = range(cell.from_cell[1], cell.to_cell[1] + 1)
+            content_length = cell.content_len
+            if content_length != 0 and content_length < 3:
+                content_length += 1
+            if 3 <= content_length < 5:
+                content_length += 0.5
+            current_col_length = sum([column_width[column] for column in columns])
+            while current_col_length < content_length:
+                for column in columns:
+                    column_width[column] += 0.5
+                current_col_length = sum([column_width[column] for column in columns])
+    in_table_list.sort(key=lambda cell: (cell.from_cell[0], cell.from_cell[1]))
+    for i in range(column_limit):
+        if i == 0:
+            return_block += f'style="height:0.5em; width:{column_width[i]}em"| '
+        else:
+            return_block += f'||style="width:{column_width[i]}em"| '
+    return_block += '\n'
+    # for row 2 onwards
+    for row_num in range(2, row_limit):
+        flag = 0
+        return_block += '|-\n'
+        while True:
+            current_cell = in_table_list[in_table_list_cur_index]
+            if current_cell.from_cell[0] < row_num:
+                in_table_list_cur_index += 1
+            else:
+                break
+        while True:
+            current_cell = in_table_list[in_table_list_cur_index]
+            if current_cell.from_cell[0] > row_num:
+                break
+            if flag == 0:
+                return_block += '|style="height:1em" '
+                flag += 1
+            else:
+                return_block += f'||'
+            rowspan_describe = (f'rowspan="'
+                                f'{current_cell.to_cell[0] - current_cell.from_cell[0] + 1}'
+                                f'" ')
+            colspan_describe = (f'colspan="'
+                                f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
+                                f'" ')
+            if current_cell.to_cell[0] == current_cell.from_cell[0]:
+                rowspan_describe = ''
+            if current_cell.to_cell[1] == current_cell.from_cell[1]:
+                colspan_describe = ''
+            solid_border = f'style="border:1px solid #aaa;text-align:center" bgcolor="{current_cell.bg_color}"'
+            up = "1px" if current_cell.border_up else 0
+            right = "1px" if current_cell.border_right else 0
+            down = "1px" if current_cell.border_down else 0
+            left = "1px" if current_cell.border_left else 0
+            black_border = f'style="border-width:{up} {right} {down} {left}; border-style:solid; border-color:black;"'
+            if not current_cell.border_black:
+                return_block += (rowspan_describe + colspan_describe
+                                 + (solid_border if (not current_cell.empty) else '')
+                                 + f' |'
+                                   f'{current_cell.content}')
+            else:
+                return_block += (rowspan_describe + colspan_describe
+                                 + black_border +
+                                 f' |'
+                                 f'{current_cell.content}')
+            return_block += " "
+            in_table_list_cur_index += 1
+            if in_table_list_cur_index >= len(in_table_list):
+                break
+        return_block += "\n"
+
+    return_block += ("|}\n<!-- End Bracket of "
+                     + f"{table_name}"
+                     + "-->\n")
+    return return_block
+
+
+def draw_table_with_col_dis_dic(in_table_list_org_tab: organized_tab.OrganizedTable, table_name: str = '') -> str:
+    in_table_list = in_table_list_org_tab.table_list
+    column_disabled_dic = in_table_list_org_tab.column_disabled_dict
+    print(column_disabled_dic)
+    in_table_list_org_tab.process_disabled_dict()
     print(f"Begin generating table of {table_name}")
     return_block = f"<!-- Begin Bracket of {table_name}-->\n"
     row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1

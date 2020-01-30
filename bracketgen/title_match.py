@@ -1,7 +1,7 @@
-from metastruct import organized_t, tree_node, kishi_data
+from metastruct import organized_tr, tree_node, kishi_data
 
 
-def title_match_str(matches_tree: organized_t.OrganizedTree,
+def title_match_str(matches_tree: organized_tr.OrganizedTree,
                     tournament_name: str,
                     iteration: str,
                     title_name: str,

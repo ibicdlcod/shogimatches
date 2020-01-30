@@ -1,9 +1,9 @@
 from bracketgen import bra_from_tr
-from metastruct import organized_t
+from metastruct import organized_tr
 
 
 class TableFeed:
-    tree: organized_t.OrganizedTree = None,
+    tree: organized_tr.OrganizedTree = None,
     prefix: str = ''
     tournament_name: str = ''
     iteration: str = ''
@@ -42,7 +42,7 @@ def draw_table_from_feed(feeds: list) -> str:
                                              feed.in_seed_disabled,
                                              feed.first_place_label,
                                              feed.second_place_label)
-        draw_table = bra_from_tr.draw_table(table,
+        draw_table = bra_from_tr.draw_table_with_col_dis_dic(table,
                                             feed.tournament_name
                                             + feed.iteration
                                             + in_tree.display_name

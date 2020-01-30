@@ -123,6 +123,7 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
         this_kishi = kishi_data.query_kishi_from_id(k)
         this_kishi_surname = this_kishi.fullname[:this_kishi.surname_length]
         kishi_surname_table.append(this_kishi_surname)
+    column_disabled_dict = dict()
     for j in range(a):
         for k in have_match_dicts[j].keys():
             this_kishi = kishi_data.query_kishi_from_id(k)
@@ -238,7 +239,15 @@ def generate_bra_pos(in_tree: organized_t.OrganizedTree,
                     out_seed_text,
                     "#fff0f0" if this_kishi.woman else "#f9f9f9",
                 )
+                column_num = factor * (a - j - 1) + 4
+                empty = (len(out_seed_text) == 0)
+                if empty:
+                    if column_num not in column_disabled_dict:
+                        column_disabled_dict[column_num] = True
+                else:
+                    column_disabled_dict[column_num] = False
                 table_pos_all.append(t4)
+    print(column_disabled_dict)
     # black lines
     for j in range(a):
         for node in tree_into_layers[j]:

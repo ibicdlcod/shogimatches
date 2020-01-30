@@ -1,5 +1,5 @@
 import importdata.kishi_txt as txt
-from importdata import python_mysql_dbconf
+from importdata import python_mysql_dbconf, former_meijin
 from bracketgen import ryuou_old
 import database_fix
 
@@ -41,6 +41,8 @@ if __name__ == '__main__':
         for i in kishi_db:
             outfile.write(str(i) + "\n")
         outfile.close()
+
+    former_meijin.import_former_meijin()
     for i in range(1, 2):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")

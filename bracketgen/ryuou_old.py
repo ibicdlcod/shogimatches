@@ -84,8 +84,8 @@ def ryuou_old_str(iteration: str, iteration_last: str = None) -> str:
                                               "===昇級者決定戦===\n",
                                               "竜王戦",
                                               iteration,
-                                              False,
                                               i == 6,
+                                              False,
                                               "△",
                                               "")
             feeds_i.append(feed_normal)

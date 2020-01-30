@@ -10,7 +10,15 @@ def title_match_str(matches_tree: organized_t.OrganizedTree,
     match_node = matches_tree.last_remain_nodes[0]
     last_matches_node = last_matches_tree.last_remain_nodes[0] if last_matches_tree is not None else None
     match_length = len(match_node.series)
-    if last_matches_node is None:
+    if last_matches_node is not None:
+        last_match_participants = last_matches_tree.get_winners()
+        if (match_node.winner() not in last_match_participants) and (match_node.loser() not in last_match_participants):
+            new_title_flag = True
+        else:
+            new_title_flag = False
+    else:
+        new_title_flag = True
+    if new_title_flag:
         black = match_node.black_of_first
     else:
         black = last_matches_node.winner()
@@ -59,7 +67,7 @@ def title_match_str(matches_tree: organized_t.OrganizedTree,
     return_result += "|" + black_bold + black_display_name + black_bold + "||"
     for i in range(match_length):
         return_result += black_win_loss[i] + "||"
-    if last_matches_tree is not None:
+    if last_matches_tree is not None and not new_title_flag:
         if match_node.winner() == black:
             return_result += "'''" + title_name + "位防衛'''"
     else:
@@ -70,7 +78,7 @@ def title_match_str(matches_tree: organized_t.OrganizedTree,
     return_result += "|" + white_bold + white_display_name + white_bold + "||"
     for i in range(match_length):
         return_result += white_win_loss[i] + "||"
-    if last_matches_tree is not None:
+    if last_matches_tree is not None and not new_title_flag:
         if match_node.winner() == white:
             return_result += "'''" + title_name + "位奪取'''"
     else:
@@ -78,7 +86,6 @@ def title_match_str(matches_tree: organized_t.OrganizedTree,
             return_result += "'''" + title_name + "位獲得'''"
     return_result += "\n|}\n"
     return_result += "<br/>\n"
-    print(match_node)
     return return_result
 
 

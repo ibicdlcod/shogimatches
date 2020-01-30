@@ -1,5 +1,6 @@
 from datetime import date
 from metastruct import kishi_rank_sql
+from importdata import former_meijin
 import mysql.connector
 import importdata.python_mysql_dbconf as db_conf
 import urllib.request
@@ -57,6 +58,13 @@ class Kishi:
 
     def rank(self, query_date: date) -> tuple:
         sql_result = kishi_rank_sql.from_sql(self.id, query_date)
+        if (sql_result is not None) and sql_result.endswith("段"):
+            former_ryuou_name = former_meijin.import_former_ryuou(query_date)
+            if former_ryuou_name == self.fullname:
+                sql_result = "前竜王"
+            former_meijin_name = former_meijin.import_former_meijin(query_date)
+            if former_meijin_name == self.fullname:
+                sql_result = "前名人"
         if sql_result is not None:
             if len(sql_result) > 3:
                 length = len(sql_result) * 0.7
@@ -85,6 +93,13 @@ class Kishi:
                     result = "竜王名人"
                 else:
                     result = html_str[index2 + 2 + len(self.fullname):index3]
+                if (result is not None) and result.endswith("段"):
+                    former_ryuou_name = former_meijin.import_former_ryuou(query_date)
+                    if former_ryuou_name == self.fullname:
+                        result = "前竜王"
+                    former_meijin_name = former_meijin.import_former_meijin(query_date)
+                    if former_meijin_name == self.fullname:
+                        result = "前名人"
                 kishi_rank_sql.to_sql(result, self.id, query_date)
                 print(f"Obtained rank of {self.fullname} "
                       f"on day {query_date.isoformat()} ")

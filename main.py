@@ -51,7 +51,7 @@ if __name__ == '__main__':
         out_str = ryuou_template.gen_usage(f"第{j}期", [7, 0, 1, 2, 3, 4, 5, 6])
         outfile.write(out_str)
         outfile.close()
-    for i in range(6, 19):
+    for i in range(13, 19):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         if i == 1:

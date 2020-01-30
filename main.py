@@ -44,7 +44,14 @@ if __name__ == '__main__':
         outfile.close()
 
     former_meijin.import_former_meijin()
-    for i in range(1, 1):
+    for i in range(1, 33):
+        outfile_name = f"txt_dst\\ryuou\\usage_{i}.txt"
+        outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+        j = str(i).zfill(2)
+        out_str = ryuou_template.gen_usage(f"第{j}期", [7, 0, 1, 2, 3, 4, 5, 6])
+        outfile.write(out_str)
+        outfile.close()
+    for i in range(6, 19):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         if i == 1:
@@ -56,7 +63,7 @@ if __name__ == '__main__':
             out_str = ryuou_template.gen_template(ryuou_old.ryuou_old_str_dict(f"第{j}期", f"第{j_1}期"))
             outfile.write(out_str)
         outfile.close()
-    for i in range(19, 20):
+    for i in range(19, 33):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         j = str(i).zfill(2)

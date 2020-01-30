@@ -41,7 +41,13 @@ if __name__ == '__main__':
         for i in kishi_db:
             outfile.write(str(i) + "\n")
         outfile.close()
-    outfile_name = "temp.txt"
-    outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    outfile.write(ryuou_old.ryuou_old_str("第01期"))
-    outfile.close()
+    for i in range(1, 2):
+        outfile_name = f"txt_dst\\ryuou\\{i}.txt"
+        outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+        if i == 1:
+            outfile.write(ryuou_old.ryuou_old_str("第01期"))
+        else:
+            j = str(i).zfill(2)
+            j_1 = str(i-1).zfill(2)
+            outfile.write(ryuou_old.ryuou_old_str(f"第{j}期", f"第{j_1}期"))
+        outfile.close()

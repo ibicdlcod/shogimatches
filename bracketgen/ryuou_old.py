@@ -1,38 +1,28 @@
+from bracketgen import title_match, str_list
 from metastruct import organized_t, seeds_out_in, table_feed
 from importdata import sql_read, gen_round_name
 
 
-def ryuou_old_str(iteration: str) -> str:
+def ryuou_old_str(iteration: str, iteration_last: str = None) -> str:
     return_result = ""
-    letter_list = []
-    for i in range(64, 90):
-        letter_list.append(chr(i + 1))
-    for i in range(96, 122):
-        letter_list.append(chr(i + 1))
-    katakana_list = [
-        'イ', 'ロ', 'ハ', 'ニ', 'ホ', 'ヘ', 'ト',
-        'チ', 'リ', 'ヌ', 'ル', 'ヲ', 'ワ', 'カ',
-        'ヨ', 'タ', 'レ', 'ソ', 'ツ', 'ネ', 'ナ',
-        'ラ', 'ム', 'ウ', 'ヰ', 'ノ', 'オ', 'ク',
-        'ヤ', 'マ', 'ケ', 'フ', 'コ', 'エ', 'テ',
-        'ア', 'サ', 'キ', 'ユ', 'メ', 'ミ', 'シ',
-        'ヱ', 'ヒ', 'モ', 'セ', 'ス',
-    ]
-    hiragana_list = [
-        'あ',	'い',	'う',	'え',	'お',
-        'か',	'き',	'く',	'け',	'こ',
-        'さ',	'し',	'す',	'せ',	'そ',
-        'た',	'ち',	'つ',	'て',	'と',
-        'な',	'に',	'ぬ',	'ね',	'の',
-        'は',	'ひ',	'ふ',	'へ',	'ほ',
-        'ま',	'み',	'む',	'め',	'も',
-        'や',	'ゆ',	'よ',
-        'ら',	'り',	'る',	'れ',	'ろ',
-        'わ',	'ゐ',	'ゑ',	'を',
-
-    ]
-    # number_list = list(range(64))
-
+    letter_list = str_list.letter_list
+    katakana_list = str_list.katakana_list
+    hiragana_list = str_list.hiragana_list
+    title_matches = sql_read.read_match("竜王戦", iteration, "タイトル戦", "七番勝負")
+    if iteration_last is not None:
+        title_matches_last = sql_read.read_match("竜王戦", iteration_last, "タイトル戦", "七番勝負")
+        org_tree_title_last = organized_t.OrganizedTree(title_matches_last, f"タイトル戦七番勝負", ["", ])
+    else:
+        org_tree_title_last = None
+    org_tree_title = organized_t.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
+    return_result += title_match.title_match_str(org_tree_title,
+                                                 "竜王戦",
+                                                 iteration,
+                                                 "竜王",
+                                                 "七番勝負",
+                                                 org_tree_title_last)
+    legend_string = ('{| border="1" class="wikitable" style="font-size:89%"\n|\n'
+                     '◎：決勝進出　△：昇級　▼：降級\n|}\n')
     feeds_x = []
     for i in range(0, 7):
         feeds_i = []
@@ -60,7 +50,7 @@ def ryuou_old_str(iteration: str) -> str:
             s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, ], letter_list)
             s.assign_seed()
             feed_normal = table_feed.TableFeed(org_tree_normal,
-                                               "==1組==\n===ランキング戦===\n",
+                                               "==1組==\n" + legend_string + "===ランキング戦===\n",
                                                "竜王戦",
                                                iteration,
                                                False,
@@ -83,7 +73,7 @@ def ryuou_old_str(iteration: str) -> str:
             s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
             s.assign_seed()
             feed_normal = table_feed.TableFeed(org_tree_normal,
-                                               f"=={i}組==\n===ランキング戦===\n",
+                                               f"=={i}組==\n" + legend_string + "===ランキング戦===\n",
                                                "竜王戦",
                                                iteration,
                                                False,

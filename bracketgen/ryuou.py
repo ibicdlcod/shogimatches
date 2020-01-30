@@ -111,7 +111,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
             feeds_i.append(feed_normal)
             feeds_i.append(feed_promo)
         if i != 0:
-            a, b = ryuou_old.get_x_group_remain_war_trees(iteration, i)
+            a, b, c = ryuou_old.get_x_group_remain_war_trees(iteration, i)
             if a is None:
                 if i != 6:
                     if feed_promo is not None:

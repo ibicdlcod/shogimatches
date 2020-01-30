@@ -117,7 +117,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                     if feed_promo is not None:
                         feed_promo.prefix = "===昇級者決定戦===\n▼:降級\n"
                     else:  # to 5 for new
-                        feed_5.prefix = "===3位出場者決定戦===\n▼:降級\n"
+                        feed_5.prefix = "===5位出場者決定戦===\n▼:降級\n"
                 normal_first_round_losers = feed_normal.tree.get_losers_in_their_first()
                 if feed_promo is not None:
                     promo_first_round_losers = feed_promo.tree.get_losers_in_their_first()
@@ -185,7 +185,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     seeds_out_in.Seed(2, [feeds_x[1][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)", ], ["1組2位", ])
     seeds_out_in.Seed(1, [feeds_x[1][1].tree, ], [tree_0, ], ["3位(決勝Ｔ)", ], ["1組3位", ])
     seeds_out_in.Seed(1, [feeds_x[1][2].tree, ], [tree_0, ], ["4位(決勝Ｔ)", ], ["1組4位", ])
-    seeds_out_in.Seed(1, [feeds_x[1][3].tree, ], [tree_0, ], ["5位(決勝Ｔ)", ], ["1組5 位", ])
+    seeds_out_in.Seed(1, [feeds_x[1][3].tree, ], [tree_0, ], ["5位(決勝Ｔ)", ], ["1組5位", ])
     seeds_out_in.Seed(1, [feeds_x[2][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["2組優勝", ])
     seeds_out_in.Seed(2, [feeds_x[2][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)·昇級", ], ["2組2位", ])
     seeds_out_in.Seed(1, [feeds_x[3][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["3組優勝", ])

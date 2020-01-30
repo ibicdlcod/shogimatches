@@ -288,7 +288,6 @@ def draw_table(in_table_list: list, table_name: str = '') -> str:
     # for row 0
     return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
     # column names
-    # return_block += '| &nbsp;\n'
     in_table_list_cur_index = 0
     while True:
         current_cell = in_table_list[in_table_list_cur_index]
@@ -402,7 +401,6 @@ def draw_table_with_col_dis_dic(in_table_list_org_tab: organized_tab.OrganizedTa
     # for row 0
     return_block += '{| border="0" cellpadding="0" cellspacing="0" style="font-size: 70%;"\n'
     # column names
-    # return_block += '| &nbsp;\n'
     in_table_list_cur_index = 0
     while True:
         current_cell = in_table_list[in_table_list_cur_index]

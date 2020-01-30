@@ -74,9 +74,7 @@ def union_table(in_table_list_list: list) -> list:
         this_column_limit = max([in_table.to_cell[1] for in_table in in_table_list]) + 1
         for cell in in_table_list:
             cell.shift(0, column_limit - this_column_limit)
-    # for i in in_table_list_list[0]:
-    #     print(i)
-    # print()
+
     row_current = 0
     for in_table_list in in_table_list_list:
         for cell in in_table_list:

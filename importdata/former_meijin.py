@@ -12,13 +12,10 @@ for i in range(1, 9):
     ryuou_end_dates[i] = end_date
     ryuou_winners[i] = (ryuou_matches[-1].black_name if ryuou_matches[-1].win_loss_for_black > 0
                         else ryuou_matches[-1].white_name)
-
 ryuou_end_dates[9] = date.fromisoformat("2100-01-01")
 ryuou_winners[7] = None
 ryuou_winners[8] = None
-# for i in range(13, 53):
-#     iteration = "第" + str(i).zfill(2) + "期"
-#     meijin_matches = sql_read.read_match("名人戦", iteration, "タイトル戦", "七番勝負")
+
 meijin_end_dates = dict()
 meijin_end_dates[12] = date.fromisoformat("1900-01-01")
 meijin_winners = dict()

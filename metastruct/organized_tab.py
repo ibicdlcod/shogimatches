@@ -28,8 +28,6 @@ class OrganizedTable:
             cell.to_cell[1] = to_col
             if from_col <= to_col:
                 return_list.append(cell)
-            else:
-                print("WWW")
         self.table_list = return_list
 
 
@@ -37,14 +35,12 @@ def union_table_with_dict(in_org_table_list_list: list) -> OrganizedTable:
     column_limit = 0
     for in_org_table in in_org_table_list_list:
         in_table_list = in_org_table.table_list
-        column_disabled_dic = in_org_table.column_disabled_dict
         column_limit_item = max([in_table.to_cell[1] for in_table in in_table_list]) + 1
         if column_limit < column_limit_item:
             column_limit = column_limit_item
     row_limit = 0
     for in_org_table in in_org_table_list_list:
         in_table_list = in_org_table.table_list
-        column_disabled_dic = in_org_table.column_disabled_dict
         row_limit_item = max([in_table.to_cell[0] for in_table in in_table_list]) + 1
         row_limit += row_limit_item
 
@@ -61,7 +57,6 @@ def union_table_with_dict(in_org_table_list_list: list) -> OrganizedTable:
     row_current = 0
     for in_org_table in in_org_table_list_list:
         in_table_list = in_org_table.table_list
-        column_disabled_dic = in_org_table.column_disabled_dict
         for cell in in_table_list:
             cell.shift(row_current, 0)
         row_current += max([in_table.to_cell[0] for in_table in in_table_list]) + 2

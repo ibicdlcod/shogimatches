@@ -43,9 +43,9 @@ def draw_table_from_feed(feeds: list) -> str:
                                              feed.first_place_label,
                                              feed.second_place_label)
         draw_table = bra_from_tr.draw_table_with_col_dis_dic(table,
-                                            feed.tournament_name
-                                            + feed.iteration
-                                            + in_tree.display_name
-                                            )
+                                                             feed.tournament_name
+                                                             + feed.iteration
+                                                             + in_tree.display_name
+                                                             )
         result += draw_table
     return result

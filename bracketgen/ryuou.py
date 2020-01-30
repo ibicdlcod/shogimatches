@@ -1,9 +1,9 @@
-from bracketgen import title_match, str_list
+from bracketgen import title_match, str_list, ryuou_old
 from metastruct import organized_tr, seeds_out_in, table_feed
 from importdata import sql_read, gen_round_name
 
 
-def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
+def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     return_dict = dict()
     letter_list = str_list.letter_list
     katakana_list = str_list.katakana_list
@@ -29,7 +29,7 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
         remain_war_disabled_flag = False
         feed_normal = None
         feed_promo = None
-        feed_3 = None
+        feed_5 = None
         if i == 0:
             match_db_0 = sql_read.read_match("竜王戦", iteration, "決勝トーナメント")
             round_db_0 = gen_round_name.read_round("竜王戦", iteration, "決勝トーナメント")
@@ -45,9 +45,11 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                           "")
             feeds_i.append(feed_0)
         elif i == 1:
-            org_tree_normal = get_x_group_normal_tree(iteration, 1)
-            org_tree_3 = get_1_group_appear_round_tree(iteration, 3)
-            s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, ], letter_list)
+            org_tree_normal = ryuou_old.get_x_group_normal_tree(iteration, 1)
+            org_tree_3 = ryuou_old.get_1_group_appear_round_tree(iteration, 3)
+            org_tree_4 = ryuou_old.get_1_group_appear_round_tree(iteration, 4)
+            org_tree_5 = ryuou_old.get_1_group_appear_round_tree(iteration, 5)
+            s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, org_tree_4, org_tree_5, ], letter_list)
             s.assign_seed()
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                "==1組==\n" + legend_string + "===ランキング戦===\n",
@@ -64,12 +66,30 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                           False,
                                           remain_war_disabled_flag,
                                           "◎",
-                                          "◎")
+                                          "")
+            feed_4 = table_feed.TableFeed(org_tree_4,
+                                          "===4位出場者決定戦===\n",
+                                          "竜王戦",
+                                          iteration,
+                                          False,
+                                          remain_war_disabled_flag,
+                                          "◎",
+                                          "")
+            feed_5 = table_feed.TableFeed(org_tree_5,
+                                          "==5位出場者決定戦===\n",
+                                          "竜王戦",
+                                          iteration,
+                                          False,
+                                          remain_war_disabled_flag,
+                                          "◎",
+                                          "")
             feeds_i.append(feed_normal)
             feeds_i.append(feed_3)
+            feeds_i.append(feed_4)
+            feeds_i.append(feed_5)
         else:
-            org_tree_normal = get_x_group_normal_tree(iteration, i)
-            org_tree_promo = get_x_group_promo_round_tree(iteration, i)
+            org_tree_normal = ryuou_old.get_x_group_normal_tree(iteration, i)
+            org_tree_promo = ryuou_old.get_x_group_promo_round_tree(iteration, i)
             s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
             s.assign_seed()
             feed_normal = table_feed.TableFeed(org_tree_normal,
@@ -79,7 +99,7 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                                False,
                                                True,
                                                "◎",
-                                               "◎" if i < 4 else "△")
+                                               "◎" if i < 3 else "△")
             feed_promo = table_feed.TableFeed(org_tree_promo,
                                               "===昇級者決定戦===\n",
                                               "竜王戦",
@@ -91,18 +111,18 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
             feeds_i.append(feed_normal)
             feeds_i.append(feed_promo)
         if i != 0:
-            a, b = get_x_group_remain_war_trees(iteration, i)
+            a, b = ryuou_old.get_x_group_remain_war_trees(iteration, i)
             if a is None:
                 if i != 6:
                     if feed_promo is not None:
                         feed_promo.prefix = "===昇級者決定戦===\n▼:降級\n"
                     else:  # to 5 for new
-                        feed_3.prefix = "===3位出場者決定戦===\n▼:降級\n"
+                        feed_5.prefix = "===3位出場者決定戦===\n▼:降級\n"
                 normal_first_round_losers = feed_normal.tree.get_losers_in_their_first()
                 if feed_promo is not None:
                     promo_first_round_losers = feed_promo.tree.get_losers_in_their_first()
                 else:
-                    promo_first_round_losers = feed_3.tree.get_losers_in_their_first()
+                    promo_first_round_losers = feed_5.tree.get_losers_in_their_first()
                 relegated = []
                 for loser in promo_first_round_losers:
                     if loser in normal_first_round_losers:
@@ -113,7 +133,7 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
                 if feed_promo is not None:
                     seeds_out_in.Seed(5, [feed_promo.tree, ], [], [], None, losers_dict)
                 else:
-                    seeds_out_in.Seed(5, [feed_3.tree, ], [], [], None, losers_dict)
+                    seeds_out_in.Seed(5, [feed_5.tree, ], [], [], None, losers_dict)
                 pass  # trigger 无残留决定战时的降级
             elif b is None:
                 seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, ], katakana_list)
@@ -163,15 +183,16 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
         seeds_out_in.Seed(0, [], [tree_0, ], [], [], {165: "第26期十段", 115: "永世十段", 42: "永世十段"})
     seeds_out_in.Seed(1, [feeds_x[1][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)", ], ["1組優勝", ])
     seeds_out_in.Seed(2, [feeds_x[1][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)", ], ["1組2位", ])
-    seeds_out_in.Seed(1, [feeds_x[1][1].tree, ], [tree_0, ], ["3位(決勝Ｔ)", "3位(決勝Ｔ)", ], ["1組3位", "1組3位", ])
+    seeds_out_in.Seed(1, [feeds_x[1][1].tree, ], [tree_0, ], ["3位(決勝Ｔ)", ], ["1組3位", ])
+    seeds_out_in.Seed(1, [feeds_x[1][2].tree, ], [tree_0, ], ["4位(決勝Ｔ)", ], ["1組4位", ])
+    seeds_out_in.Seed(1, [feeds_x[1][3].tree, ], [tree_0, ], ["5位(決勝Ｔ)", ], ["1組5 位", ])
     seeds_out_in.Seed(1, [feeds_x[2][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["2組優勝", ])
     seeds_out_in.Seed(2, [feeds_x[2][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)·昇級", ], ["2組2位", ])
     seeds_out_in.Seed(1, [feeds_x[3][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["3組優勝", ])
-    seeds_out_in.Seed(2, [feeds_x[3][0].tree, ], [tree_0, ], ["2位(決勝Ｔ)·昇級", ], ["3組2位", ])
     seeds_out_in.Seed(1, [feeds_x[4][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["4組優勝", ])
     seeds_out_in.Seed(1, [feeds_x[5][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["5組優勝", ])
     seeds_out_in.Seed(1, [feeds_x[6][0].tree, ], [tree_0, ], ["優勝(決勝Ｔ)·昇級", ], ["6組優勝", ])
-    for i in range(4, 7):
+    for i in range(3, 7):
         loser_dict = dict()
         for loser in feeds_x[i][0].tree.get_runners_up():
             loser_dict[loser.id] = "昇級"
@@ -189,61 +210,3 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
     for j in range(len(feeds_x)):
         return_dict[j] = table_feed.draw_table_from_feed(feeds_x[j])
     return return_dict
-
-
-def get_x_group_normal_tree(iteration: str, group_num: int):
-    match_db = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "ランキング戦")
-    round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "ランキング戦")
-    org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組ランキング戦", round_db)
-    return org_tree
-
-
-def get_x_group_promo_round_tree(iteration: str, group_num: int):
-    match_db = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "昇級者決定戦")
-    round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "昇級者決定戦")
-    org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組昇級者決定戦", round_db)
-    return org_tree
-
-
-def get_1_group_appear_round_tree(iteration: str, pos_num: int):
-    match_db = sql_read.read_match("竜王戦", iteration, "1組", f"{pos_num}位出場者決定戦")
-    round_db = gen_round_name.read_round("竜王戦", iteration, "1組", f"{pos_num}位出場者決定戦")
-    org_tree = organized_tr.OrganizedTree(match_db, f"1組{pos_num}位出場者決定戦", round_db)
-    return org_tree
-
-
-def get_x_group_remain_war_trees(iteration: str, group_num: int) -> tuple:
-    match_db = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "残留決定戦")
-    if len(match_db) == 0:
-        return None, None
-    match_db_first_round = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "残留決定戦", "01回戦")
-    if len(match_db_first_round) == 0:  # match_db only have first round
-        org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組残留決定戦", ["", ])
-        return org_tree, None
-    first_round_one_match = match_db_first_round[0]
-    first_round_loser_0 = None
-    if first_round_one_match.win_loss_for_black > 0:
-        first_round_loser_0 = first_round_one_match.white_name
-    elif first_round_one_match.win_loss_for_black < 0:
-        first_round_loser_0 = first_round_one_match.black_name
-    else:
-        print("Remain war first round should have a decisive result")
-        exit(3)
-    match_db_non_first_round = []
-    for m in match_db:
-        if m not in match_db_first_round:
-            match_db_non_first_round.append(m)
-    non_first_round_participants = []
-    for m in match_db_non_first_round:
-        non_first_round_participants.append(m.black_name)
-        non_first_round_participants.append(m.white_name)
-    if first_round_loser_0 in non_first_round_participants:
-        print("Irregular remain war tree found")
-        org_tree_1 = organized_tr.OrganizedTree(match_db_first_round, f"{group_num}組残留決定戦", ["01回戦", ])
-        round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "残留決定戦")
-        org_tree_2 = organized_tr.OrganizedTree(match_db_non_first_round, f"{group_num}組残留決定戦", round_db[:-1])
-        return org_tree_1, org_tree_2
-    else:
-        round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "残留決定戦")
-        org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組残留決定戦", round_db)
-        return org_tree, None

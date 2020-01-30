@@ -393,10 +393,10 @@ def draw_table(in_table_list: list, table_name: str = '') -> str:
 
 
 def draw_table_with_col_dis_dic(in_table_list_org_tab: organized_tab.OrganizedTable, table_name: str = '') -> str:
+    in_table_list_org_tab.process_disabled_dict()
     in_table_list = in_table_list_org_tab.table_list
     column_disabled_dic = in_table_list_org_tab.column_disabled_dict
     print(column_disabled_dic)
-    in_table_list_org_tab.process_disabled_dict()
     print(f"Begin generating table of {table_name}")
     return_block = f"<!-- Begin Bracket of {table_name}-->\n"
     row_limit = max([cell.to_cell[0] for cell in in_table_list]) + 1

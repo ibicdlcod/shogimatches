@@ -10,9 +10,27 @@ class OrganizedTable:
         self.column_disabled_dict = column_disabled_dict
 
     def process_disabled_dict(self):
-        for i in self.table_list:
-            print(i)
-        pass
+        return_list = []
+        for cell in self.table_list:
+            from_col = cell.from_cell[1]
+            to_col = cell.to_cell[1]
+            disabled_col_from_num = 0
+            for i in range(from_col):
+                if i in self.column_disabled_dict and self.column_disabled_dict[i]:
+                    disabled_col_from_num += 1
+            from_col -= disabled_col_from_num
+            disable_col_to_num = 0
+            for i in range(to_col + 1):
+                if i in self.column_disabled_dict and self.column_disabled_dict[i]:
+                    disable_col_to_num += 1
+            to_col -= disable_col_to_num
+            cell.from_cell[1] = from_col
+            cell.to_cell[1] = to_col
+            if from_col <= to_col:
+                return_list.append(cell)
+            else:
+                print("WWW")
+        self.table_list = return_list
 
 
 def union_table_with_dict(in_org_table_list_list: list) -> OrganizedTable:

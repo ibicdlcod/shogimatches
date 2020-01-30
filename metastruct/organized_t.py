@@ -92,6 +92,15 @@ class OrganizedTree:
             return_result.append(node.loser())
         return return_result
 
+    def get_losers_in_their_first(self):
+        return_result = []
+        for i in range(0, len(self.node_groups)):
+            for node in self.node_groups[i]:
+                return_result.append(node.loser())
+                if return_result.count(node.winner()) > 0:
+                    return_result.remove(node.winner())
+        return return_result
+
     def modify_dict(self, in_dict: dict, out_dict: dict):
         self.in_seed = in_dict
         self.out_seed = out_dict

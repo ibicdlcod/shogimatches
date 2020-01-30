@@ -1,10 +1,14 @@
 import importdata.kishi_txt as txt
 from importdata import python_mysql_dbconf
 from bracketgen import ryuou_old
+import database_fix
 
 if __name__ == '__main__':
     gen_conf = python_mysql_dbconf.read_db_general_config()
     update_on = gen_conf["read_update_on"]
+
+    database_fix.fix_database()
+
     if update_on:
         kishi_db = txt.process_txt()
         amateur1 = txt.process_more_txt("current_amateur_part")

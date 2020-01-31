@@ -5,7 +5,7 @@ from bracketgen import ryuou_old, ryuou
 import database_fix
 
 if __name__ == '__main__':
-    gen_conf = python_mysql_dbconf.read_db_general_config()
+    gen_conf = python_mysql_dbconf.read_general_config()
     update_on = gen_conf["read_update_on"]
 
     database_fix.fix_database()
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         out_str = ryuou_template.gen_usage(f"第{j}期", [7, 0, 1, 2, 3, 4, 5, 6])
         outfile.write(out_str)
         outfile.close()
-    for i in range(19, 19):
+    for i in range(1, 19):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         if i == 1:
@@ -63,7 +63,8 @@ if __name__ == '__main__':
             out_str = ryuou_template.gen_template(ryuou_old.ryuou_old_str_dict(f"第{j}期", f"第{j_1}期"))
             outfile.write(out_str)
         outfile.close()
-    for i in range(25, 26):
+    exit(0)
+    for i in range(19, 33):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         j = str(i).zfill(2)

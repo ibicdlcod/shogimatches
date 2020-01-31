@@ -14,7 +14,7 @@ def read_kishi() -> list:
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            gen_conf = db_conf.read_db_general_config()
+            gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
                 print('Connected to MySQL database')
 
@@ -41,7 +41,7 @@ def read_kishi() -> list:
         if conn is not None and conn.is_connected():
             conn.close()
         kishi_db.sort(key=lambda x: x.id)
-        gen_conf = db_conf.read_db_general_config()
+        gen_conf = db_conf.read_general_config()
         if gen_conf["sql_output"] == "True":
             print("Reading Kishi data complete")
         return kishi_db
@@ -59,7 +59,7 @@ def read_match(tournament_name: str, iteration: str,
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            gen_conf = db_conf.read_db_general_config()
+            gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
                 print('Connected to MySQL database')
 
@@ -108,7 +108,7 @@ def read_match(tournament_name: str, iteration: str,
         if conn is not None and conn.is_connected():
             conn.close()
         match_db.sort(key=lambda x: x.match_date)
-        gen_conf = db_conf.read_db_general_config()
+        gen_conf = db_conf.read_general_config()
         if gen_conf["sql_output"] == "True":
             print(f"Reading Match data of {tournament_name} iteration {iteration}"
                   f" detail1:{detail1}, detail2:{detail2}, detail3:{detail3} complete")

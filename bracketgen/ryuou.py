@@ -5,7 +5,7 @@ from importdata import sql_read, gen_round_name
 
 def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     return_dict = dict()
-    letter_list = str_list.letter_list + str_list.hiragana_list
+    letter_list = str_list.letter_list
     katakana_list = str_list.katakana_list
     hiragana_list = str_list.hiragana_list
     number_list = str_list.number_list

@@ -14,7 +14,7 @@ def read_round(tournament_name: str, iteration: str,
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            gen_conf = db_conf.read_db_general_config()
+            gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
                 print('Connected to MySQL database')
 
@@ -82,7 +82,7 @@ def read_round(tournament_name: str, iteration: str,
         if conn is not None and conn.is_connected():
             conn.close()
         round_db.sort(key=lambda x: round_name_value(x), reverse=True)
-        gen_conf = db_conf.read_db_general_config()
+        gen_conf = db_conf.read_general_config()
         if gen_conf["sql_output"] == "True":
             print(f"Reading Match data of {tournament_name} iteration {iteration}"
                   f" detail1:{detail1}, detail2:{detail2}, detail3:{detail3} complete")

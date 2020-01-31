@@ -26,8 +26,8 @@ def read_db_config(filename: str = 'config\\db_config.ini',
     return db
 
 
-def read_db_general_config(filename: str = 'config\\config.ini',
-                           section: str = 'general') -> dict:
+def read_general_config(filename: str = 'config\\config.ini',
+                        section: str = 'general') -> dict:
     """ Read database configuration file and return a dictionary object
     :param filename: name of the configuration file
     :param section: section of database configuration

@@ -69,7 +69,7 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
             feeds_i.append(feed_3)
         else:
             org_tree_normal = get_x_group_normal_tree(iteration, i)
-            org_tree_promo = get_x_group_promo_round_tree(iteration, i)
+            org_tree_promo, org_tree_promo_irregular = get_x_group_promo_round_tree(iteration, i)
             seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                f"=={i}組==\n" + legend_string + "===ランキング戦===\n",

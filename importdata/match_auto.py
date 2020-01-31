@@ -121,7 +121,7 @@ def match_to_sql(in_match_list: list) -> None:
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            gen_conf = db_conf.read_db_general_config()
+            gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
                 print('Connected to MySQL database')
 

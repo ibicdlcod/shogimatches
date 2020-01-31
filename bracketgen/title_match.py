@@ -45,16 +45,16 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
     else:
         white = match_node.black_of_first
     white_rank = white.rank(match_node.series[0].match_date)[0]
-    if black.wiki_name == "":
+    if white.wiki_name == "":
         white_display_name = "[[" \
                              + white.fullname \
                              + "]]" \
                              + white_rank
     else:
         white_display_name = "[[" \
-                             + black.wiki_name \
+                             + white.wiki_name \
                              + "|" \
-                             + black.fullname \
+                             + white.fullname \
                              + "]]" \
                              + white_rank
     black_win_loss = match_icon_for_kishi(match_node, black.id)
@@ -106,8 +106,8 @@ def match_icon_for_kishi(this_node: tree_node.TreeNode, kishi_id: int):
             print("Kishi_id not in match participants")
             exit(3)
         match_icon = ""
-        match_icon += ("千" * match.sennichite)
-        match_icon += ("持" * match.mochishogi)
+        match_icon += ("[[千日手|千]]" * match.sennichite)
+        match_icon += ("[[持将棋|持]]" * match.mochishogi)
         if match.sennichite == 0 and match.mochishogi == 0 and match.win_loss_for_black == 0:
             match_icon = "無"
         elif match.forfeit_active:

@@ -5,7 +5,7 @@ from importdata import sql_read, gen_round_name
 
 def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     return_dict = dict()
-    letter_list = str_list.letter_list
+    letter_list = str_list.letter_list + str_list.hiragana_list
     katakana_list = str_list.katakana_list
     hiragana_list = str_list.hiragana_list
     number_list = str_list.number_list
@@ -23,7 +23,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                                  "七番勝負",
                                                  org_tree_title_last)
     legend_string = ('{| border="1" class="wikitable" style="font-size:89%"\n|\n'
-                     '◎：決勝進出　△：昇級　◇：残留 ▼：降級\n|}\n')
+                     '◎：決勝進出　△：昇級　◇：残留　▼：降級\n|}\n')
     feeds_x = []
     for i in range(0, 7):
         feeds_i = []

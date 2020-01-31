@@ -63,7 +63,6 @@ if __name__ == '__main__':
             out_str = ryuou_template.gen_template(ryuou_old.ryuou_old_str_dict(f"第{j}期", f"第{j_1}期"))
             outfile.write(out_str)
         outfile.close()
-    exit(0)
     for i in range(19, 33):
         outfile_name = f"txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")

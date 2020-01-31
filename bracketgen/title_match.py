@@ -45,7 +45,7 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
     else:
         white = match_node.black_of_first
     white_rank = white.rank(match_node.series[0].match_date)[0]
-    if black.wiki_name == "":
+    if white.wiki_name == "":
         white_display_name = "[[" \
                              + white.fullname \
                              + "]]" \

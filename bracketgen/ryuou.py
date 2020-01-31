@@ -8,6 +8,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     letter_list = str_list.letter_list
     katakana_list = str_list.katakana_list
     hiragana_list = str_list.hiragana_list
+    number_list = str_list.number_list
     title_matches = sql_read.read_match("竜王戦", iteration, "タイトル戦", "七番勝負")
     if iteration_last is not None:
         title_matches_last = sql_read.read_match("竜王戦", iteration_last, "タイトル戦", "七番勝負")
@@ -151,7 +152,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                                    "◇",
                                                    "")
                 feeds_i.append(feed_remain)
-            else:
+            elif c is None:
                 seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, b, ], katakana_list)
                 seeds_out_in.Seed(-1, [a, ], [b, ], hiragana_list)
                 b_losers = b.get_runners_up() + b.get_others()
@@ -177,6 +178,42 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                                     "")
                 feeds_i.append(feed_remain)
                 feeds_i.append(feed_remain2)
+            else:
+                seeds_out_in.Seed(-2, [feeds_i[1].tree, ], [a, b, c, ], katakana_list)
+                seeds_out_in.Seed(-1, [a, ], [b, ], hiragana_list)
+                seeds_out_in.Seed(-1, [b, ], [c, ], number_list)
+                c_losers = c.get_runners_up() + c.get_others()
+                losers_dict = dict()
+                for loser in c_losers:
+                    losers_dict[loser.id] = "▼"
+                seeds_out_in.Seed(5, [c, ], [], [], None, losers_dict)
+                feed_remain = table_feed.TableFeed(a,
+                                                   f"===残留決定戦===\n▼:降級\n",
+                                                   "竜王戦",
+                                                   iteration,
+                                                   False,
+                                                   False,
+                                                   "◇",
+                                                   "")
+                feed_remain2 = table_feed.TableFeed(b,
+                                                    f"<br/>",
+                                                    "竜王戦",
+                                                    iteration,
+                                                    False,
+                                                    False,
+                                                    "◇",
+                                                    "")
+                feed_remain3 = table_feed.TableFeed(c,
+                                                    f"<br/>",
+                                                    "竜王戦",
+                                                    iteration,
+                                                    False,
+                                                    False,
+                                                    "◇",
+                                                    "")
+                feeds_i.append(feed_remain)
+                feeds_i.append(feed_remain2)
+                feeds_i.append(feed_remain3)
         feeds_x.append(feeds_i)
     tree_0 = feeds_x[0][0].tree
     if iteration == "第01期":

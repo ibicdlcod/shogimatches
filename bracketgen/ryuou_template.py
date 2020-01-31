@@ -13,7 +13,7 @@ def gen_template(in_str_dict: dict):
 
 
 def gen_usage(iteration: str, in_str_dict_keys):
-    result = ""
+    result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
     for key in in_str_dict_keys:
         result += "{{" + iteration + "竜王戦|group=" + str(key) + "}}\n"
     return result

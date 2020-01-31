@@ -23,18 +23,23 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
     else:
         black = last_matches_node.winner()
     black_rank = black.rank(match_node.series[0].match_date)[0]
+    black_display_rank = black_rank if last_matches_tree is None else title_name
+    if tournament_name == "竜王戦" and black_rank == "<small>竜王名人</small>":
+        black_display_rank = "竜王名人"
+    if tournament_name == "名人戦" and black_rank == "<small>竜王名人</small>":
+        black_display_rank = "名人(竜王)"
     if black.wiki_name == "":
         black_display_name = "[[" \
                              + black.fullname \
                              + "]]" \
-                             + (black_rank if last_matches_tree is None else title_name)
+                             + black_display_rank
     else:
         black_display_name = "[[" \
                              + black.wiki_name \
                              + "|" \
                              + black.fullname \
                              + "]]" \
-                             + (black_rank if last_matches_tree is None else title_name)
+                             + black_display_rank
     if black == match_node.black_of_first:
         white = match_node.white_of_first
     else:
@@ -61,7 +66,7 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
     return_result += '{| class="wikitable" style="text-align: center;"\n'
     return_result += '!対局者!!'
     for i in range(match_length):
-        return_result += f'第{i+1}局!!'
+        return_result += f'第{i + 1}局!!'
     return_result += "\n|-\n"
     black_bold = ("'''" if match_node.winner() == black else "")
     return_result += "|" + black_bold + black_display_name + black_bold + "||"

@@ -262,6 +262,7 @@ def get_x_group_promo_round_tree(iteration: str, group_num: int):
         org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組昇級者決定戦", round_db)
         return org_tree, None
     else:
+        print("Irregular promo war tree (2nd degree) found")
         org_tree_0 = organized_tr.OrganizedTree(regular_promo_matches, f"{group_num}組昇級者決定戦", round_db)
         org_tree_1 = organized_tr.OrganizedTree(irregular_promo_matches, f"{group_num}組昇級者決定戦", ["決勝"])
         return org_tree_0, org_tree_1
@@ -300,7 +301,7 @@ def get_x_group_remain_war_trees(iteration: str, group_num: int) -> tuple:
         non_first_round_participants.append(m.black_name)
         non_first_round_participants.append(m.white_name)
     if first_round_loser_0 in non_first_round_participants:
-        print("Irregular remain war tree found")
+        print("Irregular remain war tree (2nd degree) found")
         # confirm there are two rounds
         org_tree_1 = organized_tr.OrganizedTree(match_db_first_round, f"{group_num}組残留決定戦", ["01回戦", ])
         round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "残留決定戦")
@@ -326,7 +327,7 @@ def get_x_group_remain_war_trees(iteration: str, group_num: int) -> tuple:
             non_second_round_participants.append(m.black_name)
             non_second_round_participants.append(m.white_name)
         if second_round_loser_0 in non_second_round_participants:
-            print("Irregular remain war tree found")
+            print("Irregular remain war tree (3rd degree) found")
             org_tree_1 = organized_tr.OrganizedTree(match_db_first_round, f"{group_num}組残留決定戦", ["01回戦", ])
             round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "残留決定戦")
             org_tree_2 = organized_tr.OrganizedTree(match_db_second_round, f"{group_num}組残留決定戦", ["02回戦", ])

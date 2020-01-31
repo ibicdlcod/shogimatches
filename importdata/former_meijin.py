@@ -111,7 +111,7 @@ if gen_conf["renew_former_table"] == "True":
     for i in range(12, 55):
         to_sql(i, meijin_winners[i], "名人戦", meijin_end_dates[i])
 else:
-    for i in range(0, 9):
+    for i in range(0, 10):
         result_i = from_sql(i, "竜王戦")
         ryuou_end_dates[i] = result_i[2]
         ryuou_winners[i] = result_i[3]

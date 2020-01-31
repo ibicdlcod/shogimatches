@@ -6,3 +6,4 @@ mysqlsampledatabase.sql
 *.pyc
 *.dump
 txt_dst/
+readme/~*.ods

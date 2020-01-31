@@ -52,6 +52,14 @@ def sql_init():
                              "PRIMARY KEY (id_hash)"
                              ");")
     args_init_rank_table = tuple()
+    query_init_former_table = ("CREATE TABLE IF NOT EXISTS former("
+                               "tournament_name VARCHAR(63),"
+                               "iteration_int INT,"
+                               "end_date DATE NOT NULL DEFAULT '1900-01-01',"
+                               "winner_fullname VARCHAR(63),"
+                               "PRIMARY KEY (end_date)"
+                               ");")
+    args_init_former_table = tuple()
 
     try:
         conn = mysql.connector.MySQLConnection(**db_config)
@@ -68,6 +76,8 @@ def sql_init():
         print("Match table init success")
         cursor.execute(query_init_rank_table, args_init_rank_table)
         print("Rank table init success")
+        cursor.execute(query_init_former_table, args_init_former_table)
+        print("Former table init success")
 
         cursor.close()
 

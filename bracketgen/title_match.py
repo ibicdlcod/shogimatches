@@ -106,8 +106,8 @@ def match_icon_for_kishi(this_node: tree_node.TreeNode, kishi_id: int):
             print("Kishi_id not in match participants")
             exit(3)
         match_icon = ""
-        match_icon += ("千" * match.sennichite)
-        match_icon += ("持" * match.mochishogi)
+        match_icon += ("[[千日手|千]]" * match.sennichite)
+        match_icon += ("[[持将棋|持]]" * match.mochishogi)
         if match.sennichite == 0 and match.mochishogi == 0 and match.win_loss_for_black == 0:
             match_icon = "無"
         elif match.forfeit_active:

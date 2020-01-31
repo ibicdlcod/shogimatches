@@ -193,6 +193,7 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
             )
             table_pos_all.append(t2)
             match_icons = ""
+            match_icons_len = 0
             for match in this_node.series:
                 if len(this_node.series) > 1:
                     if match.black_name == kishi_data.query_kishi_from_id(k).fullname:
@@ -200,10 +201,14 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                     elif match.white_name == kishi_data.query_kishi_from_id(k).fullname:
                         black_or_white = "white"
                 match_icon = ""
-                match_icon += ("千" * match.sennichite)
-                match_icon += ("持" * match.mochishogi)
+                match_icon_len = 0
+                match_icon += ("[[千日手|千]]" * match.sennichite)
+                match_icon_len += match.sennichite
+                match_icon += ("[[持将棋|持]]" * match.mochishogi)
+                match_icon_len += match.mochishogi
                 if match.sennichite == 0 and match.mochishogi == 0 and match.win_loss_for_black == 0:
                     match_icon = "無"
+                    match_icon_len += 1
                 elif match.forfeit_active:
                     if black_or_white == "black" and match.win_loss_for_black > 0:
                         match_icon += "□"
@@ -211,6 +216,7 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                         match_icon += "□"
                     else:
                         match_icon += "■"
+                    match_icon_len += 1
                 else:
                     if black_or_white == "black" and match.win_loss_for_black > 0:
                         match_icon += "○"
@@ -220,13 +226,18 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                         match_icon += "●"
                     elif black_or_white == "white" and match.win_loss_for_black > 0:
                         match_icon += "●"
+                    match_icon_len += 1
                 match_icons += match_icon
+                match_icons_len += match_icon_len
             t3 = table_desc.TableDesc(
                 (position_dicts[j][k], factor * (a - j - 1) + 3),
                 (position_dicts[j][k] + 1, factor * (a - j - 1) + 3),
                 False,
                 match_icons,
                 "#fff0f0" if this_kishi.woman else "#f9f9f9",
+                False,
+                (True, True, True, True),
+                match_icons_len
             )
             table_pos_all.append(t3)
             out_seed_text = out_seed[k] if k in out_seed.keys() else ""

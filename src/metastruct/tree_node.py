@@ -14,7 +14,7 @@ class TreeNode:
     round_num_display: str = ""
 
     def __init__(self, match_list: list, title_holder: kishi_data.Kishi = None,
-                 superior_1win_advantage: kishi_data.Kishi = None,):
+                 superior_1win_advantage: kishi_data.Kishi = None, ):
         if len(match_list) == 0:
             print("Invalid: no match specified for TreeNode")
             exit(2)

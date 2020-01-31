@@ -2,13 +2,10 @@ import importdata.kishi_txt as txt
 from bracketgen import ryuou_template
 from importdata import python_mysql_dbconf, former_meijin
 from bracketgen import ryuou_old, ryuou
-import database_fix
 
 if __name__ == '__main__':
     gen_conf = python_mysql_dbconf.read_general_config()
     update_on = gen_conf["read_update_on"]
-
-    database_fix.fix_database()
 
     if update_on:
         kishi_db = txt.process_txt()
@@ -37,7 +34,7 @@ if __name__ == '__main__':
 
         kishi_db = txt.sql_connect(False, True, kishi_db)
 
-        outfile_name = "txt_src\\names2.csv"
+        outfile_name = "..\\txt_src\\names2.csv"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         for i in kishi_db:
             outfile.write(str(i) + "\n")
@@ -45,14 +42,14 @@ if __name__ == '__main__':
 
     former_meijin.import_former_meijin()
     for i in range(1, 33):
-        outfile_name = f"txt_dst\\ryuou\\usage_{i}.txt"
+        outfile_name = f"..\\txt_dst\\ryuou\\usage_{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         j = str(i).zfill(2)
         out_str = ryuou_template.gen_usage(f"第{j}期", [7, 0, 1, 2, 3, 4, 5, 6])
         outfile.write(out_str)
         outfile.close()
     for i in range(1, 19):
-        outfile_name = f"txt_dst\\ryuou\\{i}.txt"
+        outfile_name = f"..\\txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         if i == 1:
             out_str = ryuou_template.gen_template(ryuou_old.ryuou_old_str_dict("第01期"))
@@ -64,7 +61,7 @@ if __name__ == '__main__':
             outfile.write(out_str)
         outfile.close()
     for i in range(19, 33):
-        outfile_name = f"txt_dst\\ryuou\\{i}.txt"
+        outfile_name = f"..\\txt_dst\\ryuou\\{i}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         j = str(i).zfill(2)
         j_1 = str(i-1).zfill(2)

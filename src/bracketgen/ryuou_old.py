@@ -1,6 +1,6 @@
-from bracketgen import title_match, str_list
+from bracketgen import title_match, str_list, gen_round_name
 from metastruct import organized_tr, seeds_out_in, table_feed
-from importdata import sql_read, gen_round_name
+from importdata import sql_read
 
 
 def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:

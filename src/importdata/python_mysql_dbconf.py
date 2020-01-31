@@ -2,7 +2,7 @@ from configparser import ConfigParser
 import os
 
 
-def read_db_config(filename: str = 'config\\db_config.ini',
+def read_db_config(filename: str = '..\\config\\db_config.ini',
                    section: str = 'mysql') -> dict:
     """ Read database configuration file and return a dictionary object
     :param filename: name of the configuration file
@@ -26,7 +26,7 @@ def read_db_config(filename: str = 'config\\db_config.ini',
     return db
 
 
-def read_general_config(filename: str = 'config\\config.ini',
+def read_general_config(filename: str = '..\\config\\config.ini',
                         section: str = 'general') -> dict:
     """ Read database configuration file and return a dictionary object
     :param filename: name of the configuration file

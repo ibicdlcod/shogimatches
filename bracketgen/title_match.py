@@ -52,9 +52,9 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
                              + white_rank
     else:
         white_display_name = "[[" \
-                             + black.wiki_name \
+                             + white.wiki_name \
                              + "|" \
-                             + black.fullname \
+                             + white.fullname \
                              + "]]" \
                              + white_rank
     black_win_loss = match_icon_for_kishi(match_node, black.id)

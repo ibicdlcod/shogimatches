@@ -48,8 +48,7 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
         elif i == 1:
             org_tree_normal = get_x_group_normal_tree(iteration, 1)
             org_tree_3 = get_1_group_appear_round_tree(iteration, 3)
-            s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, ], letter_list)
-            s.assign_seed()
+            seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, ], letter_list)
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                "==1組==\n" + legend_string + "===ランキング戦===\n",
                                                "竜王戦",
@@ -71,8 +70,7 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
         else:
             org_tree_normal = get_x_group_normal_tree(iteration, i)
             org_tree_promo = get_x_group_promo_round_tree(iteration, i)
-            s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
-            s.assign_seed()
+            seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                f"=={i}組==\n" + legend_string + "===ランキング戦===\n",
                                                "竜王戦",
@@ -237,9 +235,36 @@ def get_x_group_normal_tree(iteration: str, group_num: int):
 
 def get_x_group_promo_round_tree(iteration: str, group_num: int):
     match_db = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "昇級者決定戦")
+    match_db_last_round = sql_read.read_match("竜王戦", iteration, f"{group_num}組", "昇級者決定戦", "決勝")
+    last_round_losers = []
+    for match in match_db_last_round:
+        if match.win_loss_for_black > 0:
+            last_round_losers.append(match.white_name)
+        elif match.win_loss_for_black < 0:
+            last_round_losers.append(match.black_name)
+    irregular_promo_matches = []
+    irregular_promo_flag = False
+    for match in match_db_last_round:
+        if match.win_loss_for_black > 0:
+            winner = match.black_name
+        elif match.win_loss_for_black < 0:
+            winner = match.white_name
+        else:
+            winner = None
+        if winner in last_round_losers:
+            irregular_promo_flag = True
+            irregular_promo_matches.append(match)
+    regular_promo_matches = match_db
+    for match in irregular_promo_matches:
+        regular_promo_matches.remove(match)
     round_db = gen_round_name.read_round("竜王戦", iteration, f"{group_num}組", "昇級者決定戦")
-    org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組昇級者決定戦", round_db)
-    return org_tree
+    if not irregular_promo_flag:
+        org_tree = organized_tr.OrganizedTree(match_db, f"{group_num}組昇級者決定戦", round_db)
+        return org_tree, None
+    else:
+        org_tree_0 = organized_tr.OrganizedTree(regular_promo_matches, f"{group_num}組昇級者決定戦", round_db)
+        org_tree_1 = organized_tr.OrganizedTree(irregular_promo_matches, f"{group_num}組昇級者決定戦", ["決勝"])
+        return org_tree_0, org_tree_1
 
 
 def get_1_group_appear_round_tree(iteration: str, pos_num: int):

@@ -25,6 +25,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     legend_string = ('{| border="1" class="wikitable" style="font-size:89%"\n|\n'
                      '◎：決勝進出　△：昇級　◇：残留　▼：降級\n|}\n')
     feeds_x = []
+    irregular_promo_dict = dict()
     for i in range(0, 7):
         feeds_i = []
         remain_war_disabled_flag = False
@@ -50,8 +51,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
             org_tree_3 = ryuou_old.get_1_group_appear_round_tree(iteration, 3)
             org_tree_4 = ryuou_old.get_1_group_appear_round_tree(iteration, 4)
             org_tree_5 = ryuou_old.get_1_group_appear_round_tree(iteration, 5)
-            s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, org_tree_4, org_tree_5, ], letter_list)
-            s.assign_seed()
+            seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, org_tree_4, org_tree_5, ], letter_list)
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                "==1組==\n" + legend_string + "===ランキング戦===\n",
                                                "竜王戦",
@@ -90,9 +90,11 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
             feeds_i.append(feed_5)
         else:
             org_tree_normal = ryuou_old.get_x_group_normal_tree(iteration, i)
-            org_tree_promo = ryuou_old.get_x_group_promo_round_tree(iteration, i)
-            s = seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
-            s.assign_seed()
+            org_tree_promo, org_tree_promo_irregular = ryuou_old.get_x_group_promo_round_tree(iteration, i)
+            seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
+            if org_tree_promo_irregular is not None:
+                irregular_promo_dict[i] = True
+                seeds_out_in.Seed(-1, [org_tree_promo, ], [org_tree_promo_irregular, ], number_list)
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                f"=={i}組==\n" + legend_string + "===ランキング戦===\n",
                                                "竜王戦",
@@ -111,6 +113,16 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                               "")
             feeds_i.append(feed_normal)
             feeds_i.append(feed_promo)
+            if org_tree_promo_irregular is not None:
+                feed_promo_irregular = table_feed.TableFeed(org_tree_promo_irregular,
+                                                            "===昇級者決定戦(5位)===\n",
+                                                            "竜王戦",
+                                                            iteration,
+                                                            i == 6,
+                                                            False,
+                                                            "△",
+                                                            "")
+                feeds_i.append(feed_promo_irregular)
         if i != 0:
             a, b, c = ryuou_old.get_x_group_remain_war_trees(iteration, i)
             if a is None:
@@ -239,6 +251,11 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
         for winner in feeds_x[i][1].tree.get_winners():
             winner_dict[winner.id] = "昇級"
         seeds_out_in.Seed(5, [feeds_x[i][1].tree, ], [], [], [], winner_dict)
+        if i in irregular_promo_dict.keys() and irregular_promo_dict[i]:
+            winner_dict2 = dict()
+            for winner in feeds_x[i][2].tree.get_winners():
+                winner_dict2[winner.id] = "昇級"
+            seeds_out_in.Seed(5, [feeds_x[i][2].tree, ], [], [], [], winner_dict2)
     challenge_dict = dict()
     for kishi in tree_0.get_winners():
         challenge_dict[kishi.id] = "挑戦者"

@@ -1,4 +1,5 @@
-from metastruct import tree_node, kishi_data
+from datetime import date
+from metastruct import tree_node, league_info
 
 
 def generate_lea_pos(match_db: list,
@@ -41,12 +42,15 @@ def generate_lea_pos(match_db: list,
     kishi_wins_output = dict()
     kishi_draws_output = dict()
     kishi_loses_output = dict()
+    kishi_last_match_date = dict()
+    kishi_league_information = []
     for kishi in participants:
         all_kishi_output[kishi] = []
         all_kishi_output_len[kishi] = []
         kishi_wins_output[kishi] = 0
         kishi_draws_output[kishi] = 0
         kishi_loses_output[kishi] = 0
+        kishi_last_match_date[kishi] = date.fromisoformat("1900-01-01")
         for i in range(len(round_names)):  # query match
             this_nodes = [node for node in node_db[round_names[i]]]
             node_contains_self = None
@@ -70,6 +74,8 @@ def generate_lea_pos(match_db: list,
                     kishi_draws_output[kishi] += 1
                 else:
                     kishi_loses_output[kishi] += 1
+                kishi_last_match_date[kishi] = max(kishi_last_match_date[kishi],
+                                                   node_contains_self.series[0].match_date)
             else:
                 this_cell_output = "－－－"
                 this_cell_output_len = 3
@@ -83,6 +89,16 @@ def generate_lea_pos(match_db: list,
                                          (- 99) if (x.id not in junni_dict.keys()) else (- junni_dict[x.id]),
                                          - x.id), reverse=True)
     for kishi in participants:
-        print(kishi.fullname + ":", all_kishi_output[kishi], all_kishi_output_len[kishi],
-              kishi_wins_output[kishi], kishi_draws_output[kishi], kishi_loses_output[kishi])
-    return []
+        kishi_league_information.append(league_info.LeagueInfo(
+            kishi,
+            len(round_names),
+            all_kishi_output[kishi],
+            all_kishi_output_len[kishi],
+            kishi_wins_output[kishi],
+            kishi_draws_output[kishi],
+            kishi_loses_output[kishi],
+            kishi_last_match_date[kishi]
+        ))
+    for info in kishi_league_information:
+        print(info)
+    return kishi_league_information

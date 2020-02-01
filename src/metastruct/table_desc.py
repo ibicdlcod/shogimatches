@@ -49,7 +49,7 @@ class TableDesc:
             str(self.border_up),
             str(self.border_right),
             str(self.border_down),
-            str(self.border_left)
+            str(self.border_left),
         ]
         return ",".join(out_str_item)
 

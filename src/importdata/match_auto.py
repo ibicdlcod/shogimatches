@@ -2,9 +2,9 @@ from datetime import date
 from metastruct import match_data
 import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
+import time
 import urllib.request
 import urllib.error
-import time
 
 
 def str_to_match(in_str: str) -> match_data.Match:
@@ -123,7 +123,7 @@ def match_to_sql(in_match_list: list) -> None:
         if conn.is_connected():
             gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
-                print('Connected to MySQL database')
+                print('Exporting matches to MySQL database')
 
         cursor = conn.cursor()
         query_use = "USE shogi;"

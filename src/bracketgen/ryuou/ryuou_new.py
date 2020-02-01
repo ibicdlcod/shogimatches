@@ -1,6 +1,7 @@
-from bracketgen import title_match, str_list, ryuou_old, gen_round_name
-from metastruct import organized_tr, seeds_out_in, table_feed
+from bracketgen import title_match, str_list, gen_round_name
+from bracketgen.ryuou import ryuou_common
 from importdata import sql_read
+from metastruct import organized_tr, seeds_out_in, table_feed
 
 
 def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
@@ -47,10 +48,10 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                           "")
             feeds_i.append(feed_0)
         elif i == 1:
-            org_tree_normal = ryuou_old.get_x_group_normal_tree(iteration, 1)
-            org_tree_3 = ryuou_old.get_1_group_appear_round_tree(iteration, 3)
-            org_tree_4 = ryuou_old.get_1_group_appear_round_tree(iteration, 4)
-            org_tree_5 = ryuou_old.get_1_group_appear_round_tree(iteration, 5)
+            org_tree_normal = ryuou_common.get_x_group_normal_tree(iteration, 1)
+            org_tree_3 = ryuou_common.get_1_group_appear_round_tree(iteration, 3)
+            org_tree_4 = ryuou_common.get_1_group_appear_round_tree(iteration, 4)
+            org_tree_5 = ryuou_common.get_1_group_appear_round_tree(iteration, 5)
             seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_3, org_tree_4, org_tree_5, ], letter_list)
             feed_normal = table_feed.TableFeed(org_tree_normal,
                                                "==1組==\n" + legend_string + "===ランキング戦===\n",
@@ -89,8 +90,8 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
             feeds_i.append(feed_4)
             feeds_i.append(feed_5)
         else:
-            org_tree_normal = ryuou_old.get_x_group_normal_tree(iteration, i)
-            org_tree_promo, org_tree_promo_irregular = ryuou_old.get_x_group_promo_round_tree(iteration, i)
+            org_tree_normal = ryuou_common.get_x_group_normal_tree(iteration, i)
+            org_tree_promo, org_tree_promo_irregular = ryuou_common.get_x_group_promo_round_tree(iteration, i)
             seeds_out_in.Seed(-2, [org_tree_normal, ], [org_tree_promo, ], letter_list)
             if org_tree_promo_irregular is not None:
                 irregular_promo_dict[i] = True
@@ -124,7 +125,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                                             "")
                 feeds_i.append(feed_promo_irregular)
         if i != 0:
-            a, b, c = ryuou_old.get_x_group_remain_war_trees(iteration, i)
+            a, b, c = ryuou_common.get_x_group_remain_war_trees(iteration, i)
             if a is None:
                 if i != 6:
                     if feed_promo is not None:

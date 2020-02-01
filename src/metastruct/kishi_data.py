@@ -1,11 +1,11 @@
 from datetime import date
-from metastruct import kishi_rank_sql
 from importdata import former_meijin
+from metastruct import kishi_rank_sql
 import mysql.connector
 import importdata.python_mysql_dbconf as db_conf
+import time
 import urllib.request
 import urllib.error
-import time
 
 
 class Kishi:

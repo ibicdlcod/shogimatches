@@ -1,5 +1,5 @@
-import hashlib
 from datetime import date
+import hashlib
 import mysql.connector
 import importdata.python_mysql_dbconf as db_conf
 

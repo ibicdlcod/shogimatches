@@ -14,6 +14,14 @@ class Seed:
                  character_set_out: list = None,
                  seed_dict: dict = None):
         self.seed_type = seed_type
+        """
+        (1: left champion only -> right, left_names, right_names,
+        (2: left runner up only -> right, left_names, right_names,
+        (-1: all left losers -> right, left_names, right_names,
+        (-2: all losers except runner up -> right, left_names, right_names,
+        (0: none -> right, right_names (used for initial seed)
+        (5: left -> none, left_names (used for relegation/challenge)
+        """
         self.left_tree_list = left_tree_list
         self.right_tree_list = right_tree_list
         self.character_set = character_set

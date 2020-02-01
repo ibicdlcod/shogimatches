@@ -1,5 +1,6 @@
 from datetime import date
 from importdata import sql_read
+import gen_config
 import importdata.python_mysql_dbconf as db_conf
 import mysql.connector
 
@@ -78,7 +79,7 @@ meijin_end_dates = dict()
 meijin_end_dates[12] = date.fromisoformat("1901-04-01")
 meijin_winners = {12: None}
 
-gen_conf = db_conf.read_general_config()
+gen_conf = gen_config.read_primary_config()
 if gen_conf["renew_former_table"] == "True":
     print('Renew former meijin/ryuou table')
     for i in range(1, 9):

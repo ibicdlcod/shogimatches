@@ -5,7 +5,7 @@ import mysql.connector
 
 def process_txt():
     kishi_db = []
-    infile_name = "..\\txt_src\\names.txt"
+    infile_name = "txt_src\\names.txt"
     infile = open(infile_name, 'r', encoding="utf-8-sig")
     content = infile.readline()
     while content:
@@ -26,7 +26,7 @@ def process_txt():
 
 def process_more_txt(source_name: str) -> list:
     returns = []
-    infile_name1 = f"..\\txt_src\\{source_name}.txt"
+    infile_name1 = f"txt_src\\{source_name}.txt"
     infile1 = open(infile_name1, 'r', encoding="utf-8-sig")
     line1 = infile1.readline()
     while line1:
@@ -75,7 +75,7 @@ def sql_connect(insert_first: bool = False,
         if conn.is_connected():
             gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
-                print('Connected to MySQL database')
+                print('Exporting Kishi from text to MySQL database')
 
         cursor = conn.cursor()
         cursor.execute(query_establish, args_establish, multi=True)

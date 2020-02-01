@@ -16,7 +16,7 @@ def read_kishi() -> list:
         if conn.is_connected():
             gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
-                print('Connected to MySQL database')
+                print('Importing Kishi from MySQL database')
 
         cursor = conn.cursor()
 
@@ -61,7 +61,7 @@ def read_match(tournament_name: str, iteration: str,
         if conn.is_connected():
             gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
-                print('Connected to MySQL database')
+                print('Importing match from MySQL database')
 
         cursor = conn.cursor()
         if detail1 is None:  # only temporary matches have detail1 = "" which is ignored

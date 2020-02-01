@@ -16,7 +16,7 @@ def read_round(tournament_name: str, iteration: str,
         if conn.is_connected():
             gen_conf = db_conf.read_general_config()
             if gen_conf["sql_output"] == "True":
-                print('Connected to MySQL database')
+                print('Importing round names from MySQL database')
 
         cursor = conn.cursor()
 

@@ -136,6 +136,24 @@ def kishi_from_str(in_str: str):
 
 
 def query_kishi_from_name(in_name: str) -> Kishi:
+    if in_name == "高野秀行":
+        in_name = "髙野秀行"
+    elif in_name == "高崎一生":
+        in_name = "髙﨑一生"
+    elif in_name == "高見泰地":
+        in_name = "髙見泰地"
+    elif in_name == "高野智史":
+        in_name = "髙野智史"
+    elif in_name == "平藤真吾":
+        in_name = "平藤眞吾"
+    elif in_name == "広津久雄":
+        in_name = "廣津久雄"
+    elif in_name == "松田茂行":
+        in_name = "松田茂役"
+    elif in_name == "森&#38622;二":
+        in_name = "森雞二"
+    elif in_name == "田中正之":
+        in_name = "田中魁秀"
     db_config = db_conf.read_db_config()
     conn = None
     result = None

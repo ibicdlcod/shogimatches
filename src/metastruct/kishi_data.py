@@ -154,6 +154,8 @@ def query_kishi_from_name(in_name: str) -> Kishi:
         in_name = "森雞二"
     elif in_name == "田中正之":
         in_name = "田中魁秀"
+    elif in_name == "吉田正和":
+        in_name = "渡辺正和"
     db_config = db_conf.read_db_config()
     conn = None
     result = None

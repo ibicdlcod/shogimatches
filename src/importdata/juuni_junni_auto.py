@@ -1,4 +1,4 @@
-from metastruct import kishi_data
+from metastruct import kishi_data, junni_info
 import time
 import urllib.request
 import urllib.error
@@ -47,26 +47,39 @@ def import_junni(iteration: int) -> list:
 
 
 def process_junni_html_all(in_str, iteration):
+    result_list = []
+    meijin_scroll_body_start = in_str.find('class="champ">')
+    meijin_scroll_body_end = in_str.find('</td>', meijin_scroll_body_start)
+    content = in_str[meijin_scroll_body_start:meijin_scroll_body_end]
+    result_list += process_junni_html_meijin(content, iteration)
+
     a_scroll_body_start = in_str.find("<!--Ａ級-->")
     a_scroll_body_end = in_str.find("<!--スペース-->", a_scroll_body_start)
     content = in_str[a_scroll_body_start:a_scroll_body_end]
-    process_junni_html(content, iteration, "A")
+    result_list += process_junni_html(content, iteration, "A")
     b1_scroll_body_start = in_str.find("<!--Ｂ級１組-->")
     b1_scroll_body_end = in_str.find("<!--スペース-->", b1_scroll_body_start)
     content = in_str[b1_scroll_body_start:b1_scroll_body_end]
-    process_junni_html(content, iteration, "B1")
+    result_list += process_junni_html(content, iteration, "B1")
     b2_scroll_body_start = in_str.find("<!--Ｂ級２組-->")
     b2_scroll_body_end = in_str.find("<!--スペース-->", b2_scroll_body_start)
     content = in_str[b2_scroll_body_start:b2_scroll_body_end]
-    process_junni_html(content, iteration, "B2")
+    result_list += process_junni_html(content, iteration, "B2")
     c1_scroll_body_start = in_str.find("<!--Ｃ級１組-->")
     c1_scroll_body_end = in_str.find("<!--スペース-->", c1_scroll_body_start)
     content = in_str[c1_scroll_body_start:c1_scroll_body_end]
-    process_junni_html(content, iteration, "C1")
+    result_list += process_junni_html(content, iteration, "C1")
     c2_scroll_body_start = in_str.find("<!--Ｃ級２組-->")
     c2_scroll_body_end = in_str.find("<!--スペース-->", c2_scroll_body_start)
     content = in_str[c2_scroll_body_start:c2_scroll_body_end]
-    process_junni_html(content, iteration, "C2")
+    result_list += process_junni_html(content, iteration, "C2")
+
+    if iteration >= 53:
+        fc_scroll_body_start = in_str.find("<!--フリークラス-->")
+        fc_scroll_body_end = in_str.find("<!--貼り付けここまで-->", fc_scroll_body_start)
+        content = in_str[fc_scroll_body_start:fc_scroll_body_end]
+        result_list += process_junni_html_fc(content, iteration)
+    print(result_list)
 
 
 def process_junni_html(in_str, iteration, tier):
@@ -75,8 +88,9 @@ def process_junni_html(in_str, iteration, tier):
     # content = in_str[a_scroll_body_start:a_scroll_body_end]
     contents = in_str.split("</tr>")
     real_contents = []
+    result_list = []
     for row in contents:
-        if row.find("</td><td") != -1 and row.find("年度</td>") == -1:
+        if row.find("</td><td") != -1:
             real_contents.append(row)
     # 棋士名：寻找title="再找">
     for i in range(len(real_contents)):
@@ -86,61 +100,16 @@ def process_junni_html(in_str, iteration, tier):
 
         kishi_name_index = real_row.find('title="')
         kishi_name_index = real_row.find('">', kishi_name_index) + 2
-        real_kishi = None
         if kishi_name_index == 1:
             real_kishi = None
         else:
             kishi_name = real_row[kishi_name_index]
-            while (kishi_data.query_kishi_from_name(kishi_name) is None
-                   and (kishi_data.query_kishi_from_name(kishi_name.replace("高", "髙").replace("崎", "﨑")) is None)
-                   and (kishi_data.query_kishi_from_name(kishi_name.replace("真", "眞")) is None
-                   and (kishi_data.query_kishi_from_name(kishi_name.replace("広", "廣")) is None)
-                   and (kishi_data.query_kishi_from_name(kishi_name.replace("行", "役")) is None)
-                   and (kishi_data.query_kishi_from_name(kishi_name.replace("&#38622;", "雞")) is None)
-                   and (kishi_data.query_kishi_from_name(kishi_name.replace("正之", "魁秀")) is None))
-                   ):
+            while kishi_data.query_kishi_from_name(kishi_name) is None:
                 kishi_name_index += 1
                 if real_row[kishi_name_index] != '　':
                     kishi_name += real_row[kishi_name_index]
             real_kishi_name = kishi_name
-            if real_kishi_name.find("高") != -1:
-                real_kishi_1 = kishi_data.query_kishi_from_name(kishi_name.replace("高", "髙").replace("崎", "﨑"))
-                if real_kishi_1 is not None:
-                    real_kishi = real_kishi_1
-                else:
-                    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
-            elif real_kishi_name.find("真") != -1:
-                real_kishi_2 = kishi_data.query_kishi_from_name(kishi_name.replace("真", "眞"))
-                if real_kishi_2 is not None:
-                    real_kishi = real_kishi_2
-                else:
-                    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
-            elif real_kishi_name.find("広") != -1:
-                real_kishi_3 = kishi_data.query_kishi_from_name(kishi_name.replace("広", "廣"))
-                if real_kishi_3 is not None:
-                    real_kishi = real_kishi_3
-                else:
-                    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
-            elif real_kishi_name.find("行") != -1:  # 松田茂役
-                real_kishi_4 = kishi_data.query_kishi_from_name(kishi_name.replace("行", "役"))
-                if real_kishi_4 is not None:
-                    real_kishi = real_kishi_4
-                else:
-                    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
-            elif real_kishi_name.find("&#38622;") != -1:
-                real_kishi_5 = kishi_data.query_kishi_from_name(kishi_name.replace("&#38622;", "雞"))
-                if real_kishi_5 is not None:
-                    real_kishi = real_kishi_5
-                else:
-                    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
-            elif real_kishi_name.find("正之") != -1:
-                real_kishi_6 = kishi_data.query_kishi_from_name(kishi_name.replace("正之", "魁秀"))
-                if real_kishi_6 is not None:
-                    real_kishi = real_kishi_6
-                else:
-                    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
-            else:
-                real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
+            real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
 
         relegation_point_added = False
         if real_row.find("▼") != -1:
@@ -179,17 +148,155 @@ def process_junni_html(in_str, iteration, tier):
             result = "dead"
 
         if real_kishi is not None:
-            # print(iteration, tier, i + 1,
-            #       real_kishi.fullname,
-            #       relegation_point_added,
-            #       current_relegation_point,
-            #       result)
-            pass
-        else:
             print(iteration,
                   tier,
                   i + 1,
-                  "None",
+                  real_kishi.fullname,
                   relegation_point_added,
                   current_relegation_point,
-                  result)
+                  result,
+                  None)
+            result_list.append(junni_info.JunniInfo(
+                iteration,
+                tier,
+                i + 1,
+                real_kishi,
+                relegation_point_added,
+                current_relegation_point,
+                result,
+                None
+            ))
+        else:
+            pass
+    return result_list
+
+
+def process_junni_html_fc(in_str, iteration):
+    contents = in_str.split("</tr>")
+    real_contents1 = []
+    real_contents2 = []
+    part_1_flag = False
+    part_2_flag = False
+    result_list = []
+
+    for row in contents:
+        if row.find("転出年度") != -1:
+            part_1_flag = True
+        elif row.find("編入年度") != -1:
+            part_1_flag = False
+            part_2_flag = True
+        elif row.find("</td><td") != -1:
+            if part_1_flag:
+                real_contents1.append(row)
+            elif part_2_flag:
+                real_contents2.append(row)
+    for i in range(len(real_contents1)):
+        real_row = real_contents1[i]
+
+        if real_row.find('">') != -1:
+            kishi_name_index = real_row.find('">') + 2
+        elif real_row.find('<tr><td>') == -1:
+            continue
+        else:
+            kishi_name_index = real_row.find('<tr><td>') + 8
+        kishi_name = real_row[kishi_name_index]
+        while kishi_data.query_kishi_from_name(kishi_name) is None:
+            kishi_name_index += 1
+            if real_row[kishi_name_index] != '　':
+                kishi_name += real_row[kishi_name_index]
+        real_kishi_name = kishi_name
+        real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
+        kishi_year_index = real_row.find('</td><td>', kishi_name_index) + 9
+
+        print(iteration,
+              "FC",
+              0,
+              real_kishi.fullname,
+              False,
+              0,
+              "f_announce",
+              int(real_row[kishi_year_index:kishi_year_index + 4])
+              )
+        result_list.append(junni_info.JunniInfo(
+            iteration,
+            "FC",
+            0,
+            real_kishi,
+            False,
+            0,
+            "f_announce",
+            int(real_row[kishi_year_index:kishi_year_index + 4])
+        ))
+
+    for i in range(len(real_contents2)):
+        real_row = real_contents2[i]
+
+        if real_row.find('">') != -1:
+            kishi_name_index = real_row.find('">') + 2
+        elif real_row.find('<tr><td>') == -1:
+            continue
+        else:
+            kishi_name_index = real_row.find('<tr><td>') + 8
+        kishi_name = real_row[kishi_name_index]
+        while kishi_data.query_kishi_from_name(kishi_name) is None:
+            kishi_name_index += 1
+            if real_row[kishi_name_index] != '　':
+                kishi_name += real_row[kishi_name_index]
+        real_kishi_name = kishi_name
+        real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
+        kishi_year_index = real_row.find('</td><td>', kishi_name_index) + 9
+
+        print(iteration,
+              "FC",
+              0,
+              real_kishi.fullname,
+              False,
+              0,
+              "f_relegated",
+              int(real_row[kishi_year_index:kishi_year_index + 4])
+              )
+        result_list.append(junni_info.JunniInfo(
+            iteration,
+            "FC",
+            0,
+            real_kishi,
+            False,
+            0,
+            "f_relegated",
+            int(real_row[kishi_year_index:kishi_year_index + 4])
+        ))
+    return result_list
+
+
+def process_junni_html_meijin(in_str, iteration):
+    real_row = in_str[14:]
+    result_list = []
+
+    kishi_name_index = 0
+    kishi_name = real_row[kishi_name_index]
+    while kishi_data.query_kishi_from_name(kishi_name) is None:
+        kishi_name_index += 1
+        if real_row[kishi_name_index] != '　':
+            kishi_name += real_row[kishi_name_index]
+    real_kishi_name = kishi_name
+    real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
+    print(iteration + 1,
+          "M",
+          0,
+          real_kishi.fullname,
+          False,
+          0,
+          "normal",
+          None
+          )
+    result_list.append(junni_info.JunniInfo(
+        iteration + 1,
+        "M",
+        0,
+        real_kishi,
+        False,
+        0,
+        "normal",
+        None
+    ))
+    return result_list

@@ -84,7 +84,7 @@ def read_round(tournament_name: str, iteration: str,
         round_db.sort(key=lambda x: round_name_value(x), reverse=not league)
         gen_conf = db_conf.read_general_config()
         if gen_conf["sql_output"] == "True":
-            print(f"Reading Match data of {tournament_name} iteration {iteration}"
+            print(f"Reading Round data of {tournament_name} iteration {iteration}"
                   f" detail1:{detail1}, detail2:{detail2}, detail3:{detail3} complete")
         return round_db
 

@@ -1,8 +1,6 @@
-# create user 'shogi'@'localhost' identified by 'password';
-# alter user 'shogi'@'localhost' identified by 'password' password expire never;
-# alter user 'shogi'@'localhost' identified with mysql_native_password by 'tomokanishiyama';
-# select Host,User,plugin from mysql.user;
-# grant all on shogi.* to 'shogi'@'localhost';
+alter user 'root'@'localhost' identified by 'password' password expire never;
+alter user 'root'@'localhost' identified with mysql_native_password by 'example';
+select Host,User,plugin from mysql.user
 
 create user 'shogi'@'%' identified by 'password';
 alter user 'shogi'@'%' identified by 'password' password expire never;

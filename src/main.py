@@ -1,5 +1,6 @@
-from importdata import former_meijin, kishi_all
-from bracketgen.ryuou import ryuou_new, ryuou_old, ryuou_template, ryuou_write
+from bracketgen import lea_from_mat, gen_round_name
+from bracketgen.ryuou import ryuou_write
+from importdata import kishi_all, sql_read
 import gen_config
 
 if __name__ == '__main__':
@@ -15,5 +16,10 @@ if __name__ == '__main__':
             outfile.write(str(i) + "\n")
         outfile.close()
 
-    former_meijin.import_former_meijin()
-    ryuou_write.ryuou_output(18, 20)
+    ryuou_conf = gen_config.read_primary_config('config\\config.ini', 'ryuou')
+    if ryuou_conf["enabled"] == "True":
+        ryuou_write.ryuou_output(int(ryuou_conf["start_iter"]), int(ryuou_conf["end_iter"]))
+
+    junni_matches = sql_read.read_match("順位戦", "第77期", "C級2組")
+    junni_round = gen_round_name.read_round("順位戦", "第77期", "C級2組", league=True)
+    lea_from_mat.generate_lea_pos(junni_matches, None, junni_round, "C級2組")

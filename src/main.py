@@ -24,6 +24,8 @@ if __name__ == '__main__':
         ryuou_write.ryuou_output(int(ryuou_conf["start_iter"]), int(ryuou_conf["end_iter"]))
 
     for i in range(9, 78):
+        if i in range(31, 36):
+            continue
         junni.generate_junni_table(i)
     # no detail3 until 37期
     # data for 8期 is incomplete

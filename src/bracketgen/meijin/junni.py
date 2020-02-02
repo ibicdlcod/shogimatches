@@ -13,17 +13,18 @@ for i in range(7, 78):
 
 def generate_junni_table(iteration_int: int):
     iteration_str = f"第{str(iteration_int).zfill(2)}期"
+    iteration_int_prev = (iteration_int - 1) if iteration_int != 36 else 30
     junni_info_list = junni_info.junni_info_from_sql(iteration_int)
-    junni_info_list_prev = junni_info.junni_info_from_sql(iteration_int - 1)
+    junni_info_list_prev = junni_info.junni_info_from_sql(iteration_int_prev)
     junni_info_dict = dict()
     junni_info_full_dict = dict()
-    junni_info_dict_prev = dict()
+    junni_junni_dict_prev = dict()
     junni_tier_dict_prev = dict()
     for junni_info_item in junni_info_list:
         junni_info_dict[junni_info_item.kishi.id] = junni_info_item.junni
         junni_info_full_dict[junni_info_item.kishi.id] = junni_info_item
     for junni_info_item in junni_info_list_prev:
-        junni_info_dict_prev[junni_info_item.kishi.id] = junni_info_item.junni
+        junni_junni_dict_prev[junni_info_item.kishi.id] = junni_info_item.junni
         junni_tier_dict_prev[junni_info_item.kishi.id] = junni_info_item.tier
 
     junni_matches_a = sql_read.read_match("順位戦", iteration_str, "A級", "")
@@ -58,14 +59,17 @@ def generate_junni_table(iteration_int: int):
     for league_info in league_info_db:
         this_id = league_info.kishi.id
         print(str(iteration_int),
+              junni_info_full_dict[this_id].tier,
               str(junni_info_full_dict[this_id].junni),
               league_info.kishi.fullname,
               league_info.kishi.rank(league_info.last_match_date)[0],
               str(league_info.kishi.rank(league_info.last_match_date)[1]),
               str(kishi_data.rank_to_int(league_info.kishi.rank(league_info.last_match_date)[0])),
-              str(win_dicts_dict[iteration_int-1][this_id] if this_id in win_dicts_dict[iteration_int-1] else 0),
-              str(loss_dicts_dict[iteration_int-1][this_id] if this_id in loss_dicts_dict[iteration_int-1] else 0),
-              str(junni_info_dict_prev[this_id] if this_id in junni_info_dict_prev.keys() else 0),
+              str(win_dicts_dict[iteration_int_prev][this_id]
+                  if this_id in win_dicts_dict[iteration_int_prev] else 0),
+              str(loss_dicts_dict[iteration_int_prev][this_id]
+                  if this_id in loss_dicts_dict[iteration_int_prev] else 0),
+              str(junni_junni_dict_prev[this_id] if this_id in junni_junni_dict_prev.keys() else 0),
               str(junni_tier_dict_prev[this_id] if this_id in junni_tier_dict_prev.keys() else "N"),
               str(league_info.wins),
               str(league_info.losses),

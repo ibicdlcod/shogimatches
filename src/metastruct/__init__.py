@@ -78,7 +78,7 @@ def sql_init():
         conn = mysql.connector.MySQLConnection(**db_config)
 
         if conn.is_connected():
-            print('Initializing  MySQL database')
+            print('Initializing MySQL database')
 
         cursor = conn.cursor()
         cursor.execute(query_init_db, args_init_db, multi=True)

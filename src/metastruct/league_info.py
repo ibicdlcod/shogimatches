@@ -29,3 +29,15 @@ class LeagueInfo:
         self.draws = draws
         self.losses = losses
         self.last_match_date = last_match_date
+
+    def __str__(self) -> str:
+        out_str_item = [
+            self.kishi.fullname,
+            str(self.round_num),
+            str(self.output_details),
+            str(self.output_detail_lengths),
+            str(self.wins),
+            str(self.draws),
+            str(self.losses),
+            date.isoformat(self.last_match_date)]
+        return ",".join(out_str_item)

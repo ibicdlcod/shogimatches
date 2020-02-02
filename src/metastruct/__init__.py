@@ -104,6 +104,3 @@ def sql_init():
     finally:
         if conn is not None and conn.is_connected():
             conn.close()
-
-
-sql_init()

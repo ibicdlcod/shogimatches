@@ -127,4 +127,46 @@ def junni_info_to_sql(in_info_list: list) -> None:
 
 
 def junni_info_from_sql(iteration_int: int):
-    pass
+    db_config = db_conf.read_db_config()
+    conn = None
+    result = []
+
+    try:
+        conn = mysql.connector.MySQLConnection(**db_config)
+
+        cursor = conn.cursor(buffered=True)
+        query_use = "USE shogi;"
+        args_use = tuple()
+        cursor.execute(query_use, args_use)
+
+        query_insert = ("SELECT * FROM junni\n"
+                        "WHERE iteration_int=%s;\n")
+        args_insert = (iteration_int, )
+        cursor = conn.cursor()
+        cursor.execute(query_insert, args_insert)
+        rows = cursor.fetchall()
+        if rows is None:
+            return result
+        else:
+            for row in rows:
+                junni_info_result = JunniInfo(row[1],
+                                              row[2],
+                                              row[3],
+                                              kishi_data.query_kishi_from_id(row[4]),
+                                              row[5] == 1,
+                                              row[6],
+                                              row[7],
+                                              row[8])
+                result.append(junni_info_result)
+
+        cursor.close()
+        conn.commit()
+
+    except mysql.connector.Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+        return result
+

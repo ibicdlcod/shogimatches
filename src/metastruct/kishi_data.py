@@ -88,12 +88,12 @@ class Kishi:
                     html = response.read()
                 html_str = str(html, encoding="utf-8-sig")
                 index1 = html_str.find(f"person.php?name={self.id}\"")
-                index2 = html_str.find(">", index1+8)
-                index3 = [i for i in range(index2, index2+100)
+                index2 = html_str.find(">", index1 + 8)
+                index3 = [i for i in range(index2, index2 + 100)
                           if html_str[i] == "<"
                           or html_str[i] == "("
                           or html_str[i] == "・"][0]
-                if html_str[index3] == "・" and html_str[index3-2] == "竜" and html_str[index3-3] == " ":
+                if html_str[index3] == "・" and html_str[index3 - 2] == "竜" and html_str[index3 - 3] == " ":
                     result = "竜王名人"
                 else:
                     result = html_str[index2 + 2 + len(self.fullname):index3]
@@ -261,3 +261,70 @@ def query_kishi_from_id(in_id: int) -> Kishi:
         if conn is not None and conn.is_connected():
             conn.close()
         return result
+
+
+dict_rank_to_int = {
+    "<small>竜王名人</small>": 100,
+    "竜王": 99,
+    "名人": 98,
+    "五冠": 95,
+    "四冠": 94,
+    "三冠": 93,
+    "二冠": 92,
+    "十段": 89,
+    "叡王": 88,
+    "王位": 87,
+    "王座": 86,
+    "棋王": 85,
+    "王将": 84,
+    "棋聖": 83,
+    "前名人": 82,
+    "前竜王": 81,
+    "<small>十四世名人</small>": 79,
+    "<small>十五世名人</small>": 78,
+    "<small>十六世名人</small>": 77,
+    "<small>永世十段</small>": 71,
+    "<small>名誉十段</small>": 70,
+    "<small>実力制第四代名人</small>": 67,
+    "<small>永世王位</small>": 66,
+    "<small>名誉王座</small>": 65,
+    "<small>永世棋王</small>": 64,
+    "<small>永世王将</small>": 63,
+    "<small>永世棋聖</small>": 62,
+    "<small>名誉名人</small>": 61,
+    "九段": 60,
+    "<small>名誉九段</small>": 59,
+    "八段": 58,
+    "七段": 57,
+    "六段": 56,
+    "五段": 55,
+    "四段": 54,
+    "<small>女流六冠</small>": 46,
+    "<small>女流五冠</small>": 45,
+    "<small>女流四冠</small>": 44,
+    "<small>女流三冠</small>": 43,
+    "<small>女流二冠</small>": 42,
+    "清麗": 39,
+    "女王": 38,
+    "<small>女流王座</small>": 37,
+    "<small>女流名人</small>": 36,
+    "<small>女流王位</small>": 35,
+    "<small>女流王将</small>": 34,
+    "<small>倉敷藤花</small>": 33,
+    "<small>女流六段</small>": 27,
+    "<small>女流五段</small>": 26,
+    "<small>女流四段</small>": 25,
+    "三段": 24,
+    "<small>女流三段</small>": 23,
+    "<small>女流二段</small>": 22,
+    "<small>女流初段</small>": 21,
+    "<small>女流1級</small>": 19,
+    "<small>女流2級</small>": 18,
+    "<small>女流3級</small>": 17,
+    "アマ": 1,
+    "": 0,
+}
+
+
+def rank_to_int(in_str):
+    return dict_rank_to_int[in_str]

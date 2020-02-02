@@ -68,10 +68,10 @@ def generate_lea_pos(match_db: list,
                 this_cell_output = icon_str_list[0] + opponent_display_name
                 this_cell_output_len = length + len(opponent_display_name)
                 winner = node_contains_self.winner()
-                if winner == kishi:
-                    kishi_wins_output[kishi] += 1
-                elif winner is None:
+                if winner is None:
                     kishi_draws_output[kishi] += 1
+                elif winner == kishi:
+                    kishi_wins_output[kishi] += 1
                 else:
                     kishi_loses_output[kishi] += 1
                 kishi_last_match_date[kishi] = max(kishi_last_match_date[kishi],
@@ -99,6 +99,4 @@ def generate_lea_pos(match_db: list,
             kishi_loses_output[kishi],
             kishi_last_match_date[kishi]
         ))
-    for info in kishi_league_information:
-        print(info)
     return kishi_league_information

@@ -79,8 +79,6 @@ def process_junni_html_all(in_str, iteration):
         fc_scroll_body_end = in_str.find("<!--貼り付けここまで-->", fc_scroll_body_start)
         content = in_str[fc_scroll_body_start:fc_scroll_body_end]
         result_list += process_junni_html_fc(content, iteration)
-    for result in result_list:
-        print(result)
     junni_info.junni_info_to_sql(result_list)
     return result_list
 
@@ -160,6 +158,7 @@ def process_junni_html(in_str, iteration, tier):
             ))
         else:
             pass
+
     return result_list
 
 

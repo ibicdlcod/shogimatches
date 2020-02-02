@@ -110,24 +110,24 @@ def generate_junni_table(iteration_int: int):
                                   + "|"
                                   + this_kishi.fullname
                                   + "]]")
-        print(str(iteration_int),
-              this_junni_info.tier,
-              (f"{this_junni_info.junni}({this_junni_info.current_relegation_point})"
-               if this_junni_info.current_relegation_point != 0
-               else f"{this_junni_info.junni}"),
-              kishi_display_name,
-              display_length,
-              "{{Sort|%d|%s}}" % (kishi_data.rank_to_int(this_rank[0]), this_rank[0]),
-              str(this_rank[1]),
-              age,
-              f"{prev_wins}-{prev_losses}({prev_junni}/{prev_tier})",
-              str(league_info.wins),
-              str(league_info.losses),
-              this_junni_info.relegation_point_added,
-              this_junni_info.result,
-              this_junni_info.to_fc_year,
-              sep="\t"
-              )
+        result_list_list.append([
+            str(iteration_int),
+            this_junni_info.tier,
+            (f"{this_junni_info.junni}({this_junni_info.current_relegation_point})"
+             if this_junni_info.current_relegation_point != 0
+             else f"{this_junni_info.junni}"),
+            kishi_display_name,
+            display_length,
+            "{{Sort|%d|%s}}" % (kishi_data.rank_to_int(this_rank[0]), this_rank[0]),
+            this_rank[1],
+            age,
+            f"{prev_wins}-{prev_losses}({prev_junni}/{prev_tier})",
+            str(league_info.wins),
+            str(league_info.losses),
+            this_junni_info.relegation_point_added,
+            this_junni_info.result,
+            this_junni_info.to_fc_year,
+        ])
         win_dicts_dict[iteration_int][this_id] = league_info.wins
         loss_dicts_dict[iteration_int][this_id] = league_info.losses
     for this_kishi in junni_participants:
@@ -154,24 +154,49 @@ def generate_junni_table(iteration_int: int):
                        if this_id in loss_dicts_dict[iteration_int_prev].keys() else 0)
         prev_junni = junni_junni_dict_prev[this_id] if this_id in junni_junni_dict_prev.keys() else 0
         prev_tier = junni_tier_dict_prev[this_id] if this_id in junni_tier_dict_prev.keys() else "N"
-        print(str(iteration_int),
-              this_junni_info.tier,
-              (f"{this_junni_info.junni}({this_junni_info.current_relegation_point})"
-               if this_junni_info.current_relegation_point != 0
-               else f"{this_junni_info.junni}"),
-              kishi_display_name,
-              display_length,
-              "{{Sort|%d|%s}}" % (kishi_data.rank_to_int(this_rank[0]), this_rank[0]),
-              str(this_rank[1]),
-              age,
-              f"{prev_wins}-{prev_losses}({prev_junni}/{prev_tier})",
-              0,
-              0,
-              this_junni_info.relegation_point_added,
-              this_junni_info.result,
-              this_junni_info.to_fc_year,
-              sep="\t"
-              )
+        result_list_list.append([
+            str(iteration_int),
+            this_junni_info.tier,
+            (f"{this_junni_info.junni}({this_junni_info.current_relegation_point})"
+             if this_junni_info.current_relegation_point != 0
+             else f"{this_junni_info.junni}"),
+            kishi_display_name,
+            display_length,
+            "{{Sort|%d|%s}}" % (kishi_data.rank_to_int(this_rank[0]), this_rank[0]),
+            this_rank[1],
+            age,
+            f"{prev_wins}-{prev_losses}({prev_junni}/{prev_tier})",
+            0,
+            0,
+            this_junni_info.relegation_point_added,
+            this_junni_info.result,
+            this_junni_info.to_fc_year,
+            ])
+    result_a_list = []
+    result_b1_list = []
+    result_b2_list = []
+    result_c1_list = []
+    result_c2_list = []
+    result_fc_list = []
+    for result_list in result_list_list:
+        if result_list[1] == "A":
+            result_a_list.append(result_list)
+        if result_list[1] == "B1":
+            result_b1_list.append(result_list)
+        if result_list[1] == "B2":
+            result_b2_list.append(result_list)
+        if result_list[1] == "C1":
+            result_c1_list.append(result_list)
+        if result_list[1] == "C2":
+            result_c2_list.append(result_list)
+        if result_list[1] == "FC":
+            result_fc_list.append(result_list)
+    draw_table_junni(result_a_list)
+    draw_table_junni(result_b1_list)
+    draw_table_junni(result_b2_list)
+    draw_table_junni(result_c1_list)
+    draw_table_junni(result_c2_list)
+    draw_table_junni_fc(result_fc_list)
 
 
 def query_junni_info_by_kishi(in_kishi, source_list):
@@ -180,3 +205,13 @@ def query_junni_info_by_kishi(in_kishi, source_list):
             return source
     else:
         return None
+
+
+def draw_table_junni(in_list_list: list):
+    for in_list in in_list_list:
+        print(in_list)
+
+
+def draw_table_junni_fc(in_list_list: list):
+    for in_list in in_list_list:
+        print(in_list)

@@ -9,15 +9,18 @@ def generate_lea_pos(match_db: list,
     first_two_rounds = []
     node_db = dict()
     round_names_with_prefix = []
-    for round_name in round_names:
-        node_db[round_name] = []
-        round_names_with_prefix.append(round_names_prefix + round_name)
-    for match in match_db:
-        match_node = tree_node.TreeNode([match, ], )
-        match_node_index = round_names_with_prefix.index(match_node.round_num)
-        node_db[round_names[match_node_index]].append(match_node)
-        if match_node_index == 0 or match_node_index == 1:
-            first_two_rounds.append(match_node)
+    if len(round_names) == 1:
+        return gen_lea_pos_no_round_names(match_db, junni_dict, round_names_prefix)
+    else:
+        for round_name in round_names:
+            node_db[round_name] = []
+            round_names_with_prefix.append(round_names_prefix + round_name)
+        for match in match_db:
+            match_node = tree_node.TreeNode([match, ], )
+            match_node_index = round_names_with_prefix.index(match_node.round_num)
+            node_db[round_names[match_node_index]].append(match_node)
+            if match_node_index == 0 or match_node_index == 1:
+                first_two_rounds.append(match_node)
     participants = set()
     for node in first_two_rounds:
         participants.add(node.black_of_first)
@@ -92,6 +95,92 @@ def generate_lea_pos(match_db: list,
         kishi_league_information.append(league_info.LeagueInfo(
             kishi,
             len(round_names),
+            all_kishi_output[kishi],
+            all_kishi_output_len[kishi],
+            kishi_wins_output[kishi],
+            kishi_draws_output[kishi],
+            kishi_loses_output[kishi],
+            kishi_last_match_date[kishi]
+        ))
+    return kishi_league_information
+
+
+def gen_lea_pos_no_round_names(match_db: list,
+                               junni_dict: dict = None,
+                               round_names_prefix: str = None) -> list:
+    node_db = []
+    for match in match_db:
+        match_node = tree_node.TreeNode([match, ], )
+        node_db.append(match_node)
+
+    participants = set()
+    for node in node_db:
+        participants.add(node.black_of_first)
+        participants.add(node.white_of_first)
+    participants = list(participants)
+
+    kishi_surname_dict = dict()
+    for this_kishi in participants:
+        this_kishi_surname = this_kishi.fullname[:this_kishi.surname_length]
+        kishi_surname_dict[this_kishi.id] = this_kishi_surname
+    kishi_surname_dict2 = dict()
+    for this_kishi in participants:
+        this_kishi_surname = this_kishi.fullname[:this_kishi.surname_length]
+        if list(kishi_surname_dict.values()).count(this_kishi_surname) > 1:
+            this_kishi_surname2 = this_kishi.fullname[:this_kishi.surname_length + 1]
+            kishi_surname_dict2[this_kishi.id] = this_kishi_surname2
+        else:
+            kishi_surname_dict2[this_kishi.id] = kishi_surname_dict[this_kishi.id]
+
+    all_kishi_output = dict()
+    all_kishi_output_len = dict()
+    kishi_wins_output = dict()
+    kishi_draws_output = dict()
+    kishi_loses_output = dict()
+    kishi_last_match_date = dict()
+    kishi_league_information = []
+    for kishi in participants:
+        all_kishi_output[kishi] = []
+        all_kishi_output_len[kishi] = []
+        kishi_wins_output[kishi] = 0
+        kishi_draws_output[kishi] = 0
+        kishi_loses_output[kishi] = 0
+        kishi_last_match_date[kishi] = date.fromisoformat("1900-01-01")
+        nodes_contains_self = []
+        for node in node_db:
+            if node.black_of_first == kishi:
+                opponent_id = node.white_of_first.id
+                nodes_contains_self.append((node, opponent_id))
+            elif node.white_of_first == kishi:
+                opponent_id = node.black_of_first.id
+                nodes_contains_self.append((node, opponent_id))
+        nodes_contains_self.sort(key=lambda x: x[0].series[0].match_date)
+        for node in nodes_contains_self:
+            icon_str_list, length = tree_node.match_icon_for_kishi_with_length(node[0], kishi.id)
+            opponent_display_name = kishi_surname_dict2[node[1]]
+            this_cell_output = icon_str_list[0] + opponent_display_name
+            this_cell_output_len = length + len(opponent_display_name)
+            winner = node[0].winner()
+            if winner is None:
+                kishi_draws_output[kishi] += 1
+            elif winner == kishi:
+                kishi_wins_output[kishi] += 1
+            else:
+                kishi_loses_output[kishi] += 1
+            all_kishi_output[kishi].append(this_cell_output)
+            all_kishi_output_len[kishi].append(this_cell_output_len)
+        kishi_last_match_date[kishi] = max([node[0].series[0].match_date for node in nodes_contains_self])
+    if junni_dict is None:
+        participants.sort(key=lambda x: (kishi_wins_output[x], - kishi_loses_output[x], - x.id), reverse=True)
+    else:
+        participants.sort(key=lambda x: (kishi_wins_output[x],
+                                         - kishi_loses_output[x],
+                                         (- 99) if (x.id not in junni_dict.keys()) else (- junni_dict[x.id]),
+                                         - x.id), reverse=True)
+    for kishi in participants:
+        kishi_league_information.append(league_info.LeagueInfo(
+            kishi,
+            len(all_kishi_output[kishi]),
             all_kishi_output[kishi],
             all_kishi_output_len[kishi],
             kishi_wins_output[kishi],

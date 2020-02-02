@@ -65,6 +65,7 @@ def generate_junni_table(iteration_int: int):
               league_info.kishi.rank(league_info.last_match_date)[0],
               str(league_info.kishi.rank(league_info.last_match_date)[1]),
               str(kishi_data.rank_to_int(league_info.kishi.rank(league_info.last_match_date)[0])),
+              league_info.kishi.birthday(),
               str(win_dicts_dict[iteration_int_prev][this_id]
                   if this_id in win_dicts_dict[iteration_int_prev] else 0),
               str(loss_dicts_dict[iteration_int_prev][this_id]

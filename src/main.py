@@ -7,10 +7,12 @@ import gen_config
 if __name__ == '__main__':
     gen_conf = gen_config.read_primary_config()
     update_on = (gen_conf["read_update_on"] == "True")
+    birthday_on = (gen_conf["birthday_on"] == "True")
 
     if update_on:
         kishi_db = kishi_all.gen_kishi_db()
-        birthday.gen_birthday(kishi_db)
+        if birthday_on:
+            birthday.gen_birthday(kishi_db)
 
         outfile_name = "txt_src\\names2.csv"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
@@ -24,7 +26,7 @@ if __name__ == '__main__':
     if ryuou_conf["enabled"] == "True":
         ryuou_write.ryuou_output(int(ryuou_conf["start_iter"]), int(ryuou_conf["end_iter"]))
 
-    for i in range(78, 78):
+    for i in range(9, 78):
         if i in range(31, 36):
             continue
         junni.generate_junni_table(i)

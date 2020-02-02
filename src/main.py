@@ -26,7 +26,7 @@ if __name__ == '__main__':
     if ryuou_conf["enabled"] == "True":
         ryuou_write.ryuou_output(int(ryuou_conf["start_iter"]), int(ryuou_conf["end_iter"]))
 
-    for i in range(9, 78):
+    for i in range(77, 78):
         if i in range(31, 36):
             continue
         junni.generate_junni_table(i)

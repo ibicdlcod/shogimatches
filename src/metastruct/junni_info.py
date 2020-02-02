@@ -1,5 +1,7 @@
 from metastruct import kishi_data
 import hashlib
+import importdata.python_mysql_dbconf as db_conf
+import mysql.connector
 
 
 class JunniInfo:
@@ -59,55 +61,70 @@ class JunniInfo:
         return self.hash != other.hash
 
 
-# def junni_info_to_sql(in_info_list: list) -> None:
-#     """ Connect to MySQL database """
-#
-#     db_config = db_conf.read_db_config()
-#     conn = None
-#
-#     try:
-#         conn = mysql.connector.MySQLConnection(**db_config)
-#
-#         if conn.is_connected():
-#             gen_conf = db_conf.read_general_config()
-#             if gen_conf["sql_output"] == "True":
-#                 print('Exporting matches to MySQL database')
-#
-#         cursor = conn.cursor()
-#         query_use = "USE shogi;"
-#         args_use = tuple()
-#         cursor.execute(query_use, args_use)
-#
-#         print('begin porting matches')
-#
-#         query_insert = ("INSERT INTO matches(hash,fiscal_year,"
-#                         "match_date,win_loss_for_black,forfeit_active,"
-#                         "black_name,white_name,iteration,tournament_name,"
-#                         "detail1,detail2,detail3,mochishogi,sennichite)\n"
-#                         "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,"
-#                         "%s,%s,%s,%s,%s)\n"
-#                         "ON DUPLICATE KEY UPDATE fiscal_year = VALUES(fiscal_year);")
-#         for match in in_info_list:
-#             args_insert = (match.hash, match.fiscal_year, match.match_date.isoformat(),
-#                            match.win_loss_for_black, match.forfeit_active,
-#                            match.black_name, match.white_name, match.iteration,
-#                            match.tournament_name, match.detail1, match.detail2,
-#                            match.detail3, match.mochishogi, match.sennichite)
-#             cursor = conn.cursor()
-#             cursor.execute(query_insert, args_insert)
-#
-#         if cursor.lastrowid:
-#             print('last insert id', cursor.lastrowid)
-#         else:
-#             pass
-#             # print('last insert id not found')  # Expected behaviour
-#
-#         cursor.close()
-#         conn.commit()
-#
-#     except mysql.connector.Error as e:
-#         print(e)
-#
-#     finally:
-#         if conn is not None and conn.is_connected():
-#             conn.close()
+def junni_info_to_sql(in_info_list: list) -> None:
+    """ Connect to MySQL database """
+
+    db_config = db_conf.read_db_config()
+    conn = None
+
+    try:
+        conn = mysql.connector.MySQLConnection(**db_config)
+
+        if conn.is_connected():
+            gen_conf = db_conf.read_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Exporting matches to MySQL database')
+
+        cursor = conn.cursor()
+        query_use = "USE shogi;"
+        args_use = tuple()
+        cursor.execute(query_use, args_use)
+
+        print('begin porting junni')
+
+        query_insert = ("INSERT INTO junni(id_hash,iteration_int,"
+                        "tier,junni,kishi_id,relegation_point_added,"
+                        "current_relegation_point,result,to_fc_year)\n"
+                        "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)\n"
+                        "ON DUPLICATE KEY UPDATE "
+                        "iteration_int = VALUES(iteration_int), "
+                        "tier = VALUES(tier), "
+                        "junni = VALUES(junni), "
+                        "kishi_id = VALUES(kishi_id), "
+                        "relegation_point_added = VALUES(relegation_point_added), "
+                        "current_relegation_point = VALUES(current_relegation_point), "
+                        "result = VALUES(result), "
+                        "to_fc_year = VALUES(to_fc_year)"
+                        ";")
+        for info in in_info_list:
+            args_insert = (info.hash,
+                           info.iteration,
+                           info.tier,
+                           info.junni,
+                           info.kishi.id,
+                           info.relegation_point_added,
+                           info.current_relegation_point,
+                           info.result,
+                           info.to_fc_year)
+            cursor = conn.cursor()
+            cursor.execute(query_insert, args_insert)
+
+        if cursor.lastrowid:
+            print('last insert id', cursor.lastrowid)
+        else:
+            pass
+            # print('last insert id not found')  # Expected behaviour
+
+        cursor.close()
+        conn.commit()
+
+    except mysql.connector.Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+
+
+def junni_info_from_sql(iteration_int: int):
+    pass

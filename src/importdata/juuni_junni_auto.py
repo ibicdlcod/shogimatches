@@ -81,6 +81,7 @@ def process_junni_html_all(in_str, iteration):
         result_list += process_junni_html_fc(content, iteration)
     for result in result_list:
         print(result)
+    junni_info.junni_info_to_sql(result_list)
     return result_list
 
 

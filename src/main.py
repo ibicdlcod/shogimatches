@@ -22,8 +22,11 @@ if __name__ == '__main__':
     if ryuou_conf["enabled"] == "True":
         ryuou_write.ryuou_output(int(ryuou_conf["start_iter"]), int(ryuou_conf["end_iter"]))
 
-    for i in range(7, 78):
-        juuni_junni_auto.import_junni(i)
+    gen_conf = gen_config.read_primary_config()
+    if gen_conf["renew_junni_table"] == "True":
+        print('Renew former junni table')
+        for i in range(7, 78):
+            juuni_junni_auto.import_junni(i)
     # junni_matches = sql_read.read_match("順位戦", "第77期", "C級2組")
     # junni_round = gen_round_name.read_round("順位戦", "第77期", "C級2組", league=True)
     # lea_from_mat.generate_lea_pos(junni_matches, None, junni_round, "C級2組")

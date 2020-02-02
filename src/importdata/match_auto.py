@@ -68,7 +68,6 @@ def import_data(iteration: int, tournament: int) -> list:
     try_count = 0
     while try_count < 10:
         try:
-            time.sleep(1)
             print(f"Retrieving web information for tournament "
                   f"{tournament} with iteration {iteration}, please wait...")
             req = urllib.request.Request(

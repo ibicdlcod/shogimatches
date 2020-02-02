@@ -1,6 +1,6 @@
 from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
-from importdata import kishi_all, match_mass
+from importdata import kishi_all, match_mass, birthday
 import gen_config
 
 
@@ -10,6 +10,7 @@ if __name__ == '__main__':
 
     if update_on:
         kishi_db = kishi_all.gen_kishi_db()
+        birthday.gen_birthday(kishi_db)
 
         outfile_name = "txt_src\\names2.csv"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
@@ -23,7 +24,7 @@ if __name__ == '__main__':
     if ryuou_conf["enabled"] == "True":
         ryuou_write.ryuou_output(int(ryuou_conf["start_iter"]), int(ryuou_conf["end_iter"]))
 
-    for i in range(9, 78):
+    for i in range(78, 78):
         if i in range(31, 36):
             continue
         junni.generate_junni_table(i)

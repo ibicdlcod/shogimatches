@@ -1,5 +1,5 @@
 from datetime import date
-from importdata import former_meijin
+from importdata import former_meijin, birthday
 from metastruct import kishi_rank_sql
 import mysql.connector
 import importdata.python_mysql_dbconf as db_conf
@@ -129,6 +129,13 @@ class Kishi:
               f"on large number of tries.")
         return "", 0
 
+    def birthday(self):
+        db_config_1 = db_conf.read_db_config('config\\db_config.ini', "kishi_query")
+        delay = float(db_config_1["delay_birthday"])
+        if delay > 0.0:
+            time.sleep(delay)
+        return birthday.from_sql_birthday(self.id)
+
 
 def kishi_from_str(in_str: str):
     a = in_str.split(",")
@@ -224,43 +231,51 @@ def query_kishi_from_name(in_name_pri: str) -> Kishi:
         return result
 
 
-def query_kishi_from_id(in_id: int) -> Kishi:
+def query_kishi_from_id(in_id: int):
     db_config = db_conf.read_db_config()
     conn = None
-    result = None
 
-    try:
-        conn = mysql.connector.MySQLConnection(**db_config)
+    try_count = 0
+    while try_count < 10:
+        try:
+            conn = mysql.connector.MySQLConnection(**db_config)
 
-        cursor = conn.cursor(buffered=True)
-        query_use = "USE shogi;"
-        args_use = tuple()
-        cursor.execute(query_use, args_use)
+            cursor = conn.cursor(buffered=True)
+            query_use = "USE shogi;"
+            args_use = tuple()
+            cursor.execute(query_use, args_use)
 
-        query_insert = ("SELECT * FROM kishi\n"
-                        "WHERE id=%s;\n")
-        args_insert = (in_id,)
-        cursor = conn.cursor()
-        cursor.execute(query_insert, args_insert)
-        all_rows = cursor.fetchall()
-        row = all_rows[0]
-        if row is None:
-            print(f"Invalid name: kishi {in_id} does not exist")
-            result = None
-        else:
-            result = Kishi(row[0], row[1], row[2], row[3], row[4] == 1,
-                           row[5] == 1, row[6] == 1)
+            query_insert = ("SELECT * FROM kishi\n"
+                            "WHERE id=%s;\n")
+            args_insert = (in_id,)
+            cursor = conn.cursor()
+            cursor.execute(query_insert, args_insert)
+            all_rows = cursor.fetchall()
+            row = all_rows[0]
+            if row is None:
+                print(f"Invalid name: kishi {in_id} does not exist")
+            else:
+                result = Kishi(row[0], row[1], row[2], row[3], row[4] == 1,
+                               row[5] == 1, row[6] == 1)
+                cursor.close()
+                conn.commit()
+                return result
 
-        cursor.close()
-        conn.commit()
+            cursor.close()
+            conn.commit()
 
-    except mysql.connector.Error as e:
-        print(e)
+        except mysql.connector.Error as e:
+            print(e)
+            time.sleep(1)
+            try_count += 1
+            continue
 
-    finally:
-        if conn is not None and conn.is_connected():
-            conn.close()
-        return result
+        finally:
+            if conn is not None and conn.is_connected():
+                conn.close()
+    print(f"Failed to obtain kishi data of {in_id} "
+          f"on large number of tries.")
+    return None
 
 
 dict_rank_to_int = {

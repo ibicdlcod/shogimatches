@@ -12,7 +12,6 @@ def import_junni(iteration: int) -> list:
     try_count = 0
     while try_count < 10:
         try:
-            time.sleep(1)
             print(f"Retrieving web information for tournament "
                   f"順位戦 with iteration {iteration}, please wait...")
             req = urllib.request.Request(

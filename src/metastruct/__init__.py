@@ -23,6 +23,7 @@ def sql_init():
                               "woman TINYINT(1) NOT NULL DEFAULT 0,"
                               "current_shoreikai TINYINT(1) NOT NULL DEFAULT 0,"
                               "current_amateur TINYINT(1) NOT NULL DEFAULT 0,"
+                              "birthday DATE,"
                               "PRIMARY KEY (id)"
                               ");")
     args_init_kishi_table = tuple()

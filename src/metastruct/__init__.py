@@ -60,6 +60,19 @@ def sql_init():
                                "PRIMARY KEY (end_date)"
                                ");")
     args_init_former_table = tuple()
+    query_init_junni_table = ("CREATE TABLE IF NOT EXISTS junni("
+                              "id_hash BINARY(64),"
+                              "iteration_int INT,"
+                              "tier VARCHAR(63),"
+                              "junni INT,"
+                              "kishi_id INT,"
+                              "relegation_point_added TINYINT(1) NOT NULL DEFAULT 0,"
+                              "current_relegation_point INT,"
+                              "result VARCHAR(63),"
+                              "to_fc_year INT,"
+                              "PRIMARY KEY (id_hash)"
+                              ");")
+    args_init_junni_table = tuple()
 
     try:
         conn = mysql.connector.MySQLConnection(**db_config)
@@ -78,6 +91,8 @@ def sql_init():
         print("Rank table init success")
         cursor.execute(query_init_former_table, args_init_former_table)
         print("Former table init success")
+        cursor.execute(query_init_junni_table, args_init_junni_table)
+        print("Junni table init success")
 
         cursor.close()
 

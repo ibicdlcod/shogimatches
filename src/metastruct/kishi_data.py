@@ -57,6 +57,9 @@ class Kishi:
         return self.id != other.id
 
     def rank(self, query_date: date) -> tuple:
+        db_config_1 = db_conf.read_db_config('config\\db_config.ini', "kishi_query")
+        delay = float(db_config_1["delay_rank"])
+
         sql_result = kishi_rank_sql.from_sql(self.id, query_date)
         if (sql_result is not None) and sql_result.endswith("段"):
             former_ryuou_name = former_meijin.import_former_ryuou(query_date)
@@ -76,7 +79,8 @@ class Kishi:
         try_count = 0
         while try_count < 10:
             try:
-                time.sleep(0.2)
+                if delay > 0.0:
+                    time.sleep(delay)
                 print(f"Obtaining rank of {self.fullname} "
                       f"on day {query_date.isoformat()} ")
                 with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/titlecheck.php?name={self.id}"
@@ -135,27 +139,45 @@ def kishi_from_str(in_str: str):
                  )
 
 
-def query_kishi_from_name(in_name: str) -> Kishi:
-    if in_name == "高野秀行":
+kishi_name_to_kishi_dict = dict()
+
+
+def query_kishi_from_name(in_name_pri: str) -> Kishi:
+    if in_name_pri in kishi_name_to_kishi_dict.keys():
+        return kishi_name_to_kishi_dict[in_name_pri]
+
+    db_config_2 = db_conf.read_db_config('config\\db_config.ini', "sql_general")
+    if db_config_2["sql_output"] == "True":
+        print(f"Query Kishi data for {in_name_pri}, please wait...")
+
+    db_config_1 = db_conf.read_db_config('config\\db_config.ini', "kishi_query")
+    delay = float(db_config_1["delay_name"])
+
+    if delay > 0.0:
+        time.sleep(delay)
+    if in_name_pri == "高野秀行":
         in_name = "髙野秀行"
-    elif in_name == "高崎一生":
+    elif in_name_pri == "高崎一生":
         in_name = "髙﨑一生"
-    elif in_name == "高見泰地":
+    elif in_name_pri == "高見泰地":
         in_name = "髙見泰地"
-    elif in_name == "高野智史":
+    elif in_name_pri == "高野智史":
         in_name = "髙野智史"
-    elif in_name == "平藤真吾":
+    elif in_name_pri == "平藤真吾":
         in_name = "平藤眞吾"
-    elif in_name == "広津久雄":
+    elif in_name_pri == "広津久雄":
         in_name = "廣津久雄"
-    elif in_name == "松田茂行":
+    elif in_name_pri == "松田茂行":
         in_name = "松田茂役"
-    elif in_name == "森&#38622;二":
+    elif in_name_pri == "森&#38622;二":
         in_name = "森雞二"
-    elif in_name == "田中正之":
+    elif in_name_pri == "田中正之":
         in_name = "田中魁秀"
-    elif in_name == "吉田正和":
+    elif in_name_pri == "吉田正和":
         in_name = "渡辺正和"
+    else:
+        in_name = in_name_pri
+
     db_config = db_conf.read_db_config()
     conn = None
     result = None
@@ -174,13 +196,21 @@ def query_kishi_from_name(in_name: str) -> Kishi:
         cursor = conn.cursor()
         cursor.execute(query_insert, args_insert)
         all_rows = cursor.fetchall()
+        if len(all_rows) == 0:
+            if db_config_2["sql_output"] == "True":
+                print(f"Invalid name: kishi {in_name} does not exist")
+            result = None
+            kishi_name_to_kishi_dict[in_name_pri] = result
         row = all_rows[0]
         if row is None:
-            print(f"Invalid name: kishi {in_name} does not exist")
+            if db_config_2["sql_output"] == "True":
+                print(f"Invalid name: kishi {in_name} does not exist")
             result = None
+            kishi_name_to_kishi_dict[in_name_pri] = result
         else:
             result = Kishi(row[0], row[1], row[2], row[3], row[4] == 1,
                            row[5] == 1, row[6] == 1)
+            kishi_name_to_kishi_dict[in_name_pri] = result
 
         cursor.close()
         conn.commit()

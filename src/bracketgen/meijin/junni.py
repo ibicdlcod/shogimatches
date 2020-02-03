@@ -225,13 +225,23 @@ def generate_junni_table(iteration_int: int, write: bool):
     a_challenge_dict = {}
     for result in result_challenge_dict:
         a_challenge_dict[result[16]] = "挑戦者"
-    # a_meijin_dict = {}
-    # for result in result_meijin_list:
-    #     a_meijin_dict[result[16]] = "名人"
-    # print(a_meijin_dict)
     junni_matches_ap = sql_read.read_match("順位戦", iteration_str, "A級", "プレーオフ")
-    if len(junni_matches_ap) > 0:
+    if len(junni_matches_ap) > 0 and iteration_int != 12:
         junni_round_ap = gen_round_name.read_round("順位戦", iteration_str, "A級", "プレーオフ")
+        org_tree = organized_tr.OrganizedTree(junni_matches_ap, f"A級プレーオフ", junni_round_ap)
+        seeds_out_in.Seed(0, [], [org_tree, ], [], None, a_junni_dict)
+        seeds_out_in.Seed(5, [org_tree, ], [], [], None, a_challenge_dict)
+        feed_0 = table_feed.TableFeed(org_tree,
+                                      "",  # "===A級プレーオフ===\n",
+                                      "順位戦",
+                                      iteration_str,
+                                      True,
+                                      False,
+                                      "◎",
+                                      "")
+        result_ap = table_feed.draw_table_from_feed([feed_0, ])
+    elif len(junni_matches_ap) > 0 and iteration_int == 12:
+        junni_round_ap = ["", "01回戦"]
         org_tree = organized_tr.OrganizedTree(junni_matches_ap, f"A級プレーオフ", junni_round_ap)
         seeds_out_in.Seed(0, [], [org_tree, ], [], None, a_junni_dict)
         seeds_out_in.Seed(5, [org_tree, ], [], [], None, a_challenge_dict)

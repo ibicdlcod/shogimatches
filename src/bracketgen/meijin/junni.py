@@ -1,7 +1,7 @@
 from datetime import date
 from bracketgen import gen_round_name, lea_from_mat
 from importdata import sql_read
-from metastruct import junni_info, kishi_data, organized_tr
+from metastruct import junni_info, kishi_data, organized_tr, table_feed, seeds_out_in
 from dateutil.relativedelta import relativedelta
 
 win_dicts_dict = {}
@@ -30,11 +30,6 @@ def generate_junni_table(iteration_int: int, write: bool):
     for junni_info_item in junni_info_list_prev:
         junni_junni_dict_prev[junni_info_item.kishi.id] = junni_info_item.junni
         junni_tier_dict_prev[junni_info_item.kishi.id] = junni_info_item.tier
-
-    junni_matches_ap = sql_read.read_match("順位戦", iteration_str, "A級", "プレーオフ")
-    if len(junni_matches_ap) > 0:
-        junni_round_ap = gen_round_name.read_round("順位戦", iteration_str, "A級", "プレーオフ")
-        org_tree = organized_tr.OrganizedTree(junni_matches_ap, f"A級プレーオフ", junni_round_ap)
 
     junni_matches_a = sql_read.read_match("順位戦", iteration_str, "A級", "")
     junni_round_a = gen_round_name.read_round("順位戦", iteration_str, "A級", "", league=True)
@@ -141,6 +136,7 @@ def generate_junni_table(iteration_int: int, write: bool):
             this_junni_info.result,
             this_junni_info.to_fc_year,
             league_info,
+            this_id,
         ])
         win_dicts_dict[iteration_int][this_id] = league_info.wins
         loss_dicts_dict[iteration_int][this_id] = league_info.losses
@@ -195,8 +191,10 @@ def generate_junni_table(iteration_int: int, write: bool):
             this_junni_info.result,
             this_junni_info.to_fc_year,
             None,
+            this_id
             ])
     result_meijin_list = []
+    result_challenge_dict = []
     result_a_list = []
     result_b1_list = []
     result_b2_list = []
@@ -208,6 +206,8 @@ def generate_junni_table(iteration_int: int, write: bool):
             result_meijin_list.append(result_list)
         if result_list[1] == "A":
             result_a_list.append(result_list)
+            if result_list[13] == "challenge":
+                result_challenge_dict.append(result_list)
         if result_list[1] == "B1":
             result_b1_list.append(result_list)
         if result_list[1] == "B2":
@@ -218,6 +218,35 @@ def generate_junni_table(iteration_int: int, write: bool):
             result_c2_list.append(result_list)
         if result_list[1] == "FC":
             result_fc_list.append(result_list)
+
+    a_junni_dict = {}
+    for result in result_a_list:
+        a_junni_dict[result[16]] = result[2]
+    a_challenge_dict = {}
+    for result in result_challenge_dict:
+        a_challenge_dict[result[16]] = "挑戦者"
+    a_meijin_dict = {}
+    for result in result_meijin_list:
+        a_meijin_dict[result[16]] = "名人"
+    print(a_challenge_dict)
+    junni_matches_ap = sql_read.read_match("順位戦", iteration_str, "A級", "プレーオフ")
+    if len(junni_matches_ap) > 0:
+        junni_round_ap = gen_round_name.read_round("順位戦", iteration_str, "A級", "プレーオフ")
+        org_tree = organized_tr.OrganizedTree(junni_matches_ap, f"A級プレーオフ", junni_round_ap)
+        seeds_out_in.Seed(0, [], [org_tree, ], [], None, a_junni_dict)
+        seeds_out_in.Seed(5, [org_tree, ], [], [], None, a_challenge_dict)
+        feed_0 = table_feed.TableFeed(org_tree,
+                                      "===A級プレーオフ===\n",
+                                      "順位戦",
+                                      iteration_str,
+                                      True,
+                                      False,
+                                      "◎",
+                                      "")
+        result_ap = table_feed.draw_table_from_feed([feed_0, ])
+    else:
+        result_ap = ""
+
     result = ('{| border="1" class="wikitable" style="font-size:70%"\n'
               '|\n'
               '*{{colorbox|#80FF80}}名人挑戦または昇級 / '
@@ -242,15 +271,18 @@ def generate_junni_table(iteration_int: int, write: bool):
         outfile_name = f"txt_dst\\junni\\{iteration_int}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
         outfile.write(result)
+        outfile.write(result_ap)
         outfile.write(result_a)
         outfile.write(result_b1)
         outfile.write(result_b2)
         outfile.write(result_c1)
         outfile.write(result_c2)
-        outfile.write(result_fc)
+        if result_fc != "":
+            outfile.write(result_fc)
         outfile.close()
     return {"HEAD": result,
             "A": result_a,
+            "AP": result_ap if result_ap != "" else None,
             "B1": result_b1,
             "B2": result_b2,
             "C1": result_c1,
@@ -398,6 +430,8 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
 
 def draw_table_junni_fc(in_list_list: list):
     result = ""
+    if len(in_list_list) == 0:
+        return ""
     max_name_length = 0
     max_rank_length = 0
     for in_list in in_list_list:

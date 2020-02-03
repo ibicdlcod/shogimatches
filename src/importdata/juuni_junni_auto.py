@@ -197,6 +197,14 @@ def process_junni_html_fc(in_str, iteration):
         real_kishi_name = kishi_name
         real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
         kishi_year_index = real_row.find('</td><td>', kishi_name_index) + 9
+        if real_row.find('class="up"') != -1:
+            result_str = "upgrade"
+        elif real_row.find('class="retire"') != -1:
+            result_str = "retire"
+        elif real_row.find('class="dead"') != -1:
+            result_str = "dead"
+        else:
+            result_str = "f_announce"
         result_list.append(junni_info.JunniInfo(
             iteration,
             "FC",
@@ -204,7 +212,7 @@ def process_junni_html_fc(in_str, iteration):
             real_kishi,
             False,
             0,
-            "f_announce",
+            result_str,
             int(real_row[kishi_year_index:kishi_year_index + 4])
         ))
 
@@ -224,6 +232,14 @@ def process_junni_html_fc(in_str, iteration):
         real_kishi_name = kishi_name
         real_kishi = kishi_data.query_kishi_from_name(real_kishi_name)
         kishi_year_index = real_row.find('</td><td>', kishi_name_index) + 9
+        if real_row.find('class="up"') != -1:
+            result_str = "upgrade"
+        elif real_row.find('class="retire"') != -1:
+            result_str = "retire"
+        elif real_row.find('class="dead"') != -1:
+            result_str = "dead"
+        else:
+            result_str = "f_relegated"
         result_list.append(junni_info.JunniInfo(
             iteration,
             "FC",
@@ -231,7 +247,7 @@ def process_junni_html_fc(in_str, iteration):
             real_kishi,
             False,
             0,
-            "f_relegated",
+            result_str,
             int(real_row[kishi_year_index:kishi_year_index + 4])
         ))
     return result_list

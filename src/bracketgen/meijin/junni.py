@@ -1,7 +1,7 @@
 from datetime import date
 from bracketgen import gen_round_name, lea_from_mat
 from importdata import sql_read
-from metastruct import junni_info, kishi_data
+from metastruct import junni_info, kishi_data, organized_tr
 from dateutil.relativedelta import relativedelta
 
 win_dicts_dict = {}
@@ -30,6 +30,11 @@ def generate_junni_table(iteration_int: int, write: bool):
     for junni_info_item in junni_info_list_prev:
         junni_junni_dict_prev[junni_info_item.kishi.id] = junni_info_item.junni
         junni_tier_dict_prev[junni_info_item.kishi.id] = junni_info_item.tier
+
+    junni_matches_ap = sql_read.read_match("順位戦", iteration_str, "A級", "プレーオフ")
+    if len(junni_matches_ap) > 0:
+        junni_round_ap = gen_round_name.read_round("順位戦", iteration_str, "A級", "プレーオフ")
+        org_tree = organized_tr.OrganizedTree(junni_matches_ap, f"A級プレーオフ", junni_round_ap)
 
     junni_matches_a = sql_read.read_match("順位戦", iteration_str, "A級", "")
     junni_round_a = gen_round_name.read_round("順位戦", iteration_str, "A級", "", league=True)
@@ -191,6 +196,7 @@ def generate_junni_table(iteration_int: int, write: bool):
             this_junni_info.to_fc_year,
             None,
             ])
+    result_meijin_list = []
     result_a_list = []
     result_b1_list = []
     result_b2_list = []
@@ -198,6 +204,8 @@ def generate_junni_table(iteration_int: int, write: bool):
     result_c2_list = []
     result_fc_list = []
     for result_list in result_list_list:
+        if result_list[1] == "M":
+            result_meijin_list.append(result_list)
         if result_list[1] == "A":
             result_a_list.append(result_list)
         if result_list[1] == "B1":
@@ -229,7 +237,7 @@ def generate_junni_table(iteration_int: int, write: bool):
     result_b2 = draw_table_junni(result_b2_list, "B2", iteration_int)
     result_c1 = draw_table_junni(result_c1_list, "C1", iteration_int)
     result_c2 = draw_table_junni(result_c2_list, "C2", iteration_int)
-    draw_table_junni_fc(result_fc_list)
+    result_fc = draw_table_junni_fc(result_fc_list)
     if write:
         outfile_name = f"txt_dst\\junni\\{iteration_int}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
@@ -239,8 +247,16 @@ def generate_junni_table(iteration_int: int, write: bool):
         outfile.write(result_b2)
         outfile.write(result_c1)
         outfile.write(result_c2)
+        outfile.write(result_fc)
         outfile.close()
-    return [result_a, result_b1, result_b2, result_c1, result_c2]
+    return {"HEAD": result,
+            "A": result_a,
+            "B1": result_b1,
+            "B2": result_b2,
+            "C1": result_c1,
+            "C2": result_c2,
+            "FC": result_fc
+            }
 
 
 def query_junni_info_by_kishi(in_kishi, source_list):
@@ -381,6 +397,51 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
 
 
 def draw_table_junni_fc(in_list_list: list):
-    # for in_list in in_list_list:
-    #     print(in_list)
-    pass
+    result = ""
+    max_name_length = 0
+    max_rank_length = 0
+    for in_list in in_list_list:
+        max_name_length = max(max_name_length, in_list[4])
+        max_rank_length = max(max_rank_length, in_list[6])
+    result += '{|class="wikitable plainrowheaders sortable" style="text-align:center; font-size: 60%;"\n'
+    result += '|-\n'
+    result += (f'!style="width:{max_name_length * 0.03 * 60}em" class="unsortable"|棋士名'
+               f'!!style="width:{(max_rank_length + 1) * 0.02 * 60}em"|段位!!年齢!!'
+               f'class="unsortable"|前期成績(順位)!!転出/編入年度!!class="unsortable"|備考')
+    result += "\n"
+
+    for in_list in in_list_list:
+        info = in_list[15]
+        if info is not None:
+            current_info_round_num = max(current_info_round_num, info.round_num)
+        bgcolor = ""
+        detail_str = ""
+        status = in_list[13]
+        if status == "f_relegated":
+            bgcolor = "F8F8F8"
+            detail_str = ""
+        elif status == "f_announce":
+            bgcolor = "F8F8F8"
+            detail_str = "宣言"
+        elif status == "upgrade":
+            bgcolor = "80FF80"
+            detail_str = "昇級"
+        elif status == "absent":
+            bgcolor = "D0D0D0"
+            detail_str = "休場"
+        elif status == "retire":
+            bgcolor = "FFC0A0"
+            detail_str = "引退"
+        elif status == "dead":
+            bgcolor = "A0A0A0"
+            detail_str = "死去"
+        result += f'|-style="background-color:#{bgcolor}; height:2em"\n'
+        result += f'|{in_list[3]}'
+        result += f'||{in_list[5]}'
+        result += f'||{in_list[7]}'
+        result += f'||{in_list[8]}'
+        result += f'||{in_list[14]}'
+        result += f'||{detail_str}'
+        result += "\n"
+    result += '|}\n'
+    return result

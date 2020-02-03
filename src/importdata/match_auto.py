@@ -66,7 +66,7 @@ def str_to_match(in_str: str) -> match_data.Match:
 
 def import_data(iteration: int, tournament: int) -> list:
     try_count = 0
-    while try_count < 10:
+    while try_count < 50:
         try:
             print(f"Retrieving web information for tournament "
                   f"{tournament} with iteration {iteration}, please wait...")

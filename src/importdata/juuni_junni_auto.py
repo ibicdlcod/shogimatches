@@ -10,7 +10,7 @@ def import_junni(iteration: int) -> list:
         return []
     iteration_str = str(iteration).zfill(2)
     try_count = 0
-    while try_count < 10:
+    while try_count < 50:
         try:
             print(f"Retrieving web information for tournament "
                   f"順位戦 with iteration {iteration}, please wait...")

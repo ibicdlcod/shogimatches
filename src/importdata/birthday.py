@@ -17,7 +17,7 @@ def gen_birthday(kishi_list: list):
         if birthday_from_sql is not None:
             continue
         try_count = 0
-        while try_count < 10:
+        while try_count < 50:
             try:
                 if delay > 0.0:
                     time.sleep(delay)

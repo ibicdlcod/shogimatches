@@ -77,7 +77,7 @@ class Kishi:
             return sql_result, length
 
         try_count = 0
-        while try_count < 10:
+        while try_count < 50:
             try:
                 if delay > 0.0:
                     time.sleep(delay)
@@ -236,7 +236,7 @@ def query_kishi_from_id(in_id: int):
     conn = None
 
     try_count = 0
-    while try_count < 10:
+    while try_count < 50:
         try:
             conn = mysql.connector.MySQLConnection(**db_config)
 

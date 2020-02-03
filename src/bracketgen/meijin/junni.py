@@ -1,5 +1,5 @@
 from datetime import date
-from bracketgen import gen_round_name, lea_from_mat
+from bracketgen import gen_round_name, lea_from_mat, title_match
 from importdata import sql_read
 from metastruct import junni_info, kishi_data, organized_tr, table_feed, seeds_out_in
 from dateutil.relativedelta import relativedelta
@@ -225,10 +225,10 @@ def generate_junni_table(iteration_int: int, write: bool):
     a_challenge_dict = {}
     for result in result_challenge_dict:
         a_challenge_dict[result[16]] = "挑戦者"
-    a_meijin_dict = {}
-    for result in result_meijin_list:
-        a_meijin_dict[result[16]] = "名人"
-    print(a_challenge_dict)
+    # a_meijin_dict = {}
+    # for result in result_meijin_list:
+    #     a_meijin_dict[result[16]] = "名人"
+    # print(a_meijin_dict)
     junni_matches_ap = sql_read.read_match("順位戦", iteration_str, "A級", "プレーオフ")
     if len(junni_matches_ap) > 0:
         junni_round_ap = gen_round_name.read_round("順位戦", iteration_str, "A級", "プレーオフ")
@@ -236,7 +236,7 @@ def generate_junni_table(iteration_int: int, write: bool):
         seeds_out_in.Seed(0, [], [org_tree, ], [], None, a_junni_dict)
         seeds_out_in.Seed(5, [org_tree, ], [], [], None, a_challenge_dict)
         feed_0 = table_feed.TableFeed(org_tree,
-                                      "===A級プレーオフ===\n",
+                                      "",  # "===A級プレーオフ===\n",
                                       "順位戦",
                                       iteration_str,
                                       True,
@@ -246,6 +246,24 @@ def generate_junni_table(iteration_int: int, write: bool):
         result_ap = table_feed.draw_table_from_feed([feed_0, ])
     else:
         result_ap = ""
+
+    iteration_meijin_int = iteration_int if iteration_int >= 36 else iteration_int + 5
+    iteration_meijin_str = f"第{str(iteration_meijin_int).zfill(2)}期"
+    iteration_meijin_prev_int = iteration_meijin_int - 1
+    iteration_meijin_prev_str = f"第{str(iteration_meijin_prev_int).zfill(2)}期"
+    title_matches = sql_read.read_match("名人戦", iteration_meijin_str, "タイトル戦", "七番勝負")
+    if iteration_meijin_prev_int >= 13:
+        title_matches_last = sql_read.read_match("名人戦", iteration_meijin_prev_str, "タイトル戦", "七番勝負")
+        org_tree_title_last = organized_tr.OrganizedTree(title_matches_last, f"タイトル戦七番勝負", ["", ])
+    else:
+        org_tree_title_last = None
+    org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
+    result_meijin = title_match.title_match_str(org_tree_title,
+                                                 "名人戦",
+                                                 iteration_meijin_str,
+                                                 "名人",
+                                                 "七番勝負",
+                                                 org_tree_title_last)
 
     result = ('{| border="1" class="wikitable" style="font-size:70%"\n'
               '|\n'
@@ -270,6 +288,7 @@ def generate_junni_table(iteration_int: int, write: bool):
     if write:
         outfile_name = f"txt_dst\\junni\\{iteration_int}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+        outfile.write(result_meijin)
         outfile.write(result)
         outfile.write(result_ap)
         outfile.write(result_a)
@@ -281,6 +300,7 @@ def generate_junni_table(iteration_int: int, write: bool):
             outfile.write(result_fc)
         outfile.close()
     return {"HEAD": result,
+            "M": result_meijin,
             "A": result_a,
             "AP": result_ap if result_ap != "" else None,
             "B1": result_b1,

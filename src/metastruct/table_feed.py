@@ -30,7 +30,7 @@ class TableFeed:
         self.second_place_label = second_place_labels
 
 
-def draw_table_from_feed(feeds: list) -> str:
+def draw_table_from_feed(feeds: list, default_round_name=None) -> str:
     result = ""
     for feed in feeds:
         result += feed.prefix
@@ -42,10 +42,18 @@ def draw_table_from_feed(feeds: list) -> str:
                                              feed.in_seed_disabled,
                                              feed.first_place_label,
                                              feed.second_place_label)
-        draw_table = bra_from_tr.draw_table_with_col_dis_dic(table,
-                                                             feed.tournament_name
-                                                             + feed.iteration
-                                                             + in_tree.display_name
-                                                             )
+        if default_round_name is not None:
+            draw_table = bra_from_tr.draw_table_with_col_dis_dic(table,
+                                                                 feed.tournament_name
+                                                                 + feed.iteration
+                                                                 + in_tree.display_name,
+                                                                 default_round_name
+                                                                 )
+        else:
+            draw_table = bra_from_tr.draw_table_with_col_dis_dic(table,
+                                                                 feed.tournament_name
+                                                                 + feed.iteration
+                                                                 + in_tree.display_name,
+                                                                 )
         result += draw_table
     return result

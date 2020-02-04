@@ -77,7 +77,7 @@ def sql_init():
     query_init_junni_other_table = ("CREATE TABLE IF NOT EXISTS junni_other("
                                     "id_hash BINARY(64),"
                                     "tournament_name VARCHAR(63),"
-                                    "iteration VARCHAR(63),"
+                                    "iteration_int INT,"
                                     "junni INT,"
                                     "kishi_id INT,"
                                     "result VARCHAR(63),"

@@ -1,4 +1,4 @@
-from metastruct import kishi_data, junni_info
+from metastruct import kishi_data, junni_info_generic
 import re
 import time
 import urllib.request
@@ -6,6 +6,7 @@ import urllib.error
 
 
 def import_junni() -> list:
+    junni_list_list_dict = dict()
     try_count = 0
     while try_count < 50:
         try:
@@ -27,8 +28,6 @@ def import_junni() -> list:
             shidan_start_index = html_str.find('<!-- 十段戦 -->')
             shidan_end_index = html_str.find('<!--about-->', shidan_start_index)
             shidan_content = html_str[shidan_start_index:shidan_end_index].split("\n")
-            junni_tuple_list_dict = dict()
-            result_list_dict = dict()
             for shidan_content_row in shidan_content:
                 re_complied = re.compile(
                     r'.*<a href="table/ryuo/judan-(\d+).*?'
@@ -44,40 +43,49 @@ def import_junni() -> list:
                 re_result = re_complied.match(shidan_content_row)
                 if re_result:
                     iteration = int(re_result.group(1))
-                    junni_tuple_list = []
+                    junni_list_list = []
                     kishi1 = kishi_data.query_kishi_from_name(re_result.group("name1").replace("　", ""))
-                    junni_tuple_list.append((kishi1.id, 1))
+                    junni_list_list.append([kishi1, "1"])
                     kishi2 = kishi_data.query_kishi_from_name(re_result.group("name2").replace("　", ""))
-                    junni_tuple_list.append((kishi2.id, 2))
+                    junni_list_list.append([kishi2, "2"])
                     kishi3 = kishi_data.query_kishi_from_name(re_result.group("name3").replace("　", ""))
-                    junni_tuple_list.append((kishi3.id, 3))
+                    junni_list_list.append([kishi3, "3"])
                     kishi4 = kishi_data.query_kishi_from_name(re_result.group("name4").replace("　", ""))
-                    junni_tuple_list.append((kishi4.id, 4))
+                    junni_list_list.append([kishi4, "4"])
                     kishi5 = (kishi_data.query_kishi_from_name(re_result.group("name5").replace("　", ""))
                               if iteration != 11 else None)
                     if iteration == 11:
                         kishi5 = kishi_data.query_kishi_from_name("升田幸三")
-                    junni_tuple_list.append((kishi5.id, 4 if iteration < 3 else 5))
+                    junni_list_list.append([kishi5, "4" if iteration < 3 else "5"])
                     kishi6 = kishi_data.query_kishi_from_name(re_result.group("name6").replace("　", ""))
-                    junni_tuple_list.append((kishi6.id, 4 if iteration < 3 else 5))
+                    junni_list_list.append([kishi6, "4" if iteration < 3 else "5"])
                     if iteration == 11:
                         kishi7 = kishi_data.query_kishi_from_name("二上達也")
-                        junni_tuple_list.append((kishi7.id, 5))
-                    result_list = []
+                        junni_list_list.append([kishi7, "5"])
                     results = []
                     for i in range(6):
                         results.append(re.match(r'.*?class="(.*?)".*?', re_result.group(f"result{i+1}")))
                     for i in range(6):
                         if results[i] is None:
-                            result_list.append("")
+                            junni_list_list[i].append("")
                         else:
-                            result_list.append(results[i].group(1))
+                            junni_list_list[i].append(results[i].group(1))
                     if iteration == 11:
-                        result_list.append("down")
-                    print(iteration, junni_tuple_list, result_list)
-                    junni_tuple_list_dict[iteration] = junni_tuple_list
-                    result_list_dict = result_list
-            return []
+                        junni_list_list[6].append("down")
+                    junni_list_list_dict[iteration] = junni_list_list
+            result_list = []
+            for k, v in junni_list_list_dict.items():
+                for vv in v:
+                    result_state = ""
+                    if vv[2] == "down":
+                        result_state = "downgrade"
+                    elif vv[2] == "champ":
+                        result_state = "challenge"
+                    junni_info_item = junni_info_generic.JunniInfo("十段戦", k, vv[1], vv[0], result_state)
+                    print(junni_info_item)
+                    result_list.append(junni_info_item)
+            junni_info_generic.junni_info_to_sql(result_list)
+            return result_list
         except urllib.error.URLError as e:
             try_count += 1
             if hasattr(e, 'reason'):
@@ -91,5 +99,4 @@ def import_junni() -> list:
     print(f"Failed to obtain junni information "
           f"for tournament 十段戦 "
           f"on large number of tries.")
-
     return []

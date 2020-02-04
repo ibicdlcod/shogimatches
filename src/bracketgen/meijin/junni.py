@@ -1,5 +1,6 @@
 from datetime import date
 from bracketgen import gen_round_name, lea_from_mat, title_match
+from bracketgen.meijin import junni_template
 from importdata import sql_read
 from metastruct import junni_info, kishi_data, organized_tr, table_feed, seeds_out_in
 from dateutil.relativedelta import relativedelta
@@ -253,7 +254,7 @@ def generate_junni_table(iteration_int: int, write: bool):
                                       False,
                                       "◎",
                                       "")
-        result_ap = table_feed.draw_table_from_feed([feed_0, ])
+        result_ap = table_feed.draw_table_from_feed([feed_0, ], "決勝")
     else:
         result_ap = ""
 
@@ -275,6 +276,13 @@ def generate_junni_table(iteration_int: int, write: bool):
                                                  "七番勝負",
                                                  org_tree_title_last)
 
+    result_head_relegation = ""
+    if iteration_int < 17:
+        pass
+    elif 36 <= iteration_int < 44:
+        result_head_relegation = '*昇降級リーグ戦2/3組は降級点2回で降級、昇降級リーグ戦4組は降級点3回で降級。\n'
+    else:
+        '*B級2組・C級1組は降級点2回で降級、C級2組は降級点3回で降級。\n'
     result = ('{| border="1" class="wikitable" style="font-size:70%"\n'
               '|\n'
               '*{{colorbox|#80FF80}}名人挑戦または昇級 / '
@@ -287,7 +295,7 @@ def generate_junni_table(iteration_int: int, write: bool):
               '{{colorbox|#D0D0D0}}休場\n'
               '*{{colorbox|#FFC0A0}}引退 / '
               "{{colorbox|#A0A0A0}}死去\n"
-              + ('*B級2組・C級1組は降級点2回で降級、C級2組は降級点3回で降級。\n' if iteration_int >= 17 else "")
+              + result_head_relegation
               + '|}\n')
     result_a = draw_table_junni(result_a_list, "A", iteration_int)
     result_b1 = draw_table_junni(result_b1_list, "B1", iteration_int)
@@ -295,30 +303,39 @@ def generate_junni_table(iteration_int: int, write: bool):
     result_c1 = draw_table_junni(result_c1_list, "C1", iteration_int)
     result_c2 = draw_table_junni(result_c2_list, "C2", iteration_int)
     result_fc = draw_table_junni_fc(result_fc_list)
-    if write:
-        outfile_name = f"txt_dst\\junni\\{iteration_int}.txt"
-        outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-        outfile.write(result_meijin)
-        outfile.write(result)
-        outfile.write(result_ap)
-        outfile.write(result_a)
-        outfile.write(result_b1)
-        outfile.write(result_b2)
-        outfile.write(result_c1)
-        outfile.write(result_c2)
-        if result_fc != "":
-            outfile.write(result_fc)
-        outfile.close()
-    return {"HEAD": result,
+    return_dict = {
             "M": result_meijin,
+            "HEAD": result,
             "A": result_a,
-            "AP": result_ap if result_ap != "" else None,
             "B1": result_b1,
             "B2": result_b2,
             "C1": result_c1,
             "C2": result_c2,
-            "FC": result_fc
             }
+    if result_fc is not None:
+        return_dict["FC"] = result_fc
+    if result_ap is not None and result_ap != "":
+        return_dict["AP"] = result_ap
+    if write:
+        outfile_name = f"txt_dst\\junni\\{iteration_int}.txt"
+        outfile = open(outfile_name, 'w', encoding="utf-8-sig")
+        # outfile.write(result_meijin)
+        # outfile.write(result)
+        # outfile.write(result_ap)
+        # outfile.write(result_a)
+        # outfile.write(result_b1)
+        # outfile.write(result_b2)
+        # outfile.write(result_c1)
+        # outfile.write(result_c2)
+        # if result_fc != "":
+        #     outfile.write(result_fc)
+        outfile.write(junni_template.gen_template(return_dict))
+        outfile.close()
+        outfile1_name = f"txt_dst\\junni\\usage_{iteration_int}.txt"
+        outfile1 = open(outfile1_name, 'w', encoding="utf-8-sig")
+        outfile1.write(junni_template.gen_usage(iteration_str, list(return_dict.keys())))
+        outfile1.close()
+    return return_dict
 
 
 def query_junni_info_by_kishi(in_kishi, source_list):
@@ -461,7 +478,7 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
 def draw_table_junni_fc(in_list_list: list):
     result = ""
     if len(in_list_list) == 0:
-        return ""
+        return None
     max_name_length = 0
     max_rank_length = 0
     for in_list in in_list_list:

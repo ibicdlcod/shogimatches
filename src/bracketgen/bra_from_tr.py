@@ -402,7 +402,9 @@ def draw_table(in_table_list: list, table_name: str = '') -> str:
     return return_block
 
 
-def draw_table_with_col_dis_dic(in_table_list_org_tab: organized_tab.OrganizedTable, table_name: str = '') -> str:
+def draw_table_with_col_dis_dic(in_table_list_org_tab: organized_tab.OrganizedTable,
+                                table_name: str = '',
+                                default_round_name: str = '01回戦') -> str:
     in_table_list_org_tab.process_disabled_dict()
     in_table_list = in_table_list_org_tab.table_list
     print(f"Begin generating table of {table_name}")
@@ -422,7 +424,7 @@ def draw_table_with_col_dis_dic(in_table_list_org_tab: organized_tab.OrganizedTa
                              f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'
                              f'" style="border:1px solid #aaa;" bgcolor="'
                              f'{current_cell.bg_color}" |'
-                             f'{current_cell.content if len(current_cell.content) > 0 else "01回戦"}\n')
+                             f'{current_cell.content if len(current_cell.content) > 0 else default_round_name}\n')
         else:
             return_block += (f'| colspan="'
                              f'{current_cell.to_cell[1] - current_cell.from_cell[1] + 1}'

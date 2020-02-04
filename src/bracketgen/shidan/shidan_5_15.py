@@ -35,6 +35,9 @@ def shidan_str_dict(iteration_int: int) -> dict:
     feed_2 = []
     tree_2 = []
     for i in range(8):
+        if i == 6:
+            a = 1
+
         group_str = f"{str(i + 1).zfill(2)}組"
         match_db_2_i = sql_read.read_match("十段戦", iteration_str, "二次予選", group_str)
         round_db_2_i = gen_round_name.read_round("十段戦", iteration_str, "二次予選", group_str)
@@ -64,7 +67,7 @@ def shidan_str_dict(iteration_int: int) -> dict:
                                         "十段戦",
                                         iteration_str,
                                         True,
-                                        False,
+                                        True,
                                         "◎",
                                         "")
         feed_1.append(feed_1_i)
@@ -74,7 +77,7 @@ def shidan_str_dict(iteration_int: int) -> dict:
     promoted_to_group_dict = dict()
     for tree in tree_3:
         for node in tree.last_remain_nodes:
-            promoted_to_group_dict[node.winner().id] = "リーグ入り"
+            promoted_to_group_dict[node.winner().id] = "リーグ入り&nbsp;"
     seeds_out_in.Seed(5, tree_3, [], [], [], promoted_to_group_dict)
 
     return_dict[3] = table_feed.draw_table_from_feed(feed_3)

@@ -34,26 +34,23 @@ if __name__ == '__main__':
                 continue
             junni.generate_junni_table(i, write=(i != int(junni_conf["start_iter"])))
 
-    for i in range(5, 27):
-        outfile_name = f"txt_dst\\shidan\\{i}.txt"
-        outfile = open(outfile_name, "w", encoding="utf-8-sig")
-        if i >= 16:
-            result = shidan_16_26.shidan_str_dict(i)
-        else:
-            result = shidan_5_15.shidan_str_dict(i)
-        out_str = result[7]
-        outfile.write(out_str)
-        if i >= 16:
-            out_str = result[1]
-            outfile.write(out_str)
-        else:
-            out_str = result[3]
-            outfile.write(out_str)
-            out_str = result[2]
-            outfile.write(out_str)
-            out_str = result[1]
-            outfile.write(out_str)
-        outfile.close()
-    # no detail3 until 37期
-    # data for 8期 is incomplete
-
+    # for i in range(5, 27):
+    #     outfile_name = f"txt_dst\\shidan\\{i}.txt"
+    #     outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    #     if i >= 16:
+    #         result = shidan_16_26.shidan_str_dict(i)
+    #     else:
+    #         result = shidan_5_15.shidan_str_dict(i)
+    #     out_str = result[7]
+    #     outfile.write(out_str)
+    #     if i >= 16:
+    #         out_str = result[1]
+    #         outfile.write(out_str)
+    #     else:
+    #         out_str = result[3]
+    #         outfile.write(out_str)
+    #         out_str = result[2]
+    #         outfile.write(out_str)
+    #         out_str = result[1]
+    #         outfile.write(out_str)
+    #     outfile.close()

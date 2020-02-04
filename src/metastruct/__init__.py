@@ -74,6 +74,16 @@ def sql_init():
                               "PRIMARY KEY (id_hash)"
                               ");")
     args_init_junni_table = tuple()
+    query_init_junni_other_table = ("CREATE TABLE IF NOT EXISTS junni_other("
+                                    "id_hash BINARY(64),"
+                                    "tournament_name VARCHAR(63),"
+                                    "iteration VARCHAR(63),"
+                                    "junni INT,"
+                                    "kishi_id INT,"
+                                    "result VARCHAR(63),"
+                                    "PRIMARY KEY (id_hash)"
+                                    ");")
+    args_init_junni_other_table = tuple()
 
     try:
         conn = mysql.connector.MySQLConnection(**db_config)
@@ -94,6 +104,8 @@ def sql_init():
         print("Former table init success")
         cursor.execute(query_init_junni_table, args_init_junni_table)
         print("Junni table init success")
+        cursor.execute(query_init_junni_other_table, args_init_junni_other_table)
+        print("Junni table (non meijin) init success")
 
         cursor.close()
 

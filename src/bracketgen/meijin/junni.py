@@ -276,6 +276,13 @@ def generate_junni_table(iteration_int: int, write: bool):
                                                  "七番勝負",
                                                  org_tree_title_last)
 
+    result_head_relegation = ""
+    if iteration_int < 17:
+        pass
+    elif 36 <= iteration_int < 44:
+        result_head_relegation = '*昇降級リーグ戦2/3組は降級点2回で降級、昇降級リーグ戦4組は降級点3回で降級。\n'
+    else:
+        '*B級2組・C級1組は降級点2回で降級、C級2組は降級点3回で降級。\n'
     result = ('{| border="1" class="wikitable" style="font-size:70%"\n'
               '|\n'
               '*{{colorbox|#80FF80}}名人挑戦または昇級 / '
@@ -288,7 +295,7 @@ def generate_junni_table(iteration_int: int, write: bool):
               '{{colorbox|#D0D0D0}}休場\n'
               '*{{colorbox|#FFC0A0}}引退 / '
               "{{colorbox|#A0A0A0}}死去\n"
-              + ('*B級2組・C級1組は降級点2回で降級、C級2組は降級点3回で降級。\n' if iteration_int >= 17 else "")
+              + result_head_relegation
               + '|}\n')
     result_a = draw_table_junni(result_a_list, "A", iteration_int)
     result_b1 = draw_table_junni(result_b1_list, "B1", iteration_int)

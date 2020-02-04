@@ -1,14 +1,23 @@
+import re
+
+
 def gen_template(in_str_dict: dict):
     result = "<noinclude>{{複雑なテンプレート}}</noinclude>{{#switch:{{{group}}}"
     for k, v in in_str_dict.items():
         v2 = v.replace("|", "{{!}}")
         v3 = v2.replace("colorbox{{!}}", "colorbox|")
-        result += f"|{k}={v3}"
+        v4 = re.sub(r'{{Sort{{!\}\}(.*?){{!\}\}(.*?)\}\}',
+                    r"{{Sort|\1|\2}}",
+                    v3)
+        result += f"|{k}={v4}"
     result += "|}}\n"
     result += ("<noinclude>\n"
                "[[Category:順位戦関連のテンプレート]]\n"
                "</noinclude>\n")
     return result
+# re.sub(r'\{\{Sort\{\{!\}\}(.*)\{\{!\}\}(.*)\}\}',
+# ...        r"{{Sort|\1|\2}}",
+# ...        r'{{Sort{{!}}58{{!}}八段}}')
 
 
 def order(in_str: str):
@@ -37,19 +46,38 @@ def order(in_str: str):
 def gen_usage(iteration: str, in_str_dict_keys: list):
     result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
     in_str_dict_keys.sort(key=order)
+    iteration_int = int(iteration.lstrip("第").rstrip("期"))
     for key in in_str_dict_keys:
         if key == "A":
-            result += "===A級===\n"
+            if 36 <= iteration_int < 44:
+                result += "===名人戦挑戦者決定リーグ戦===\n"
+            else:
+                result += "===A級===\n"
         if key == "AP":
-            result += "===A級プレーオフ===\n"
+            if 36 <= iteration_int < 44:
+                result += "===名人戦挑戦者決定プレーオフ===\n"
+            else:
+                result += "===A級プレーオフ===\n"
         elif key == "B1":
-            result += "===B級1組===\n"
+            if 36 <= iteration_int < 44:
+                result += "===昇降級リーグ戦1組===\n"
+            else:
+                result += "===B級1組===\n"
         elif key == "B2":
-            result += "===B級2組===\n"
+            if 36 <= iteration_int < 44:
+                result += "===昇降級リーグ戦2組===\n"
+            else:
+                result += "===B級2組===\n"
         elif key == "C1":
-            result += "===C級1組===\n"
+            if 36 <= iteration_int < 44:
+                result += "===昇降級リーグ戦3組===\n"
+            else:
+                result += "===C級1組===\n"
         elif key == "C2":
-            result += "===C級2組===\n"
+            if 36 <= iteration_int < 44:
+                result += "===昇降級リーグ戦4組===\n"
+            else:
+                result += "===C級2組===\n"
         elif key == "FC":
             result += "===フリークラス===\n"
         elif key == "HEAD":

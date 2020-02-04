@@ -10,6 +10,8 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
     katakana_list = str_list.katakana_list
     hiragana_list = str_list.hiragana_list
     number_list = str_list.number_list
+
+    # 七番勝負
     title_matches = sql_read.read_match("竜王戦", iteration, "タイトル戦", "七番勝負")
     if iteration_last is not None:
         title_matches_last = sql_read.read_match("竜王戦", iteration_last, "タイトル戦", "七番勝負")
@@ -23,6 +25,7 @@ def ryuou_str_dict(iteration: str, iteration_last: str = None) -> dict:
                                                  "竜王",
                                                  "七番勝負",
                                                  org_tree_title_last)
+
     legend_string = ('{| border="1" class="wikitable" style="font-size:89%"\n|\n'
                      '◎：決勝進出　△：昇級　◇：残留　▼：降級\n|}\n')
     feeds_x = []

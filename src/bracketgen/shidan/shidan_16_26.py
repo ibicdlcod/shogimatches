@@ -1,4 +1,5 @@
-from bracketgen import gen_round_name, title_match, str_list
+from bracketgen import gen_round_name
+from bracketgen.shidan import shidan_title_7
 from importdata import sql_read
 from metastruct import organized_tr, seeds_out_in, table_feed
 
@@ -7,21 +8,8 @@ def shidan_str_dict(iteration_int: int) -> dict:
     return_dict = dict()
 
     iteration_str = f"第{str(iteration_int).zfill(2)}期"
-    iteration_str_prev = f"第{str(iteration_int - 1).zfill(2)}期"
-    # 七番勝負
-    title_matches = sql_read.read_match("十段戦", iteration_str, "タイトル戦", "七番勝負")
-    if iteration_int != 1:
-        title_matches_last = sql_read.read_match("十段戦", iteration_str_prev, "タイトル戦", "七番勝負")
-        org_tree_title_last = organized_tr.OrganizedTree(title_matches_last, f"タイトル戦七番勝負", ["", ])
-    else:
-        org_tree_title_last = None
-    org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
-    return_dict[7] = title_match.title_match_str(org_tree_title,
-                                                 "十段戦",
-                                                 iteration_str,
-                                                 "十段",
-                                                 "七番勝負",
-                                                 org_tree_title_last)
+
+    return_dict[7] = shidan_title_7.shidan_title_matches(iteration_int)
 
     match_db_1 = sql_read.read_match("十段戦", iteration_str, "予選")
     round_db_1 = gen_round_name.read_round("十段戦", iteration_str, "予選")

@@ -1,6 +1,6 @@
 from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
-from bracketgen.shidan import shidan_1_15, shidan_16_26
+from bracketgen.shidan import shidan_5_15, shidan_16_26
 from importdata import birthday, kishi_all, match_mass
 import gen_config
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
         if i >= 16:
             result = shidan_16_26.shidan_str_dict(i)
         else:
-            result = shidan_1_15.shidan_str_dict(i)
+            result = shidan_5_15.shidan_str_dict(i)
         out_str = result[7]
         outfile.write(out_str)
         if i >= 16:

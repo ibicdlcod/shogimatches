@@ -34,16 +34,7 @@ if __name__ == '__main__':
                 continue
             junni.generate_junni_table(i, write=(i != int(junni_conf["start_iter"])))
 
-    # outfile_name = "temp.txt"
-    # outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-    # # result = shidan_16_26.shidan_str_dict(16)
-    # result = shidan_1_15.shidan_str_dict(15)
-    # out_str = result[7]
-    # outfile.write(out_str)
-    # out_str = result[1]
-    # outfile.write(out_str)
-    # outfile.close()
-    for i in range(15, 16):
+    for i in range(5, 27):
         outfile_name = f"txt_dst\\shidan\\{i}.txt"
         outfile = open(outfile_name, "w", encoding="utf-8-sig")
         if i >= 16:

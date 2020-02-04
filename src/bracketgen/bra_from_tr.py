@@ -136,14 +136,21 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                 column_to_1 = factor * (a - j - 1) + 1
                 if column_from_1 > column_to_1:
                     column_from_1 = column_to_1
-                t1 = table_desc.TableDesc(
-                    (position_dicts[j][k], column_from_1),
-                    (position_dicts[j][k] + 1, column_to_1),
-                    False,
-                    in_seed[k] if k in in_seed.keys() else "",
-                    "#fff0f0" if this_kishi.woman else "#f9f9f9",
-                )
-                table_pos_all.append(t1)
+                if k in in_seed.keys() and len(in_seed[k]) > 0:
+                    t1 = table_desc.TableDesc(
+                        (position_dicts[j][k], column_from_1),
+                        (position_dicts[j][k] + 1, column_to_1),
+                        False,
+                        in_seed[k] if k in in_seed.keys() else "",
+                        "#fff0f0" if this_kishi.woman else "#f9f9f9",
+                    )
+                    table_pos_all.append(t1)
+                empty = (len(in_seed[k] if k in in_seed.keys() else "") == 0)
+                if empty and column_from_1 == column_to_1:
+                    if column_from_1 not in column_disabled_dict:
+                        column_disabled_dict[column_from_1] = True
+                elif (not empty) and column_from_1 == column_to_1:
+                    column_disabled_dict[column_from_1] = False
             if k in new_match_dicts[j].keys():
                 new_flag = True
             if k in new_match_dicts[j].keys() or j == 0:

@@ -169,4 +169,3 @@ def junni_info_from_sql(iteration_int: int):
         if conn is not None and conn.is_connected():
             conn.close()
         return result
-

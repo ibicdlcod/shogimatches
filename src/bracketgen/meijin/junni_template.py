@@ -15,9 +15,6 @@ def gen_template(in_str_dict: dict):
                "[[Category:順位戦関連のテンプレート]]\n"
                "</noinclude>\n")
     return result
-# re.sub(r'\{\{Sort\{\{!\}\}(.*)\{\{!\}\}(.*)\}\}',
-# ...        r"{{Sort|\1|\2}}",
-# ...        r'{{Sort{{!}}58{{!}}八段}}')
 
 
 def order(in_str: str):

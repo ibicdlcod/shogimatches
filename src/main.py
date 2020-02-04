@@ -1,6 +1,6 @@
 from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
-from importdata import kishi_all, match_mass, birthday
+from importdata import birthday, kishi_all, match_mass
 import gen_config
 
 

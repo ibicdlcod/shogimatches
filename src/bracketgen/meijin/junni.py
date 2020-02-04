@@ -1,9 +1,9 @@
-from datetime import date
 from bracketgen import gen_round_name, lea_from_mat, title_match
 from bracketgen.meijin import junni_template
+from datetime import date
+from dateutil.relativedelta import relativedelta
 from importdata import sql_read
 from metastruct import junni_info, kishi_data, organized_tr, table_feed, seeds_out_in
-from dateutil.relativedelta import relativedelta
 
 win_dicts_dict = {}
 loss_dicts_dict = {}
@@ -193,7 +193,7 @@ def generate_junni_table(iteration_int: int, write: bool):
             this_junni_info.to_fc_year,
             None,
             this_id
-            ])
+        ])
     result_meijin_list = []
     result_challenge_dict = []
     result_a_list = []
@@ -270,11 +270,11 @@ def generate_junni_table(iteration_int: int, write: bool):
         org_tree_title_last = None
     org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
     result_meijin = title_match.title_match_str(org_tree_title,
-                                                 "名人戦",
-                                                 iteration_meijin_str,
-                                                 "名人",
-                                                 "七番勝負",
-                                                 org_tree_title_last)
+                                                "名人戦",
+                                                iteration_meijin_str,
+                                                "名人",
+                                                "七番勝負",
+                                                org_tree_title_last)
 
     result_head_relegation = ""
     if iteration_int < 17:
@@ -304,14 +304,14 @@ def generate_junni_table(iteration_int: int, write: bool):
     result_c2 = draw_table_junni(result_c2_list, "C2", iteration_int)
     result_fc = draw_table_junni_fc(result_fc_list)
     return_dict = {
-            "M": result_meijin,
-            "HEAD": result,
-            "A": result_a,
-            "B1": result_b1,
-            "B2": result_b2,
-            "C1": result_c1,
-            "C2": result_c2,
-            }
+        "M": result_meijin,
+        "HEAD": result,
+        "A": result_a,
+        "B1": result_b1,
+        "B2": result_b2,
+        "C1": result_c1,
+        "C2": result_c2,
+    }
     if result_fc is not None:
         return_dict["FC"] = result_fc
     if result_ap is not None and result_ap != "":
@@ -401,14 +401,14 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
     font_size_eff = max(50.0, font_size)
     # font_size = max(50.0, font_size)
     result += ('{|class="wikitable plainrowheaders sortable" style="text-align:center; font-size: %f%%;"\n'
-               % (font_size, ))
+               % (font_size,))
     result += '|-\n'
     result += (f'!順位!!style="width:{max_name_length * 0.03 * font_size_eff}em" class="unsortable"|棋士名'
                f'!!style="width:{(max_rank_length + 1) * 0.02 * font_size_eff}em"|段位!!年齢!!'
                f'class="unsortable"|前期成績(順位)!!勝!!負!!class="unsortable"|備考')
     for round_i in range(round_length):
-        result += f'!!style="width:{max((content_length[round_i]) * 0.03 * font_size_eff, 5.0)}em" '\
-                  + f'class="unsortable"|{str(round_i+1).zfill(2)}回戦'
+        result += f'!!style="width:{max((content_length[round_i]) * 0.03 * font_size_eff, 5.0)}em" ' \
+                  + f'class="unsortable"|{str(round_i + 1).zfill(2)}回戦'
     result += "\n"
     current_info_round_num = 0
     for in_list in in_list_list:
@@ -429,7 +429,7 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
         elif status == "normal":
             bgcolor = "F8F8F8"
             if in_list[12]:
-                detail_str = f"降級点{in_list[11]}→{in_list[11]+1}"
+                detail_str = f"降級点{in_list[11]}→{in_list[11] + 1}"
             else:
                 detail_str = ""
         elif status == "upgrade":
@@ -446,7 +446,7 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
             detail_str = "FC転出"
         elif status == "minus_point":
             bgcolor = "FFA0D0"
-            detail_str = f"降級点{in_list[11]}→{in_list[11]-1}"
+            detail_str = f"降級点{in_list[11]}→{in_list[11] - 1}"
         elif status == "absent":
             bgcolor = "D0D0D0"
             detail_str = "休場"
@@ -491,6 +491,7 @@ def draw_table_junni_fc(in_list_list: list):
                f'class="unsortable"|前期成績(順位)!!転出/編入年度!!class="unsortable"|備考')
     result += "\n"
 
+    current_info_round_num = 0
     for in_list in in_list_list:
         info = in_list[15]
         if info is not None:

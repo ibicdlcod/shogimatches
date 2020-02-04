@@ -1,4 +1,4 @@
-from metastruct import organized_tr, tree_node, kishi_data
+from metastruct import kishi_data, organized_tr, tree_node
 
 
 def title_match_str(matches_tree: organized_tr.OrganizedTree,

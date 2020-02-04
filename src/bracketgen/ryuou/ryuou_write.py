@@ -1,4 +1,4 @@
-from bracketgen.ryuou import ryuou_template, ryuou_old, ryuou_new
+from bracketgen.ryuou import ryuou_new, ryuou_old, ryuou_template
 
 
 def ryuou_output(start_iteration: int, end_iteration: int):

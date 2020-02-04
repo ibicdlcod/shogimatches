@@ -1,4 +1,4 @@
-from bracketgen import title_match, str_list, gen_round_name
+from bracketgen import gen_round_name, title_match, str_list
 from bracketgen.ryuou import ryuou_common
 from importdata import sql_read
 from metastruct import organized_tr, seeds_out_in, table_feed

@@ -1,5 +1,5 @@
-from metastruct import organized_tr, tree_node, kishi_data, match_data
-from metastruct import table_desc, organized_tab
+from metastruct import kishi_data, match_data, organized_tab
+from metastruct import organized_tr, table_desc, tree_node
 
 
 def vertical_position(in_node: tree_node.TreeNode) -> list:

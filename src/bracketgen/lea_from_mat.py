@@ -1,5 +1,5 @@
 from datetime import date
-from metastruct import tree_node, league_info
+from metastruct import league_info, tree_node
 
 
 def generate_lea_pos(match_db: list,
@@ -10,7 +10,7 @@ def generate_lea_pos(match_db: list,
     node_db = dict()
     round_names_with_prefix = []
     if len(round_names) == 1:
-        return gen_lea_pos_no_round_names(match_db, junni_dict, round_names_prefix)
+        return gen_lea_pos_no_round_names(match_db, junni_dict)
     else:
         for round_name in round_names:
             node_db[round_name] = []
@@ -106,8 +106,7 @@ def generate_lea_pos(match_db: list,
 
 
 def gen_lea_pos_no_round_names(match_db: list,
-                               junni_dict: dict = None,
-                               round_names_prefix: str = None) -> list:
+                               junni_dict: dict = None,) -> list:
     node_db = []
     for match in match_db:
         match_node = tree_node.TreeNode([match, ], )

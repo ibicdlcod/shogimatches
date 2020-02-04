@@ -1,5 +1,5 @@
 mysqldump shogi -u shogi -p --result_file="shogi.dump"
-mysqldump --databases shogi -u shogi -p --result_file="shogi2.dump"
+mysqldump --databases shogi -u shogi -p --result_file="shogi.dump"
 
 mysql -uroot -p --default-character-set=utf8mb4 shogi2
 mysql> SET names 'utf8mb4'

@@ -319,16 +319,6 @@ def generate_junni_table(iteration_int: int, write: bool):
     if write:
         outfile_name = f"txt_dst\\junni\\{iteration_int}.txt"
         outfile = open(outfile_name, 'w', encoding="utf-8-sig")
-        # outfile.write(result_meijin)
-        # outfile.write(result)
-        # outfile.write(result_ap)
-        # outfile.write(result_a)
-        # outfile.write(result_b1)
-        # outfile.write(result_b2)
-        # outfile.write(result_c1)
-        # outfile.write(result_c2)
-        # if result_fc != "":
-        #     outfile.write(result_fc)
         outfile.write(junni_template.gen_template(return_dict))
         outfile.close()
         outfile1_name = f"txt_dst\\junni\\usage_{iteration_int}.txt"
@@ -399,7 +389,6 @@ def draw_table_junni(in_list_list: list, tier: str, iteration_int: int):
     content_size += max_rank_length + 1
     font_size = 1400 / (content_size / 3 + 12)
     font_size_eff = max(50.0, font_size)
-    # font_size = max(50.0, font_size)
     result += ('{|class="wikitable plainrowheaders sortable" style="text-align:center; font-size: %f%%;"\n'
                % (font_size,))
     result += '|-\n'

@@ -90,7 +90,6 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
         if match_node.winner() == white:
             return_result += "'''" + title_name + "位獲得'''"
     return_result += "\n|}\n"
-    return_result += "<br/>\n"
     return return_result
 
 

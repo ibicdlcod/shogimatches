@@ -257,6 +257,9 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                     False,
                     out_seed_text,
                     "#fff0f0" if this_kishi.woman else "#f9f9f9",
+                    False,
+                    (True, True, True, True),
+                    len(out_seed_text) * 1.2 if len(out_seed_text) >= 3 else len(out_seed_text)
                 )
                 column_num = factor * (a - j - 1) + 4
                 empty = (len(out_seed_text) == 0)

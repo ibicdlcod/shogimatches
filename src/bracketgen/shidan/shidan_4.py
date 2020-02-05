@@ -39,8 +39,15 @@ def shidan_str_dict(iteration_int: int) -> dict:
 
     feed_2 = []
     tree_2 = []
-    for i in range(8):
-        group_str = f"{str(i + 1).zfill(2)}組"
+    for i in range(4):
+        if i == 0:
+            group_str = f"イ組"
+        elif i == 1:
+            group_str = f"ロ組"
+        elif i == 2:
+            group_str = f"ハ組"
+        else:
+            group_str = f"ニ組"
         match_db_2_i = sql_read.read_match("十段戦", iteration_str, "二次予選", group_str)
         round_db_2_i = gen_round_name.read_round("十段戦", iteration_str, "二次予選", group_str)
         feed_2_i = table_feed.TableFeed(organized_tr.OrganizedTree(match_db_2_i,

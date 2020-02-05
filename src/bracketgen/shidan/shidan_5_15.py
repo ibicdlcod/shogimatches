@@ -133,7 +133,7 @@ def shidan_str_dict(iteration_int: int) -> dict:
 
     return_dict["LEAD"] = (
         f"第{iteration_int}期十段戦は、{1961 + iteration_int}年度（{min_match_date.isoformat()}"
-        f" - {max_match_date.isoformat()}）の十段戦である。\n"
+        f" - {max_match_date.isoformat()}）の[[十段戦 (将棋)|十段戦]]である。\n"
         "十段戦は将棋のタイトル戦の一つである。\n"
     )
 

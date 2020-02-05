@@ -75,6 +75,36 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
     return result
 
 
+def gen_usage_kudan(iteration: str, in_str_dict_keys: list):
+    result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
+    in_str_dict_keys.sort(key=order)
+    iteration_int = int(iteration.lstrip("第").rstrip("期"))
+    for key in in_str_dict_keys:
+        if key == 0:
+            result += f"==本戦==\n"
+        elif key == 1:
+            result += "==一次予選==\n"
+        elif key == 2:
+            result += "==二次予選==\n"
+        elif key == 3:
+            result += "==三次予選==\n"
+        elif key == 4:
+            result += "==予選==\n"
+        result += "{{" + iteration + "九段戦|group=" + str(key) + "}}\n"
+    result += (
+        "== 出典 ==\n"
+        f"*[http://shogititle.nobody.jp/table/ryuo/kudan-{str(iteration_int).zfill(2)}.html "
+        f"第{iteration_int}期九段戦：将棋タイトル戦]\n"
+        "{{各期の九段戦}}\n"
+        "{{Shogi-stub}}\n"
+        "{{" + f"DEFAULTSORT:九段戦{str(iteration_int).zfill(2)}き" + "}}\n"
+        f"[[Category:竜王戦|{1948+iteration_int}-{49+iteration_int}]]\n"
+        f"[[Category:{1948+iteration_int}年の日本]]\n"
+        f"[[Category:{1949+iteration_int}年の日本]]\n"
+    )
+    return result
+
+
 def shidan_str(i: int):
     if i >= 16:
         dict_result = shidan_16_26.shidan_str_dict(i)
@@ -91,4 +121,4 @@ def shidan_str(i: int):
 def kudan_str(i: int):
     dict_result = kudan.kudan_str_dict(i)
 
-    return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", list(dict_result.keys()))
+    return gen_template(dict_result), gen_usage_kudan(f"第{str(i).zfill(2)}期", list(dict_result.keys()))

@@ -46,8 +46,15 @@ if __name__ == '__main__':
             outfile1.close()
             outfile2.close()
 
-    outfile_name = f"temp.txt"
-    outfile = open(outfile_name, "w", encoding="utf-8-sig")
-    for k, v in kudan.kudan_str_dict(12).items():
-        outfile.write(v)
-    outfile.close()
+    kudan_conf = gen_config.read_primary_config('config\\config.ini', 'kudan')
+    if kudan_conf["enabled"] == "True":
+        for i in range(int(kudan_conf["start_iter"]), int(kudan_conf["end_iter"]) + 1):
+            result_str = shidan_template.kudan_str(i)
+            outfile1_name = f"txt_dst\\kudan\\{i}.txt"
+            outfile2_name = f"txt_dst\\kudan\\usage_{i}.txt"
+            outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
+            outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
+            outfile1.write(result_str[0])
+            outfile2.write(result_str[1])
+            outfile1.close()
+            outfile2.close()

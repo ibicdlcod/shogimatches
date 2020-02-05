@@ -1,6 +1,6 @@
 from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
-from bracketgen.shidan import shidan_2_3, shidan_4, shidan_5_15, shidan_16_26
+from bracketgen.shidan import shidan_2_3, shidan_4, shidan_5_15, shidan_16_26, shidan_template
 from importdata import birthday, kishi_all, match_mass
 import gen_config
 
@@ -34,39 +34,13 @@ if __name__ == '__main__':
                 continue
             junni.generate_junni_table(i, write=(i != int(junni_conf["start_iter"])))
 
-    for i in range(16, 27):
-        outfile_name = f"txt_dst\\shidan\\{i}.txt"
-        outfile = open(outfile_name, "w", encoding="utf-8-sig")
-        if i >= 16:
-            result = shidan_16_26.shidan_str_dict(i)
-        elif (16 > i >= 5) or (i == 1):
-            result = shidan_5_15.shidan_str_dict(i)
-        elif i == 4:
-            result = shidan_4.shidan_str_dict(i)
-        else:
-            result = shidan_2_3.shidan_str_dict(i)
-        out_str = result["INFOBOX"]
-        outfile.write(out_str)
-        out_str = result["LEAD"]
-        outfile.write(out_str)
-        out_str = result[7]
-        outfile.write(out_str)
-        outfile.write(f"==第{str(i).zfill(2)}期十段戦挑戦者決定リーグ戦==\n")
-        out_str = result[0]
-        outfile.write(out_str)
-        if i >= 16:
-            outfile.write("==予選==\n")
-            out_str = result[1]
-            outfile.write(out_str)
-        else:
-            if i not in [2, 3]:
-                outfile.write("==三次予選==\n")
-                out_str = result[3]
-                outfile.write(out_str)
-            outfile.write("==二次予選==\n")
-            out_str = result[2]
-            outfile.write(out_str)
-            outfile.write("==一次予選==\n")
-            out_str = result[1]
-            outfile.write(out_str)
-        outfile.close()
+    for i in range(10, 11):
+        result_str = shidan_template.shidan_str(i)
+        outfile1_name = f"txt_dst\\shidan\\{i}.txt"
+        outfile2_name = f"txt_dst\\shidan\\usage_{i}.txt"
+        outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
+        outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
+        outfile1.write(result_str[0])
+        outfile2.write(result_str[1])
+        outfile1.close()
+        outfile2.close()

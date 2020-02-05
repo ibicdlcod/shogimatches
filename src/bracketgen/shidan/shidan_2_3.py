@@ -71,4 +71,49 @@ def shidan_str_dict(iteration_int: int) -> dict:
     return_dict[2] = table_feed.draw_table_from_feed(feed_2)
     return_dict[1] = table_feed.draw_table_from_feed(feed_1)
 
+    non_relegated_str = ""
+    for non_relegated in non_relegated_list:
+        non_relegated_str += non_relegated.get_full_wiki_name()[0]
+        if non_relegated != non_relegated_list[-1]:
+            non_relegated_str += " / "
+    relegated_str = ""
+    for relegated in relegated_list:
+        relegated_str += relegated.get_full_wiki_name()[0]
+        if relegated != relegated_list[-1]:
+            relegated_str += " / "
+
+    min_match_date = sql_read.read_match_min_max_date("十段戦", iteration_str, "MIN")[0]
+    max_match_date = sql_read.read_match_min_max_date("十段戦", iteration_str, "MAX")[0]
+
+    return_dict["INFOBOX"] = (
+            "{{Infobox 各年の棋戦\n"
+            + f"|期=第{iteration_int}期\n"
+            + "|イベント名称=十段戦\n"
+            + f"|開催期間={min_match_date.isoformat()} - {max_match_date.isoformat()}\n"
+            + "|タイトル=十段\n"
+            + (f"|前タイトル={former_title.get_full_wiki_name()[0]}\n"
+               if not new_title_flag
+               else "")
+            + f"|今期=第{iteration_int}期\n"
+            + f"|新タイトル={new_title.get_full_wiki_name()[0]}\n"
+            + "|△昇級△=\n"
+            + "|▼降級▼=\n"
+            + "|リーグ=リーグ\n"
+            + f"|リーグ残留={non_relegated_str}\n"
+            + f"|リーグ陷落={relegated_str}\n"
+            + (f"|前回=[[第{iteration_int - 1}期十段戦|第{iteration_int - 1}期]]\n"
+               if iteration_int != 1
+               else "|前回=[[第12期九段戦]]\n")
+            + (f"|次回=[[第{iteration_int + 1}期十段戦|第{iteration_int + 1}期]]\n"
+               if iteration_int != 26
+               else "|次回=[[第1期竜王戦]]\n")
+            + "}}\n"
+    )
+
+    return_dict["LEAD"] = (
+        f"第{iteration_int}期十段戦は、{1961 + iteration_int}年度（{min_match_date.isoformat()}"
+        f" - {max_match_date.isoformat()}）の十段戦である。\n"
+        "十段戦は将棋のタイトル戦の一つである。\n"
+    )
+
     return return_dict

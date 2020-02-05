@@ -40,7 +40,7 @@ def shidan_str_dict(iteration_int: int) -> dict:
         promoted_to_group_dict[node.winner().id] = "リーグ入り"
     seeds_out_in.Seed(5, [feed_1.tree, ], [], [], [], promoted_to_group_dict)
 
-    return_dict[1] = table_feed.draw_table_from_feed([feed_1, ])
+    return_dict[4] = table_feed.draw_table_from_feed([feed_1, ])
 
     non_relegated_str = ""
     for non_relegated in non_relegated_list:

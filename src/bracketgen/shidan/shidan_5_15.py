@@ -92,5 +92,96 @@ def shidan_str_dict(iteration_int: int) -> dict:
     return_dict[3] = table_feed.draw_table_from_feed(feed_3)
     return_dict[2] = table_feed.draw_table_from_feed(feed_2)
     return_dict[1] = table_feed.draw_table_from_feed(feed_1)
+    non_relegated_str = ""
+    for non_relegated in non_relegated_list:
+        non_relegated_str += non_relegated.get_full_wiki_name()[0]
+        if non_relegated != non_relegated_list[-1]:
+            non_relegated_str += " / "
+    relegated_str = ""
+    for relegated in relegated_list:
+        relegated_str += relegated.get_full_wiki_name()[0]
+        if relegated != relegated_list[-1]:
+            relegated_str += " / "
+
+    min_match_date = sql_read.read_match_min_max_date("十段戦", iteration_str, "MIN")[0]
+    max_match_date = sql_read.read_match_min_max_date("十段戦", iteration_str, "MAX")[0]
+
+    return_dict["INFOBOX"] = (
+            "{{Infobox 各年の棋戦\n"
+            + f"|期=第{iteration_int}期\n"
+            + "|イベント名称=十段戦\n"
+            + f"|開催期間={min_match_date.isoformat()} - {max_match_date.isoformat()}\n"
+            + "|タイトル=十段\n"
+            + (f"|前タイトル={former_title.get_full_wiki_name()[0]}\n"
+               if not new_title_flag
+               else "")
+            + f"|今期=第{iteration_int}期\n"
+            + f"|新タイトル={new_title.get_full_wiki_name()[0]}\n"
+            + "|△昇級△=\n"
+            + "|▼降級▼=\n"
+            + "|リーグ=リーグ\n"
+            + f"|リーグ残留={non_relegated_str}\n"
+            + f"|リーグ陷落={relegated_str}\n"
+            + (f"|前回=[[第{iteration_int - 1}期十段戦|第{iteration_int - 1}期]]\n"
+               if iteration_int != 1
+               else "|前回=[[第12期九段戦]]\n")
+            + (f"|次回=[[第{iteration_int + 1}期十段戦|第{iteration_int + 1}期]]\n"
+               if iteration_int != 26
+               else "|次回=[[第1期竜王戦]]\n")
+            + "}}\n"
+    )
+
+    return_dict["LEAD"] = (
+        f"第{iteration_int}期十段戦は、{1961 + iteration_int}年度（{min_match_date.isoformat()}"
+        f" - {max_match_date.isoformat()}）の十段戦である。\n"
+        "十段戦は将棋のタイトル戦の一つである。\n"
+    )
+
+    match_db_remain_war = sql_read.read_match("十段戦", iteration_str, "挑戦者決定リーグ戦", "残留決定戦")
+    if len(match_db_remain_war) != 0:
+        round_db_remain_war = gen_round_name.read_round("十段戦",
+                                                        iteration_str,
+                                                        "挑戦者決定リーグ戦",
+                                                        "残留決定戦")
+        feed_remain_war = table_feed.TableFeed(organized_tr.OrganizedTree(match_db_remain_war,
+                                                                          "挑戦者決定リーグ戦残留決定戦",
+                                                                          round_db_remain_war),
+                                               "",
+                                               "十段戦",
+                                               iteration_str,
+                                               True,
+                                               True,
+                                               "◎",
+                                               "")
+        remain_group_dict = dict()
+        for node in feed_remain_war.tree.last_remain_nodes:
+            remain_group_dict[node.winner().id] = "リーグ残留"
+            remain_group_dict[node.loser().id] = "リーグ陷落"
+        seeds_out_in.Seed(5, [feed_remain_war.tree, ], [], [], [], remain_group_dict)
+
+        return_dict["REMAIN_W"] = table_feed.draw_table_from_feed([feed_remain_war, ])
+
+    match_db_subst_war = sql_read.read_match("十段戦", iteration_str, "挑戦者決定リーグ戦", "補欠決定戦")
+    if len(match_db_subst_war) != 0:
+        round_db_subst_war = gen_round_name.read_round("十段戦",
+                                                       iteration_str,
+                                                       "挑戦者決定リーグ戦",
+                                                       "補欠決定戦")
+        feed_subst_war = table_feed.TableFeed(organized_tr.OrganizedTree(match_db_subst_war,
+                                                                         "挑戦者決定リーグ戦補欠決定戦",
+                                                                         round_db_subst_war),
+                                              "",
+                                              "十段戦",
+                                              iteration_str,
+                                              True,
+                                              True,
+                                              "◎",
+                                              "")
+        subst_group_dict = dict()
+        for node in feed_subst_war.tree.last_remain_nodes:
+            subst_group_dict[node.winner().id] = "リーグ入り"
+        seeds_out_in.Seed(5, [feed_subst_war.tree, ], [], [], [], subst_group_dict)
+
+        return_dict["SUBST_W"] = table_feed.draw_table_from_feed([feed_subst_war, ])
 
     return return_dict

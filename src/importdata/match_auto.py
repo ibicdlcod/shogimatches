@@ -137,7 +137,8 @@ def match_to_sql(in_match_list: list) -> None:
                         "detail1,detail2,detail3,mochishogi,sennichite)\n"
                         "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,"
                         "%s,%s,%s,%s,%s)\n"
-                        "ON DUPLICATE KEY UPDATE fiscal_year = VALUES(fiscal_year);")
+                        "ON DUPLICATE KEY UPDATE "
+                        "fiscal_year = VALUES(fiscal_year);")
         for match in in_match_list:
             args_insert = (match.hash, match.fiscal_year, match.match_date.isoformat(),
                            match.win_loss_for_black, match.forfeit_active,

@@ -1,4 +1,4 @@
-from bracketgen.shidan import shidan_2_3, shidan_4, shidan_5_15, shidan_16_26
+from bracketgen.shidan import shidan_2_3, shidan_4, shidan_5_15, shidan_16_26, kudan
 
 
 def gen_template(in_str_dict: dict):
@@ -21,6 +21,8 @@ def order(in_str):
         return 0
     elif in_str == "LEAD":
         return 1
+    elif in_str == 9:
+        return 5
     elif in_str == 7:
         return 7
     elif in_str == 0:
@@ -82,5 +84,11 @@ def shidan_str(i: int):
         dict_result = shidan_4.shidan_str_dict(i)
     else:
         dict_result = shidan_2_3.shidan_str_dict(i)
+
+    return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", list(dict_result.keys()))
+
+
+def kudan_str(i: int):
+    dict_result = kudan.kudan_str_dict(i)
 
     return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", list(dict_result.keys()))

@@ -22,6 +22,40 @@ def shidan_title_matches(iteration_int: int):
                                             org_tree_title_last)
 
 
+def kudan_title_matches(iteration_int: int):
+    iteration_str = f"第{str(iteration_int).zfill(2)}期"
+    iteration_str_prev = f"第{str(iteration_int - 1).zfill(2)}期"
+
+    title_match_length = "七番勝負" if iteration_int > 6 else "五番勝負"
+    title_matches = sql_read.read_match("九段戦", iteration_str, "タイトル戦", title_match_length)
+    if iteration_int != 1:
+        title_matches_last = sql_read.read_match("九段戦", iteration_str_prev, "タイトル戦", title_match_length)
+        org_tree_title_last = organized_tr.OrganizedTree(title_matches_last, f"タイトル戦{title_match_length}", ["", ])
+    else:
+        org_tree_title_last = None
+    org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦{title_match_length}", ["", ])
+    return title_match.title_match_str_plus(org_tree_title,
+                                            "九段戦",
+                                            iteration_str,
+                                            "九段",
+                                            title_match_length,
+                                            org_tree_title_last)
+
+
+def meijin_kudan_matches(iteration_int: int):
+    iteration_str = f"第{str(iteration_int).zfill(2)}回"
+
+    title_match_length = "五番勝負"
+    title_matches = sql_read.read_match("名人九段", iteration_str, "", title_match_length)
+    org_tree_title = organized_tr.OrganizedTree(title_matches, title_match_length, ["", ])
+    return title_match.title_match_str_plus(org_tree_title,
+                                            "名人九段",
+                                            iteration_str,
+                                            "全日本選手権者",
+                                            title_match_length,
+                                            None)
+
+
 def shidan_group(iteration_int: int):
     result_list_list = []
 

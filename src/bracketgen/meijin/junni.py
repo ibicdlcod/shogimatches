@@ -270,10 +270,10 @@ def generate_junni_table(iteration_int: int, write: bool):
         org_tree_title_last = None
     org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
     result_meijin = title_match.title_match_str_plus(org_tree_title,
-                                                "名人戦",
+                                                     "名人戦",
                                                      iteration_meijin_str,
-                                                "名人",
-                                                "七番勝負",
+                                                     "名人",
+                                                     "七番勝負",
                                                      org_tree_title_last)[0]
 
     result_head_relegation = ""

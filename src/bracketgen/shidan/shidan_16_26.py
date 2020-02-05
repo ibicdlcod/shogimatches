@@ -1,5 +1,3 @@
-from datetime import date
-
 from bracketgen import gen_round_name
 from bracketgen.shidan import shidan_common
 from importdata import sql_read

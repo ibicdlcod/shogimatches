@@ -59,6 +59,17 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
         elif key == "SUBST_W":
             result += "===補欠決定戦===\n"
         result += "{{" + iteration + "十段戦|group=" + str(key) + "}}\n"
+    result += (
+        "== 出典 ==\n"
+        f"*[http://shogititle.nobody.jp/table/ryuo/judan-{str(iteration_int).zfill(2)}.html "
+        f"第{iteration_int}期十段戦：将棋タイトル戦]\n"
+        "{{各期の十段戦}}\n"
+        "{{Shogi-stub}}\n"
+        "{{" + f"DEFAULTSORT:しゆうたんせん{str(iteration_int).zfill(2)}き" + "}}\n"
+        f"[[Category:竜王戦|{1960+iteration_int}-{61+iteration_int}]]\n"
+        f"[[Category:{1960+iteration_int}年の日本]]\n"
+        f"[[Category:{1961+iteration_int}年の日本]]\n"
+    )
     return result
 
 

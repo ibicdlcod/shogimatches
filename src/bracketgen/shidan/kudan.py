@@ -141,7 +141,7 @@ def kudan_str_dict(iteration_int: int) -> dict:
 
     return_dict["LEAD"] = (
         f"第{iteration_int}期九段戦は、{1949 + iteration_int}年度（{min_match_date.isoformat()}"
-        f" - {max_match_date.isoformat()}）の九段戦である。\n"
+        f" - {max_match_date.isoformat()}）の[[九段戦]]である。\n"
         "九段戦は将棋のタイトル戦の一つである。\n"
     )
 

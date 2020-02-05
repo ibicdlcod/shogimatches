@@ -27,10 +27,13 @@ def kudan_title_matches(iteration_int: int):
     iteration_str_prev = f"第{str(iteration_int - 1).zfill(2)}期"
 
     title_match_length = "七番勝負" if iteration_int > 6 else "五番勝負"
+    title_match_length_former = "七番勝負" if iteration_int > 7 else "五番勝負"
     title_matches = sql_read.read_match("九段戦", iteration_str, "タイトル戦", title_match_length)
-    if iteration_int != 1:
-        title_matches_last = sql_read.read_match("九段戦", iteration_str_prev, "タイトル戦", title_match_length)
-        org_tree_title_last = organized_tr.OrganizedTree(title_matches_last, f"タイトル戦{title_match_length}", ["", ])
+    if iteration_int != 1 and iteration_int != 7:
+        title_matches_last = sql_read.read_match("九段戦", iteration_str_prev, "タイトル戦", title_match_length_former)
+        org_tree_title_last = organized_tr.OrganizedTree(title_matches_last,
+                                                         f"タイトル戦{title_match_length_former}",
+                                                         ["", ])
     else:
         org_tree_title_last = None
     org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦{title_match_length}", ["", ])

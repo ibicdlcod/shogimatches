@@ -244,7 +244,7 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                 "#fff0f0" if this_kishi.woman else "#f9f9f9",
                 False,
                 (True, True, True, True),
-                match_icons_len
+                match_icons_len * 1.2 if match_icons_len >= 4.0 else match_icons_len
             )
             table_pos_all.append(t3)
             out_seed_text = out_seed[k] if k in out_seed.keys() else ""

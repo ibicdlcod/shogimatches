@@ -18,9 +18,9 @@ def kudan_str_dict(iteration_int: int) -> dict:
     former_title = title_result[2]
     new_title = title_result[3]
 
-    if iteration_int < 9:
-        meijin_kudan_result = shidan_common.meijin_kudan_matches(iteration_int)
-        return_dict[9] = meijin_kudan_result
+    if iteration_int < 7:
+        meijin_kudan_result = shidan_common.meijin_kudan_matches(iteration_int + 2)
+        return_dict[9] = meijin_kudan_result[0]
     
     feed_0 = []
     tree_0 = []
@@ -103,16 +103,20 @@ def kudan_str_dict(iteration_int: int) -> dict:
         feed_1.append(feed_1_i)
         tree_1.append(feed_1_i.tree)
     seeds_out_in.Seed(1, tree_1, tree_2, hiragana_list)
-    seeds_out_in.Seed(1, tree_2, tree_3, katakana_list)
-    seeds_out_in.Seed(1, tree_3, tree_0, letter_list)
+    if len(tree_3) != 0:
+        seeds_out_in.Seed(1, tree_2, tree_3, katakana_list)
+        seeds_out_in.Seed(1, tree_3, tree_0, letter_list)
+    else:
+        seeds_out_in.Seed(1, tree_2, tree_0, letter_list)
     promoted_to_group_dict = dict()
-    for tree in tree_3:
+    for tree in tree_0:
         for node in tree.last_remain_nodes:
-            promoted_to_group_dict[node.winner().id] = "リーグ入り"
+            promoted_to_group_dict[node.winner().id] = "挑戦者"
     seeds_out_in.Seed(5, tree_0, [], [], [], promoted_to_group_dict)
 
     return_dict[0] = table_feed.draw_table_from_feed(feed_0)
-    return_dict[3] = table_feed.draw_table_from_feed(feed_3)
+    if len(tree_3) != 0:
+        return_dict[3] = table_feed.draw_table_from_feed(feed_3)
     return_dict[2] = table_feed.draw_table_from_feed(feed_2)
     return_dict[1] = table_feed.draw_table_from_feed(feed_1)
 
@@ -141,7 +145,7 @@ def kudan_str_dict(iteration_int: int) -> dict:
 
     return_dict["LEAD"] = (
         f"第{iteration_int}期九段戦は、{1949 + iteration_int}年度（{min_match_date.isoformat()}"
-        f" - {max_match_date.isoformat()}）の九段戦である。\n"
+        f" - {max_match_date.isoformat()}）の[[十段戦 (将棋)|九段戦]]である。\n"
         "九段戦は将棋のタイトル戦の一つである。\n"
     )
 

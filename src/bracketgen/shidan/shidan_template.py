@@ -11,7 +11,7 @@ def gen_template(in_str_dict: dict):
         result += f"|{k}={v2}"
     result += "|}}\n"
     result += ("<noinclude>\n"
-               "[[Category:順位戦関連のテンプレート]]\n"
+               "[[Category:十段戦関連のテンプレート]]\n"
                "</noinclude>\n")
     return result
 

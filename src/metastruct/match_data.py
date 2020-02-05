@@ -36,7 +36,7 @@ class Match:
                  i_sennichite: int
                  ):
         match_code = (i_match_date.isoformat()
-                      + i_black + "vs" + i_white)
+                      + i_black + "vs" + i_white + i_tournament)
         h = hashlib.sha512()
         h.update(bytes(match_code, "utf-8"))
         self.hash = h.digest()
@@ -56,7 +56,7 @@ class Match:
 
     def __str__(self) -> str:
         out_str_item = [
-                        # str(self.hash.hex()),
+                        str(self.hash.hex()),
                         str(self.fiscal_year),
                         str(self.match_date.isoformat()),
                         str(self.win_loss_for_black),

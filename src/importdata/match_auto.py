@@ -163,3 +163,46 @@ def match_to_sql(in_match_list: list) -> None:
     finally:
         if conn is not None and conn.is_connected():
             conn.close()
+
+
+def match_del_to_sql() -> None:
+    """ Connect to MySQL database """
+
+    db_config = db_conf.read_db_config()
+    conn = None
+
+    try:
+        conn = mysql.connector.MySQLConnection(**db_config)
+
+        if conn.is_connected():
+            gen_conf = db_conf.read_general_config()
+            if gen_conf["sql_output"] == "True":
+                print('Exporting matches to MySQL database')
+
+        cursor = conn.cursor()
+        query_use = "USE shogi;"
+        args_use = tuple()
+        cursor.execute(query_use, args_use)
+
+        print('begin porting matches')
+
+        query_insert = "DELETE FROM matches;"
+        args_insert = ()
+        cursor = conn.cursor()
+        cursor.execute(query_insert, args_insert)
+
+        if cursor.lastrowid:
+            print('last insert id', cursor.lastrowid)
+        else:
+            pass
+            # print('last insert id not found')  # Expected behaviour
+
+        cursor.close()
+        conn.commit()
+
+    except mysql.connector.Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()

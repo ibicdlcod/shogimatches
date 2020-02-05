@@ -1,9 +1,11 @@
+from datetime import date
+
 from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
-from bracketgen.shidan import shidan_2_3, shidan_4, shidan_5_15, shidan_16_26, shidan_template
-from importdata import birthday, kishi_all, match_mass
+from bracketgen.shidan import shidan_template
+from importdata import birthday, kishi_all, match_mass, sql_read, match_auto
 import gen_config
-
+from metastruct.match_data import Match
 
 if __name__ == '__main__':
     gen_conf = gen_config.read_primary_config()
@@ -34,7 +36,7 @@ if __name__ == '__main__':
                 continue
             junni.generate_junni_table(i, write=(i != int(junni_conf["start_iter"])))
 
-    for i in range(10, 11):
+    for i in range(1, 27):
         result_str = shidan_template.shidan_str(i)
         outfile1_name = f"txt_dst\\shidan\\{i}.txt"
         outfile2_name = f"txt_dst\\shidan\\usage_{i}.txt"

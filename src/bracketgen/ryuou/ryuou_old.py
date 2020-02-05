@@ -17,12 +17,12 @@ def ryuou_old_str_dict(iteration: str, iteration_last: str = None) -> dict:
     else:
         org_tree_title_last = None
     org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
-    return_dict[7] = title_match.title_match_str(org_tree_title,
+    return_dict[7] = title_match.title_match_str_plus(org_tree_title,
                                                  "竜王戦",
-                                                 iteration,
+                                                      iteration,
                                                  "竜王",
                                                  "七番勝負",
-                                                 org_tree_title_last)
+                                                      org_tree_title_last)[0]
     legend_string = ('{| border="1" class="wikitable" style="font-size:89%"\n|\n'
                      '◎：決勝進出　△：昇級　◇：残留 ▼：降級\n|}\n')
     feeds_x = []

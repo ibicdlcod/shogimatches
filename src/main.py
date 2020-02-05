@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 continue
             junni.generate_junni_table(i, write=(i != int(junni_conf["start_iter"])))
 
-    for i in range(2, 4):
+    for i in range(16, 27):
         outfile_name = f"txt_dst\\shidan\\{i}.txt"
         outfile = open(outfile_name, "w", encoding="utf-8-sig")
         if i >= 16:
@@ -45,6 +45,10 @@ if __name__ == '__main__':
             result = shidan_4.shidan_str_dict(i)
         else:
             result = shidan_2_3.shidan_str_dict(i)
+        out_str = result["INFOBOX"]
+        outfile.write(out_str)
+        out_str = result["LEAD"]
+        outfile.write(out_str)
         out_str = result[7]
         outfile.write(out_str)
         outfile.write(f"==第{str(i).zfill(2)}期十段戦挑戦者決定リーグ戦==\n")

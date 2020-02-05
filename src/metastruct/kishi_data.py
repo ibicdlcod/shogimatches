@@ -136,6 +136,20 @@ class Kishi:
             time.sleep(delay)
         return birthday.from_sql_birthday(self.id)
 
+    def get_full_wiki_name(self):
+        display_length = len(self.fullname)
+        if self.wiki_name == "":
+            kishi_display_name = ("[["
+                                  + self.fullname
+                                  + "]]")
+        else:
+            kishi_display_name = ("[["
+                                  + self.wiki_name
+                                  + "|"
+                                  + self.fullname
+                                  + "]]")
+        return kishi_display_name, display_length
+
 
 def kishi_from_str(in_str: str):
     a = in_str.split(",")

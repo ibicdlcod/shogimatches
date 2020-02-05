@@ -11,9 +11,16 @@ def shidan_str_dict(iteration_int: int) -> dict:
 
     iteration_str = f"第{str(iteration_int).zfill(2)}期"
 
-    return_dict[7] = shidan_common.shidan_title_matches(iteration_int)
+    title_result = shidan_common.shidan_title_matches(iteration_int)
+    return_dict[7] = title_result[0]
+    new_title_flag = title_result[1]
+    former_title = title_result[2]
+    new_title = title_result[3]
 
-    return_dict[0] = shidan_common.shidan_group(iteration_int)
+    group_result = shidan_common.shidan_group(iteration_int)
+    return_dict[0] = group_result[0]
+    non_relegated_list = group_result[1]
+    relegated_list = group_result[2]
 
     feed_3 = []
     tree_3 = []

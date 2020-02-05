@@ -1,12 +1,12 @@
 from metastruct import kishi_data, organized_tr, tree_node
 
 
-def title_match_str(matches_tree: organized_tr.OrganizedTree,
-                    tournament_name: str,
-                    iteration: str,
-                    title_name: str,
-                    max_match_length: str,
-                    last_matches_tree=None) -> str:
+def title_match_str_plus(matches_tree: organized_tr.OrganizedTree,
+                         tournament_name: str,
+                         iteration: str,
+                         title_name: str,
+                         max_match_length: str,
+                         last_matches_tree=None) -> tuple:
     match_node = matches_tree.last_remain_nodes[0]
     last_matches_node = last_matches_tree.last_remain_nodes[0] if last_matches_tree is not None else None
     match_length = len(match_node.series)
@@ -90,7 +90,7 @@ def title_match_str(matches_tree: organized_tr.OrganizedTree,
         if match_node.winner() == white:
             return_result += "'''" + title_name + "位獲得'''"
     return_result += "\n|}\n"
-    return return_result
+    return return_result, new_title_flag, black, match_node.winner()
 
 
 def match_icon_for_kishi(this_node: tree_node.TreeNode, kishi_id: int):

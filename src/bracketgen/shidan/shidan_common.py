@@ -14,32 +14,31 @@ def shidan_title_matches(iteration_int: int):
     else:
         org_tree_title_last = None
     org_tree_title = organized_tr.OrganizedTree(title_matches, f"タイトル戦七番勝負", ["", ])
-    return title_match.title_match_str(org_tree_title,
-                                       "十段戦",
-                                       iteration_str,
-                                       "十段",
-                                       "七番勝負",
-                                       org_tree_title_last)
+    return title_match.title_match_str_plus(org_tree_title,
+                                            "十段戦",
+                                            iteration_str,
+                                            "十段",
+                                            "七番勝負",
+                                            org_tree_title_last)
 
 
 def shidan_group(iteration_int: int):
-
     result_list_list = []
 
     junni_info_list = junni_info_generic.junni_info_from_sql("十段戦", iteration_int)
     junni_info_dict = dict()
     junni_info_full_dict = dict()
+    junni_result_dict = dict()
     for junni_info_item in junni_info_list:
         junni_info_dict[junni_info_item.kishi.id] = junni_info_item.junni
         junni_info_full_dict[junni_info_item.kishi.id] = junni_info_item
+        junni_result_dict[junni_info_item.kishi] = junni_info_item.result
 
     iteration_str = f"第{str(iteration_int).zfill(2)}期"
     junni_matches = sql_read.read_match("十段戦", iteration_str, "挑戦者決定リーグ戦", "")
     league_info_db = lea_from_mat.gen_lea_pos_no_round_names(junni_matches, junni_info_dict)
 
     for league_info in league_info_db:
-        if iteration_int == 11:
-            a = 1
         this_id = league_info.kishi.id
         this_junni_info = junni_info_full_dict[this_id]
         this_kishi = league_info.kishi
@@ -67,11 +66,19 @@ def shidan_group(iteration_int: int):
             league_info,
             this_id,
         ])
-    result = draw_table_shidan_group(result_list_list, iteration_int)
-    return result
+    result = draw_table_shidan_group(result_list_list)
+
+    relegated_list = []
+    non_relegated_list = []
+    for k, v in junni_result_dict.items():
+        if v == "downgrade":
+            relegated_list.append(k)
+        else:
+            non_relegated_list.append(k)
+    return result, non_relegated_list, relegated_list
 
 
-def draw_table_shidan_group(in_list_list: list, iteration_int: int):
+def draw_table_shidan_group(in_list_list: list):
     result = ""
     max_name_length = 0
     round_length = 0

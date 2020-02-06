@@ -2,7 +2,7 @@ from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
 from bracketgen.shidan import shidan_template
 from bracketgen.eiou import eiou_template
-from importjunni import junni_oui_auto
+from bracketgen.oui import oui_55
 from importdata import birthday, kishi_all, match_mass
 import gen_config
 
@@ -73,3 +73,11 @@ if __name__ == '__main__':
             outfile2.write(result_str[1])
             outfile1.close()
             outfile2.close()
+
+    for i in range(1, 61):
+        outfile_name = f"txt_dst\\oui\\{i}.txt"
+        outfile = open(outfile_name, "w", encoding="utf-8-sig")
+        for k, v in oui_55.oui_str_dict(i).items():
+            outfile.write(k + "\n")
+            outfile.write(v)
+        outfile.close()

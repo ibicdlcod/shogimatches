@@ -2,6 +2,7 @@ from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
 from bracketgen.shidan import shidan_template
 from bracketgen.eiou import eiou_template
+from importjunni import junni_oui_auto
 from importdata import birthday, kishi_all, match_mass
 import gen_config
 
@@ -59,14 +60,6 @@ if __name__ == '__main__':
             outfile2.write(result_str[1])
             outfile1.close()
             outfile2.close()
-
-    # result_dict = eiou_old.eiou_str_dict(2)
-    # outfile_name = f"temp.txt"
-    # outfile = open(outfile_name, "w", encoding="utf-8-sig")
-    # for k, v in result_dict.items():
-    #     outfile.write(str(k) + "\n")
-    #     outfile.write(v)
-    # outfile.close()
     
     eiou_conf = gen_config.read_primary_config('config\\config.ini', 'eiou')
     if eiou_conf["enabled"] == "True":

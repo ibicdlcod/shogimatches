@@ -35,6 +35,7 @@ class JunniInfo:
     def __str__(self) -> str:
         out_str_item = [
                         # str(self.hash.hex()),
+                        self.tournament_name,
                         str(self.iteration),
                         str(self.junni),
                         self.kishi.fullname,

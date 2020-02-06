@@ -21,8 +21,6 @@ def import_junni() -> list:
                 }
             )
             with urllib.request.urlopen(req) as response:
-                # with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0"
-                #                             f"&pd={1000 + iteration}&mn={tournament}") as response:
                 html = response.read()
             html_str = str(html, encoding="Shift_JIS")
             shidan_start_index = html_str.find('<!-- 十段戦 -->')

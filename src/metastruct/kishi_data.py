@@ -189,7 +189,7 @@ def query_kishi_from_name(in_name_pri: str) -> Kishi:
         in_name = "廣津久雄"
     elif in_name_pri == "松田茂行":
         in_name = "松田茂役"
-    elif in_name_pri == "森&#38622;二":
+    elif in_name_pri == "森&#38622;二" or in_name_pri == "森けい二":
         in_name = "森雞二"
     elif in_name_pri == "田中正之":
         in_name = "田中魁秀"

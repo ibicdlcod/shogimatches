@@ -23,8 +23,6 @@ def import_junni(iteration: int) -> list:
                 }
             )
             with urllib.request.urlopen(req) as response:
-                # with urllib.request.urlopen(f"http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0"
-                #                             f"&pd={1000 + iteration}&mn={tournament}") as response:
                 html = response.read()
             html_str = str(html, encoding="Shift_JIS")
             process_junni_html_all(html_str, iteration)
@@ -97,7 +95,7 @@ def process_junni_html(in_str, iteration, tier):
 
         kishi_name_index = real_row.find('title="')
         kishi_name_index = real_row.find('">', kishi_name_index) + 2
-        if kishi_name_index == 1:
+        if kishi_name_index == (-1 + 2):
             real_kishi = None
         else:
             kishi_name = real_row[kishi_name_index]

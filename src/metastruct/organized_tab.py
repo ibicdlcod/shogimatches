@@ -59,7 +59,7 @@ def union_table_with_dict(in_org_table_list_list: list) -> OrganizedTable:
         in_table_list = in_org_table.table_list
         for cell in in_table_list:
             cell.shift(row_current, 0)
-        row_current += max([in_table.to_cell[0] for in_table in in_table_list]) + 2
+        row_current = max([in_table.to_cell[0] for in_table in in_table_list]) + 2
     return_result = []
 
     new_column_disabled_dic = dict()

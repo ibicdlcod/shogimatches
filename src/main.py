@@ -74,7 +74,7 @@ if __name__ == '__main__':
             outfile1.close()
             outfile2.close()
 
-    for i in range(1, 61):
+    for i in range(19, 61):
         outfile_name = f"txt_dst\\oui\\{i}.txt"
         outfile = open(outfile_name, "w", encoding="utf-8-sig")
         for k, v in oui_55.oui_str_dict(i).items():

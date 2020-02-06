@@ -162,7 +162,7 @@ def oui_str_dict(iteration_int: int) -> dict:
     )
 
     return_dict["LEAD"] = (
-        f"第{iteration_int}期王位戦は、{1961 + iteration_int}年度（{min_match_date.isoformat()}"
+        f"第{iteration_int}期王位戦は、{1959 + iteration_int}年度（{min_match_date.isoformat()}"
         f" - {max_match_date.isoformat()}）の[[王位戦 (将棋)|王位戦]]である。\n"
         "王位戦は将棋のタイトル戦の一つである。\n"
     )

@@ -155,6 +155,8 @@ def draw_table_oui_group(in_list_list: list):
 
 def get_playoff_tree(iteration: str, playoff_desc: str):
     match_db = sql_read.read_match("王位戦", iteration, "挑戦者決定リーグ", playoff_desc)
-    round_db = gen_round_name.read_round("竜王戦", iteration, "挑戦者決定リーグ", playoff_desc)
+    if len(match_db) == 0:
+        return None
+    round_db = gen_round_name.read_round("王位戦", iteration, "挑戦者決定リーグ", playoff_desc)
     org_tree = organized_tr.OrganizedTree(match_db, f"挑戦者決定リーグ{playoff_desc}", round_db)
     return org_tree

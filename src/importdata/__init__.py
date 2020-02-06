@@ -1,4 +1,5 @@
-from importdata import former_meijin, juuni_junni_auto, junni_shidan_auto
+from importdata import former_meijin
+from importjunni import juuni_junni_auto, junni_shidan_auto
 from metastruct.__init__ import sql_init
 import gen_config
 import importdata.python_mysql_dbconf as db_conf

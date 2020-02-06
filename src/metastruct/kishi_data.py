@@ -1,6 +1,5 @@
 from datetime import date
-from importdata import birthday, former_meijin
-from metastruct import kishi_rank_sql
+from importdata import birthday, former_meijin, kishi_rank_sql
 import mysql.connector
 import importdata.python_mysql_dbconf as db_conf
 import time

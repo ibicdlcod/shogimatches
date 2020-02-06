@@ -74,7 +74,9 @@ def import_junni(iteration: int) -> list:
                     junni_i = 1 if i < 2 else 2
                 elif 26 < iteration < 37:
                     junni_i = 1 if i < 2 else 2
-                elif 36 < iteration:
+                elif 36 < iteration < 56:
+                    junni_i = (i + 1) if i < 2 else 3
+                elif iteration > 55:
                     junni_i = (i + 1)
 
                 result_i = "normal"
@@ -102,7 +104,9 @@ def import_junni(iteration: int) -> list:
                     junni_i = 1 if i < 2 else 2
                 elif 26 < iteration < 37:
                     junni_i = 1 if i < 2 else 2
-                elif 36 < iteration:
+                elif 36 < iteration < 56:
+                    junni_i = (i + 1) if i < 2 else 3
+                elif iteration > 55:
                     junni_i = (i + 1)
 
                 result_i = "normal"

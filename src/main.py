@@ -1,6 +1,7 @@
 from bracketgen.meijin import junni
 from bracketgen.ryuou import ryuou_write
-from bracketgen.shidan import shidan_template, kudan
+from bracketgen.shidan import shidan_template
+from bracketgen.eiou import eiou_template
 from importdata import birthday, kishi_all, match_mass
 import gen_config
 
@@ -52,6 +53,27 @@ if __name__ == '__main__':
             result_str = shidan_template.kudan_str(i)
             outfile1_name = f"txt_dst\\kudan\\{i}.txt"
             outfile2_name = f"txt_dst\\kudan\\usage_{i}.txt"
+            outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
+            outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
+            outfile1.write(result_str[0])
+            outfile2.write(result_str[1])
+            outfile1.close()
+            outfile2.close()
+
+    # result_dict = eiou_old.eiou_str_dict(2)
+    # outfile_name = f"temp.txt"
+    # outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    # for k, v in result_dict.items():
+    #     outfile.write(str(k) + "\n")
+    #     outfile.write(v)
+    # outfile.close()
+    
+    eiou_conf = gen_config.read_primary_config('config\\config.ini', 'eiou')
+    if eiou_conf["enabled"] == "True":
+        for i in range(int(eiou_conf["start_iter"]), int(eiou_conf["end_iter"]) + 1):
+            result_str = eiou_template.eiou_str(i)
+            outfile1_name = f"txt_dst\\eiou\\{i}.txt"
+            outfile2_name = f"txt_dst\\eiou\\usage_{i}.txt"
             outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
             outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
             outfile1.write(result_str[0])

@@ -70,3 +70,16 @@ def content():
             outfile2.write(result_str[1])
             outfile1.close()
             outfile2.close()
+
+    ouza_conf = gen_config.read_primary_config('config\\config.ini', 'ouza')
+    if ouza_conf["enabled"] == "True":
+        for i in range(int(ouza_conf["start_iter"]), int(ouza_conf["end_iter"]) + 1):
+            result_str = ouza_template.ouza_str(i)
+            outfile1_name = f"txt_dst\\ouza\\{i}.txt"
+            outfile2_name = f"txt_dst\\ouza\\usage_{i}.txt"
+            outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
+            outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
+            outfile1.write(result_str[0])
+            outfile2.write(result_str[1])
+            outfile1.close()
+            outfile2.close()

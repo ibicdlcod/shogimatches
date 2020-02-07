@@ -1,6 +1,7 @@
 from bracketgen.eiou import eiou_template
 from bracketgen.meijin import junni
 from bracketgen.oui import oui_template
+from bracketgen.ouza import ouza_template
 from bracketgen.ryuou import ryuou_write
 from bracketgen.shidan import shidan_template
 from importdata import birthday, kishi_all, match_mass
@@ -87,27 +88,33 @@ if __name__ == '__main__':
             outfile2.write(result_str[1])
             outfile1.close()
             outfile2.close()
-            
-    # for i in range(19, 61):
-    #     outfile_name = f"txt_dst\\oui\\{i}.txt"
-    #     outfile = open(outfile_name, "w", encoding="utf-8-sig")
-    #     for k, v in oui.oui_str_dict(i).items():
-    #         outfile.write(k + "\n")
-    #         outfile.write(v)
-    #     outfile.close()
-    infile_name = f"oui.txt"
-    infile = open(infile_name, "r", encoding="utf-8-sig")
-    outfile_name = f"oui_out.txt"
-    outfile = open(outfile_name, "w", encoding="utf-8-sig")
-    re_pattern = re.compile(r"^!(\d*)$")
-    line = infile.readline()
-    while line:
-        # print(line)
-        re_match = re.match(re_pattern, line)
-        if re_match is not None:
-            outfile.write(re.sub(re_pattern, r"![[第\1期王位戦|\1]]", line))
-        else:
-            outfile.write(line)
-        line = infile.readline()
-    infile.close()
-    outfile.close()
+
+    # infile_name = f"oui.txt"
+    # infile = open(infile_name, "r", encoding="utf-8-sig")
+    # outfile_name = f"oui_out.txt"
+    # outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    # re_pattern = re.compile(r"^!(\d*)$")
+    # line = infile.readline()
+    # while line:
+    #     # print(line)
+    #     re_match = re.match(re_pattern, line)
+    #     if re_match is not None:
+    #         outfile.write(re.sub(re_pattern, r"![[第\1期王位戦|\1]]", line))
+    #     else:
+    #         outfile.write(line)
+    #     line = infile.readline()
+    # infile.close()
+    # outfile.close()
+
+    ouza_conf = gen_config.read_primary_config('config\\config.ini', 'ouza')
+    if ouza_conf["enabled"] == "True":
+        for i in range(int(ouza_conf["start_iter"]), int(ouza_conf["end_iter"]) + 1):
+            result_str = ouza_template.ouza_str(i)
+            outfile1_name = f"txt_dst\\ouza\\{i}.txt"
+            outfile2_name = f"txt_dst\\ouza\\usage_{i}.txt"
+            outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
+            outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
+            outfile1.write(result_str[0])
+            outfile2.write(result_str[1])
+            outfile1.close()
+            outfile2.close()

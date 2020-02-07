@@ -12,14 +12,17 @@ def ouza_str_dict(iteration_int: int) -> dict:
     iteration_str = (f"第{str(iteration_int).zfill(2)}期"
                      if iteration_int >= 31
                      else f"第{str(iteration_int).zfill(2)}回")
-    iteration_str_prev = (f"第{str(iteration_int - 1).zfill(2)}期"
+    iteration_str_display = (f"第{str(iteration_int)}期"
+                             if iteration_int >= 31
+                             else f"第{str(iteration_int)}回")
+    iteration_str_prev = (f"第{str(iteration_int - 1)}期"
                           if iteration_int >= 32
-                          else f"第{str(iteration_int - 1).zfill(2)}回")
+                          else f"第{str(iteration_int - 1)}回")
     if iteration_int == 1:
         iteration_str_prev = ""
-    iteration_str_next = (f"第{str(iteration_int + 1).zfill(2)}期"
+    iteration_str_next = (f"第{str(iteration_int + 1)}期"
                           if iteration_int >= 30
-                          else f"第{str(iteration_int + 1).zfill(2)}回")
+                          else f"第{str(iteration_int + 1)}回")
 
     if iteration_int >= 18:
         if iteration_int >= 31:
@@ -187,15 +190,15 @@ def ouza_str_dict(iteration_int: int) -> dict:
 
     return_dict["INFOBOX"] = (
             "{{Infobox 各年の棋戦\n"
-            + f"|期={iteration_str}\n"
+            + f"|期={iteration_str_display}\n"
             + "|イベント名称=王座戦\n"
             + f"|開催期間={min_match_date.isoformat()} - {max_match_date.isoformat()}\n"
             + "|タイトル=王座\n"
             + (f"|前タイトル={former_title.get_full_wiki_name()[0]}\n"
                if not new_title_flag
                else "")
-            + f"|今期={iteration_str}\n"
-            + f"|新タイトル={new_title.get_full_wiki_name()[0] if iteration_int >= 18 else winner_name}\n"
+            + f"|今期={iteration_str_display}\n"
+            + f"|新タイトル={new_title.get_full_wiki_name()[0] if iteration_int >= 18 else winner_name[0]}\n"
             + "|△昇級△=\n"
             + "|▼降級▼=\n"
             + f"|前回=[[{iteration_str_prev}王座戦|{iteration_str_prev}]]\n"
@@ -204,9 +207,9 @@ def ouza_str_dict(iteration_int: int) -> dict:
     )
 
     return_dict["LEAD"] = (
-        f"第{iteration_int}期王座戦は、{1952 + iteration_int}年度（{min_match_date.isoformat()}"
+        f"{iteration_str}王座戦は、{1952 + iteration_int}年度（{min_match_date.isoformat()}"
         f" - {max_match_date.isoformat()}）の[[王座戦 (将棋)|王座戦]]である。\n"
-        "王座戦は将棋のタイトル戦の一つである。\n"
+        + ("王座戦は将棋のタイトル戦の一つである。\n" if iteration_int >= 31 else "")
     )
 
     return return_dict

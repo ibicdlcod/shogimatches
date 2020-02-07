@@ -1,4 +1,4 @@
-from bracketgen.oui import oui
+from bracketgen.oui import oui_main
 
 
 def gen_template(in_str_dict: dict):
@@ -37,8 +37,9 @@ def order(in_str):
         return 99
 
 
-def gen_usage(iteration: str, in_str_dict_keys: list):
+def gen_usage(iteration: str, in_str_dict: dict):
     result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
+    in_str_dict_keys = list(in_str_dict.keys())
     in_str_dict_keys.sort(key=order)
     iteration_int = int(iteration.lstrip("第").rstrip("期").rstrip("回"))
     for key in in_str_dict_keys:
@@ -52,7 +53,7 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
             result += f"==残留プレーオフ==\n"
         elif key == "PRELIMINARY":
             result += "==予選==\n"
-        result += "{{" + iteration + "王位戦|group=" + str(key) + "}}\n"
+        result += in_str_dict[key]
     year_at = str(59 + iteration_int)
     if iteration_int == 41:
         year_at = str(2000)
@@ -73,6 +74,6 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
 
 
 def oui_str(i: int):
-    dict_result = oui.oui_str_dict(i)
-    return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", list(dict_result.keys()))
+    dict_result = oui_main.oui_str_dict(i)
+    return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", dict_result)
 

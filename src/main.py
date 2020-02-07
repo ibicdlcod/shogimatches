@@ -1,10 +1,11 @@
+from bracketgen.eiou import eiou_template
 from bracketgen.meijin import junni
+from bracketgen.oui import oui_template
 from bracketgen.ryuou import ryuou_write
 from bracketgen.shidan import shidan_template
-from bracketgen.eiou import eiou_template
-from bracketgen.oui import oui, oui_template
 from importdata import birthday, kishi_all, match_mass
 import gen_config
+import re
 
 if __name__ == '__main__':
     gen_conf = gen_config.read_primary_config()
@@ -94,3 +95,19 @@ if __name__ == '__main__':
     #         outfile.write(k + "\n")
     #         outfile.write(v)
     #     outfile.close()
+    infile_name = f"oui.txt"
+    infile = open(infile_name, "r", encoding="utf-8-sig")
+    outfile_name = f"oui_out.txt"
+    outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    re_pattern = re.compile(r"^!(\d*)$")
+    line = infile.readline()
+    while line:
+        # print(line)
+        re_match = re.match(re_pattern, line)
+        if re_match is not None:
+            outfile.write(re.sub(re_pattern, r"![[第\1期王位戦|\1]]", line))
+        else:
+            outfile.write(line)
+        line = infile.readline()
+    infile.close()
+    outfile.close()

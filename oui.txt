@@ -1,0 +1,326 @@
+﻿==歴代七番勝負・挑戦者決定リーグ==
+[[File:Jeu-shogi-56-oi-sen.jpg|thumb]]
+{| border="1" class="wikitable" style="font-size:89%"
+|
+*番勝負
+**○●は王位から見た勝敗、千は[[千日手]]、持は[[持将棋]]。<span style="background-color: #fcc;">赤色</span>の対局者が勝者。
+*各組
+**◎は組優勝、▼は陥落。
+** <span style="background-color: #cfc;">緑色</span>は組優勝またはプレーオフ出場(残留者決定戦を兼ねる場合も含む)、但し王位奪取時は<span style="background-color: #fcc;">赤色</span>。
+** <span style="background-color: #A5D6A7;">濃い緑</span>は組最上位の成績ながら、3勝2敗時の規定によりプレーオフなしで2位残留となった者。
+** <span style="background-color: #ccf;">青色</span>は、残留決定戦出場。
+** <span style="background-color: #8ff;">水色</span>は残留ボーダー上ながら、順位差で陥落を免れた者(27～55期)、最上位ではない3勝2敗時の規定により残留した者(56期 - )。
+** <span style="background-color: #90CAF9;">濃い水色</span>は残留ボーダー上ながら、順位差で陥落した者(27～55期)、3勝2敗時の規定により陥落した者(56期 - )。
+|}
+{|class="wikitable" style="font-size:80%; margin-right:1em;"
+!期!!年度!!A組優勝!!勝敗!!B組優勝!!!! colspan="6" |A組!!colspan="6"|B組
+|-
+!1
+|1960||style="background-color: #fcc"|[[大山康晴]]||○千○○●○||[[塚田正夫]]
+||| style="background-color: #fcc" |[[大山康晴|大山]]<sup>◎</sup>||[[丸田祐三|丸田]]<sup>▼</sup>|| style="background-color: #cfc" |[[二上達也|二上]]||[[坂口允彦|坂口]]<sup>▼</sup>||[[関根茂]]<sup>▼</sup>||||style="background-color: #cfc;"|[[塚田正夫|塚田正]]<sup>◎</sup>||[[大野源一|大野源]]||[[松浦卓造|松浦卓]]<sup>▼</sup>||[[熊谷達人|熊谷]]<sup>▼</sup>||[[本間爽悦|本間爽]]<sup>▼</sup>||
+|-
+! rowspan="2" |期!! rowspan="2" |開催<br />年度!! rowspan="2" |前期王位!! rowspan="2" |勝敗!! colspan="2" |組優勝!! colspan="6" |A組!! colspan="6" |B組
+|-
+!挑戦者!!挑決敗者!! colspan="1" |前期残留!! colspan="5" |予選突破!! colspan="2" |前期残留!! colspan="4" |予選突破
+|-
+!2
+|1961|| style="background-color: #fcc" |大山康晴||○○●○○||[[丸田祐三]]
+|二上達也||塚田正<sup>▼</sup>|| style="background-color: #cfc" |丸田<sup>◎</sup>||[[高島一岐代|高島一]]<sup>▼</sup>||[[富沢幹雄|富沢]]<sup>▼</sup>|| style="background-color: #cfc" |[[大村和久|大村]]|||| style="background-color: #cfc" |二上<sup>◎</sup>|| style="background-color: #cfc" |大野源||[[高柳敏夫|高柳]]<sup>▼</sup>||[[山田道美|山田]]<sup>▼</sup>||[[伊達康夫|伊達]]<sup>▼</sup>||
+|-
+! rowspan="2" |期!! rowspan="2" |開催<br />年度!! rowspan="2" |前期王位!! rowspan="2" |勝敗!! colspan="2" |組優勝!! colspan="6" |紅組!! colspan="6" |白組
+|-
+!挑戦者!!挑決敗者!! colspan="2" |前期残留!! colspan="4" |予選突破!! colspan="2" |前期残留!! colspan="4" |予選突破
+|-
+!3
+|1962||style="background-color: #fcc"|大山康晴||○○○○||[[花村元司]]
+|升田幸三||丸田<sup>▼</sup>||大野源<sup>▼</sup>|| style="background-color: #cfc" |[[灘蓮照|灘]]|| style="background-color: #cfc" |[[花村元司|花村]]<sup>◎</sup>||[[内藤國雄|内藤]]<sup>▼</sup>||||二上<sup>▼</sup>||大村<sup>▼</sup>|| style="background-color: #cfc" |[[升田幸三|升田]]<sup>◎</sup>||[[加藤一二三|加藤一]]||[[下平幸男|下平]]<sup>▼</sup>||
+|-
+!4
+|1963||style="background-color: #fcc"|大山康晴||●○●○○○||[[加藤一二三]]
+|佐藤大五郎|| style="background-color: #cfc" |花村||style="background-color: #cfc;"|加藤一<sup>◎</sup>|| style="background-color: #cfc" |[[加藤博二|加藤博]]<sup>▼</sup>||下平<sup>▼</sup>||[[板谷進]]<sup>▼</sup>|||| style="background-color: #ccf" |升田<sup>▼</sup>||灘<sup>▼</sup>|| style="background-color: #ccf" |二上|| style="background-color: #cfc" |[[佐藤大五郎|佐藤大]]<sup>◎</sup>|| style="background-color: #ccf" |[[神田鎮雄|神田鎮]]<sup>▼</sup>||
+|-
+!5
+|1964||style="background-color: #fcc"|大山康晴||○○●●○○||[[二上達也]]
+|升田幸三|| style="background-color: #ccf" |加藤一||style="background-color: #cfc;"|二上<sup>◎</sup>|| style="background-color: #ccf" |丸田<sup>▼</sup>||[[廣津久雄|広津]]<sup>▼</sup>|| style="background-color: #ccf" |板谷進<sup>▼</sup>|||| style="background-color: #ccf" |佐藤大<sup>▼</sup>||花村<sup>▼</sup>|| style="background-color: #cfc" |升田<sup>◎</sup>|| style="background-color: #ccf" |[[佐瀬勇次|佐瀬]]||[[角田三男|角田]]<sup>▼</sup>||
+|-
+!6
+|1965||style="background-color: #fcc"|大山康晴||○○○○||[[佐藤大五郎]]
+|内藤國雄||二上<sup>▼</sup>|| style="background-color: #cfc" |佐瀬||[[北村昌男|北村昌]]<sup>▼</sup>||style="background-color: #cfc;"|佐藤大<sup>◎</sup>||板谷進<sup>▼</sup>||||升田<sup>▼</sup>||加藤一||山田<sup>▼</sup>|| style="background-color: #cfc" |内藤<sup>◎</sup>||[[佐藤庄平|佐藤庄]]<sup>▼</sup>||
+|-
+!7
+|1966||style="background-color: #fcc"|大山康晴||○○○●○||[[有吉道夫]]
+|山田道美||佐藤大<sup>▼</sup>||加藤一<sup>▼</sup>||加藤博||style="background-color: #cfc;"|[[有吉道夫|有吉]]<sup>◎</sup>||[[西村一義|西村]]<sup>▼</sup>||||内藤<sup>▼</sup>||佐瀬<sup>▼</sup>|| style="background-color: #cfc" |山田<sup>◎</sup>||関根茂||本間爽<sup>▼</sup>||
+|-
+!8
+|1967||style="background-color: #fcc"|大山康晴||●○○○○||[[大内延介]]
+|山田道美||style="background-color: #cfc;"|有吉||関根茂<sup>▼</sup>||内藤<sup>▼</sup>||熊谷<sup>▼</sup>||style="background-color: #cfc;"|[[大内延介|大内]]<sup>◎</sup>||||style="background-color: #cfc;"|山田<sup>◎</sup>||加藤博<sup>▼</sup>||style="background-color: #cfc;"|花村||佐藤大<sup>▼</sup>||広津<sup>▼</sup>||
+|-
+!9
+|1968||style="background-color: #fcc"|大山康晴||○○●○●○||有吉道夫
+|花村元司||大内<sup>▼</sup>|| style="background-color: #cfc;" |花村<sup>◎</sup>|| style="background-color: #cfc;" |二上||佐藤大<sup>▼</sup>||[[中原誠|中原]]<sup>▼</sup>|||| style="background-color: #ccf;" |山田||style="background-color: #cfc;"|有吉<sup>◎</sup>|| style="background-color: #ccf;" |大野源<sup>▼</sup>||升田<sup>▼</sup>||本間爽<sup>▼</sup>||
+|-
+!10
+|1969||style="background-color: #fcc"|大山康晴||○●千○●○○||[[西村一義]]
+|内藤國雄|| style="background-color: #ccf;" |有吉|| style="background-color: #ccf;" |二上<sup>▼</sup>||本間爽<sup>▼</sup>|| style="background-color: #ccf;" |大内<sup>▼</sup>||style="background-color: #cfc;"|西村<sup>◎</sup>||||花村<sup>▼</sup>||山田|| style="background-color: #cfc;" |内藤<sup>◎</sup>||板谷進<sup>▼</sup>||[[長谷部久雄|長谷久]]<sup>▼</sup>||
+|-
+!11
+|1970||style="background-color: #fcc"|大山康晴||○○○●○||[[米長邦雄]]
+|中原誠|| style="background-color: #cfc;" |西村||山田<sup>▼</sup><ref>山田道美はリーグ戦最中の1970年6月18日に急逝した。</ref>|| style="background-color: #cfc;" |大野源<sup>▼</sup>|| style="background-color: #cfc;" |中原<sup>◎</sup>||[[関屋喜代作|関屋]]<sup>▼</sup>|||| style="background-color: #ccf;" |内藤<sup>▼</sup>||有吉<sup>▼</sup>|| style="background-color: #ccf;" |[[松田茂役|松田茂]]|| style="background-color: #ccf;" |二上<sup>▼</sup>|| style="background-color: #cfc;" |[[米長邦雄|米長]]<sup>◎</sup>||
+|-
+!12
+|1971||style="background-color: #fcc"|大山康晴||○●○○●●○||[[中原誠]]
+|米長邦雄|| style="background-color: #cfc;" |米長<sup>◎</sup>|| style="background-color: #cfc;" |西村||有吉<sup>▼</sup>||大内<sup>▼</sup>||[[田中魁秀|田中正]]<sup>▼</sup>||||style="background-color: #cfc;"|中原<sup>◎</sup>||松田茂<sup>▼</sup>|| style="background-color: #ccf;" |加藤一<sup>▼</sup>|| style="background-color: #ccf;" |関根茂|| style="background-color: #ccf;" |板谷進<sup>▼</sup>||
+|-
+!13
+|1972||大山康晴||●○●●●||style="background-color: #fcc"|[[内藤國雄]]
+|中原誠|| style="background-color: #cfc;" |中原<sup>◎</sup>||西村<sup>▼</sup>||有吉||佐藤大<sup>▼</sup>||[[池田修一|池田]]<sup>▼</sup>|||| style="background-color: #ccf;" |米長|| style="background-color: #ccf;" |関根茂<sup>▼</sup>||[[小堀清一|小堀]]<sup>▼</sup>|| style="background-color: #fcc;" |内藤<sup>◎</sup>|| style="background-color: #ccf;" |板谷進<sup>▼</sup>||
+|-
+!14
+|1973||内藤國雄||●●●●||style="background-color: #fcc"|中原誠
+|有吉道夫||大山|| style="background-color: #cfc;" |有吉<sup>◎</sup>||花村<sup>▼</sup>||西村<sup>▼</sup>||[[坪内利幸|坪内]]<sup>▼</sup>||||style="background-color: #fcc"|中原<sup>◎</sup>||米長<sup>▼</sup>||関根茂<sup>▼</sup>||田中正||[[石田和雄|石田和]]<sup>▼</sup>||
+|-
+!15
+|1974||style="background-color: #fcc"|中原誠||○●○●○○||米長邦雄
+|有吉道夫||内藤<sup>▼</sup>||style="background-color: #cfc;"|大山||style="background-color: #cfc;"|米長<sup>◎</sup>||板谷進<sup>▼</sup>||富沢<sup>▼</sup>||||style="background-color: #cfc;"|有吉<sup>◎</sup>||田中正<sup>▼</sup>||熊谷||[[北村昌男|北村昌]]<sup>▼</sup>||関根茂<sup>▼</sup>||
+|-
+!16
+|1975||style="background-color: #fcc"|中原誠||○●○●○○||内藤國雄
+|米長邦雄||style="background-color: #cfc;"|米長<sup>◎</sup>||熊谷<sup>▼</sup>||style="background-color: #cfc;"|[[勝浦修|勝浦]]||[[森けい二|森雞]]<sup>▼</sup>||[[小阪昇|小阪]]<sup>▼</sup>||||style="background-color: #cfc;"|有吉||大山<sup>▼</sup>||style="background-color: #cfc;"|内藤<sup>◎</sup>||広津<sup>▼</sup>||西村<sup>▼</sup>||
+|-
+!17
+|1976||style="background-color: #fcc"|中原誠||●○○○●○||[[勝浦修]]
+|有吉道夫||内藤<sup>▼</sup>||style="background-color: #cfc;"|勝浦<sup>◎</sup>||花村<sup>▼</sup>||style="background-color: #cfc;"|西村||[[沼春雄|沼]]<sup>▼</sup>||||style="background-color: #ccf;"|米長<sup>▼</sup>||style="background-color: #cfc;"|有吉<sup>◎</sup>||style="background-color: #ccf;"|加藤一||大野源<sup>▼</sup>||style="background-color: #ccf;"|[[森安秀光|森安秀]]<sup>▼</sup>||
+|-
+!18
+|1977||style="background-color: #fcc"|中原誠||●○○○●○||米長邦雄
+|小林健二||勝浦<sup>▼</sup>||style="background-color: #ccf;"|加藤一||大山<sup>▼</sup>||style="background-color: #ccf;"|二上<sup>▼</sup>||style="background-color: #cfc;"|米長<sup>◎</sup>||田中正<sup>▼</sup>||有吉<sup>▼</sup>||西村<sup>▼</sup>||花村<sup>▼</sup>||森雞||style="background-color: #cfc;"|[[小林健二 (将棋棋士)|小林健]]<sup>◎</sup>||[[酒井順吉|酒井]]<sup>▼</sup>
+|-
+!19
+|1978||style="background-color: #fcc"|中原誠||○●○○○||大山康晴
+|森雞二||米長<sup>▼</sup>||style="background-color: #cfc;"|森雞<sup>◎</sup>||style="background-color: #cfc;"|大内||[[高島弘光|高島弘]]<sup>▼</sup>||style="background-color: #cfc;"|[[宮坂幸雄|宮坂]]<sup>▼</sup>||[[若松政和|若松]]<sup>▼</sup>||小林健<sup>▼</sup>||style="background-color: #cfc;"|加藤一||style="background-color: #cfc;"|大山<sup>◎</sup>||花村<sup>▼</sup>||森安秀<sup>▼</sup>||[[青野照市|青野]]<sup>▼</sup>
+|-
+!20
+|1979||中原誠||○●●○●○千●||style="background-color: #fcc"|米長邦雄
+|加藤一二三||大山||大内<sup>▼</sup>||style="background-color: #fcc"|米長<sup>◎</sup>||二上<sup>▼</sup>||[[木村義徳|木村徳]]<sup>▼</sup>||[[土佐浩司|土佐]]<sup>▼</sup>||森雞<sup>▼</sup>||style="background-color: #cfc;"|加藤一<sup>◎</sup>||style="background-color: #cfc;"|有吉||style="background-color: #cfc;"|勝浦<sup>▼</sup>||[[森信雄|森信]]<sup>▼</sup>||style="background-color: #cfc;"|[[田中寅彦|田中寅]]<sup>▼</sup>
+|-
+!21
+|1980||米長邦雄||●●●●||style="background-color: #fcc"|中原誠
+|大山康晴|| style="background-color: #fcc" |中原<sup>◎</sup>||有吉<sup>▼</sup>||勝浦<sup>▼</sup>||style="background-color: #ccf;"|長谷久<sup>▼</sup>||style="background-color: #ccf;"|[[谷川浩司|谷川]]||[[松浦隆一|松浦隆]]<sup>▼</sup>||style="background-color: #ccf;"|加藤一||style="background-color: #cfc;"|大山<sup>◎</sup>||二上<sup>▼</sup>||北村昌<sup>▼</sup>||style="background-color: #ccf;"|小林健<sup>▼</sup>||[[伊藤果]]<sup>▼</sup>
+|-
+!22
+|1981||style="background-color: #fcc"|中原誠||○●○○●●○||大山康晴
+|二上達也||米長<sup>▼</sup>||加藤一||style="background-color: #cfc;"|二上<sup>◎</sup>||森安秀<sup>▼</sup>||土佐<sup>▼</sup>||[[脇謙二|脇]]<sup>▼</sup>||style="background-color: #cfc;"|大山<sup>◎</sup>||谷川<sup>▼</sup>||佐藤大<sup>▼</sup>||石田和||[[武者野勝巳|武者野]]<sup>▼</sup>||[[中村修 (棋士)|中村修]]<sup>▼</sup>
+|-
+!23
+|1982||中原誠||●○○●●●||style="background-color: #fcc"|内藤國雄
+|[[谷川浩司]]||style="background-color: #ccf;"|大山<sup>▼</sup>||style="background-color: #ccf;"|加藤一||北村昌<sup>▼</sup>||勝浦<sup>▼</sup>||style="background-color: #cfc;"|谷川<sup>◎</sup>||池田<sup>▼</sup>||style="background-color: #ccf;"|二上<sup>▼</sup>||石田和<sup>▼</sup>||style="background-color: #fcc"|内藤<sup>◎</sup>||森雞<sup>▼</sup>||style="background-color: #ccf;"|森安秀||西村<sup>▼</sup>
+|-
+!24
+|1983||内藤國雄||●○●●○●||style="background-color: #fcc"|[[高橋道雄]]
+|桐山清澄||中原||加藤一<sup>▼</sup>||二上<sup>▼</sup>||関根茂<sup>▼</sup>||style="background-color: #cfc;"|[[桐山清澄|桐山]]<sup>◎</sup>||脇<sup>▼</sup>||谷川<sup>▼</sup>||森安秀<sup>▼</sup>||大山<sup>▼</sup>||青野||田中寅<sup>▼</sup>||style="background-color: #fcc"|[[高橋道雄|高橋]]<sup>◎</sup>
+|-
+!25
+|1984||高橋道雄||●○○●○●●||style="background-color: #fcc"|加藤一二三
+|中原誠||内藤||style="background-color: #cfc;"|中原<sup>◎</sup>||大山<sup>▼</sup>||森雞<sup>▼</sup>||森安秀<sup>▼</sup>||[[山口千嶺|山口千]]<sup>▼</sup>||style="background-color: #ccf;"|桐山<sup>▼</sup>||青野<sup>▼</sup>||style="background-color: #ccf;"|谷川||style="background-color: #ccf;"|米長<sup>▼</sup>||style="background-color: #ffcccc"|加藤一<sup>◎</sup>||[[淡路仁茂|淡路]]<sup>▼</sup>
+|-
+!26
+|1985||加藤一二三||●●●●||style="background-color: #fcc"|高橋道雄
+|[[谷川浩司]]|| style="background-color: #fcc" |高橋<sup>◎</sup>||内藤<sup>▼</sup>||田中寅||小林健<sup>▼</sup>||[[福崎文吾|福崎]]<sup>▼</sup>||[[小野敦生|小野敦]]<sup>▼</sup>||style="background-color: #ccf;"|中原||style="background-color: #cfc;"|谷川<sup>◎</sup>||石田和<sup>▼</sup>||青野<sup>▼</sup>||[[島朗|島]]<sup>▼</sup>||style="background-color: #ccf;"|[[森下卓|森下]]<sup>▼</sup>
+|-
+!rowspan="2"|期!!rowspan="2"|開催<br />年度!! rowspan="2" |前期王位!!rowspan="2"|勝敗!! colspan="2" |組優勝!! colspan="6" |紅組!!colspan="6"|白組
+|-
+!挑戦者!!挑決敗者!!colspan="2"|1!!colspan="4"|2!!colspan="2"|1!!colspan="4"|2
+|-
+!27
+|1986||style="background-color: #fcc"|高橋道雄||○○○○||米長邦雄
+|中原誠||加藤一<sup>▼</sup>||style="background-color: #cfc;"|中原<sup>◎</sup>||二上<sup>▼</sup>||大内<sup>▼</sup>||勝浦<sup>▼</sup>||[[東和男|東]]||谷川<sup>▼</sup>||田中寅<sup>▼</sup>||style="background-color: #cfc;"|米長<sup>◎</sup>||森安秀||[[佐藤義則|佐藤義]]<sup>▼</sup>||[[田丸昇|田丸]]<sup>▼</sup>
+|-
+!28
+|1987||高橋道雄||●●○●●||style="background-color: #fcc"|[[谷川浩司]]
+|米長邦雄||style="background-color: #cfc;"|米長<sup>◎</sup>||style="background-color: #8ff;"|東||大山<sup>▼</sup>||森雞<sup>▼</sup>||土佐<sup>▼</sup>||style="background-color: #90CAF9;"|[[西川慶二|西川慶]]<sup>▼</sup>||中原<sup>▼</sup>||森安秀<sup>▼</sup>||style="background-color: #fcc"|谷川<sup>◎</sup>||style="background-color: #cfc;"|[[真部一男|真部]]||島<sup>▼</sup>||小野敦<sup>▼</sup>
+|-
+!29
+|1988||谷川浩司||●○○●●○●||style="background-color: #fcc"|[[森けい二|森雞二]]
+|森下卓||高橋<sup>▼</sup>||東<sup>▼</sup>||style="background-color: #fcc"|森雞<sup>◎</sup>||伊藤果<sup>▼</sup>||[[所司和晴|所司]]<sup>▼</sup>||style="background-color: #cfc;"|[[佐藤康光|佐藤康]]||style="background-color: #8ff;"|米長||真部<sup>▼</sup>||style="background-color: #90CAF9;"|森安秀<sup>▼</sup>||福崎<sup>▼</sup>||style="background-color: #cfc;"|森下<sup>◎</sup>||[[櫛田陽一|櫛田]]<sup>▼</sup>
+|-
+!30
+|1989||森雞二||●○●●●||style="background-color: #fcc"|谷川浩司
+|森下卓|| style="background-color: #fcc" |谷川<sup>◎</sup>||米長<sup>▼</sup>||style="background-color: #cfc;"|中原||勝浦<sup>▼</sup>||田中寅<sup>▼</sup>||[[達正光|達]]<sup>▼</sup>||style="background-color: #cfc;"|森下<sup>◎</sup>||佐藤康||[[南芳一|南]]<sup>▼</sup>||大山<sup>▼</sup>||二上<sup>▼</sup>||森安秀<sup>▼</sup>
+|-
+!31
+|1990||style="background-color: #fcc"|谷川浩司||●○○●○●○||[[佐藤康光]]
+|福崎文吾||森雞<sup>▼</sup>||style="background-color: #cfc;"|佐藤康<sup>◎</sup>||加藤一||淡路<sup>▼</sup>||島<sup>▼</sup>||[[中田功]]<sup>▼</sup>||森下<sup>▼</sup>||style="background-color: #8ff;"|中原||高橋<sup>▼</sup>||青野<sup>▼</sup>||style="background-color: #cfc;"|福崎<sup>◎</sup>||style="background-color: #90CAF9;"|[[阿部隆]]<sup>▼</sup>
+|-
+!32
+|1991||style="background-color: #fcc"|谷川浩司||●●○○○○||[[中田宏樹]]
+|小林健二||style="background-color: #cfc;"|佐藤康||中原<sup>▼</sup>||有吉<sup>▼</sup>||style="background-color: #cfc;"|小林健<sup>◎</sup>||[[大島映二|大島]]<sup>▼</sup>||[[丸山忠久|丸山]]<sup>▼</sup>||福崎<sup>▼</sup>||加藤一<sup>▼</sup>||米長<sup>▼</sup>||style="background-color: #cfc;"|[[中田宏樹|中田宏]]<sup>◎</sup>||[[安西勝一|安西]]<sup>▼</sup>||style="background-color: #cfc;"|[[郷田真隆|郷田]]
+|-
+!33
+|1992||谷川浩司||●●●○○●||style="background-color: #fcc"|[[郷田真隆]]<ref name="gouda">史上唯一となる四段の棋士のタイトル獲得。詳細は[[郷田真隆#棋歴]]を参照。</ref>
+|佐藤康光||中田宏<sup>▼</sup>||style="background-color: #cfc;"|佐藤康<sup>◎</sup>||米長<sup>▼</sup>||田中寅<sup>▼</sup>||style="background-color: #cfc;"|森下||[[村山聖]]<sup>▼</sup>||小林健<sup>▼</sup>||style="background-color: #fcc"|郷田<sup>◎</sup>||style="background-color: #cfc;"|中原||style="background-color: #cfc;"|加藤一<sup>▼</sup>||style="background-color: #cfc;"|[[富岡英作|富岡]]<sup>▼</sup>||[[杉本昌隆|杉本昌]]<sup>▼</sup>
+|-
+!34
+|1993||郷田真隆||●●●●||style="background-color: #fcc"|[[羽生善治]]
+|高橋道雄||谷川<sup>▼</sup>||森下<sup>▼</sup>||style="background-color: #fcc"|[[羽生善治|羽生]]<sup>◎</sup>||加藤一<sup>▼</sup>||[[小野修一|小野修]]<sup>▼</sup>||style="background-color: #cfc;"|[[神崎健二|神崎]]||佐藤康<sup>▼</sup>||中原||内藤<sup>▼</sup>||style="background-color: #cfc;"|高橋<sup>◎</sup>||[[浦野真彦|浦野]]<sup>▼</sup>||[[森内俊之|森内]]<sup>▼</sup>
+|-
+!35
+|1994||style="background-color: #fcc"|羽生善治||○○●●●○○||郷田真隆
+|高橋道雄|| style="background-color: #cfc;" |郷田<sup>◎</sup>||style="background-color: #8ff;"|中原||style="background-color: #90CAF9;"|谷川<sup>▼</sup>||福崎<sup>▼</sup>||[[先崎学|先崎]]<sup>▼</sup>||style="background-color: #90CAF9;"|[[深浦康市|深浦]]<sup>▼</sup>||style="background-color: #cfc;"|高橋<sup>◎</sup>||神崎<sup>▼</sup>||style="background-color: #cfc;"|佐藤康||島<sup>▼</sup>||森下<sup>▼</sup>||[[飯塚祐紀|飯塚祐]]<sup>▼</sup>
+|-
+!36
+|1995||style="background-color: #fcc"|羽生善治||●●○○○○||郷田真隆
+|谷川浩司|| style="background-color: #cfc;" |郷田<sup>◎</sup>||style="background-color: #8ff;"|佐藤康||米長<sup>▼</sup>||style="background-color: #90CAF9;"|森内<sup>▼</sup>||脇<sup>▼</sup>||[[佐藤秀司|佐藤秀]]<sup>▼</sup>||style="background-color: #cfc;"|高橋||style="background-color: #cfc;"|中原<sup>▼</sup>||style="background-color: #cfc;"|谷川<sup>◎</sup>||森雞<sup>▼</sup>||神崎<sup>▼</sup>||[[小倉久史|小倉]]<sup>▼</sup>
+|-
+!rowspan="2"|期!!rowspan="2"|開催<br />年度!! rowspan="2" |前期王位!!rowspan="2"|勝敗!! colspan="2" |組優勝!! colspan="6" |紅組!!colspan="6"|白組
+|-
+!挑戦者!!挑決敗者!!1!!2!!colspan="4"|3!!1!!2!!colspan="4"|3
+|-
+!37
+|1996||style="background-color: #fcc"|羽生善治||○○●○○||[[深浦康市]]
+|丸山忠久||style="background-color: #8ff;"|郷田||style="background-color: #90CAF9;"|高橋<sup>▼</sup>||島<sup>▼</sup>||村山聖<sup>▼</sup>||神崎<sup>▼</sup>||style="background-color: #cfc;"|深浦<sup>◎</sup>||谷川<sup>▼</sup>||style="background-color: #8ff;"|佐藤康||森下<sup>▼</sup>||阿部隆<sup>▼</sup>||style="background-color: #cfc;"|丸山<sup>◎</sup>||style="background-color: #90CAF9;"|[[行方尚史|行方]]<sup>▼</sup>
+|-
+!38
+|1997||style="background-color: #fcc"|羽生善治||○●○○○||佐藤康光
+|郷田真隆||深浦<sup>▼</sup>||style="background-color: #cfc;"|佐藤康<sup>◎</sup>||style="background-color: #ccf;"|中村修<sup>▼</sup>||style="background-color: #ccf;"|阿部隆||style="background-color: #ccf;"|[[藤井猛]]<sup>▼</sup>||[[岡崎洋 (棋士)|岡崎]]<sup>▼</sup>||丸山<sup>▼</sup>||style="background-color: #cfc;"|郷田<sup>◎</sup>||森下||佐藤義<sup>▼</sup>||小野修<sup>▼</sup>||[[畠山成幸|畠山成]]<sup>▼</sup>
+|-
+!39
+|1998||style="background-color: #fcc"|羽生善治||○○●○●○||佐藤康光
+|郷田真隆|| style="background-color: #cfc;" |佐藤康<sup>◎</sup>||森下<sup>▼</sup>||高橋||島<sup>▼</sup>||北島<sup>▼</sup>||[[矢倉規広|矢倉]]<sup>▼</sup>||style="background-color: #cfc;"|郷田<sup>◎</sup>||style="background-color: #cfc;"|阿部隆||[[屋敷伸之|屋敷]]<sup>▼</sup>||村山聖<sup>▼</sup><ref>村山聖はリーグ戦を病気入院により途中休場。1998年8月8日に逝去した。</ref>||[[日浦市郎|日浦]]<sup>▼</sup>||[[木村一基|木村一]]<sup>▼</sup>
+|-
+!40
+|1999||style="background-color: #fcc"|羽生善治||○○○○||谷川浩司
+|屋敷伸之||佐藤康<sup>▼</sup>||阿部隆<sup>▼</sup>||style="background-color: #cfc;"|谷川<sup>◎</sup>||島<sup>▼</sup>||杉本昌<sup>▼</sup>||行方||style="background-color: #cfc;"|郷田||style="background-color: #cfc;"|高橋<sup>▼</sup>||藤井猛<sup>▼</sup>||style="background-color: #cfc;"|屋敷<sup>◎</sup>||style="background-color: #cfc;"|矢倉<sup>▼</sup>||北島<sup>▼</sup>
+|-
+!41
+|2000||style="background-color: #fcc"|羽生善治||○●○●○●○||谷川浩司
+|屋敷伸之|| style="background-color: #cfc;" |谷川<sup>◎</sup>||style="background-color: #8ff;"|郷田||丸山<sup>▼</sup>||南<sup>▼</sup>||style="background-color: #90CAF9;"|[[中川大輔|中川]]<sup>▼</sup>||[[中田功]]<sup>▼</sup>||style="background-color: #cfc;"|屋敷<sup>◎</sup>||行方<sup>▼</sup>||style="background-color: #ccf;"|森下||[[井上慶太|井上]]<sup>▼</sup>||style="background-color: #ccf;"|深浦<sup>▼</sup>||[[鈴木大介 (棋士)|鈴木大]]<sup>▼</sup>
+|-
+!42
+|2001||style="background-color: #fcc"|羽生善治||○○○○||[[屋敷伸之]]
+|森内俊之||style="background-color: #8ff;"|谷川||森下<sup>▼</sup>||style="background-color: #cfc;"|森内<sup>◎</sup>||中村修<sup>▼</sup>||[[長沼洋|長沼]]<sup>▼</sup>||style="background-color: #90CAF9;"|[[山崎隆之|山崎]]<sup>▼</sup>||style="background-color: #cfc;"|屋敷<sup>◎</sup>||郷田<sup>▼</sup>||佐藤康<sup>▼</sup>||畠山成<sup>▼</sup>||深浦||[[金沢孝史|金沢]]<sup>▼</sup>
+|-
+!43
+|2002||羽生善治||●●●○千●||style="background-color: #fcc"|谷川浩司
+|佐藤康光||style="background-color: #8ff;"|屋敷||style="background-color: #fcc"|谷川<sup>◎</sup>||style="background-color: #90CAF9;"|丸山<sup>▼</sup>||中村修<sup>▼</sup>||style="background-color: #90CAF9;"|木村一<sup>▼</sup>||[[松尾歩|松尾]]<sup>▼</sup>||style="background-color: #cfc;"|森内||深浦<sup>▼</sup>||style="background-color: #cfc;"|佐藤康<sup>◎</sup>||淡路<sup>▼</sup>||南<sup>▼</sup>||金沢<sup>▼</sup>
+|-
+!44
+|2003||style="background-color: #fcc"|谷川浩司||○○○●○||羽生善治
+|屋敷伸之|| style="background-color: #cfc;" |羽生<sup>◎</sup>||style="background-color: #8ff;"|森内||style="background-color: #90CAF9;"|小倉<sup>▼</sup>||[[平藤眞吾|平藤]]<sup>▼</sup>||[[真田圭一|真田]]<sup>▼</sup>||[[渡辺明 (棋士)|渡辺明]]<sup>▼</sup>||佐藤康<sup>▼</sup>||style="background-color: #cfc;"|屋敷<sup>◎</sup>||淡路<sup>▼</sup>||style="background-color: #ccf;"|中川||[[石川陽生|石川]]<sup>▼</sup>||style="background-color: #ccf;"|[[大平武洋|大平]]<sup>▼</sup>
+|-
+!45
+|2004||谷川浩司||○●●●●||style="background-color: #fcc"|羽生善治
+|山崎隆之|| style="background-color: #fcc" |羽生<sup>◎</sup>||style="background-color: #8ff;"|中川||深浦<sup>▼</sup>||中原<sup>▼</sup>||style="background-color: #90CAF9;"|中田功<sup>▼</sup>||岡崎<sup>▼</sup>||style="background-color: #8ff;"|屋敷||森内<sup>▼</sup>||style="background-color: #90CAF9;"|丸山<sup>▼</sup>||先崎<sup>▼</sup>||[[畠山鎮]]<sup>▼</sup>||style="background-color: #cfc;"|山崎<sup>◎</sup>
+|-
+!46
+|2005||style="background-color: #fcc"|羽生善治||●●○○●○○||佐藤康光
+|先崎学||style="background-color: #cfc;"|谷川||style="background-color: #cfc;"|屋敷<sup>▼</sup>||style="background-color: #cfc;"|渡辺明<sup>▼</sup>||style="background-color: #cfc;"|先崎<sup>◎</sup>||[[北浜健介|北浜]]<sup>▼</sup>||[[阿久津主税|阿久津]]<sup>▼</sup>||山崎<sup>▼</sup>||中川<sup>▼</sup>||style="background-color: #cfc;"|佐藤康<sup>◎</sup>||深浦||富岡<sup>▼</sup>||畠山鎮<sup>▼</sup>
+|-
+!47
+|2006||style="background-color: #fcc"|羽生善治||○○●●○○||佐藤康光
+|島朗|| style="background-color: #cfc;" |佐藤康<sup>◎</sup>||谷川<sup>▼</sup>||style="background-color: #cfc;"|渡辺明||中川<sup>▼</sup>||[[佐藤紳哉|佐藤紳]]<sup>▼</sup>||阿久津<sup>▼</sup>||先崎<sup>▼</sup>||style="background-color: #8ff;"|深浦||style="background-color: #90CAF9;"|森内<sup>▼</sup>||style="background-color: #cfc;"|島<sup>◎</sup>||[[藤原直哉 (棋士)|藤原]]<sup>▼</sup>||[[小林裕士|小林裕]]<sup>▼</sup>
+|-
+!48
+|2007||羽生善治||●●○●○○●||style="background-color: #fcc"|深浦康市
+|渡辺明||佐藤康<sup>▼</sup>||style="background-color: #fcc"|深浦<sup>◎</sup>||丸山||鈴木大<sup>▼</sup>||[[千葉幸生|千葉]]<sup>▼</sup>||阿久津<sup>▼</sup>||島<sup>▼</sup>||style="background-color: #cfc;"|渡辺明<sup>◎</sup>||森内<sup>▼</sup>||style="background-color: #cfc;"|山崎||[[神谷広志|神谷]]<sup>▼</sup>||[[橋本崇載|橋本崇]]<sup>▼</sup>
+|-
+!49
+|2008||style="background-color: #fcc"|深浦康市||●○○○●●○||羽生善治
+|橋本崇載|| style="background-color: #cfc;" |羽生<sup>◎</sup>||山崎<sup>▼</sup>||井上<sup>▼</sup>||木村一<sup>▼</sup>||松尾<sup>▼</sup>||阿久津||渡辺明<sup>▼</sup>||style="background-color: #8ff;"|丸山||島<sup>▼</sup>||style="background-color: #90CAF9;"|[[久保利明|久保]]<sup>▼</sup>||[[中座真|中座]]<sup>▼</sup>||style="background-color: #cfc;"|橋本崇<sup>◎</sup>
+|-
+!50
+|2009||style="background-color: #fcc"|深浦康市||千●●●○○○○||[[木村一基]]
+|橋本崇載||style="background-color: #8ff;"|羽生||丸山<sup>▼</sup>||style="background-color: #90CAF9;"|渡辺明<sup>▼</sup>||郷田<sup>▼</sup>||style="background-color: #cfc;"|木村一<sup>◎</sup>||style="background-color: #90CAF9;"|先崎<sup>▼</sup>||style="background-color: #cfc;"|橋本崇<sup>◎</sup>||阿久津<sup>▼</sup>||style="background-color: #ccf;"|佐藤康||style="background-color: #ccf;"|[[三浦弘行|三浦]]<sup>▼</sup>||style="background-color: #ccf;"|久保<sup>▼</sup>||井上<sup>▼</sup>
+|-
+!51
+|2010||深浦康市||●○●○千●千●||style="background-color: #fcc"|[[広瀬章人]]
+|羽生善治||木村一<sup>▼</sup>||style="background-color: #8ff;"|佐藤康||style="background-color: #90CAF9;"|渡辺明<sup>▼</sup>||松尾<sup>▼</sup>||style="background-color: #fcc"|[[広瀬章人|広瀬]]<sup>◎</sup>||[[大石直嗣|大石]]<sup>▼</sup>||橋本崇<sup>▼</sup>||style="background-color: #cfc;"|羽生<sup>◎</sup>||丸山<sup>▼</sup>||三浦<sup>▼</sup>||style="background-color: #cfc;"|[[戸辺誠|戸辺]]||[[高崎一生|高崎]]<sup>▼</sup>
+|-
+!52
+|2011||広瀬章人||○○●●○●●||style="background-color: #fcc"|羽生善治
+|藤井猛||深浦<sup>▼</sup>||style="background-color: #8ff;"|戸辺||谷川<sup>▼</sup>||style="background-color: #cfc;"|藤井猛<sup>◎</sup>||style="background-color: #90CAF9;"|[[豊島将之|豊島]]<sup>▼</sup>||style="background-color: #90CAF9;"|[[遠山雄亮|遠山]]<sup>▼</sup>||style="background-color: #fcc"|羽生<sup>◎</sup>||佐藤康<sup>▼</sup>||三浦<sup>▼</sup>||[[窪田義行|窪田]]<sup>▼</sup>||style="background-color: #cfc;"|[[村山慈明|村山慈]]||[[渡辺正和 (棋士)|吉田正]]<sup>▼</sup>
+|-
+!53
+|2012||style="background-color: #fcc"|羽生善治||千○●○○○||[[藤井猛]]
+|渡辺明||style="background-color: #8ff;"|広瀬||戸辺<sup>▼</sup>||style="background-color: #cfc;"|渡辺明<sup>◎</sup>||中村修<sup>▼</sup>||style="background-color: #90CAF9;"|豊島<sup>▼</sup>||[[船江恒平|船江]]<sup>▼</sup>||style="background-color: #cfc;"|藤井猛<sup>◎</sup>||村山慈<sup>▼</sup>||高橋<sup>▼</sup>||style="background-color: #ccf;"|丸山||日浦<sup>▼</sup>||style="background-color: #ccf;"|[[牧野光則|牧野]]<sup>▼</sup>
+|-
+!54
+|2013||style="background-color: #fcc"|羽生善治||○○●○○||[[行方尚史]]
+|佐藤康光||style="background-color: #8ff;"|藤井猛||広瀬<sup>▼</sup>||style="background-color: #cfc;"|行方<sup>◎</sup>||style="background-color: #90CAF9;"|松尾<sup>▼</sup>||[[宮田敦史|宮田敦]]<sup>▼</sup>||大石<sup>▼</sup>||渡辺明<sup>▼</sup>||丸山<sup>▼</sup>||style="background-color: #cfc;"|佐藤康<sup>◎</sup>||村山慈<sup>▼</sup>||[[佐々木慎|佐々慎]]<sup>▼</sup>||[[澤田真吾|澤田]]
+|-
+!55
+|2014||style="background-color: #fcc"|羽生善治||●○持○○●○||木村一基
+|千田翔太||行方<sup>▼</sup>||澤田<sup>▼</sup>||森内<sup>▼</sup>||style="background-color: #cfc;"|広瀬||豊島<sup>▼</sup>||style="background-color: #cfc;"|[[千田翔太|千田]]<sup>◎</sup>||style="background-color: #8ff;"|佐藤康||style="background-color: #90CAF9;"|藤井猛<sup>▼</sup>||style="background-color: #90CAF9;"|渡辺明<sup>▼</sup>||style="background-color: #cfc;"|木村一<sup>◎</sup>||森下<sup>▼</sup>||[[及川拓馬|及川]]<sup>▼</sup>
+|-
+! rowspan="2" |期!! rowspan="2" |開催<br />年度!! rowspan="2" |前期王位!! rowspan="2" |勝敗!! colspan="2" |組優勝!! colspan="6" |紅組!! colspan="6" |白組
+|-
+!挑戦者!!挑決敗者!! colspan="2" |前期残留!! colspan="4" |予選突破!! colspan="2" |前期残留!! colspan="4" |予選突破
+|-
+!56
+|2015|| style="background-color: #fcc" |羽生善治||○○●○○||広瀬章人
+|菅井竜也|| style="background-color: #90CAF9" |木村一<sup>▼</sup>|| style="background-color: #cfc;" |広瀬<sup>◎</sup>|| style="background-color: #A5D6A7" |山崎||[[田村康介|田村]]<sup>▼</sup>|| style="background-color: #90CAF9" |[[佐々木勇気|佐々勇]]<sup>▼</sup>||[[阿部光瑠|阿部光]]<sup>▼</sup>||千田<sup>▼</sup>|| style="background-color: #cfc" |佐藤康||松尾<sup>▼</sup>||[[伊奈祐介|伊奈]]<sup>▼</sup>||[[横山泰明|横山]]<sup>▼</sup>|| style="background-color: #cfc" |[[菅井竜也|菅井]]<sup>◎</sup>
+|-
+!57
+|2016|| style="background-color: #fcc" |羽生善治||●○○●●○○||木村一基
+|豊島将之|| style="background-color: #8ff" |広瀬|| style="background-color: #90CAF9" |佐藤康<sup>▼</sup>|| style="background-color: #90CAF9" |行方<sup>▼</sup>|| style="background-color: #cfc" |豊島<sup>◎</sup>||佐藤紳<sup>▼</sup>||[[八代弥|八代]]<sup>▼</sup>||菅井||山崎<sup>▼</sup>|| style="background-color: #cfc;" |木村一<sup>◎</sup>||[[瀬川晶司|瀬川]]<sup>▼</sup>||脇<sup>▼</sup>||森内<sup>▼</sup>
+|-
+!58
+|2017||羽生善治||●●○●●|| style="background-color: #ffcccc" |[[菅井竜也]]
+|澤田真吾||木村一||広瀬<sup>▼</sup>||山崎<sup>▼</sup>||阿部隆<sup>▼</sup>|| style="background-color: #cfc" |澤田<sup>◎</sup>||阿久津<sup>▼</sup>|| style="background-color: #8ff" |豊島|| style="background-color: #fcc" |菅井<sup>◎</sup>|| style="background-color: #90CAF9" |[[佐藤天彦|佐藤天]]<sup>▼</sup>||渡辺明<sup>▼</sup>|| style="background-color: #90CAF9" |佐々勇<sup>▼</sup>||丸山<sup>▼</sup>
+|-
+!59
+|2018
+|菅井竜也
+|○●○●○●●
+|style="background-color: #ffcccc" |[[豊島将之]]
+|羽生善治 
+| style="background-color: #cfc" |羽生<sup>◎</sup>
+| style="background-color: #8ff" |木村一
+|谷川<sup>▼</sup>
+|松尾<sup>▼</sup>
+|[[近藤誠也|近藤誠]]<sup>▼</sup>
+| style="background-color: #90CAF9" |村山慈<sup>▼</sup>
+| style="background-color: #cfc" |澤田
+| style="background-color: #ffcccc" |豊島<sup>◎</sup>
+|阿久津<sup>▼</sup>
+|[[野月浩貴|野月]]<sup>▼</sup>
+|千田<sup>▼</sup>
+|[[佐々木大地 (棋士)|佐々大]]<sup>▼</sup>
+|-
+!60
+|2019
+|豊島将之
+|○○●●○●●
+|style="background-color: #ffcccc" |木村一基
+|羽生善治
+| style="background-color: #cfc" |菅井
+| style="background-color: #ffcccc" |木村一<sup>◎</sup>
+|阿久津<sup>▼</sup>
+|佐々大<sup>▼</sup>
+|[[稲葉陽|稲葉]]<sup>▼</sup>
+|[[長谷部浩平|長谷浩]]<sup>▼</sup>
+| style="background-color: #cfc" |羽生<sup>◎</sup>
+|澤田<sup>▼</sup>
+|千田<sup>▼</sup>
+|谷川<sup>▼</sup>
+|[[中村太地 (棋士)|中村太]]<sup>▼</sup>
+| style="background-color: #cfc" |[[永瀬拓矢|永瀬]]
+|-
+!61
+|2020
+|木村一基
+|
+|
+|
+|豊島
+|永瀬
+|佐々大
+|鈴木大
+|佐藤秀
+|[[本田奎|本田]]
+|羽生
+|菅井
+|稲葉
+|[[上村亘|上村]]
+|[[阿部健治郎|阿部健]]
+|[[藤井聡太|藤井聡]]
+|}

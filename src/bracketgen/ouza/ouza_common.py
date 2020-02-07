@@ -24,7 +24,7 @@ def ouza_title_matches(iteration_int: int):
                                             "王座戦",
                                             iteration_str,
                                             "王座",
-                                            "五番勝負",
+                                            title_length_str,
                                             org_tree_title_last)
 
 

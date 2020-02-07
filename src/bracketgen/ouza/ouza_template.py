@@ -60,7 +60,7 @@ def gen_usage(iteration: str, in_str_dict: dict):
         "{{各期の王座戦}}\n"
         "{{Shogi-stub}}\n"
         "{{" + f"DEFAULTSORT:王座戦{str(iteration_int).zfill(2)}き" + "}}\n"
-        f"[[Category:王座戦|{1951+iteration_int}-{year_at}]]\n"
+        f"[[Category:王座戦 (将棋)|{1951+iteration_int}-{year_at}]]\n"
         f"[[Category:{1951+iteration_int}年の日本]]\n"
         f"[[Category:{1952+iteration_int}年の日本]]\n"
     )

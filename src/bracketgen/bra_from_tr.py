@@ -286,9 +286,10 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
             table_pos_all.append(t5)
             pos3 = (pos1 + pos2 - 1) // 2
             if j != 0:
+                column_6 = factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 2
                 t6 = table_desc.TableDesc(
-                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 2),
-                    (pos3, factor * (a - j) - (0 if (factor == 4 and j == 0) else 1) + 2),
+                    (pos3, column_6),
+                    (pos3, column_6),
                     False,
                     "",
                     "#FFFFFF",
@@ -296,6 +297,7 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
                     (False, False, True, False)
                 )
                 table_pos_all.append(t6)
+                column_disabled_dict[column_6] = False
     # pad 0+sort
     table_pos_all = table_desc.padding_0(table_pos_all)
     return organized_tab.OrganizedTable(table_pos_all, column_disabled_dict)

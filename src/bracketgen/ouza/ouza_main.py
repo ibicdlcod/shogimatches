@@ -207,7 +207,7 @@ def ouza_str_dict(iteration_int: int) -> dict:
     )
 
     return_dict["LEAD"] = (
-        f"{iteration_str}王座戦は、{1952 + iteration_int}年度（{min_match_date.isoformat()}"
+        f"{iteration_str_display}王座戦は、{1952 + iteration_int}年度（{min_match_date.isoformat()}"
         f" - {max_match_date.isoformat()}）の[[王座戦 (将棋)|王座戦]]である。\n"
         + ("王座戦は将棋のタイトル戦の一つである。\n" if iteration_int >= 31 else "")
     )

@@ -81,4 +81,3 @@ def ouza_str(iteration_int: int):
                      else f"第{str(iteration_int).zfill(2)}回")
 
     return gen_template(dict_result), gen_usage(f"{iteration_str}", dict_result)
-

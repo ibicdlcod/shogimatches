@@ -72,4 +72,4 @@ if __name__ == '__main__':
     #     "[[Category:棋王戦_(将棋)|*]]\n"
     #     "[[Category: 将棋関連のテンプレート]] </noinclude>\n"
     # )
-    outfile.close()
+    # outfile.close()

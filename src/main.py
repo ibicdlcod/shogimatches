@@ -24,14 +24,15 @@ if __name__ == '__main__':
 
     gen_content.content()
 
-    for i in range(8, 45):
-        outfile_name = f"txt_dst\\kiou\\{i}.txt"
-        outfile = open(outfile_name, "w", encoding="utf-8-sig")
-        for k, v in kiou_main.kiou_str_dict(i).items():
-            outfile.write(str(k))
-            outfile.write("\n")
-            outfile.write(v)
-        outfile.close()
+    # for i in range(11, 45):
+    #     outfile_name = f"txt_dst\\kiou\\{i}.txt"
+    #     outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    #     for k, v in kiou_main.kiou_str_dict(i).items():
+    #         outfile.write(str(k))
+    #         outfile.write("\n")
+    #         outfile.write(v)
+    #     outfile.close()
+
     # infile_name = f"ouza.txt"
     # infile = open(infile_name, "r", encoding="utf-8-sig")
     # outfile_name = f"ouza_out.txt"

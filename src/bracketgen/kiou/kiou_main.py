@@ -97,7 +97,7 @@ def kiou_str_dict(iteration_int: int) -> dict:
         if iteration_int >= 18:
             org_tree_db_decisive.node_groups[0][0].set_1win_advantage(winner_winners_group)
         feed_decisive_i = table_feed.TableFeed(org_tree_db_decisive,
-                                               f"",
+                                               f"==挑戦者決定戦==",
                                                "棋王戦",
                                                iteration_str,
                                                False,

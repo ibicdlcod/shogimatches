@@ -97,7 +97,11 @@ def kiou_str_dict(iteration_int: int) -> dict:
         if iteration_int >= 18:
             org_tree_db_decisive.node_groups[0][0].set_1win_advantage(winner_winners_group)
         feed_decisive_i = table_feed.TableFeed(org_tree_db_decisive,
-                                               f"==挑戦者決定戦==",
+                                               (f"==挑戦者決定戦==\n"
+                                                + (f"全勝進出者のアドバンテージとして☆を付記。\n"
+                                                   if iteration_int >= 18
+                                                   else "")
+                                                ),
                                                "棋王戦",
                                                iteration_str,
                                                False,
@@ -119,7 +123,7 @@ def kiou_str_dict(iteration_int: int) -> dict:
 
     feed_2 = []
     tree_2 = []
-    if 7 <= iteration_int <= 39:
+    if 7 <= iteration_int <= 39 and not (27 <= iteration_int <= 28):
         for i in range(1):
             match_db_2_i = sql_read.read_match("棋王戦", iteration_str, "予選")
             if len(match_db_2_i) == 0:
@@ -138,7 +142,7 @@ def kiou_str_dict(iteration_int: int) -> dict:
             feed_2.append(feed_2_i)
             tree_2.append(feed_2_i.tree)
         seeds_out_in.Seed(1, tree_2, tree_0, katakana_list)
-    elif iteration_int >= 40:
+    elif iteration_int >= 40 or (27 <= iteration_int <= 28):
         for i in range(8):
             group_str = f"{str(i + 1).zfill(2)}組"
             match_db_2_i = sql_read.read_match("棋王戦", iteration_str, "予選", group_str)

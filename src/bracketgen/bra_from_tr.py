@@ -201,11 +201,24 @@ def generate_bra_pos(in_tree: organized_tr.OrganizedTree,
             table_pos_all.append(t2)
             match_icons = ""
             match_icons_len = 0
+            this_kishi = kishi_data.query_kishi_from_id(k)
+            if this_node.win_advantage_1 == "black" and this_node.black_of_first == this_kishi:
+                match_icons += "☆"
+                match_icons_len += 1
+            elif this_node.win_advantage_1 == "white" and this_node.black_of_first == this_kishi:
+                match_icons += "★"
+                match_icons_len += 1
+            elif this_node.win_advantage_1 == "black" and this_node.white_of_first == this_kishi:
+                match_icons += "★"
+                match_icons_len += 1
+            elif this_node.win_advantage_1 == "white" and this_node.white_of_first == this_kishi:
+                match_icons += "☆"
+                match_icons_len += 1
             for match in this_node.series:
                 if len(this_node.series) > 1:
-                    if match.black_name == kishi_data.query_kishi_from_id(k).fullname:
+                    if match.black_name == this_kishi.fullname:
                         black_or_white = "black"
-                    elif match.white_name == kishi_data.query_kishi_from_id(k).fullname:
+                    elif match.white_name == this_kishi.fullname:
                         black_or_white = "white"
                 match_icon = ""
                 match_icon_len = 0

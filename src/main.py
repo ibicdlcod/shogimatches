@@ -1,4 +1,4 @@
-from bracketgen.ouza import ouza_template
+from bracketgen.kiou import kiou_main
 from importdata import birthday, kishi_all, match_mass
 import gen_config
 import gen_content
@@ -24,6 +24,14 @@ if __name__ == '__main__':
 
     gen_content.content()
 
+    for i in range(8, 45):
+        outfile_name = f"txt_dst\\kiou\\{i}.txt"
+        outfile = open(outfile_name, "w", encoding="utf-8-sig")
+        for k, v in kiou_main.kiou_str_dict(i).items():
+            outfile.write(str(k))
+            outfile.write("\n")
+            outfile.write(v)
+        outfile.close()
     # infile_name = f"ouza.txt"
     # infile = open(infile_name, "r", encoding="utf-8-sig")
     # outfile_name = f"ouza_out.txt"
@@ -55,7 +63,7 @@ if __name__ == '__main__':
     #     for j in range(10):
     #         this_num = i * 10 + j + 1
     #         iteration_end = "期" if this_num > 30 else "回"
-    #         outfile.write(f"[[第{this_num}{iteration_end}王座戦|{str(this_num).zfill(2)}({1959+this_num})]]")
+    #         outfile.write(f"[[第{this_num}{iteration_end}王座戦|{str(this_num).zfill(2)}({1952+this_num})]]")
     #         if j != 9:
     #             outfile.write(" - ")
     #     outfile.write("\n")

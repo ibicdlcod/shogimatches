@@ -5,7 +5,7 @@ import os
 dict_tour_name = {"ryuou": 1, "meijin": 2, "junni": 3, "eiou": 12, "oui": 4,
                   "ouza": 5, "kiou": 6, "oushou": 7, "kisei": 8, "asahi_cup": 9,
                   "ginga": 10, "nhk": 11, "jt": 13, "shinjin": 14, "kakogawa": 15,
-                  "yamada": 34, "dan10": 17, "dan9": 35, "meijin_dan9": 36,
+                  "yamada": 34, "dan10": 17, "dan9": 35, "meijin_dan9": 36, "meiki": 20,
                   "seirei": 101, "mynavi": 102, "jo_ouza": 103, "jo_meijin": 104, "jo_oui": 105,
                   "jo_oushou": 106, "touka": 107, "jo_yamada": 108}
 
@@ -152,6 +152,15 @@ def match_mass():
             match_list = match_auto.import_data(i, dict_tour_name["meijin_dan9"])
             match_auto.match_to_sql(match_list)
             print(f"Retrieving web information for tournament 36 with iteration {i} succeeded")
+    if conf["meiki"] == "True":
+        for i in range(1003, 1008):
+            match_list = match_auto.import_data(i, dict_tour_name["meiki"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 20 with iteration {i} succeeded")
+        for i in range(1, 4):
+            match_list = match_auto.import_data(i, dict_tour_name["meiki"])
+            match_auto.match_to_sql(match_list)
+            print(f"Retrieving web information for tournament 20 with iteration {i} succeeded")
 
     if conf["seirei"] == "True":
         for i in range(1, 2):

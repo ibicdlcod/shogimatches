@@ -31,7 +31,8 @@ def order(in_str):
         return 99
 
 
-def gen_usage(iteration: str, in_str_dict_keys: list):
+def gen_usage(iteration: str, in_str_dict: dict):
+    in_str_dict_keys = list(in_str_dict.keys())
     result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
     in_str_dict_keys.sort(key=order)
     iteration_int = int(iteration.lstrip("第").rstrip("期").rstrip("回"))
@@ -50,9 +51,15 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
             result += "==五段戦==\n"
         elif key == 4:
             result += "==四段戦==\n"
-        result += "{{" + iteration + "叡王戦|group=" + str(key) + "}}\n"
+        result += in_str_dict[key] + "\n"
+        # result += "{{" + iteration + "叡王戦|group=" + str(key) + "}}\n"
+    kenyu_int = (1000 + iteration_int) if iteration_int >= 3 else (2000 + iteration_int)
     result += (
         "== 出典 ==\n"
+        f"*[https://www.shogi.or.jp/match/eiou/ 叡王戦：日本将棋連盟]\n"
+        f"*[https://www.shogi.or.jp/publish/shogi_nenkan.html 将棋年鑑]\n"
+        f"*[http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0&pd={kenyu_int}&mn=12 "
+        f"{iteration}叡王戦：将棋棋士成績DB]\n"
         f"*[http://shogititle.nobody.jp/table/eiou/eiou-{str(iteration_int).zfill(2)}.html "
         f"{iteration}叡王戦：将棋タイトル戦]\n"
         "{{各期の叡王戦}}\n"
@@ -67,8 +74,8 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
 def eiou_str(i: int):
     if i <= 2:
         dict_result = eiou_old.eiou_str_dict(i)
-        return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}回", list(dict_result.keys()))
+        return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}回", dict_result)
     else:
         dict_result = eiou_new.eiou_str_dict(i)
-        return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", list(dict_result.keys()))
+        return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", dict_result)
 

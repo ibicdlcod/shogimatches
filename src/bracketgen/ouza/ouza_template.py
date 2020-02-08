@@ -53,10 +53,16 @@ def gen_usage(iteration: str, in_str_dict: dict):
         year_at = str(2000)
     elif iteration_int > 48:
         year_at = str(iteration_int - 48).zfill(2)
+    kenyu_int = (1000 + iteration_int) if iteration_int >= 31 else (2000 + iteration_int)
+    q_or_h = "期" if iteration_int >= 31 else "回"
     result += (
         "== 出典 ==\n"
+        f"*[https://www.shogi.or.jp/match/ouza/ 王座戦：日本将棋連盟]\n"
+        f"*[https://www.shogi.or.jp/publish/shogi_nenkan.html 将棋年鑑]\n"
+        f"*[http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0&pd={kenyu_int}&mn=5 "
+        f"第{iteration_int}{q_or_h}王座戦：将棋棋士成績DB]\n"
         f"*[http://shogititle.nobody.jp/table/ouza/ouza-{str(iteration_int).zfill(2)}.html "
-        f"{iteration}王座戦：将棋タイトル戦]\n"
+        f"第{iteration_int}{q_or_h}王座戦：将棋タイトル戦]\n"
         "{{各期の王座戦}}\n"
         "{{Shogi-stub}}\n"
         "{{" + f"DEFAULTSORT:王座戦{str(iteration_int).zfill(2)}き" + "}}\n"

@@ -41,7 +41,8 @@ def order(in_str):
         return 99
 
 
-def gen_usage(iteration: str, in_str_dict_keys: list):
+def gen_usage(iteration: str, in_str_dict: dict):
+    in_str_dict_keys = list(in_str_dict.keys())
     result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
     in_str_dict_keys.sort(key=order)
     iteration_int = int(iteration.lstrip("第").rstrip("期"))
@@ -60,9 +61,15 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
             result += "===残留決定戦===\n"
         elif key == "SUBST_W":
             result += "===補欠決定戦===\n"
-        result += "{{" + iteration + "十段戦|group=" + str(key) + "}}\n"
+        # result += "{{" + iteration + "十段戦|group=" + str(key) + "}}\n"
+        result += in_str_dict[key] + "\n"
+    kenyu_int = 1000 + iteration_int
     result += (
         "== 出典 ==\n"
+        f"*[https://www.shogi.or.jp/match/finished/10_9.html 十段戦：日本将棋連盟]\n"
+        f"*[https://www.shogi.or.jp/publish/shogi_nenkan.html 将棋年鑑]\n"
+        f"*[http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0&pd={kenyu_int}&mn=17 "
+        f"第{iteration_int}期十段戦：将棋棋士成績DB]\n"
         f"*[http://shogititle.nobody.jp/table/ryuo/judan-{str(iteration_int).zfill(2)}.html "
         f"第{iteration_int}期十段戦：将棋タイトル戦]\n"
         "{{各期の十段戦}}\n"
@@ -75,7 +82,8 @@ def gen_usage(iteration: str, in_str_dict_keys: list):
     return result
 
 
-def gen_usage_kudan(iteration: str, in_str_dict_keys: list):
+def gen_usage_kudan(iteration: str, in_str_dict: dict):
+    in_str_dict_keys = list(in_str_dict.keys())
     result = "<!-- Please report bugs to https://github.com/ibicdlcod/shogimatches/issues -->\n"
     in_str_dict_keys.sort(key=order)
     iteration_int = int(iteration.lstrip("第").rstrip("期"))
@@ -90,9 +98,15 @@ def gen_usage_kudan(iteration: str, in_str_dict_keys: list):
             result += "==三次予選==\n"
         elif key == 4:
             result += "==予選==\n"
-        result += "{{" + iteration + "九段戦|group=" + str(key) + "}}\n"
+        # result += "{{" + iteration + "九段戦|group=" + str(key) + "}}\n"
+        result += in_str_dict[key] + "\n"
+    kenyu_int = 1000 + iteration_int
     result += (
         "== 出典 ==\n"
+        f"*[https://www.shogi.or.jp/match/finished/10_9.html 九段戦：日本将棋連盟]\n"
+        f"*[https://www.shogi.or.jp/publish/shogi_nenkan.html 将棋年鑑]\n"
+        f"*[http://kenyu1234.php.xdomain.jp/resultsm.php?sen=0&pd={kenyu_int}&mn=35 "
+        f"第{iteration_int}期九段戦：将棋棋士成績DB]\n"
         f"*[http://shogititle.nobody.jp/table/ryuo/kudan-{str(iteration_int).zfill(2)}.html "
         f"第{iteration_int}期九段戦：将棋タイトル戦]\n"
         "{{各期の九段戦}}\n"
@@ -115,10 +129,10 @@ def shidan_str(i: int):
     else:
         dict_result = shidan_2_3.shidan_str_dict(i)
 
-    return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", list(dict_result.keys()))
+    return gen_template(dict_result), gen_usage(f"第{str(i).zfill(2)}期", dict_result)
 
 
 def kudan_str(i: int):
     dict_result = kudan.kudan_str_dict(i)
 
-    return gen_template(dict_result), gen_usage_kudan(f"第{str(i).zfill(2)}期", list(dict_result.keys()))
+    return gen_template(dict_result), gen_usage_kudan(f"第{str(i).zfill(2)}期", dict_result)

@@ -78,6 +78,14 @@ class TreeNode:
         ]
         return ",".join(out_str_item)
 
+    def set_1win_advantage(self, kishi: kishi_data.Kishi):
+        if kishi.id == self.black_of_first.id:
+            self.win_advantage_1 = "black"
+            self.advance_result += 1
+        elif kishi.id == self.white_of_first.id:
+            self.win_advantage_1 = "white"
+            self.advance_result += (-1)
+
 
 def match_icon_for_kishi_with_length(this_node: TreeNode, kishi_id: int):
     match_icons = []

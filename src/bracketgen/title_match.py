@@ -23,7 +23,7 @@ def title_match_str_plus(matches_tree: organized_tr.OrganizedTree,
     else:
         black = last_matches_node.winner()
     black_rank = black.rank(match_node.series[0].match_date)[0]
-    black_display_rank = black_rank if last_matches_tree is None else title_name
+    black_display_rank = black_rank if new_title_flag else title_name
     if tournament_name == "竜王戦" and black_rank == "<small>竜王名人</small>":
         black_display_rank = "竜王名人"
     if tournament_name == "名人戦" and black_rank == "<small>竜王名人</small>":
@@ -127,3 +127,91 @@ def match_icon_for_kishi(this_node: tree_node.TreeNode, kishi_id: int):
                 match_icon += "●"
         match_icons.append(match_icon)
     return match_icons
+
+
+def title_match_str_plus2(matches_tree: organized_tr.OrganizedTree,
+                          tournament_name: str,
+                          iteration: str,
+                          title_name: str,
+                          max_match_length: str,
+                          last_match_winner: kishi_data.Kishi) -> tuple:
+    match_node = matches_tree.last_remain_nodes[0]
+    match_length = len(match_node.series)
+    last_match_participants = [last_match_winner, ]
+    if (match_node.winner() not in last_match_participants) and (match_node.loser() not in last_match_participants):
+        new_title_flag = True
+    else:
+        new_title_flag = False
+    if new_title_flag:
+        black = match_node.black_of_first
+    else:
+        black = last_match_winner
+    black_rank = black.rank(match_node.series[0].match_date)[0]
+    black_display_rank = black_rank if new_title_flag else title_name
+    if tournament_name == "竜王戦" and black_rank == "<small>竜王名人</small>":
+        black_display_rank = "竜王名人"
+    if tournament_name == "名人戦" and black_rank == "<small>竜王名人</small>":
+        black_display_rank = "名人(竜王)"
+    if black.wiki_name == "":
+        black_display_name = "[[" \
+                             + black.fullname \
+                             + "]]" \
+                             + black_display_rank
+    else:
+        black_display_name = "[[" \
+                             + black.wiki_name \
+                             + "|" \
+                             + black.fullname \
+                             + "]]" \
+                             + black_display_rank
+    if black == match_node.black_of_first:
+        white = match_node.white_of_first
+    else:
+        white = match_node.black_of_first
+    white_rank = white.rank(match_node.series[0].match_date)[0]
+    if white.wiki_name == "":
+        white_display_name = "[[" \
+                             + white.fullname \
+                             + "]]" \
+                             + white_rank
+    else:
+        white_display_name = "[[" \
+                             + white.wiki_name \
+                             + "|" \
+                             + white.fullname \
+                             + "]]" \
+                             + white_rank
+    black_win_loss = match_icon_for_kishi(match_node, black.id)
+    white_win_loss = match_icon_for_kishi(match_node, white.id)
+    return_result = ""
+    return_result += ("==" + iteration + tournament_name + max_match_length + "==\n")
+    return_result += f"開催:{match_node.series[0].match_date.isoformat()} " \
+                     f"- {match_node.series[-1].match_date.isoformat()}\n"
+    return_result += '{| class="wikitable" style="text-align: center;"\n'
+    return_result += '!対局者!!'
+    for i in range(match_length):
+        return_result += f'第{i + 1}局!!'
+    return_result += "\n|-\n"
+    black_bold = ("'''" if match_node.winner() == black else "")
+    return_result += "|" + black_bold + black_display_name + black_bold + "||"
+    for i in range(match_length):
+        return_result += black_win_loss[i] + "||"
+    if not new_title_flag:
+        if match_node.winner() == black:
+            return_result += "'''" + title_name + "位防衛'''"
+    else:
+        if match_node.winner() == black:
+            return_result += "'''" + title_name + "位獲得'''"
+    return_result += "\n|-\n"
+    white_bold = ("'''" if match_node.winner() == white else "")
+    return_result += "|" + white_bold + white_display_name + white_bold + "||"
+    for i in range(match_length):
+        return_result += white_win_loss[i] + "||"
+    if not new_title_flag:
+        if match_node.winner() == white:
+            return_result += "'''" + title_name + "位奪取'''"
+    else:
+        if match_node.winner() == white:
+            return_result += "'''" + title_name + "位獲得'''"
+    return_result += "\n|}\n"
+    return return_result, new_title_flag, black, match_node.winner()

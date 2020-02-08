@@ -122,6 +122,9 @@ class Kishi:
                     print('Error code: ', e.code)
                 time.sleep(1)
                 continue
+            except Exception as e:
+                print(e)
+                continue
         # try failed
         print(f"Failed to obtain rank of {self.fullname}"
               f"on day {query_date.isoformat()} "

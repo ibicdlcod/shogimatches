@@ -2,6 +2,7 @@ from bracketgen.eiou import eiou_template
 from bracketgen.kiou import kiou_template
 from bracketgen.meijin import junni
 from bracketgen.oui import oui_template
+from bracketgen.oushou import oushou_template
 from bracketgen.ouza import ouza_template
 from bracketgen.ryuou import ryuou_write
 from bracketgen.shidan import shidan_template
@@ -91,6 +92,19 @@ def content():
             result_str = kiou_template.kiou_str(i)
             outfile1_name = f"txt_dst\\kiou\\{i}.txt"
             outfile2_name = f"txt_dst\\kiou\\usage_{i}.txt"
+            outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
+            outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
+            outfile1.write(result_str[0])
+            outfile2.write(result_str[1])
+            outfile1.close()
+            outfile2.close()
+
+    oushou_conf = gen_config.read_primary_config('config\\config.ini', 'oushou')
+    if oushou_conf["enabled"] == "True":
+        for i in range(int(oushou_conf["start_iter"]), int(oushou_conf["end_iter"]) + 1):
+            result_str = oushou_template.oushou_str(i)
+            outfile1_name = f"txt_dst\\oushou\\{i}.txt"
+            outfile2_name = f"txt_dst\\oushou\\usage_{i}.txt"
             outfile1 = open(outfile1_name, "w", encoding="utf-8-sig")
             outfile2 = open(outfile2_name, "w", encoding="utf-8-sig")
             outfile1.write(result_str[0])

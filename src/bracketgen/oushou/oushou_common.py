@@ -37,10 +37,16 @@ def oushou_group(iteration_int: int):
 
     iteration_str = f"第{str(iteration_int).zfill(2)}期"
     junni_matches = sql_read.read_match("王将戦", iteration_str, "挑戦者決定リーグ戦", "")
-    if iteration_int <= 4:
+    if iteration_int == 5:
+        third_place_matches = sql_read.read_match("王将戦", iteration_str, "挑戦者決定リーグ戦", "", "三位決定戦")
+        for third_place_match in third_place_matches:
+            junni_matches.remove(third_place_match)
+    if iteration_int <= 4 or iteration_int == 17:
         league_info_db = lea_from_mat.gen_lea_pos_no_round_names(junni_matches, junni_info_dict)
     else:
         oushou_round = gen_round_name.read_round("王将戦", iteration_str, "挑戦者決定リーグ戦", "", league=True)
+        if iteration_int == 5:
+            oushou_round.remove("三位決定戦")
         league_info_db = lea_from_mat.generate_lea_pos(junni_matches, junni_info_dict,
                                                        oushou_round, "挑戦者決定リーグ戦")
 

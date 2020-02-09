@@ -1,7 +1,8 @@
+from importdata import birthday, kishi_all, match_mass
+from bracketgen.oushou import oushou_main
 import gen_config
 import gen_content
 import re
-from importdata import birthday, kishi_all, match_mass
 
 if __name__ == '__main__':
     gen_conf = gen_config.read_primary_config()
@@ -23,14 +24,14 @@ if __name__ == '__main__':
 
     gen_content.content()
 
-    # for i in range(11, 45):
-    #     outfile_name = f"txt_dst\\kiou\\{i}.txt"
-    #     outfile = open(outfile_name, "w", encoding="utf-8-sig")
-    #     for k, v in kiou_main.kiou_str_dict(i).items():
-    #         outfile.write(str(k))
-    #         outfile.write("\n")
-    #         outfile.write(v)
-    #     outfile.close()
+    for i in range(9, 69):
+        outfile_name = f"txt_dst\\oushou\\{i}.txt"
+        outfile = open(outfile_name, "w", encoding="utf-8-sig")
+        for k, v in oushou_main.oushou_str_dict(i).items():
+            outfile.write(str(k))
+            outfile.write("\n")
+            outfile.write(v)
+        outfile.close()
 
     # infile_name = f"kiou.txt"
     # infile = open(infile_name, "r", encoding="utf-8-sig")

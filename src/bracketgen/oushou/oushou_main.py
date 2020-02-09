@@ -1,4 +1,4 @@
-from bracketgen import gen_round_name
+from bracketgen import gen_round_name, str_list
 from bracketgen.oushou import oushou_common
 from importdata import sql_read
 from metastruct import organized_tr, seeds_out_in, table_feed
@@ -6,11 +6,12 @@ from metastruct import organized_tr, seeds_out_in, table_feed
 
 def oushou_str_dict(iteration_int: int) -> dict:
     return_dict = dict()
+    letter_list = str_list.letter_list
 
     iteration_str = f"第{str(iteration_int).zfill(2)}期"
 
     title_result = oushou_common.oushou_title_matches(iteration_int)
-    return_dict[7] = title_result[0]
+    return_dict["T"] = title_result[0]
     new_title_flag = title_result[1]
     former_title = title_result[2]
     new_title = title_result[3]
@@ -73,7 +74,7 @@ def oushou_str_dict(iteration_int: int) -> dict:
                                             "王将戦",
                                             iteration_str,
                                             True,
-                                            True,
+                                            False,
                                             "◎",
                                             "")
             feed_2.append(feed_2_i)
@@ -93,13 +94,11 @@ def oushou_str_dict(iteration_int: int) -> dict:
                                             "王将戦",
                                             iteration_str,
                                             True,
-                                            True,
+                                            False,
                                             "◎",
                                             "")
             feed_2.append(feed_2_i)
             tree_2.append(feed_2_i.tree)
-        # seeds_out_in.Seed(1, tree_2, tree_0, katakana_list)
-        # seeds_out_in.Seed(1, tree_2, tree_0, katakana_list)
 
     promoted_to_group_dict = dict()
     for tree in tree_2:
@@ -107,7 +106,50 @@ def oushou_str_dict(iteration_int: int) -> dict:
             promoted_to_group_dict[node.winner().id] = "リーグ入り"
     seeds_out_in.Seed(5, tree_2, [], [], [], promoted_to_group_dict)
 
+    feed_1 = []
+    tree_1 = []
+    if 26 <= iteration_int <= 63:
+        for i in range(1):
+            match_db_1_i = sql_read.read_match("王将戦", iteration_str, "一次予選")
+            if len(match_db_1_i) == 0:
+                continue
+            round_db_1_i = gen_round_name.read_round("王将戦", iteration_str, "一次予選")
+            feed_1_i = table_feed.TableFeed(organized_tr.OrganizedTree(match_db_1_i,
+                                                                       "一次予選",
+                                                                       round_db_1_i),
+                                            f"",
+                                            "王将戦",
+                                            iteration_str,
+                                            True,
+                                            True,
+                                            "◎",
+                                            "")
+            feed_1.append(feed_1_i)
+            tree_1.append(feed_1_i.tree)
+    else:
+        for i in range(11):
+            group_str = f"{str(i + 1).zfill(2)}組"
+            match_db_1_i = sql_read.read_match("王将戦", iteration_str, "一次予選", group_str)
+            if len(match_db_1_i) == 0:
+                continue
+            round_db_1_i = gen_round_name.read_round("王将戦", iteration_str, "一次予選", group_str)
+            feed_1_i = table_feed.TableFeed(organized_tr.OrganizedTree(match_db_1_i,
+                                                                       "一次予選" + group_str,
+                                                                       round_db_1_i),
+                                            f"==={group_str}===\n",
+                                            "王将戦",
+                                            iteration_str,
+                                            True,
+                                            True,
+                                            "◎",
+                                            "")
+            feed_1.append(feed_1_i)
+            tree_1.append(feed_1_i.tree)
+
+    seeds_out_in.Seed(1, tree_1, tree_2, letter_list)
+
     return_dict[2] = table_feed.draw_table_from_feed(feed_2)
+    return_dict[1] = table_feed.draw_table_from_feed(feed_1)
 
     non_relegated_str = ""
     for non_relegated in non_relegated_list:
@@ -141,16 +183,14 @@ def oushou_str_dict(iteration_int: int) -> dict:
             + f"|リーグ陷落={relegated_str}\n"
             + (f"|前回=[[第{iteration_int - 1}期王将戦|第{iteration_int - 1}期]]\n"
                if iteration_int != 1
-               else "|前回=[[第12期九段戦]]\n")
-            + (f"|次回=[[第{iteration_int + 1}期王将戦|第{iteration_int + 1}期]]\n"
-               if iteration_int != 26
-               else "|次回=[[第1期竜王戦]]\n")
+               else "|前回=\n")
+            + f"|次回=[[第{iteration_int + 1}期王将戦|第{iteration_int + 1}期]]\n"
             + "}}\n"
     )
 
     return_dict["LEAD"] = (
-        f"第{iteration_int}期王将戦は、{1961 + iteration_int}年度（{min_match_date.isoformat()}"
-        f" - {max_match_date.isoformat()}）の[[王将戦 (将棋)|王将戦]]である。\n"
+        f"第{iteration_int}期王将戦は、{1950 + iteration_int}年度（{min_match_date.isoformat()}"
+        f" - {max_match_date.isoformat()}）の[[王将戦]]である。\n"
         "王将戦は将棋のタイトル戦の一つである。\n"
     )
     return return_dict

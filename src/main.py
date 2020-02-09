@@ -1,5 +1,4 @@
 from importdata import birthday, kishi_all, match_mass
-from bracketgen.oushou import oushou_main
 import gen_config
 import gen_content
 import re
@@ -24,25 +23,25 @@ if __name__ == '__main__':
 
     gen_content.content()
 
-    for i in range(9, 69):
-        outfile_name = f"txt_dst\\oushou\\{i}.txt"
-        outfile = open(outfile_name, "w", encoding="utf-8-sig")
-        for k, v in oushou_main.oushou_str_dict(i).items():
-            outfile.write(str(k))
-            outfile.write("\n")
-            outfile.write(v)
-        outfile.close()
-
-    # infile_name = f"kiou.txt"
+    # for i in range(4, 69):
+    #     outfile_name = f"txt_dst\\oushou\\{i}.txt"
+    #     outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    #     for k, v in oushou_main.oushou_str_dict(i).items():
+    #         outfile.write(str(k))
+    #         outfile.write("\n")
+    #         outfile.write(v)
+    #     outfile.close()
+    #
+    # infile_name = f"oushou.txt"
     # infile = open(infile_name, "r", encoding="utf-8-sig")
-    # outfile_name = f"kiou_out.txt"
+    # outfile_name = f"oushou_out.txt"
     # outfile = open(outfile_name, "w", encoding="utf-8-sig")
     # re_pattern = re.compile(r"^!(\d*)$")
     # line = infile.readline()
     # while line:
     #     re_match = re.match(re_pattern, line)
     #     if re_match is not None:
-    #         outfile.write(re.sub(re_pattern, r"![[第\1期棋王戦|\1]]", line))
+    #         outfile.write(re.sub(re_pattern, r"![[第\1期王将戦|\1]]", line))
     #     else:
     #         outfile.write(line)
     #     line = infile.readline()
@@ -53,24 +52,24 @@ if __name__ == '__main__':
     # outfile = open(outfile_name, "w", encoding="utf-8-sig")
     # outfile.write(
     #     "{{Navbox\n"
-    #     "| name = 各期の棋王戦\n"
-    #     "| title = 各期の[[棋王戦_(将棋)|棋王戦]]\n"
+    #     "| name = 各期の王将戦\n"
+    #     "| title = 各期の[[王将戦]]\n"
     #     "| listclass = hlist hlist - pipe hnum\n"
     #     "| titlestyle = background - color:  # CCCCFF; color:#000\n"
     #     "| groupstyle = background - color:  # CCCCFF; text-align:center\n"
     # )
-    # for i in range(5):
+    # for i in range(7):
     #     outfile.write(f"|list{i+1}=")
     #     for j in range(10):
     #         this_num = i * 10 + j + 1
     #         iteration_end = "期"
-    #         outfile.write(f"[[第{this_num}{iteration_end}棋王戦|{str(this_num).zfill(2)}({1974+this_num})]]")
+    #         outfile.write(f"[[第{this_num}{iteration_end}王将戦|{str(this_num).zfill(2)}({1950+this_num})]]")
     #         if j != 9:
     #             outfile.write(" - ")
     #     outfile.write("\n")
     # outfile.write(
     #     "}}<noinclude>\n"
-    #     "[[Category:棋王戦_(将棋)|*]]\n"
+    #     "[[Category:王将戦|*]]\n"
     #     "[[Category: 将棋関連のテンプレート]] </noinclude>\n"
     # )
     # outfile.close()

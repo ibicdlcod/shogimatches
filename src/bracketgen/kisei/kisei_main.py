@@ -42,11 +42,11 @@ def kisei_str_dict(iteration_int: int) -> dict:
             feed_0.append(feed_0_i)
             tree_0.append(feed_0_i.tree)
 
-        challenge_dict = dict()
+        promoted_to_group_dict = dict()
         for tree in tree_0:
             for node in tree.last_remain_nodes:
-                challenge_dict[node.winner().id] = "挑戦者"
-        seeds_out_in.Seed(5, tree_0, [], [], [], challenge_dict)
+                promoted_to_group_dict[node.winner().id] = "挑戦者"
+        seeds_out_in.Seed(5, tree_0, [], [], [], promoted_to_group_dict)
 
     feed_2 = []
     tree_2 = []
@@ -87,6 +87,20 @@ def kisei_str_dict(iteration_int: int) -> dict:
                                             "")
             feed_2.append(feed_2_i)
             tree_2.append(feed_2_i.tree)
+
+    if 66 <= iteration_int <= 71:
+        return_dict[3] = ""
+        for i in range(4):
+            group_str = ["A組", "B組", "C組", "D組"][i]
+            group_result = kisei_common.kisei_group_66_71(iteration_int, group_str)
+            return_dict[3] += (f"==={group_str}===\n" + group_result)
+    elif 72 <= iteration_int <= 80:
+        promoted_to_group_dict = dict()
+        for tree in tree_2:
+            for node in tree.last_remain_nodes:
+                promoted_to_group_dict[node.winner().id] = "二次予選から"
+        group_result = kisei_common.kisei_group_72_80(iteration_int, promoted_to_group_dict)
+        return_dict[9] = group_result
 
     feed_1 = []
     tree_1 = []
@@ -135,14 +149,20 @@ def kisei_str_dict(iteration_int: int) -> dict:
     seeds_out_in.Seed(1, tree_1, tree_2, katakana_list)
     if iteration_int < 66 or iteration_int > 80:
         seeds_out_in.Seed(1, tree_2, tree_0, letter_list)
+    else:
+        promoted_to_group_dict = dict()
+        for tree in tree_2:
+            for node in tree.last_remain_nodes:
+                promoted_to_group_dict[node.winner().id] = "三次予選進出" if iteration_int <= 71 else "最終予選進出"
+        seeds_out_in.Seed(5, tree_2, [], [], [], promoted_to_group_dict)
 
     if len(feed_0) != 0:
         return_dict[0] = table_feed.draw_table_from_feed(feed_0)
+        return_dict[2] = table_feed.draw_table_from_feed(feed_2)
+        return_dict[1] = table_feed.draw_table_from_feed(feed_1)
     else:
         group_result = kisei_common.kisei_iter1_group(iteration_int)
         return_dict["TG"] = group_result
-    return_dict[2] = table_feed.draw_table_from_feed(feed_2)
-    return_dict[1] = table_feed.draw_table_from_feed(feed_1)
 
     min_match_date = sql_read.read_match_min_max_date("棋聖戦", iteration_str, "MIN")[0]
     max_match_date = sql_read.read_match_min_max_date("棋聖戦", iteration_str, "MAX")[0]

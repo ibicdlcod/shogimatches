@@ -75,9 +75,9 @@ def gen_usage(iteration: str, in_str_dict: dict):
         if end_str == "2000":
             pass
         elif end_str.startswith("19"):
-            end_str = end_str.lstrip("19")
+            end_str = end_str[2:]
         elif end_str.startswith("20"):
-            end_str = end_str.lstrip("20")
+            end_str = end_str[2:]
         from_to_end_str = f"{year_from}-{end_str}"
 
     kenyu_int = 1000 + iteration_int

@@ -1,7 +1,8 @@
+from bracketgen.kisei import kisei_main
 from importdata import birthday, kishi_all, match_mass
+from importjunni import junni_kisei_auto
 import gen_config
 import gen_content
-from bracketgen.kisei import kisei_main
 import re
 
 if __name__ == '__main__':
@@ -24,14 +25,15 @@ if __name__ == '__main__':
 
     gen_content.content()
 
-    for i in range(14, 91):
-        outfile_name = f"txt_dst\\kisei\\{i}.txt"
-        outfile = open(outfile_name, "w", encoding="utf-8-sig")
-        for k, v in kisei_main.kisei_str_dict(i).items():
-            outfile.write(str(k))
-            outfile.write("\n")
-            outfile.write(v)
-        outfile.close()
+    # for i in range(72, 81):
+    #     outfile_name = f"txt_dst\\kisei\\{i}.txt"
+    #     outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    #     for k, v in kisei_main.kisei_str_dict(i).items():
+    #         outfile.write(str(k))
+    #         outfile.write("\n")
+    #         outfile.write(v)
+    #     outfile.close()
+
     #
     # infile_name = f"kisei.txt"
     # infile = open(infile_name, "r", encoding="utf-8-sig")

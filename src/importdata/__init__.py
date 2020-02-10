@@ -1,6 +1,7 @@
 from importdata import former_meijin
 from metastruct.__init__ import sql_init
-from importjunni import juuni_junni_auto, junni_shidan_auto, junni_oui_auto, junni_oushou_auto
+from importjunni import juuni_junni_auto, junni_kisei_auto, junni_shidan_auto
+from importjunni import junni_oui_auto, junni_oushou_auto
 import gen_config
 import importdata.python_mysql_dbconf as db_conf
 
@@ -28,3 +29,8 @@ if gen_conf["renew_oushou_junni_table"] == "True":
     print('Renew oushou junni table')
     for i in range(1, 70):
         junni_oushou_auto.import_junni(i)
+
+if gen_conf["renew_kisei_junni_table"] == "True":
+    print('Renew kisei junni table')
+    for i in range(66, 72):
+        junni_kisei_auto.import_junni(i)

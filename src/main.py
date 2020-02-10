@@ -1,9 +1,6 @@
-from bracketgen.kisei import kisei_main
-from importdata import birthday, kishi_all, match_mass
-from importjunni import junni_kisei_auto
 import gen_config
 import gen_content
-import re
+from importdata import birthday, kishi_all, match_mass
 
 if __name__ == '__main__':
     gen_conf = gen_config.read_primary_config()
@@ -34,21 +31,21 @@ if __name__ == '__main__':
     #         outfile.write(v)
     #     outfile.close()
 
-    infile_name = f"kisei.txt"
-    infile = open(infile_name, "r", encoding="utf-8-sig")
-    outfile_name = f"kisei_out.txt"
-    outfile = open(outfile_name, "w", encoding="utf-8-sig")
-    re_pattern = re.compile(r"^!(\d*)$")
-    line = infile.readline()
-    while line:
-        re_match = re.match(re_pattern, line)
-        if re_match is not None:
-            outfile.write(re.sub(re_pattern, r"![[第\1期棋聖戦|\1]]", line))
-        else:
-            outfile.write(line)
-        line = infile.readline()
-    infile.close()
-    outfile.close()
+    # infile_name = f"kisei.txt"
+    # infile = open(infile_name, "r", encoding="utf-8-sig")
+    # outfile_name = f"kisei_out.txt"
+    # outfile = open(outfile_name, "w", encoding="utf-8-sig")
+    # re_pattern = re.compile(r"^!(\d*)$")
+    # line = infile.readline()
+    # while line:
+    #     re_match = re.match(re_pattern, line)
+    #     if re_match is not None:
+    #         outfile.write(re.sub(re_pattern, r"![[第\1期棋聖戦|\1]]", line))
+    #     else:
+    #         outfile.write(line)
+    #     line = infile.readline()
+    # infile.close()
+    # outfile.close()
 
     # outfile_name = f"temp.txt"
     # outfile = open(outfile_name, "w", encoding="utf-8-sig")

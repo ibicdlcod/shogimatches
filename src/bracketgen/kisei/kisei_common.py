@@ -61,12 +61,12 @@ def kisei_iter1_group(iteration_int: int):
             league_info,
             this_id,
         ])
-    result = draw_table_kisei_group(result_list_list)
+    result = draw_table_kisei_iter1_group(result_list_list)
 
     return result
 
 
-def draw_table_kisei_group(in_list_list: list):
+def draw_table_kisei_iter1_group(in_list_list: list):
     result = ""
     max_name_length = 0
     round_length = 0

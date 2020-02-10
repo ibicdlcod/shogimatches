@@ -42,11 +42,11 @@ def kisei_str_dict(iteration_int: int) -> dict:
             feed_0.append(feed_0_i)
             tree_0.append(feed_0_i.tree)
 
-        challenge_dict = dict()
+        promoted_to_group_dict = dict()
         for tree in tree_0:
             for node in tree.last_remain_nodes:
-                challenge_dict[node.winner().id] = "挑戦者"
-        seeds_out_in.Seed(5, tree_0, [], [], [], challenge_dict)
+                promoted_to_group_dict[node.winner().id] = "挑戦者"
+        seeds_out_in.Seed(5, tree_0, [], [], [], promoted_to_group_dict)
 
     feed_2 = []
     tree_2 = []
@@ -135,6 +135,12 @@ def kisei_str_dict(iteration_int: int) -> dict:
     seeds_out_in.Seed(1, tree_1, tree_2, katakana_list)
     if iteration_int < 66 or iteration_int > 80:
         seeds_out_in.Seed(1, tree_2, tree_0, letter_list)
+    else:
+        promoted_to_group_dict = dict()
+        for tree in tree_2:
+            for node in tree.last_remain_nodes:
+                promoted_to_group_dict[node.winner().id] = "三次予選進出" if iteration_int <= 71 else "最終予選進出"
+        seeds_out_in.Seed(5, tree_2, [], [], [], promoted_to_group_dict)
 
     if len(feed_0) != 0:
         return_dict[0] = table_feed.draw_table_from_feed(feed_0)

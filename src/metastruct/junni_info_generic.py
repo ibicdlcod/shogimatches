@@ -19,7 +19,8 @@ class JunniInfo:
                  kishi,
                  result,
                  ):
-        junni_code = (str(iteration)
+        junni_code = (tournament_name
+                      + str(iteration)
                       + str(junni).zfill(2)
                       + kishi.fullname)
         h = hashlib.sha512()

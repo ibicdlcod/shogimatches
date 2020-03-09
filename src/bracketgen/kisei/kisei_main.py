@@ -180,10 +180,10 @@ def kisei_str_dict(iteration_int: int) -> dict:
             + f"|新タイトル={new_title.get_full_wiki_name()[0]}\n"
             + "|△昇級△=\n"
             + "|▼降級▼=\n"
-            + (f"|前回=[[{iteration_str_prev}棋聖戦|{iteration_str_prev}]]\n"
+            + (f"|前回=[[{iteration_str_prev}棋聖戦 (将棋)|{iteration_str_prev}]]\n"
                if iteration_int >= 2
                else f"|前回=")
-            + f"|次回=[[{iteration_str_next}棋聖戦|{iteration_str_next}]]\n"
+            + f"|次回=[[{iteration_str_next}棋聖戦 (将棋)|{iteration_str_next}]]\n"
             + "}}\n"
     )
 

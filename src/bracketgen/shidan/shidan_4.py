@@ -129,10 +129,10 @@ def shidan_str_dict(iteration_int: int) -> dict:
             + "|リーグ=リーグ\n"
             + f"|リーグ残留={non_relegated_str}\n"
             + f"|リーグ陷落={relegated_str}\n"
-            + (f"|前回=[[第{iteration_int - 1}期十段戦|第{iteration_int - 1}期]]\n"
+            + (f"|前回=[[第{iteration_int - 1}期十段戦 (将棋)|第{iteration_int - 1}期]]\n"
                if iteration_int != 1
                else "|前回=[[第12期九段戦]]\n")
-            + (f"|次回=[[第{iteration_int + 1}期十段戦|第{iteration_int + 1}期]]\n"
+            + (f"|次回=[[第{iteration_int + 1}期十段戦 (将棋)|第{iteration_int + 1}期]]\n"
                if iteration_int != 26
                else "|次回=[[第1期竜王戦]]\n")
             + "}}\n"

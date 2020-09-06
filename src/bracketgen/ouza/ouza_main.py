@@ -183,7 +183,8 @@ def ouza_str_dict(iteration_int: int) -> dict:
 
     return_dict[0] = table_feed.draw_table_from_feed(feed_0)
     return_dict[2] = table_feed.draw_table_from_feed(feed_2)
-    return_dict[1] = table_feed.draw_table_from_feed(feed_1)
+    if len(feed_1) > 0:
+        return_dict[1] = table_feed.draw_table_from_feed(feed_1)
 
     min_match_date = sql_read.read_match_min_max_date("王座戦", iteration_str, "MIN")[0]
     max_match_date = sql_read.read_match_min_max_date("王座戦", iteration_str, "MAX")[0]
@@ -201,8 +202,8 @@ def ouza_str_dict(iteration_int: int) -> dict:
             + f"|新タイトル={new_title.get_full_wiki_name()[0] if iteration_int >= 18 else winner_name[0]}\n"
             + "|△昇級△=\n"
             + "|▼降級▼=\n"
-            + f"|前回=[[{iteration_str_prev}王座戦|{iteration_str_prev}]]\n"
-            + f"|次回=[[{iteration_str_next}王座戦|{iteration_str_next}]]\n"
+            + f"|前回=[[{iteration_str_prev}王座戦 (将棋)|{iteration_str_prev}]]\n"
+            + f"|次回=[[{iteration_str_next}王座戦 (将棋)|{iteration_str_next}]]\n"
             + "}}\n"
     )
 

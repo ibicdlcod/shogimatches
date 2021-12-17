@@ -1,5 +1,6 @@
 # shogimatches
 Generate shogi tournament bracket for Wikipedia
+(archived due to poor feedbacks)
 
 # supported matches
 Completed: All non-female title matches that is in the database (http://kenyu1234.php.xdomain.jp/)
